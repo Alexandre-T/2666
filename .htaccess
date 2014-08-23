@@ -1,0 +1,69 @@
+# You may need to un-comment the following lines
+# Options +FollowSymlinks
+# To make sure that rewritten dir or file (/|.html) will not load dir.php in case it exist
+# Options -MultiViews
+# REMEBER YOU ONLY NEED TO STARD MOD REWRITE ONCE
+RewriteEngine On
+# Uncomment the statement below if you want to make use of
+# HTTP authentication and it does not already work.
+# This could be required if you are for example using PHP via Apache CGI.
+# RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+# REWRITE BASE
+RewriteBase /
+# HERE IS A GOOD PLACE TO FORCE CANONICAL DOMAIN
+# RewriteCond %{HTTP_HOST} !^2666\.jeuforum\.local$ [NC]
+# RewriteRule ^(.*)$ http://2666.jeuforum.local/$1 [QSA,L,R=301]
+
+# DO NOT GO FURTHER IF THE REQUESTED FILE / DIR DOES EXISTS
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule . - [L]
+#####################################################
+# PHPBB SEO REWRITE RULES ALL MODES
+#####################################################
+# AUTHOR : dcz www.phpbb-seo.com
+# STARTED : 01/2006
+#################################
+# FORUMS PAGES
+###############
+# FORUM INDEX REWRITERULE WOULD STAND HERE IF USED. "forum" REQUIRES TO BE SET AS FORUM INDEX
+# RewriteRule ^jeuderole/forum\.html$ /jeuderole/index.php [QSA,L,NC]
+# FORUM ALL MODES
+RewriteRule ^jeuderole/(forum|[a-z0-9_-]*-f)([0-9]+)/?(page([0-9]+)\.html)?$ /jeuderole/viewforum.php?f=$2&start=$4 [QSA,L,NC]
+# TOPIC WITH VIRTUAL FOLDER ALL MODES
+RewriteRule ^jeuderole/(forum|[a-z0-9_-]*-f)([0-9]+)/(topic|[a-z0-9_-]*-t)([0-9]+)(-([0-9]+))?\.html$ /jeuderole/viewtopic.php?f=$2&t=$4&start=$6 [QSA,L,NC]
+# TOPIC WITHOUT FORUM ID & DELIM ALL MODES
+RewriteRule ^jeuderole/([a-z0-9_-]*)/?(topic|[a-z0-9_-]*-t)([0-9]+)(-([0-9]+))?\.html$ /jeuderole/viewtopic.php?forum_uri=$1&t=$3&start=$5 [QSA,L,NC]
+# PHPBB FILES ALL MODES
+RewriteRule ^jeuderole/ressources/[a-z0-9_-]+/(thumb/)?([0-9]+)$ /jeuderole/download/file.php?id=$2&t=$1 [QSA,L,NC]
+# PROFILES THROUGH USERNAME
+RewriteRule ^jeuderole/membre/([^/]+)/?$ /jeuderole/memberlist.php?mode=viewprofile&un=$1 [QSA,L,NC]
+# USER MESSAGES THROUGH USERNAME
+RewriteRule ^jeuderole/membre/([^/]+)/(topics|posts)/?(page([0-9]+)\.html)?$ /jeuderole/search.php?author=$1&sr=$2&start=$4 [QSA,L,NC]
+# GROUPS ALL MODES
+RewriteRule ^jeuderole/(groupe|[a-z0-9_-]*-g)([0-9]+)(-([0-9]+))?\.html$ /jeuderole/memberlist.php?mode=group&g=$2&start=$4 [QSA,L,NC]
+# POST
+RewriteRule ^jeuderole/post([0-9]+)\.html$ /jeuderole/viewtopic.php?p=$1 [QSA,L,NC]
+# ACTIVE TOPICS
+RewriteRule ^jeuderole/sujets-actifs(-([0-9]+))?\.html$ /jeuderole/search.php?search_id=active_topics&start=$2&sr=topics [QSA,L,NC]
+# UNANSWERED TOPICS
+RewriteRule ^jeuderole/sans-reponses(-([0-9]+))?\.html$ /jeuderole/search.php?search_id=unanswered&start=$2&sr=topics [QSA,L,NC]
+# NEW POSTS
+RewriteRule ^jeuderole/nouveaux-messages(-([0-9]+))?\.html$ /jeuderole/search.php?search_id=newposts&start=$2&sr=topics [QSA,L,NC]
+# UNREAD POSTS
+RewriteRule ^jeuderole/non-lu(-([0-9]+))?\.html$ /jeuderole/search.php?search_id=unreadposts&start=$2 [QSA,L,NC]
+# THE TEAM
+RewriteRule ^jeuderole/equipe\.html$ /jeuderole/memberlist.php?mode=leaders [QSA,L,NC]
+# HERE IS A GOOD PLACE TO ADD OTHER PHPBB RELATED REWRITERULES
+
+# FORUM WITHOUT ID & DELIM ALL MODES
+# THESE THREE LINES MUST BE LOCATED AT THE END OF YOUR HTACCESS TO WORK PROPERLY
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^jeuderole/([a-z0-9_-]+)/?(page([0-9]+)\.html)?$ /jeuderole/viewforum.php?forum_uri=$1&start=$3 [QSA,L,NC]
+# FIX RELATIVE PATHS : FILES
+RewriteRule ^jeuderole/.+/(style\.php|ucp\.php|mcp\.php|faq\.php|download/file.php)$ /jeuderole/$1 [QSA,L,NC,R=301]
+# FIX RELATIVE PATHS : IMAGES
+RewriteRule ^jeuderole/.+/(styles/.*|images/.*)/$ /jeuderole/$1 [QSA,L,NC,R=301]
+# END PHPBB PAGES
+#####################################################

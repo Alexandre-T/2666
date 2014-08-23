@@ -2177,6 +2177,9 @@ function tracking_unserialize($string, $max_depth = 3)
 function generate_pagination($base_url, $num_items, $per_page, $start_item, $add_prevnext_text = false, $tpl_prefix = '')
 {
 	global $template, $user;
+	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+	global $phpbb_seo, $phpEx;
+	// www.phpBB-SEO.com SEO TOOLKIT END
 
 	// Make sure $per_page is a valid value
 	$per_page = ($per_page <= 0) ? 1 : $per_page;
@@ -2241,15 +2244,68 @@ function generate_pagination($base_url, $num_items, $per_page, $start_item, $add
 		}
 	}
 
-	$template->assign_vars(array(
-		$tpl_prefix . 'BASE_URL'		=> $base_url,
-		'A_' . $tpl_prefix . 'BASE_URL'	=> addslashes($base_url),
-		$tpl_prefix . 'PER_PAGE'		=> $per_page,
+	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+	$prev =  ($on_page == 1) ? '' : $base_url . "{$url_delim}start=" . (($on_page - 2) * $per_page);
+	$next = ($on_page == $total_pages) ? '' : $base_url . "{$url_delim}start=" . ($on_page * $per_page);
+	if (!empty($phpbb_seo->seo_opt['url_rewrite'])) {
+		static $pagin_find = array();
+		static $pagin_replace = array();
+		if (empty($pagin_replace)) {
+			$pagin_find = array(
+				// http://example.com/a_n-y/d.i.r/with.ext
+				'`(https?\://[a-z0-9_/\.-]+/[a-z0-9_\.-]+)(\.[a-z0-9]+)(\?[\w$%&~\-;:=,@+\. ]+)?(#[a-z0-9_\.-]+)?(&amp;|\?)start=([0-9]+)`i',
+				// http://example.com/a_n-y/d.i.r/withoutext
+				'`(https?\://[a-z0-9_/\.-]+/[a-z0-9_-]+)/?(\?[\w$%&~\-;:=,@+\. ]+)?(#[a-z0-9_\.-]+)?(&amp;|\?)start=([0-9]+)`i'
+			);
+			$pagin_replace = array(
+				// http://example.com/a_n-y/d.i.r/with-xx.ext
+				'\1' . $phpbb_seo->seo_delim['start'] . '\6\2\3\4',
+				// http://example.com/a_n-y/d.i.r/withoutext/pagexx.html
+				'\1/' . $phpbb_seo->seo_static['pagination'] . '\5' . $phpbb_seo->seo_ext['pagination'] . '\2\3'
+			);
+		}
+		$rewrite_pagination = false;
+		// here we rewrite rewritten urls only, and they do hold the full url with http
+		if (preg_match('`^https?://[a-z0-9_\.-]+/(.*)$`i', $base_url, $match)) {
+			$rewrite_pagination = true;
+			if (!empty($match[1])) {
+				// though, we won't do it for .php files.
+				if (preg_match('`^.*\.' . $phpEx . '(|\?.*|#.*)$`i', trim($match[1]))) {
+					$rewrite_pagination = false;
 
-		$tpl_prefix . 'PREVIOUS_PAGE'	=> ($on_page == 1) ? '' : $base_url . "{$url_delim}start=" . (($on_page - 2) * $per_page),
-		$tpl_prefix . 'NEXT_PAGE'		=> ($on_page == $total_pages) ? '' : $base_url . "{$url_delim}start=" . ($on_page * $per_page),
-		$tpl_prefix . 'TOTAL_PAGES'		=> $total_pages,
-	));
+				}
+			}
+
+		}
+		// in all cases remove the start=0 dupe
+		$page_string = str_replace($url_delim . 'start=0', '', $page_string);
+		$prev = str_replace($url_delim . 'start=0', '', $prev);
+		if ($rewrite_pagination) {
+			$page_string = preg_replace($pagin_find, $pagin_replace, $page_string);
+			$prev = $prev ? preg_replace($pagin_find, $pagin_replace, $prev) : '';
+			$next = $next ? preg_replace( $pagin_find, $pagin_replace, $next) : '';
+		} else {
+			// take care about eventual hashes
+			if (strpos($base_url, '#') !== false) {
+				// since hashes are not originally handled,
+				// we need to make sure we put it at the end of the url
+				static $hash_find = '`((https?\://)?[a-z0-9_/\.-]+\.[a-z0-9]+)(\?[\w$%&~\-;:=,@+\.]+)?(#[a-z0-9_\.-]+)((&amp;|\?)start=[0-9]+)`';
+				static $hash_replace = '\1\3\5\4';
+				$page_string = preg_replace($hash_find, $hash_replace, $page_string);
+				$prev = $prev ? preg_replace($hash_find, $hash_replace, $prev) : '';
+				$next = $next ? preg_replace($hash_find, $hash_replace, $next) : '';
+			}
+		}
+	}
+	$template->assign_vars(array(
+		$tpl_prefix . 'BASE_URL'	=> $base_url,
+		'A_' . $tpl_prefix . 'BASE_URL'	=> addslashes($base_url),
+		$tpl_prefix . 'PER_PAGE'	=> $per_page,
+		$tpl_prefix . 'PREVIOUS_PAGE'	=> $prev,
+		$tpl_prefix . 'NEXT_PAGE'	=> $next,
+		$tpl_prefix . 'TOTAL_PAGES'	=> $total_pages)
+	);
+	// www.phpBB-SEO.com SEO TOOLKIT END
 
 	return $page_string;
 }
@@ -2296,6 +2352,13 @@ function on_page($num_items, $per_page, $start)
 function append_sid($url, $params = false, $is_amp = true, $session_id = false)
 {
 	global $_SID, $_EXTRA_URL, $phpbb_hook;
+	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+	// We bypass the hook function here, the same effect as a standalone hook, which we want, but faster ;-)
+	global $phpbb_seo;
+	if (!empty($phpbb_seo->seo_opt['url_rewrite'])) {
+		return $phpbb_seo->url_rewrite($url, $params, $is_amp, $session_id);
+	} else
+		// www.phpBB-SEO.com SEO TOOLKIT END
 
 	if ($params === '' || (is_array($params) && empty($params)))
 	{
@@ -4468,6 +4531,26 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 	{
 		return;
 	}
+	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+	global $phpbb_seo;
+	if (!empty($phpbb_seo)) {
+		$template->assign_vars( array(
+				'PHPBB_FULL_URL' => $phpbb_seo->seo_path['phpbb_url'],
+				'SEO_BASE_HREF' => $phpbb_seo->seo_opt['seo_base_href'],
+				'SEO_START_DELIM' => $phpbb_seo->seo_delim['start'],
+				'SEO_SATIC_PAGE' => $phpbb_seo->seo_static['pagination'],
+				'SEO_EXT_PAGE' => $phpbb_seo->seo_ext['pagination'],
+				'SEO_CANONICAL_URL' => !empty($phpbb_seo->seo_opt['zero_dupe']['on']) ? $phpbb_seo->get_canonical() : '',
+				'SEO_EXTERNAL' => !empty($config['seo_ext_links']) ? 'true' : 'false',
+				'SEO_EXTERNAL_SUB' => !empty($config['seo_ext_subdomain']) ? 'true' : 'false',
+				'SEO_EXT_CLASSES' => !empty($config['seo_ext_classes']) ? "'" . preg_replace('`[^a-z0-9_|-]+`', '', str_replace(',', '|', trim($config['seo_ext_classes'], ', '))) . "'" : 'false',
+				'SEO_HASHFIX' => $phpbb_seo->seo_opt['url_rewrite'] && $phpbb_seo->seo_opt['virtual_folder'] ? 'true' : 'false',
+		));
+	}
+	if (isset($user->lang['Page']) && !empty($config['seo_append_sitename']) && !empty($config['sitename'])) {
+		$page_title = $page_title && strpos($page_title, $config['sitename']) === false ? $page_title . ' - ' . $config['sitename'] : $page_title;
+	}
+	// www.phpBB-SEO.com SEO TOOLKIT END
 
 	define('HEADER_INC', true);
 
@@ -4656,7 +4739,9 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'U_PRIVATEMSGS'			=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;folder=inbox'),
 		'U_RETURN_INBOX'		=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;folder=inbox'),
 		'U_POPUP_PM'			=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;mode=popup'),
-		'UA_POPUP_PM'			=> addslashes(append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;mode=popup')),
+		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+		'UA_POPUP_PM'			=> addslashes(append_sid((!empty($phpbb_seo) ? $phpbb_seo->seo_path['phpbb_url'] : $phpbb_root_path) . "ucp.$phpEx", 'i=pm&amp;mode=popup')),
+		// www.phpBB-SEO.com SEO TOOLKIT END
 		'U_MEMBERLIST'			=> append_sid("{$phpbb_root_path}memberlist.$phpEx"),
 		'U_VIEWONLINE'			=> ($auth->acl_gets('u_viewprofile', 'a_user', 'a_useradd', 'a_userdel')) ? append_sid("{$phpbb_root_path}viewonline.$phpEx") : '',
 		'U_LOGIN_LOGOUT'		=> $u_login_logout,
@@ -4770,6 +4855,12 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 function page_footer($run_cron = true)
 {
 	global $db, $config, $template, $user, $auth, $cache, $starttime, $phpbb_root_path, $phpEx;
+	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+	global $phpbb_seo;
+	if (!empty($phpbb_seo)) {
+		$phpbb_seo->seo_end();
+	}
+	// www.phpBB-SEO.com SEO TOOLKIT END
 
 	// Output page creation time
 	if (defined('DEBUG'))

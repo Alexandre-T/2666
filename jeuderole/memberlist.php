@@ -22,6 +22,15 @@ $user->session_begin();
 $auth->acl($user->data);
 $user->setup(array('memberlist', 'groups'));
 
+// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+if (!empty($_REQUEST['un'])) {
+	$_REQUEST['un'] = rawurldecode($_REQUEST['un']);
+	if (!$phpbb_seo->is_utf8($_REQUEST['un'])) {
+		$_REQUEST['un'] = utf8_normalize_nfc(utf8_recode($_REQUEST['un'], 'ISO-8859-1'));
+	}
+}
+// www.phpBB-SEO.com SEO TOOLKIT END
+
 // Grab data
 $mode		= request_var('mode', '');
 $action		= request_var('action', '');
@@ -229,6 +238,9 @@ switch ($mode)
 			else
 			{
 				$group_name = ($row['group_type'] == GROUP_SPECIAL) ? $user->lang['G_' . $row['group_name']] : $row['group_name'];
+				// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+				$phpbb_seo->prepare_url('group', $row['group_name'], $row['group_id']);
+				// www.phpBB-SEO.com SEO TOOLKIT END
 				$u_group = append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=group&amp;g=' . $row['group_id']);
 			}
 
@@ -424,6 +436,10 @@ switch ($mode)
 		}
 
 		$user_id = (int) $member['user_id'];
+		
+		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+		$phpbb_seo->set_user_url( $member['username'], $user_id );
+		// www.phpBB-SEO.com SEO TOOLKIT END
 
 		// Get group memberships
 		// Also get visiting user's groups to determine hidden group memberships if necessary.

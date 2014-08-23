@@ -72,6 +72,9 @@ while ($row = $db->sql_fetchrow($result))
 	}
 	else
 	{
+		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+		$phpbb_seo->prepare_url('group', $row['group_name'], $row['group_id']);
+		// www.phpBB-SEO.com SEO TOOLKIT END
 		$legend[] = '<a' . $colour_text . ' href="' . append_sid("{$phpbb_root_path}memberlist.$phpEx", 'mode=group&amp;g=' . $row['group_id']) . '">' . $group_name . '</a>';
 	}
 }

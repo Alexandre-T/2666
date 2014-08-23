@@ -597,11 +597,16 @@ class session
 
 		// Bot user, if they have a SID in the Request URI we need to get rid of it
 		// otherwise they'll index this page with the SID, duplicate content oh my!
-		if ($bot && isset($_GET['sid']))
+		// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+		// This does not mix well with USU and Zero Duplicate (which already removes them)
+		// Bot user, if they have a SID in the Request URI we need to get rid of it
+		// otherwise they'll index this page with the SID, duplicate content oh my!
+		/*if ($bot && isset($_GET['sid']))
 		{
 			send_status_line(301, 'Moved Permanently');
 			redirect(build_url(array('sid')));
-		}
+		}*/
+		// www.phpBB-SEO.com SEO TOOLKIT END
 
 		// If no data was returned one or more of the following occurred:
 		// Key didn't match one in the DB
