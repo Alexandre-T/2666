@@ -1,0 +1,111 @@
+<!-- INCLUDE ucp_header.html -->
+
+<form id="ucp" method="post" action="{S_UCP_ACTION}"{S_FORM_ENCTYPE}>
+<div class="panel panel-default">
+	<div class="panel-heading"><h3 class="panel-title">{L_TITLE}</h3></div>
+	<div class="panel-body">
+		<p class="text-justify">{L_BOOKMARKS_EXPLAIN}</p>	
+		<!-- IF S_NO_DISPLAY_BOOKMARKS -->
+		<div class="alert alert-warning">{L_BOOKMARKS_DISABLED}</div>
+		<!-- ELSEIF ! .topicrow -->
+			<div class="alert alert-info">{L_NO_BOOKMARKS}</div>
+		<!-- ENDIF -->
+	</div>
+	<!-- IF ! S_NO_DISPLAY_BOOKMARKS and .topicrow -->
+	<table class="table table-striped table-bordered table-hover ">
+		<thead>
+			<tr>
+				<th>
+					{L_BOOKMARKS}
+				</th>
+				<th class=" hidden-xs hidden-sm">
+					{L_LAST_POST}
+				</th>
+				<th>
+					{L_MARK}
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+		<!-- BEGIN topicrow -->
+			<tr>
+				<td>
+				<!-- IF topicrow.S_DELETED_TOPIC -->
+					<strong>{L_DELETED_TOPIC}</strong>
+				<!-- ELSE -->
+					<div class="pull-left forum-topic-icon">
+						<span><a href="{topicrow.U_VIEW_TOPIC}" class="btn <!-- IF topicrow.S_UNREAD_TOPIC -->btn-info<!-- ELSE -->btn-default<!-- ENDIF --> <!-- IF topicrow.S_POST_ANNOUNCE or topicrow.S_POST_GLOBAL --> btn-lg <!-- ENDIF --> tooltip-link" title="{topicrow.TOPIC_FOLDER_IMG_ALT}">
+							<!-- IF topicrow.S_TOPIC_LOCKED -->
+								<!-- IF topicrow.S_POST_GLOBAL or topicrow.S_POST_ANNOUNCE -->
+									<i class="fa fa-lock fa-lg"></i>
+								<!-- ELSE -->
+									<i class="fa fa-lock"></i>
+								<!-- ENDIF -->
+							<!-- ELSEIF topicrow.S_POST_GLOBAL -->
+								<i class="fa fa-info-circle fa-lg"></i>
+							<!-- ELSEIF topicrow.S_POST_ANNOUNCE -->
+								<i class="fa fa-info-circle fa-lg"></i>
+							<!-- ELSEIF topicrow.S_POST_STICKY -->
+								<i class="fa fa-thumb-tack"></i>
+							<!-- ELSEIF topicrow.S_TOPIC_MOVED -->
+								<i class="fa fa-share"></i>
+							<!-- ELSEIF topicrow.S_HAS_POLL -->
+								<i class="fa fa-comment-o"></i>
+							<!-- ELSE -->
+								<i class="fa fa-file-text-o"></i>
+							<!-- ENDIF --> 
+						</a></span>
+					</div>
+					<div class="pull-right">
+						<div class="btn-group">
+							<!-- IF topicrow.S_TOPIC_UNAPPROVED or topicrow.S_POSTS_UNAPPROVED -->
+							<a href="{topicrow.U_MCP_QUEUE}" class="btn btn-warning btn-xs"><i class="fa fa-exclamation-triangle"></i></a>
+							<!-- ENDIF -->
+							<!-- IF topicrow.S_TOPIC_REPORTED -->
+							<a href="{topicrow.U_MCP_REPORT}" class="btn btn-warning btn-xs"><i class="fa fa-exclamation-triangle"></i></a>
+							<!-- ENDIF -->
+							<!-- IF topicrow.ATTACH_ICON_IMG -->
+							<a href="#" class="btn btn-default btn-xs disabled"><i class="fa fa-paperclip"></i></a>
+							<!-- ENDIF -->
+							<!-- IF topicrow.PAGINATION -->{topicrow.PAGINATION}<!-- ENDIF -->
+							<!-- IF topicrow.S_UNREAD_TOPIC -->
+								<a class="btn btn-xs btn-info" href="{topicrow.U_NEWEST_POST}"><i class="fa fa-angle-right"></i></a>
+							<!-- ENDIF -->
+							<!-- IF not S_IS_BOT -->
+								<a class="btn btn-xs btn-info tooltip-link" href="{topicrow.U_LAST_POST}"  title="{L_LAST_POST}"><i class="fa fa-angle-double-right"></i></a>
+							<!-- ENDIF -->						
+						</div>
+					</div>
+					<a class="bleu" href="{topicrow.U_VIEW_TOPIC}" class="topictitle"><strong>{topicrow.TOPIC_TITLE}</strong></a><br/>					
+				 	<small>{L_POST_BY_AUTHOR} {topicrow.TOPIC_AUTHOR_FULL} &raquo; {topicrow.FIRST_POST_TIME}</small>
+				<!-- ENDIF -->
+				</td>
+				<td class=" hidden-xs hidden-sm">
+					<small>{L_POST_BY_AUTHOR} {topicrow.LAST_POST_AUTHOR_FULL}						
+					<br />{topicrow.LAST_POST_TIME}</small>
+				</td>
+				<td>
+					<label class="checkbox"><input type="checkbox" name="t[{topicrow.TOPIC_ID}]" id="t{topicrow.TOPIC_ID}" />{L_UNWATCH_MARKED}</label>
+				</td>
+			</tr>
+		<!-- END topicrow -->
+		</tbody>
+	</table>
+	<div class="panel-footer">
+		<fieldset class="">		
+			<input type="submit" name="unbookmark" value="{L_REMOVE_BOOKMARK_MARKED}" class="btn btn-primary" />
+			<div class="pull-right">
+				<div class="btn-group">
+					<a class="btn btn-default btn-xs visible-md  visible-lg" href="#" onclick="return marklist('ucp','t',true);"><i class="fa fa-check-square-o"></i> {L_MARK_ALL}</a>
+					<a class="btn btn-default btn-xs visible-md  visible-lg" href="#" onclick="return marklist('ucp','t',false);"><i class="fa fa-square-o"></i> {L_UNMARK_ALL}</a>
+				</div>
+				<!-- INCLUDE pagination.html -->
+			</div>
+			{S_FORM_TOKEN}
+		</fieldset>
+	</div>
+	<!-- ENDIF -->
+</div>
+</form>
+
+<!-- INCLUDE ucp_footer.html -->

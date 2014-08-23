@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html dir="{S_CONTENT_DIRECTION}" lang="{S_USER_LANG}">
+<head>
+<!-- INCLUDE header.inc.html -->
+<!-- IF S_ENABLE_FEEDS -->
+	<!-- IF S_ENABLE_FEEDS_OVERALL --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {SITENAME}" href="{U_FEED}" /><!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_NEWS --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_FEED_NEWS}" href="{U_FEED}?mode=news" /><!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_FORUMS --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_ALL_FORUMS}" href="{U_FEED}?mode=forums" /><!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_TOPICS --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_FEED_TOPICS_NEW}" href="{U_FEED}?mode=topics" /><!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_TOPICS_ACTIVE --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_FEED_TOPICS_ACTIVE}" href="{U_FEED}?mode=topics_active" /><!-- ENDIF -->	<!-- IF S_ENABLE_FEEDS_FORUM and S_FORUM_ID --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_FORUM} - {FORUM_NAME}" href="{U_FEED}?f={S_FORUM_ID}" /><!-- ENDIF -->
+	<!-- IF S_ENABLE_FEEDS_TOPIC and S_TOPIC_ID --><link rel="alternate" type="application/atom+xml" title="{L_FEED} - {L_TOPIC} - {TOPIC_TITLE}" href="{U_FEED}?f={S_FORUM_ID}&amp;t={S_TOPIC_ID}" /><!-- ENDIF -->
+<!-- ENDIF -->
+</head>
+
+<body class="body-{SCRIPT_NAME}" id="top">
+<nav class="navbar navbar-inverse navbar-fixed-top _navbar-inverse navbar-static-top">
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-header-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand <!-- IF SCRIPT_NAME eq 'index' -->active<!-- ENDIF -->" href="{U_INDEX}"><i class="fa fa-home"></i>&nbsp;{SITENAME}</a>
+		</div>    
+		<div class="navbar-inner">
+			<!-- Everything you want hidden at 940px or less, place within here -->
+			<div class="collapse navbar-collapse" id="bs-header-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+	     				<!-- IF not S_IS_BOT and S_USER_LOGGED_IN -->
+	     					<li><a href="{U_PROFILE}" title="{L_PROFILE}" accesskey="e"><i class="fa fa-user"></i> {L_PROFILE}</a></li>
+	     					<!-- IF S_DISPLAY_PM --><li><a href="{U_PRIVATEMSGS}"><i class="fa fa-envelope"></i> {PRIVATE_MESSAGE_INFO}</a></li><!-- ENDIF -->
+						<!-- IF U_RESTORE_PERMISSIONS --><li><a href="{U_RESTORE_PERMISSIONS}"><i class="fa fa-key"></i> {L_RESTORE_PERMISSIONS}</a></li><!-- ENDIF -->
+					<!-- ENDIF -->
+					<li><a href="{U_FAQ}" title="{L_FAQ_EXPLAIN}"><i class="fa fa-question-circle"></i> {L_FAQ}</a></li>
+					<!-- IF not S_IS_BOT -->
+						<!-- IF S_DISPLAY_MEMBERLIST --><li><a href="{U_MEMBERLIST}" title="{L_MEMBERLIST_EXPLAIN}"><i class="fa fa-group"></i> {L_MEMBERLIST}</a></li><!-- ENDIF -->
+						<!-- IF not S_USER_LOGGED_IN and S_REGISTER_ENABLED and not (S_SHOW_COPPA or S_REGISTRATION) --><li><a href="{U_REGISTER}"><i class="fa fa-sign-in fa-rotate-270"></i> {L_REGISTER}</a></li><!-- ENDIF -->
+						<li><a href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}" accesskey="x"><!-- IF S_USER_LOGGED_IN --><i class="fa fa-sign-out"></i> {L_LOGOUT} <!-- ELSE --><i class="fa fa-sign-in"></i> {L_LOGIN} <!-- ENDIF --></a></li>
+					<!-- ENDIF -->
+	   			</ul>
+			</div>
+		</div>
+	</div>
+</nav>
+<header class="header-{SCRIPT_NAME}">
+	<div class="<!-- IF SCRIPT_NAME eq index -->jumbotron<!-- ELSE -->page-header<!-- ENDIF --> ">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-7">
+					<!-- @todo <a href="{U_INDEX}" title="{L_INDEX}" id="logo">{SITE_LOGO_IMG}</a>  -->
+					<!-- IF SCRIPT_NAME eq index -->
+						<h1>{SITENAME}</h1>			
+						<p>{SITE_DESCRIPTION}</p>
+					<!-- ELSE -->
+						<h1>{SITENAME}<br/><small>{SITE_DESCRIPTION}</small></h1>
+					<!-- ENDIF -->
+					<p class="sr-only"><a href="#start_here">{L_SKIP}</a></p>
+				</div>
+				<div class="col-md-5 text-right">
+					<!-- IF S_DISPLAY_SEARCH and not S_IN_SEARCH -->
+					<div class="row">
+					<div class="col-sm-6 col-md-9 pull-right">
+					<form class="form-search hidden-xs" action="{U_SEARCH}" method="get">
+						{S_SEARCH_HIDDEN_FIELDS}
+						<div class="form-group">
+							<div class="input-group">
+								<input type="text" name="keywords" title="{L_SEARCH_KEYWORDS}" class="form-control" value="{SEARCH_WORDS}" placeholder="{L_SEARCH_MINI}">
+					    		<div class="input-group-btn">
+					    			<button type="submit" class="btn btn-default"><i class="fa fa-search"></i> {L_SEARCH}</button>
+					    		</div>
+							</div>
+							<p class="help-block"><a class="" href="{U_SEARCH}" title="{L_SEARCH_ADV_EXPLAIN}"><small>{L_SEARCH_ADV}&hellip;</small></a></p>
+						</div>
+						
+					</form>
+					</div>
+					</div>
+					<!-- ENDIF -->
+					<ul class="list-unstyled">
+						<li class="pull-right btn-toolbar">
+							<span class="btn-group">				
+								<!-- IF U_EMAIL_TOPIC --><a class="btn btn-default btn-xs" href="{U_EMAIL_TOPIC}" title="{L_EMAIL_TOPIC}"><i class="fa fa-envelope"></i><span class="sr-only"> {L_EMAIL_TOPIC}</span></a><!-- ENDIF -->
+								<!-- IF U_EMAIL_PM --><a class="btn btn-default btn-xs" href="{U_EMAIL_PM}" title="{L_EMAIL_PM}" class=""><i class="fa fa-envelope"></i><span class="sr-only"> {L_EMAIL_PM}</span></a><!-- ENDIF -->
+								<!-- IF U_PRINT_TOPIC --><a class="btn btn-default btn-xs tooltip-link" href="{U_PRINT_TOPIC}" title="{L_PRINT_TOPIC}" accesskey="p"><i class="fa fa-print"></i><span class="sr-only"> {L_PRINT_TOPIC}</span></a><!-- ENDIF -->
+								<!-- IF U_PRINT_PM --><a class="btn btn-default btn-xs" href="{U_PRINT_PM}" title="{L_PRINT_PM}" accesskey="p"><i class="fa fa-print"></i><span class="sr-only"> {L_PRINT_PM}</span></a><!-- ENDIF -->
+							</span>
+							<span class="btn-group">
+								<!-- IF S_USER_LOGGED_IN --><span class="btn btn-default btn-xs tooltip-link" data-toggle="tooltip"  title="{LAST_VISIT_DATE}"><i class="fa fa-calendar"></i><span class="sr-only"> {LAST_VISIT_DATE}</span></span><!-- ENDIF -->
+								<span class="btn btn-default btn-xs tooltip-link" data-toggle="tooltip" data-original-title="{CURRENT_TIME}"><i class="fa fa-clock-o"></i><span class="sr-only"> {CURRENT_TIME}</span></span>
+								<!-- IF U_MCP --><a href="{U_MCP}" class="btn btn-default btn-xs btn-warning tooltip-link" title="{L_MCP}"><i class="fa fa-legal"></i><span class="sr-only"> {L_MCP}</span></a><!-- ENDIF -->
+								<!-- IF U_ACP --><a href="{U_ACP}" class="btn btn-default btn-xs btn-danger tooltip-link" title="{L_ACP}"><i class="fa fa-wrench"></i><span class="sr-only"> {L_ACP}</span></a><!-- ENDIF -->
+							</span>
+						<!-- IF S_DISPLAY_SEARCH or (S_USER_LOGGED_IN and not S_IS_BOT) -->				
+							<!-- IF S_DISPLAY_SEARCH -->
+								<span class="btn-group">						
+									<a href="{U_SEARCH_UNANSWERED}" class="btn btn-default btn-xs tooltip-link" title="{L_SEARCH_UNANSWERED}"><i class="fa fa-search"></i><span class="sr-only"> {L_SEARCH_UNANSWERED}</span></a>
+									<!-- IF S_LOAD_UNREADS --><a href="{U_SEARCH_UNREAD}" class="btn btn-default btn-xs tooltip-link" title="{L_SEARCH_UNREAD}"><i class="fa fa-eye"></i><span class="sr-only"> {L_SEARCH_UNREAD}</span></a><!-- ENDIF -->
+									<!-- IF S_USER_LOGGED_IN --><a href="{U_SEARCH_NEW}" class="btn btn-default btn-xs tooltip-link" title="{L_SEARCH_NEW}"><i class="fa fa-plus"></i><span class="sr-only"> {L_SEARCH_NEW}</span></a><!-- ENDIF -->
+									<a href="{U_SEARCH_ACTIVE_TOPICS}" class="btn btn-default btn-xs tooltip-link" title="{L_SEARCH_ACTIVE_TOPICS}"><i class="fa fa-thumb-tack"></i><span class="sr-only"> {L_SEARCH_ACTIVE_TOPICS}</span></a>
+									<!-- IF S_USER_LOGGED_IN --><a href="{U_SEARCH_SELF}" class="btn btn-default btn-xs tooltip-link" title="{L_SEARCH_SELF}"><i class="fa fa-star-o"></i><span class="sr-only"> {L_SEARCH_SELF}</span></a><!-- ENDIF -->
+								</span>
+							<!-- ENDIF -->							
+							<!-- IF not S_IS_BOT and U_MARK_FORUMS -->
+								<span class="btn-group">
+									<a href="{U_MARK_FORUMS}" class="btn btn-default btn-xs tooltip-link" title="{L_MARK_FORUMS_READ}" accesskey="m"><i class="fa fa-check-square-o"></i><span class="sr-only"> {L_MARK_FORUMS_READ}</span></a>
+								</span>
+							<!-- ENDIF -->
+						<!-- ENDIF -->
+						</li>
+					</ul>
+  				</div>
+			</div>
+			<!-- IF S_BOARD_DISABLED and S_USER_LOGGED_IN and (U_MCP or U_ACP) -->
+				<div class="alert alert-warning alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					<strong>{L_INFORMATION} :</strong> <small>{L_BOARD_DISABLED}</small>
+				</div>
+			<!-- ENDIF -->
+			
+		</div>
+	</div>
+</header>
+<nav class="container">
+	<ul class="breadcrumb">
+		<li><i class="fa fa-home"></i>&nbsp;-&nbsp;<a href="{U_INDEX}" accesskey="h">{L_INDEX}</a></li>
+		<!-- BEGIN navlinks -->
+		<li><a href="{navlinks.U_VIEW_FORUM}">{navlinks.FORUM_NAME}</a></li>
+		<!-- END navlinks -->		
+	</ul>
+</nav>
+
+<section class="section-{SCRIPT_NAME} container" id="start_here">

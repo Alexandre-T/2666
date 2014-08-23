@@ -1,0 +1,104 @@
+<!-- INCLUDE ucp_header.html -->
+
+<form id="ucp" method="post" action="{S_UCP_ACTION}"{S_FORM_ENCTYPE} >
+
+<div class="panel panel-default">
+	<div class="panel-heading"><h3 class="panel-title"><i class="fa fa-paperclip"></i> {L_TITLE}</h3></div>
+	<div class="panel-body">
+		<!-- IF .attachrow -->
+		<div class="pull-right">
+			<!-- INCLUDE pagination.html -->
+		</div>
+		<!-- ENDIF -->
+		<p>{L_ATTACHMENTS_EXPLAIN}</p>	
+		<!-- IF ! .attachrow -->
+		<p class="alert alert-info">{L_UCP_NO_ATTACHMENTS}</p>
+		<!-- ELSE -->
+		<hr />
+		<div class="text-center">
+			<fieldset class="form-horizontal">
+			
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-8">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-sort"></i> {L_SORT_BY}</span>
+						<select name="sk" id="sk">{S_SORT_OPTIONS}</select>
+						<select name="sd" id="sd">{S_ORDER_SELECT}</select>
+						<div class="input-group-btn input-group-btn-deuxieme">
+							<button class="btn btn-default" type="submit" name="sort" id="button_sort" value="{L_SORT}"><i class="fa fa-sort-amount-asc"></i></button>
+						</div>
+						<div class="input-group-btn">
+							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+		   						<span class="caret"></span>
+		   						<span class="sr-only">Toggle Dropdown</span>
+							</button>
+							<ul class="dropdown-menu text-left">
+								<li><a href="#" onclick="return message_asc_sd()" id="message_asc_sd"><i class="fa fa-sort-amount-asc"></i> {L_ASCENDING}</a></li>
+								<li><a href="#" onclick="return message_desc_sd()" id="message_desc_sd"><i class="fa fa-sort-amount-desc"></i> {L_DESCENDING} </a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			{S_FORM_TOKEN}
+			</fieldset>
+		</div>
+		<!-- ENDIF -->		
+	</div>
+	<!-- IF .attachrow -->
+	<table class="table table-striped table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>
+					{L_FILENAME}
+				</th>
+				<th class=" hidden-xs hidden-sm">
+					{L_DOWNLOADS}
+				</th>
+				<th class=" hidden-xs hidden-sm">
+					{L_POST_TIME}
+				</th>
+				<th>
+					{L_MARK}
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+		<!-- BEGIN attachrow -->
+			<tr>
+				<td><a href="{attachrow.U_VIEW_ATTACHMENT}" class="topictitle">{attachrow.FILENAME}</a> ({attachrow.SIZE})<br />
+					<!-- IF attachrow.S_IN_MESSAGE -->{L_PM}: <!-- ELSE -->{L_TOPIC}: <!-- ENDIF --><a href="{attachrow.U_VIEW_TOPIC}">{attachrow.TOPIC_TITLE}</a>
+				</td>
+				<td class="text-center text-middle"><span class="badge">{attachrow.DOWNLOAD_COUNT}</span></td>
+				<td class="text-center text-middle"><span class="badge">{attachrow.POST_TIME}</span></td>
+				<td class="text-middle"><input type="checkbox" name="attachment[{attachrow.ATTACH_ID}]" value="1" /></td>
+			</tr>
+		<!-- END attachrow -->
+		</tbody>
+	</table>
+	<div class="panel-footer">
+		<div class="pull-right">
+			<div class="btn-group">
+				<a class="btn btn-xs btn-default visible-md visible-lg" href="#" onclick="return marklist('ucp','attachment',true);"><i class="fa fa-check-square-o"></i> {L_MARK_ALL}</a>
+				<a class="btn btn-xs btn-default visible-md visible-lg" href="#" onclick="return marklist('ucp','attachment',false);"><i class="fa fa-square-o"></i> {L_UNMARK_ALL}</a>
+			</div>
+			<!-- INCLUDE pagination.html -->
+		</div>
+		<!-- IF S_ATTACHMENT_ROWS -->
+		<fieldset>
+			<button class="btn btn-primary" type="submit" name="delete" value="{L_DELETE_MARKED}"><i class="fa fa-trash-o"></i> {L_DELETE_MARKED}</button>
+			{S_FORM_TOKEN}
+		</fieldset>
+		<!-- ENDIF -->
+	</div>
+	<!-- ENDIF -->	
+</div>
+
+
+
+
+	<!-- IF .attachrow -->
+	<!-- ENDIF -->
+</form>
+
+<!-- INCLUDE ucp_footer.html -->

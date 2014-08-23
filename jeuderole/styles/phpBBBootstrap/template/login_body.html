@@ -1,0 +1,102 @@
+<!-- INCLUDE overall_header.html -->
+<script>
+	$( document ).ready(function() {
+	    $('#<!-- IF S_ADMIN_AUTH -->{PASSWORD_CREDENTIAL}<!-- ELSE -->{USERNAME_CREDENTIAL}<!-- ENDIF -->').focus();    
+	});
+</script>
+
+<form action="{S_LOGIN_ACTION}" method="post" id="login" class="form-horizontal">
+	<div class="row">
+		<div class="col-md-7">
+			<div class="panel panel-default">
+				<div class="panel-heading"><h2 class="panel-title"><!-- IF LOGIN_EXPLAIN -->{LOGIN_EXPLAIN}<!-- ELSE -->{L_LOGIN}<!-- ENDIF --></h2></div>
+				<div class="panel-body">
+					<!-- IF LOGIN_ERROR -->			
+					<div class="alert alert-danger alert-dismissable">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+						{LOGIN_ERROR}
+					</div>
+					<!-- ENDIF -->
+					<div class="form-group">
+			   			<label class="col-lg-3 control-label" for="{USERNAME_CREDENTIAL}">{L_USERNAME}&nbsp;</label>
+			   			<div class="col-lg-9">
+			   				<div class="input-group">
+			 						<span class="input-group-addon"><i class="fa fa-user"></i></span>
+			 						<input class="form-control" type="text" tabindex="1" name="{USERNAME_CREDENTIAL}" id="{USERNAME_CREDENTIAL}" size="25" value="{USERNAME}" />
+							</div>
+			   			</div>
+			 			</div>
+					<div class="form-group">
+			   			<label class="col-lg-3 control-label" for="{PASSWORD_CREDENTIAL}">{L_PASSWORD}&nbsp;</label>
+			   			<div class="col-lg-9">
+			   				<div class="input-group">
+			   					<span class="input-group-addon"><i class="fa fa-key"></i></span>
+			     					<input class="form-control" type="password" tabindex="2" id="{PASSWORD_CREDENTIAL}" name="{PASSWORD_CREDENTIAL}" size="25" /></dd>
+			     				</div>
+			   			</div>
+			 		</div>
+					<!-- IF CAPTCHA_TEMPLATE and S_CONFIRM_CODE -->
+						<!-- DEFINE $CAPTCHA_TAB_INDEX = 3 -->
+						<!-- DEFINE $CAPTCHA_COL_LABEL = 'col-lg-3' -->
+						<!-- DEFINE $CAPTCHA_COL_INPUT = 'col-lg-9' -->
+						<!-- INCLUDE {CAPTCHA_TEMPLATE} -->
+					<!-- ENDIF -->
+						<!-- IF S_DISPLAY_FULL_LOGIN and (U_SEND_PASSWORD or U_RESEND_ACTIVATION) -->
+							<div class="form-group">
+								<div class="col-lg-offset-3 col-lg-9">
+									<p class="form-control-static">
+										<!-- IF U_SEND_PASSWORD --><a href="{U_SEND_PASSWORD}">{L_FORGOT_PASS}</a><!-- ENDIF -->
+										<!-- IF U_SEND_PASSWORD and U_RESEND_ACTIVATION -->
+											&nbsp;&bull;&nbsp;
+										<!-- ENDIF -->
+										<!-- IF U_RESEND_ACTIVATION --><a href="{U_RESEND_ACTIVATION}">{L_RESEND_ACTIVATION}</a><!-- ENDIF -->
+									</p>
+								</div>
+							</div>							
+						<!-- ENDIF -->
+					<!-- IF S_DISPLAY_FULL_LOGIN -->
+					<!-- IF S_AUTOLOGIN_ENABLED -->
+					<div class="form-group">
+						<div class="col-lg-offset-3 col-lg-9">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="autologin" id="autologin" tabindex="4" /> 
+									{L_LOG_ME_IN}
+								</label>
+							</div>
+						</div>
+					</div>
+					<!-- ENDIF -->
+					<div class="form-group">
+						<div class="col-lg-offset-3 col-lg-9">
+							<div class="checkbox">
+								<label>
+									<input type="checkbox" name="viewonline" id="viewonline" tabindex="5" /> 
+									{L_HIDE_ME}
+								</label>
+							</div>					
+						</div>
+					</div>
+					<!-- ENDIF -->
+				</div>
+				<div class="panel-footer">
+					<button type="submit" name="login" tabindex="6" class="btn btn-primary"><i class="fa fa-sign-in"></i> {L_LOGIN}</button>
+					{S_LOGIN_REDIRECT}
+					{S_HIDDEN_FIELDS}
+				</div>
+			</div>
+		</div>
+		<div class="col-md-5">
+			<!-- IF not S_ADMIN_AUTH and S_REGISTER_ENABLED -->
+			<div class="panel panel-default">
+				<div class="panel-heading"><h2 class="panel-title">{L_REGISTER}</h2></div>
+				<div class="panel-body">
+					<p class="text-justify">{L_LOGIN_INFO}</p>
+					<p><a href="{U_TERMS_USE}">{L_TERMS_USE}</a> &bull; <a href="{U_PRIVACY}">{L_PRIVACY}</a></p></div>
+				<div class="panel-footer"><a href="{U_REGISTER}" class="btn btn-success"><i class="fa fa-sign-in fa-rotate-270"></i> {L_REGISTER}</a></div>
+			</div>
+			<!-- ENDIF -->
+		</div>
+	</div>
+</form>
+<!-- INCLUDE overall_footer.html -->

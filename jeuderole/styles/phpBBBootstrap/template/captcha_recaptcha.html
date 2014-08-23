@@ -1,0 +1,39 @@
+<!-- IF ! $CAPTCHA_COL_LABEL -->
+	<!-- DEFINE $CAPTCHA_COL_LABEL = 'col-sm-4' -->
+	<!-- DEFINE $CAPTCHA_COL_INPUT = 'col-sm-8' -->
+<!-- ENDIF -->
+<!-- IF S_TYPE == 1 -->
+	<h3>{L_CONFIRMATION}</h3>
+	<p class="text-justify">{L_CONFIRM_EXPLAIN}</p>
+<!-- ENDIF -->
+
+	<div class="form-group">
+		<label class="control-label {$CAPTCHA_COL_LABEL}" for="answer">{L_CONFIRM_CODE}</label>
+<!-- IF S_RECAPTCHA_AVAILABLE -->
+		<script>
+		var RecaptchaOptions = {
+			lang : '{LA_RECAPTCHA_LANG}',
+			theme : 'clean',
+			tabindex : <!-- IF $CAPTCHA_TAB_INDEX -->{$CAPTCHA_TAB_INDEX}<!-- ELSE -->10<!-- ENDIF -->
+		};
+		</script>
+		<script src="{RECAPTCHA_SERVER}/challenge?k={RECAPTCHA_PUBKEY}{RECAPTCHA_ERRORGET}"></script>
+		<!-- IF S_CONTENT_DIRECTION eq 'rtl' -->
+		<script>
+			document.getElementById('recaptcha_table').style.direction = 'ltr';
+		</script>
+		<!-- ENDIF -->
+		<noscript>
+			<div class="{$CAPTCHA_COL_INPUT}">
+				<object data="{RECAPTCHA_SERVER}/noscript?k={RECAPTCHA_PUBKEY}{RECAPTCHA_ERRORGET}" type="text/html" height="300" width="500"></object><br />
+				<textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
+				<input type="hidden" name="recaptcha_response_field" value="manual_challenge" />
+			</div>
+		</noscript>
+		<p class="help-block"><em>{L_RECAPTCHA_EXPLAIN}</em></p>
+<!-- ELSE -->
+			<div class="{$CAPTCHA_COL_INPUT}">
+				<p class="form-control-static">{L_RECAPTCHA_NOT_AVAILABLE}</p>
+			</div>
+<!-- ENDIF -->
+	</div>

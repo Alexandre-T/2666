@@ -1,0 +1,228 @@
+@CHARSET "UTF-8";
+
+/* Change the docs' brand */
+body > .navbar .navbar-brand {
+  padding-right: 0;
+  padding-left: 0;
+  margin-left: 20px;
+  font-weight: bold;
+  color: #000;
+  text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 10px rgba(255,255,255,.75);
+  -webkit-transition: all .2s linear;
+     -moz-transition: all .2s linear;
+          transition: all .2s linear;
+}
+body > .navbar .navbar-brand:hover {
+  text-decoration: none;
+  text-shadow: 0 1px 0 rgba(255,255,255,.1), 0 0 30px rgba(255,255,255,.4);
+}
+/* Base class
+------------------------- */
+header div.page-header{
+	margin-top: 60px;
+}
+footer{
+	padding-top:20px;
+	border-top: 1px solid #eee;
+	margin-top:-20px;
+}
+nav.footer{
+	padding-top:20px;
+}
+
+td.forum-topics,td.forum-posts,th.forum-topics,th.forum-posts{
+	text-align:center;
+}
+td.forum-lastpost,th.forum-lastpost{
+}
+div.hr,h1.hr,h2.hr,h3.hr{
+	border-bottom:thin solid #e5e5e5;
+}
+
+ul.dropdown-menu li span{
+	margin-left:20px;
+	margin-right:20px;
+}
+
+table.table-forum-topic{
+	margin-top:5px;
+	margin-bottom:5px;
+}
+
+p.text-justify{
+	text-align: justify;
+}
+
+.text-bottom{
+	vertical-align: sub;
+}
+.text-top{
+	vertical-align: super;
+}
+table td.text-middle{
+	vertical-align: middle;
+}
+table td.text-center{
+	text-align: center;
+}
+div.forum-content{
+	/* min-height:280px; */
+}
+.forum-topic-subject{
+	margin-bottom:0;
+}
+.forum-author{
+	margin-top:0;
+}
+.page-sep{
+	display: none;
+}
+span.help-block{
+	font-style: italic;
+}
+/* Annulation de certaines modifications */
+.jumbotron form.form-search{
+	margin-top:20px;
+}
+.jumbotron p.help-block small{
+	font-size:65%;
+}
+.jumbotron p.help-block {
+	/* margin-top:10pt; */
+	line-height: 1pt;
+}
+button.btn-second{
+	border-radius: 0;
+	border-right-style:none;
+}
+/* en français deuxième signifie la présence d'un troisième */
+.input-group-btn-deuxieme a.btn,.input-group-btn-deuxieme button.btn,.input-group-btn-deuxieme input[type="submit"].btn{
+	border-radius: 0;
+}
+table tr td.text-middle{
+	vertical-align: middle;
+}
+
+.nowrap{
+  white-space:nowrap;
+ }
+ 
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 999px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    background: red;
+    cursor: inherit;
+    display: block;
+}
+input[readonly] {
+	background-color: white !important;
+	cursor: text !important;
+}
+#post_details,#topicreview{
+	overflow: auto;
+	height:200px;
+}
+
+/**
+ * Forum elements
+ */
+
+dd.forum_pm_marked_colour,dd.forum_pm_replied_colour,dd.forum_pm_friend_colour,dd.forum_pm_foe_colour{
+	padding-left:10px;
+}
+dd.forum_pm_marked_colour,tr.forum_pm_marked_colour {
+	border-left :solid medium #b94a48;
+}
+dd.forum_pm_replied_colour,tr.forum_pm_replied_colour {
+	border-left :solid medium #808080;
+}
+dd.forum_pm_friend_colour, tr.forum_pm_friend_colour {
+	border-left :solid medium #468847;
+}
+dd.forum_pm_foe_colour, tr.forum_pm_foe_colour{
+    border-left :solid medium #a47e3c;	
+}
+dl.forum_rank{
+	text-align:center;
+}
+div.forum_progress{
+	margin-top:8px;
+}
+fieldset.forum-smallbande, fieldset.forum-bande{
+	margin-right:20px;
+	margin-top:-5px;
+}
+fieldset.forum-smallbande{
+	width:30%;
+}
+fieldset.forum-bande{
+	width:50%;
+}
+h2.forum-legend,h3.forum-legend,h4.forum-legend,h5.forum-legend,h6.forum-legend{
+	border-bottom : thin #eee solid;
+}
+hr.forum-small-divider{
+	margin-top:2px;
+	margin-bottom:2px;
+}
+h2.forum-title-form{
+	font-size: x-large;
+	padding-top:2px;
+}
+img.forum-img-select{
+	cursor: pointer;
+}
+span.forum-button{
+	margin-left:15px;
+	margin-right:15px;
+}
+span.forum-topic-button{
+	margin-left:10px;
+	margin-right:10px;
+}
+.forum-top-buffer{
+	margin-top: 20px;
+}
+.forum-topic-icon{
+	margin-left:12px;margin-top:6px;margin-right:15px;
+}
+
+/* Responsive
+-------------------------------------------------- */
+
+/* Desktop large
+	 Au dessus de 1200
+------------------------- */
+@media (min-width: 1200px) {
+}
+
+/* Desktop entre 980 et 1200
+------------------------- */
+@media (min-width: 980px) and (max-width: 1199px) {
+}
+
+/* Tablet to desktop
+------------------------- */
+@media (min-width: 768px) and (max-width: 979px) {
+}
+
+/* Tablet Only
+------------------------- */
+@media (min-width: 481px) and (max-width: 767px) {
+}
+
+/* Landscape phones and smaller
+------------------------- */
+@media (max-width: 480px) {
+}
