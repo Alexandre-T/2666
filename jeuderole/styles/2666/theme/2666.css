@@ -1,0 +1,69 @@
+@CHARSET "UTF-8";
+
+@font-face{font-family:'coalition';src:url('{T_THEME_PATH}/fonts/coalition.ttf?v=2.0.0');}
+
+h1,h5,h6{
+	font-family:'coalition',fantasy;
+}
+
+.jumbotron h1{
+	font-size: 100px;
+	color:white;
+}
+.jumbotron p.description{
+	font-family:'coalition',fantasy;
+}
+.jumbotron p.description,.jumbotron p.help-block a small{
+	color:white;
+}
+.jumbotron {
+	background-color: black;
+	background-image: url('{T_THEME_PATH}/images/jumbotron.jpg');
+	background-position: center center;
+	background-repeat: no-repeat;
+	border-bottom: thin solid black;
+	margin-bottom:0;
+}
+div.page-header {
+	margin-bottom:0;
+}
+section h2,section h3,section h4{
+	font-family:'coalition',fantasy;
+}
+
+.page-header h1 small {
+	font-size: large;
+}
+
+table.table th a {
+	font-family:'coalition',fantasy;
+}
+
+/* Responsive
+-------------------------------------------------- */
+
+/* Desktop large
+	 Au dessus de 1200
+------------------------- */
+@media (min-width: 1200px) {
+}
+
+/* Desktop entre 980 et 1200
+------------------------- */
+@media (min-width: 980px) and (max-width: 1199px) {
+}
+
+/* Tablet to desktop
+------------------------- */
+@media (min-width: 768px) and (max-width: 979px) {
+}
+
+/* Tablet Only
+------------------------- */
+@media (min-width: 481px) and (max-width: 767px) {
+}
+
+/* Landscape phones and smaller
+------------------------- */
+@media (max-width: 480px) {
+}
