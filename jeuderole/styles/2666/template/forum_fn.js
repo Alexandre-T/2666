@@ -97,7 +97,9 @@ function phpbb_seo_href() {
 	}
 }
 if (seo_external || seo_hashfix) {
-	onload_functions.push('phpbb_seo_href()');
+	//AT Begin
+	//onload_functions.push('phpbb_seo_href()');
+	//AT End
 }
 // www.phpBB-SEO.com SEO TOOLKIT END
 

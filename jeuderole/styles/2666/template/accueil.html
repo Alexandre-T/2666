@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html dir="{S_CONTENT_DIRECTION}" lang="{S_USER_LANG}">
+<head>
+{SEO_BASE_HREF}
+<script>
+// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+var seo_delim_start = '{SEO_START_DELIM}';
+var seo_static_pagination = '{SEO_SATIC_PAGE}';
+var seo_ext_pagination = '{SEO_EXT_PAGE}';
+var seo_external = {SEO_EXTERNAL};
+var seo_external_sub = {SEO_EXTERNAL_SUB};
+var seo_ext_classes = {SEO_EXT_CLASSES};
+var seo_hashfix = {SEO_HASHFIX};
+// www.phpBB-SEO.com SEO TOOLKIT END
+</script>
+<!-- INCLUDE header.inc.html -->
+</head>
+<body class="body-{SCRIPT_NAME} accueil" id="top">	
+	<div id="header" class="container container-2666">
+		<div class="panel panel-default panel-2666">
+			<div class="panel-body">
+				<h1 class="text-right">{SITENAME}
+				<small>{SITE_DESCRIPTION}</small>
+				</h1>
+				<p class="text-left accueil2666">
+					<a href="{U_GUIDE}" 
+					  class="white tooltip-link" 
+					  title="{L_GUIDE_TITLE}">
+						<i class="fa fa-book fa-fw fa-2x"></i>&nbsp;{L_GUIDE_DU_NOUVEL_ARRIVANT}
+					</a>
+				</p>
+			</div>
+			<div class="panel-footer">
+				<nav class="bottomnav">
+					<ul class="list-inline accueil2666 text-center">
+						<li>
+							<a href="{U_OU_SUIS_JE}"
+							 class="tooltip-top" 
+							  title="{L_OU_SUIS_JE_TITLE}">
+								<i class="fa fa-life-ring fa-fw "></i>&nbsp;{L_OU_SUIS_JE}
+							</a>
+						</li>
+						<li>
+							<a href="{U_REGLEMENT}" 
+						  	  class="tooltip-top"   
+						      title="{L_REGLEMENT_TITLE}">
+						      <i class="fa fa-edit fa-fw "></i>&nbsp;{L_REGLEMENT}
+						    </a>
+						</li>
+						<li>
+							<a href="{U_INDEX}" class="tooltip-top" title="{L_INDEX}">
+								<i class="fa fa-file-text-o fa-fw "></i>&nbsp;{L_FORUM}
+							</a>
+						</li>
+						<li>
+							<!-- IF S_USER_LOGGED_IN and not S_IS_BOT -->
+								<a class="tooltip-top" href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}">
+									<i class="fa fa-sign-out fa-fw "></i>&nbsp;{L_LOGOUT}
+								</a>
+							<!-- ELSEIF S_IS_BOT -->
+							<!-- ELSE -->
+								<a class="tooltip-top" href="{U_LOGIN_LOGOUT}" title="{L_LOGIN}">
+									<i class="fa fa-sign-in fa-fw "></i>&nbsp;{L_LOGIN}
+								</a>
+							<!-- ENDIF -->
+						</li>
+					</ul>
+				</nav>					
+			</div>
+		</div>		
+	</div>
+</body>
+</html>

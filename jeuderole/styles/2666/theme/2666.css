@@ -9,12 +9,15 @@ h1,h5,h6{
 .jumbotron h1{
 	font-size: 100px;
 	color:white;
+	text-shadow: 2px 2px 2px #2C6CAE;
 }
 .jumbotron p.description{
 	font-family:'coalition',fantasy;
+	text-shadow: 2px 2px 2px #2C6CAE;
 }
 .jumbotron p.description,.jumbotron p.help-block a small{
 	color:white;
+	text-shadow: 2px 2px 2px #2C6CAE;
 }
 .jumbotron {
 	background-color: black;
@@ -27,7 +30,7 @@ h1,h5,h6{
 div.page-header {
 	margin-bottom:0;
 }
-section h2,section h3,section h4{
+section h2,section h3,section h4,ul.accueil2666{
 	font-family:'coalition',fantasy;
 }
 
@@ -38,7 +41,52 @@ section h2,section h3,section h4{
 table.table th a {
 	font-family:'coalition',fantasy;
 }
+body.accueil{
+	background-color: black;
+	background-image : url('{T_THEME_PATH}/images/bg_etoile.jpg');
+	background-position: center center;
+	background-repeat: no-repeat;
+ 
+}
+.accueil h1{
+	font-size: 100px;
+	color:white;
+	text-shadow: 2px 2px 2px #2C6CAE;
+}
+.accueil h1 small{
+	display:block;
+	font-size: 20px;
+	color:white;
+	text-shadow: 2px 2px 2px #2C6CAE;
+}
 
+.accueil div.container{
+	margin-top:100px;
+	text-align:center;	
+}
+.accueil div.panel-2666 .panel-body{
+	height:400px;
+	background-image : url('{T_THEME_PATH}/images/accueil.jpg');
+	background-position: center center;
+	background-repeat: no-repeat;
+
+}
+.accueil ul.accueil2666{
+	font-size:large;	
+}
+div.panel-2666{
+	
+}
+p.accueil2666{
+	font-family:'coalition',fantasy;
+	color:white;
+	text-shadow: 2px 2px 2px #2C6CAE;
+	vertical-align: bottom;
+	line-height:200px;	
+}
+a.white{
+	color:white;
+}
 /* Responsive
 -------------------------------------------------- */
 
@@ -46,6 +94,9 @@ table.table th a {
 	 Au dessus de 1200
 ------------------------- */
 @media (min-width: 1200px) {
+	.accueil div.container{
+		width:940px;
+	}
 }
 
 /* Desktop entre 980 et 1200
