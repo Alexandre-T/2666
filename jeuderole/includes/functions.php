@@ -4765,8 +4765,9 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		
 		//AT BEGIN NEW LINK
 		'U_GUIDE'				=> append_sid("{$phpbb_root_path}aides-de-jeu/guide-du-nouvel-arrivant-t3.html"),
-		'U_OU_SUIS_JE'			=> append_sid("{$phpbb_root_path}description-du-jeu/ou-suis-je-t7.html"),
-		'U_REGLEMENT'			=> append_sid("{$phpbb_root_path}description-du-jeu/reglement-t2.html"),
+		'U_OU_SUIS_JE'			=> append_sid("{$phpbb_root_path}accueil-du-jeu/ou-suis-je-t7.html"),
+		'U_REGLEMENT'			=> append_sid("{$phpbb_root_path}accueil-du-jeu/reglement-t2.html"),
+		'U_REGLE_BIENSEANCE'	=> append_sid("{$phpbb_root_path}accueil-du-jeu/la-bienseance-t4.html"),
 		//AT END NEW LINK
 
 		'S_USER_LOGGED_IN'		=> ($user->data['user_id'] != ANONYMOUS) ? true : false,
