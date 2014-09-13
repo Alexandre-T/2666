@@ -4764,7 +4764,7 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'U_FEED'				=> generate_board_url() . "/feed.$phpEx",
 		
 		//AT BEGIN NEW LINK
-		'U_GUIDE'				=> append_sid("{$phpbb_root_path}description-du-jeu/guide-du-nouvel-arrivant-t3.html"),
+		'U_GUIDE'				=> append_sid("{$phpbb_root_path}aides-de-jeu/guide-du-nouvel-arrivant-t3.html"),
 		'U_OU_SUIS_JE'			=> append_sid("{$phpbb_root_path}description-du-jeu/ou-suis-je-t7.html"),
 		'U_REGLEMENT'			=> append_sid("{$phpbb_root_path}description-du-jeu/reglement-t2.html"),
 		//AT END NEW LINK
