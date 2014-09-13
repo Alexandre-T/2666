@@ -155,6 +155,9 @@ div.corps,div#postingbox{
 	padding-bottom : 4px;
 	text-align: justify;
 }
+img.img-thumbnail{
+	border-color:#428BCA;
+}
 div#postingbox{
 	padding:4px;
 }
