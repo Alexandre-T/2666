@@ -1,0 +1,109 @@
+<!-- INCLUDE overall_header.html -->
+<div class="corps container">
+<h2>{L_SIGNATURE_TITRE}</h2>
+<!-- IF S_USER_LOGGED_IN and not S_SIGNATURE -->
+	<!-- IF S_MESSAGE -->
+	<p class="alert alert-danger text-center">
+		Avant de pouvoir créer votre personnage, vous devez lire, approuver et signer le règlement.
+	</p>
+	<!-- ENDIF -->
+<!-- ENDIF -->
+<p>
+	<em>Veuillez accepter les conditions générales de ce jeu pour y participer.</em>
+</p>
+<!-- IF not S_IS_BOT and S_USER_LOGGED_IN and not S_SIGNATURE -->
+<form method="post" action="#signature" class="form-horizontal">
+<input type="hidden" name="age" value="0">
+<input type="hidden" name="bienseance" value="0">
+<input type="hidden" name="pi" value="0">
+<!-- ENDIF -->
+<h3>Âge d'inscription</h3>
+<p class="col-sm-offset-2 col-sm-10">Internet est une chance d'ouverture sur le monde et une source d'information et de divertissement sans précédent. Mais tout son contenu n’est pas destiné aux enfants. C’est le cas du jeu de ce jeu de rôles par forum où certains textes peuvent être violents ou érotiques. Les parents doivent être vigilants et accompagner autant que possible leurs enfants dans leur "consommation" d’Internet. C’est dans cet objectif de protection des enfants et des adolescents que ce forum est interdit aux mineurs.</p>
+<div class="form-group">
+	<div class="col-sm-offset-2 col-sm-10">
+		<div class="checkbox">
+		    <label>
+		      <input type="checkbox" name="age" value="18"> J'ai plus de 18 ans
+		    </label>
+		    <p class="help-block">Cochez cette cas si vous avez plus de 18 ans et êtes majeur selon les lois de votre pays.</p>
+		</div>
+	</div>
+</div>
+
+<h3>Règles de bienséance</h3>
+<p class="col-sm-offset-2 col-sm-10">
+	Les <a href="{U_REGLE_BIENSEANCE}" title="Règles de bienséance"></a>règles de bienséance sont exposées dans ce sujet. Je vous invite à bien lire les rubriques :	
+</p>
+<ul class="col-sm-offset-2 col-sm-10">
+	<li>L'ambiance</li>
+	<li>Les absences</li>
+	<li>Le rythme de jeu</li>
+</ul>
+<div class="form-group">
+	<div class="col-sm-offset-2 col-sm-10">
+		<div class="checkbox">
+		    <label>
+		      <input type="checkbox" name="bienseance" value="1">J'ai bien compris les règles de bienséance de ce forum.
+		    </label>
+		    <p class="help-block">Cochez cette case si vous avez bien compris les règles de politesse exigée pour participer à ce forum.</p>
+		</div>
+	</div>
+</div>
+<h3>Propriété intellectuelle</h3>
+<p class="col-sm-offset-2 col-sm-10">
+Ce jeu est hébergé en France, le code de la propriété intellectuel
+français s'applique. En vous inscrivant à ce jeu, vous participez à une
+œuvre de collaboration, comme définie à l'article <a
+	href="http://legifrance.gouv.fr/affichCodeArticle.do?idArticle=LEGIARTI000006278882"
+	class="postlink">L113-2</a> du code de la propriété intellectuelle. Si
+lors de votre départ, vous souhaitez faire usage de vos droits de
+retrait ou de repentir et retirer de ce site les contributions que vous
+y avez publiées, il faudra le faire en conformité avec l'article suivant
+du CPI <a
+	href="http://legifrance.gouv.fr/affichCodeArticle.do?idArticle=LEGIARTI000006278894"
+	class="postlink">L121-4</a>. </p>
+<p class="col-sm-offset-2 col-sm-10">Soyons clairs ! Le choix de l'œuvre de collaboration signifie que pour faire supprimer vos
+textes, vous devrez au préalable dédommager la communauté à hauteur du
+préjudice subit.</p>
+<div class="form-group">
+	<div class="col-sm-offset-2 col-sm-10">
+		<div class="checkbox">
+		    <label>
+		      <input type="checkbox" name="pi" value="1">J'ai bien compris les règles de bienséance de ce forum.
+		    </label>
+		    <p class="help-block">Cochez cette case si vous avez bien compris les règles de publication et de propriétés intellectuelles qui s'appliquent sur ce forum.</p>
+		</div>
+	</div>
+</div>
+
+<!-- IF S_IS_BOT -->
+<p><a id="signature"></a><a href="{U_INDEX}" title="{L_INDEX}">{L_INDEX}</a></p>
+<!-- ELSEIF not S_USER_LOGGED_IN -->
+<h3>{L_SIGNATURE_REGLEMENT}</h3>
+<p class="alert alert-info text-center"><a id="signature"></a>
+	Veuillez vous 
+	<a href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}">connecter</a>
+	ou vous 
+	<a href="{U_REGISTER}" title="{L_REGISTER}">inscrire au jeu</a> 
+	pour pouvoir en signer le règlement par la suite !
+</p>
+<!-- ELSEIF S_SIGNATURE -->
+<h3><a id="signature"></a>{L_SIGNATURE_REGLEMENT}</h3>
+<p class="alert alert-success text-center">Merci d'avoir signé le règlement !</p>
+<!-- ELSE -->
+<h3><a id="signature"></a>{L_SIGNATURE_REGLEMENT}</h3>
+	<!-- IF S_ERREUR -->
+	<p class="alert alert-danger text-center">
+		Pour signer le réglement, vous devez cocher les trois cases à cocher.
+	</p>
+	<!-- ENDIF -->
+	<dl class="col-sm-offset-2 col-sm-10">			
+		<dt><label for="">Signature</label></dt>
+		<dd>Je, soussigné {S_USERNAME}, certifie avoir pris connaissances du règlement du forum. Je certifie être majeur et avoir compris que ce jeu s'adressait à un public adulte en raison de son contenu à caractères violents et érotiques. J'ai bien compris que je participai à une œuvre de collaboration selon le code de la propriété intellectuel français.				
+		<br/><br/>
+		<input class="btn btn-primary" type="submit" value="Signez votre contrat avec Harahel !"/></dd>
+	</dl>
+</form>
+<!-- ENDIF -->
+</div>
+<!-- INCLUDE overall_footer.html -->

@@ -21,6 +21,10 @@ $user->session_begin();
 $auth->acl($user->data);
 $user->setup('memberlist');
 
+//MOD AT BEGIN
+$user->add_lang('mods/viewonline');
+//MOD AT END
+
 // Get and set some variables
 $mode		= request_var('mode', '');
 $session_id	= request_var('s', '');
@@ -190,13 +194,23 @@ while ($row = $db->sql_fetchrow($result))
 	preg_match('#^([a-z0-9/_-]+)#i', $row['session_page'], $on_page);
 	if (!sizeof($on_page))
 	{
-		$on_page[1] = '';
+		//AT MOD VIEWONLINE BEGIN
+		//$on_page[1] = '';
+		preg_match('#^\.\./([a-z0-9/_-]+)#i', $row['session_page'], $on_page);
+		if (!sizeof($on_page))
+		{
+			$on_page[1] = '';
+		}
+		//AT MOD VIEWONLINE END
 	}
-
+	var_dump($row['session_page'],$on_page[1]);
 	switch ($on_page[1])
 	{
 		case 'index':
-			$location = $user->lang['INDEX'];
+			//MOD AT BEGIN
+			//$location = $user->lang['INDEX'];
+			$location = $user->lang['CONSULTE_INDEX'];
+			//MOD AT END
 			$location_url = append_sid("{$phpbb_root_path}index.$phpEx");
 		break;
 
@@ -204,7 +218,22 @@ while ($row = $db->sql_fetchrow($result))
 			$location = $user->lang['ACP'];
 			$location_url = append_sid("{$phpbb_root_path}index.$phpEx");
 		break;
-
+		
+		//MOD AT BEGIN
+		case 'creation/index':
+			$location = $user->lang['CREATION_INDEX'];
+			$location_url = append_sid("{$phpbb_root_path}creation/index.$phpEx");
+			break;
+		case 'creation/etape1':
+			$location = $user->lang['CREATION_ETAPE1'];
+			$location_url = append_sid("{$phpbb_root_path}creation/etape1.$phpEx");
+			break;
+		case 'signature':
+				$location = $user->lang['SIGNATURE'];
+				$location_url = append_sid("{$phpbb_root_path}creation/etape1.$phpEx");
+				break;
+		//MOD AT END
+		
 		case 'posting':
 		case 'viewforum':
 		case 'viewtopic':
