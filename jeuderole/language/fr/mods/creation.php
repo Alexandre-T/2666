@@ -41,7 +41,7 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	'SIGNATURE_INDEX'	=>	'Signature du réglement',
+	'CREATION_TITRE'	=>	'Création de personnage',
 	
 
 ));
