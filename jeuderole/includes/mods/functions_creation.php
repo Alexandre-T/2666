@@ -79,16 +79,16 @@ function creation_verification_etape($etape) {
 	$etapes[2] = $etapes[1];
 	$etapes[3] = empty ( $user->profile_fields ['pf_sexe'] );
 	$etapes[4] = empty ( $user->profile_fields ['pf_race'] );
-	$etapes[8] = empty ( $user->profile_fields ['pf_avatar'] ) || 
-			     empty ( $user->profile_fields ['pf_sexe'] ) || 
+	$etapes[5] = empty ( $user->profile_fields ['pf_avatar'] );
+	$etapes[6] = empty ( $user->profile_fields ['pf_passe'] ) || 
 			     empty ( $user->profile_fields ['pf_ageapparent'] ) ||
 			     empty ( $user->profile_fields ['pf_prenom'] ) || 
-			     AT_DIEU != $user->profile_fields ['pf_race'] && empty ( $user->profile_fields ['pf_nom'] );
-	$etapes[8] = empty ( $user->profile_fields ['pf_dieu'] ) ||
+			     empty ( $user->profile_fields ['pf_nom'] ); 
+	$etapes[6] = empty ( $user->profile_fields ['pf_dieu'] ) ||
 				 AT_NONRENSEIGNE == $user->profile_fields ['pf_dieu'] ||
 			     empty ( $user->profile_fields ['pf_passe'] ) || 
 			     empty ( $user->profile_fields ['pf_agereel'] );
-	$etapes[8] = empty ( $user->profile_fields ['pf_nature'] ) || 
+	$etapes[7] = empty ( $user->profile_fields ['pf_nature'] ) || 
 			     empty ( $user->profile_fields ['pf_attitude'] ) || 
 			     empty ( $user->profile_fields ['pf_defaut'] ) || 
 			     empty ( $user->profile_fields ['pf_caractere'] ) || 
@@ -135,7 +135,6 @@ function creation_verification_etape($etape) {
 		'S_BBCODE_ALLOWED'	  => true,
 		'S_BBCODE_CHECKED'    => true,
 		'S_CREATION' 		  => true,
-		'S_DIEU'		  	  => ($l_race == AT_DIEU),
 		'U_ETAPE_0'			  => append_sid("{$phpbb_root_path}../creation/index.$phpEx"),
 		'U_ETAPE_1'			  => append_sid("{$phpbb_root_path}../creation/etape1.$phpEx"),
 		'U_ETAPE_2'			  => append_sid("{$phpbb_root_path}../creation/etape2.$phpEx"),
