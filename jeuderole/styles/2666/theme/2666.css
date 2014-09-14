@@ -165,6 +165,10 @@ div#postingbox{
 	padding:4px;
 }
 
+div.correction{
+	margin-left:5px;
+}
+
 /* Fond d'écran par défaut */
 header{
 	background-color:white;	
