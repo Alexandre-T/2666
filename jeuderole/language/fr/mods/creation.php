@@ -42,8 +42,13 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, array(
 	'CREATION_TITRE'	=>	'Création de personnage',
-	
-
+	'CREATION_ETAPE1'	=>	'Création de personnage : Étape 1',
+	'CREATION_ETAPE2'	=>	'Création de personnage : Étape 2',
+	'CREATION_ETAPE3'	=>	'Création de personnage : Étape 3',
+	'CREATION_ETAPE4'	=>	'Création de personnage : Étape 4',
+	'CREATION_ETAPE5'	=>	'Création de personnage : Étape 5',
+	'CREATION_ETAPE6'	=>	'Création de personnage : Étape 6',
+	'CREATION_ETAPE7'	=>	'Création de personnage : Étape 7',
 ));
 
 ?>
