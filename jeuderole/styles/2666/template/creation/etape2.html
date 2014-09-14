@@ -1,0 +1,130 @@
+<!-- INCLUDE overall_header.html -->
+<h2>Création de personnage</h2>
+
+<!-- sINCLUDE progression.html -->
+<div class="corps container">
+<h3 class="soustitre">Allez, ne fait pas ton timide, sort un peu de l'ombre !</h3>
+	
+<!-- sINCLUDE creation/etape.html -->
+	<div class="row">
+		<div class="col-sm-3">
+			<img src="{T_THEME_PATH}/images/lazer.jpg" width="200" height="320" class="img-thumbnail img-responsive"/>
+		</div>
+		<div class="col-sm-9">
+				<!-- IF S_MESSAGE -->
+					<p class="alert alert-danger">
+						<!-- IF S_FEMME -->
+							Hum hum ! Tu es bien gentille, mais revient par ici s'il-te-plaît.
+							Oui toi, la donzelle qui se balade dans les sas où elle ne doit pas aller.
+							Tu fais comme tu veux ma cocotte, mais si tu te retrouves dans l'espace avant que je ne t'ai
+							donnée ta combinaison spatiale, alors tu ne vas pas rire longtemps.							
+						<!-- ELSE -->
+							Hum hum ! Tu es mignon, mais revient par ici s'il-te-plaît.
+							Oui toi, le mec au joli petit cul qui se balade dans les sas où il ne devrait pas.
+							Tu fais comme tu veux mon coco, mais si tu te retrouves dans l'espace avant que je ne t'ai
+							donnée ta combinaison spatiale, alors tu ne vas pas rire longtemps.
+						<!-- ENDIF -->
+					</p> 
+				<!-- ENDIF -->
+				<p>
+					Bien seconde étape, avant de tout, il m'est important de savoir si j'ai affaire à
+					<!-- IF S_FEMME -->une humaine ou à une Nephilim<!-- ELSE -->un humain ou à un Nephilim<!-- ENDIF -->					
+					Il faut bien comprendre que nos races n'ont guère le choix et que nous devons vivre ensemble.
+					Les Nephilim ont besoin d'Orgone et les humains ont souvent besoin de la puissance des Nephilim pour
+					réparer les machines. Le statut quos entre les races est fragile et ténus. Il ne faut pas oublier que
+					nous sortons d'une guerre qui a longtemps opposé les deux races. Alors je te recommande de faire ton choix
+					judicieusement.					
+				</p>	
+				<p>
+					Si tu n'es pas <!-- IF S_FEMME -->sûre<!-- ELSE -->sûr<!-- ENDIF --> de toi, tu peux toujours commencer
+					par une race et revenir ici pour changer. Comment je fais pour te laisser changer de race ? Bonne question !
+					J'ai envie de te répondre : «<abbr title="Ta Gueule C'est magique ! ;)">TGCM</abbr>». C'est une expression
+					que tu retrouveras souvent sortir des lèvres des personnages. Ne t'inquiète pas, ce n'est pas une insulte.
+					C'est un peu comme «<abbr title="Ta Gueule C'est Harahel ! ;)">TGCH</abbr>». Ouais, c'est parce que Harahel,
+					c'est un Gros Bill et qu'il aime bien se la péter contrairement à Asmodée qui lui sait se faire plus discret. 
+					Bon, je parle, je parle, on dirait Kurt&hellip; Tu as choisi ta race ? 
+				</p>
+				<form class="horizontal-form" action="etape3.php" method="post">
+					{S_HIDDEN_FIELDS}
+					<fieldset>
+						<legend>Choix de la race</legend>
+						<div class="form-group">
+   							<div class="col-sm-offset-2 col-sm-10">
+								<div class="radio">
+					  				<label>
+					    				<input type="radio" name="race" id="optionsRadios2" value="{AT_HUMAIN}" {HUMAIN_CHECKED}>
+					    				<!-- IF S_FEMME -->
+					    				<i class="fa fa-fw fa-female"></i>&nbsp;Je choisis d'être une humaine.
+					    				<!-- ELSE -->
+					    				<i class="fa fa-fw fa-male"></i>&nbsp;Je choisis d'être un humain.
+					    				<!-- ENDIF -->
+					  				</label>
+					  			</div>
+					  		</div>
+ 						</div>
+						<div class="form-group">
+   							<div class="col-sm-offset-2 col-sm-10">
+								<div class="radio">
+					  				<label>
+					    				<input type="radio" name="race" id="optionsRadios1" value="{AT_NEPHILIM}" {NEPHILIM_CHECKED}>
+					    				<!-- IF S_FEMME -->
+					    				<i class="fa fa-fw fa-rebel"></i>&nbsp;Je choisis d'être une Nephilim.
+					    				<!-- ELSE -->
+					    				<i class="fa fa-fw fa-rebel"></i>&nbsp;Je choisis d'être un Nephilim.
+					    				<!-- ENDIF -->
+					  				</label>
+					  			</div>
+					  		</div>
+ 						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<div class="btn-group">			
+									<button onclick="return false;" class="btn btn-default" data-toggle="modal" data-target="#modalHelp"><i class="fa fa-fw fa-question-circle"></i>&nbsp;J'ai besoin d'aide</button>
+									<input type="submit" class="btn btn-primary" value="Je valide &gt;&gt;"/>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</form>	
+				<br/>
+				<br/>
+		</div>
+	</div>
+</div>
+<!-- DEFINE $MODAL_ID = 'modalHelp' -->
+<!-- INCLUDE modal/header.html -->
+J'ai besoin d'aide pour choisir
+<!-- INCLUDE modal/body.html -->
+Bien je préfère que tu me poses cette question. Les humains et les Nephilim doivent vivre ensemble,
+mais cela n'a pas toujours été le parfait amour entre eux. Lidrya et Harahel sont sans doute l'exception qui confirme la règle.
+Les Nephilim sont forcément attirants. Déjà, parce qu'ils sont canons, regarde-moi ! 
+<!-- IF S_FEMME -->
+	Oui je sais tu es jalouse, comme toutes les femmes
+<!-- ELSE -->
+	Dans les yeux ! Arrête de mater mes seins s'il te plait&hellip;
+<!-- ENDIF -->
+Donc on est canon, mais les humains ont leur charme, surtout les personnages des joueurs. Ce qu'il est important de comprendre,
+c'est que tu vas rencontrer deux modes de jeu différents. Les Nephilim sont immortels, rapides et forts. Quel intérêt de jouer un humain ?
+En théorie aucun. En pratique, c'est tout l'inverse. Déjà ton humain aura un ou plusieurs dons qui le rendront indispensables à la race
+Nephilim. Et puis sans humain, les Nephilim perdent leurs pouvoirs et redeviennent humains. Ils finiront par mourir. Je t'invite à lire 
+les sujets sur les Nephilim et les humains. Regarde sur ton holodeck !
+<!-- INCLUDE modal/footer.html -->
+
+
+<!-- DEFINE $MODAL_ID = 'modalHumain' -->
+<!-- INCLUDE modal/header.html -->
+Humains
+<!-- INCLUDE modal/body.html -->
+{POST_HUMAIN}
+<!-- INCLUDE modal/footer.html -->
+
+<!-- DEFINE $MODAL_ID = 'modalNephilim' -->
+<!-- INCLUDE modal/header.html -->
+Nephilim
+<!-- INCLUDE modal/body.html -->
+{POST_NEPHILIM}
+<!-- INCLUDE modal/footer.html -->
+
+
+
+<!-- INCLUDE overall_footer.html -->					

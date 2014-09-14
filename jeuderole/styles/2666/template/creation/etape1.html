@@ -1,0 +1,85 @@
+<!-- INCLUDE overall_header.html -->
+<h2>Création de personnage</h2>
+
+<!-- sINCLUDE progression.html -->
+<div class="corps container">
+<h3 class="soustitre">Allez, ne fait pas ton timide, sort un peu de l'ombre !</h3>
+	
+<!-- sINCLUDE creation/etape.html -->
+	<div class="row">
+		<div class="col-sm-3">
+			<img src="{T_THEME_PATH}/images/lazer.jpg" width="200" height="320" class="img-thumbnail img-responsive"/>
+		</div>
+		<div class="col-sm-9">
+				<!-- IF S_MESSAGE -->
+					<p class="alert alert-danger">
+						Hum hum&nbsp;!!! Reviens ici, toi ! Je ne sais pas pourquoi, tu étais déjà passé aux étapes suivantes,
+						mais visiblement, il y a eu une erreur d'aiguillage. Laisse-moi te donner un conseil&nbsp;! 
+						Si tu ne suis pas les étapes dans l'ordre, tu vas rencontrer des soucis. Imagine que tu te retrouves
+						dans le sas d'éjection et que tu n'aies pas enfiler ta combinaison spatiale&nbsp;! Oui&nbsp;! En fait, n'imagine
+						pas&nbsp;! C'est très gore comme scène. Alors, commence pas à gruger, ok ! J'aime pas trop les insoumis&hellip;
+					</p> 
+				<!-- ENDIF -->
+				<p>
+					Bien première étape, nous allons&hellip;
+				</p>	
+				<p>
+					Mmmm&hellip; Écoute, je suis un peu embêtée. Tu as vu, je suis une femme. Oui arrête de mater mes seins, je sais
+					que le fondateur a des goûts très prononcés pour les tenues moulantes&hellip; Mais j'apprécierai que <b>toi</b>,
+					tu sortes un peu de l'ombre. Je n'arrive même pas à voir si tu es un homme ou une femme.
+				</p>
+				<p>
+					Ce n'est pas que cela me dérange beaucoup. Mais si tu te retrouves avec une coque à l'entrejambe de ta combinaison, 
+					ça pourrait faire désordre au moment d'enfourcer ta motojet. 
+				</p>
+				<form class="horizontal-form" action="etape2.php" method="post">
+					{S_HIDDEN_FIELDS}
+					<fieldset>
+						<legend>Début du questionnaire</legend>
+						<div class="form-group">
+   							<div class="col-sm-offset-2 col-sm-10">
+								<div class="radio">
+					  				<label>
+					    				<input type="radio" name="sexe" id="optionsRadios2" value="{AT_FEMME}" {FEMME_CHECKED}>
+					    				<i class="fa fa-fw fa-female"></i>&nbsp;Je suis une femme
+					  				</label>
+					  			</div>
+					  		</div>
+ 						</div>
+						<div class="form-group">
+   							<div class="col-sm-offset-2 col-sm-10">
+     								<div class="radio">
+					  				<label>
+					    				<input type="radio" name="sexe" id="optionsRadios1" value="{AT_HOMME}" {HOMME_CHECKED}>
+					    				<i class="fa fa-fw fa-male"></i>&nbsp;Je suis un homme
+					  				</label>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="col-sm-offset-2 col-sm-10">
+								<div class="btn-group">			
+									<button onclick="return false;" class="btn btn-default" data-toggle="modal" data-target="#modalHelp"><i class="fa fa-fw fa-question-circle"></i>&nbsp;J'ai besoin d'aide</button>
+									<input type="submit" class="btn btn-primary" value="Je valide &gt;&gt;"/>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+				</form>	
+				<br/>
+				<br/>
+		</div>
+	</div>
+</div>
+<!-- DEFINE $MODAL_ID = 'modalHelp' -->
+<!-- INCLUDE modal/header.html -->
+J'ai besoin d'aide pour savoir si je suis une femme ou un homme
+<!-- INCLUDE modal/body.html -->
+<p>Bien, je vois que nous avons affaire avec un génie. Alors tu vas ouvrir ta braguette de pantalon, tu vas le baisser jusqu'à tes chevilles.
+Maintenant, tu vas enlever ce truc immonde qui te sert de culotte. Tu sais que les Nephilim sont sensés être sexy, hein ? Oui, 
+je ne vais pas brûler les étapes. Restons-en donc à l'étape de la découverte de ton sexe.</p>
+<p>Bon, alors tu le baisses ton pantalon ?</p>
+<p>Bien, alors de deux choses l'une, soit tu as la cordelette de ton tampax qui dépasse. Soit tu es un homme&hellip;</p>
+<p>Allez va cocher la bonne case, maintenant !</p>   
+<!-- INCLUDE modal/footer.html -->
+<!-- INCLUDE overall_footer.html -->

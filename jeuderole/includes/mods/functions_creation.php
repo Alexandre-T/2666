@@ -76,8 +76,9 @@ function creation_verification_etape($etape) {
 	$user->get_profile_fields ( $user->data ['user_id'] );
 	$etapes[0] = !creation_verification_groupe();
 	$etapes[1] = $etapes[0];
-	$etapes[2] = empty ( $user->profile_fields ['pf_race'] );
-	$etapes[3] = empty ( $user->profile_fields ['pf_avatar'] ) || 
+	$etapes[2] = empty ( $user->profile_fields ['pf_sexe'] );
+	$etapes[3] = empty ( $user->profile_fields ['pf_race'] );
+	$etapes[4] = empty ( $user->profile_fields ['pf_avatar'] ) || 
 			     empty ( $user->profile_fields ['pf_sexe'] ) || 
 			     empty ( $user->profile_fields ['pf_ageapparent'] ) ||
 			     empty ( $user->profile_fields ['pf_prenom'] ) || 
@@ -130,7 +131,6 @@ function creation_verification_etape($etape) {
 	$template->assign_vars(array(	
 		'ETAPE' 	          => $etape,
 		'S_ACTIF' 	          => is_user_in_group(GROUPE_ACTIF),
-		'S_ANDROIDE'		  => ($l_race == AT_ANDROID),
 		'S_BBCODE_ALLOWED'	  => true,
 		'S_BBCODE_CHECKED'    => true,
 		'S_CREATION' 		  => true,
@@ -154,6 +154,7 @@ function creation_verification_etape($etape) {
 		'S_HUMAIN'		  	  => ($l_race == AT_HUMAIN),
 		'S_CREE'			  => is_user_in_group(GROUPE_DEMANDE_CREATION),
 		'S_INACTIF'			  => is_user_in_group(GROUPE_INACTIF),
+		'S_NEPHILIM'	  	  => ($l_race == AT_NEPHILIM),
 		'S_SIGNATURE' 		  => is_user_in_group(GROUPE_SIGNATURE),
 		'S_SMILIES_ALLOWED'	  => true,
 		'S_SMILIES_CHECKED'	  => true,
