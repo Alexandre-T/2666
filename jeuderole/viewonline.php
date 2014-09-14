@@ -228,9 +228,17 @@ while ($row = $db->sql_fetchrow($result))
 			$location = $user->lang['CREATION_ETAPE1'];
 			$location_url = append_sid("{$phpbb_root_path}creation/etape1.$phpEx");
 			break;
+		case 'creation/etape2':
+			$location = $user->lang['CREATION_ETAPE2'];
+			$location_url = append_sid("{$phpbb_root_path}creation/etape2.$phpEx");
+			break;
+		case 'creation/etape3':
+			$location = $user->lang['CREATION_ETAPE3'];
+			$location_url = append_sid("{$phpbb_root_path}creation/etape3.$phpEx");
+			break;
 		case 'signature':
 				$location = $user->lang['SIGNATURE'];
-				$location_url = append_sid("{$phpbb_root_path}creation/etape1.$phpEx");
+				$location_url = append_sid("{$phpbb_root_path}signature.$phpEx");
 				break;
 		//MOD AT END
 		

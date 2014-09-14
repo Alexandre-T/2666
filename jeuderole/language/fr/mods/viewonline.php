@@ -41,13 +41,12 @@ if (empty($lang) || !is_array($lang))
 //
 
 $lang = array_merge($lang, array(
-	//Utiliser dans 2666
 	'CONSULTE_INDEX'			=> 'Consulte la page d’index du forum',
 	'CONSULTE_SIGNATURE'		=> 'Consulte le contrat d’Harahel',
 	'CREATION_INDEX'			=> 'S’apprête à créer son personnage',
-	'CREATION_ETAPE1'			=> 'Est en train de créer son personnage',
-	'CREATION_ETAPE2'			=> 'Est en train de créer un des contacts de son personnage',
-	'CREATION_ETAPE3'			=> 'Est en train de décrire ses pouvoirs',
+	'CREATION_ETAPE1'			=> 'Est en train de choisir le sexe de son personnage',
+	'CREATION_ETAPE2'			=> 'Est en train de choisir la race de son personnage',
+	'CREATION_ETAPE3'			=> 'Est en train de préciser les généralités de son personnage (âge, nom, prénom, etc.)',
 	'CREATION_ETAPE4'			=> 'Est en train de décrire ses pouvoirs',
 	'SIGNATURE'					=> 'Est en train de signer ou de relire le réglement',
 ));
