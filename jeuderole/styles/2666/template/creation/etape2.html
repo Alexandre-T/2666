@@ -27,11 +27,11 @@
 					</p> 
 				<!-- ENDIF -->
 				<p>
-					Bien seconde étape, avant de tout, il m'est important de savoir si j'ai affaire à
+					Bien seconde étape, avant tout, il m'est important de savoir si j'ai affaire à
 					<!-- IF S_FEMME -->une humaine ou à une Nephilim<!-- ELSE -->un humain ou à un Nephilim<!-- ENDIF -->					
 					Il faut bien comprendre que nos races n'ont guère le choix et que nous devons vivre ensemble.
 					Les Nephilim ont besoin d'Orgone et les humains ont souvent besoin de la puissance des Nephilim pour
-					réparer les machines. Le statut quos entre les races est fragile et ténus. Il ne faut pas oublier que
+					réparer les machines. Le statut quos entre les races est fragile et ténu. Il ne faut pas oublier que
 					nous sortons d'une guerre qui a longtemps opposé les deux races. Alors je te recommande de faire ton choix
 					judicieusement.					
 				</p>	
@@ -39,11 +39,24 @@
 					Si tu n'es pas <!-- IF S_FEMME -->sûre<!-- ELSE -->sûr<!-- ENDIF --> de toi, tu peux toujours commencer
 					par une race et revenir ici pour changer. Comment je fais pour te laisser changer de race ? Bonne question !
 					J'ai envie de te répondre : «<abbr title="Ta Gueule C'est magique ! ;)">TGCM</abbr>». C'est une expression
-					que tu retrouveras souvent sortir des lèvres des personnages. Ne t'inquiète pas, ce n'est pas une insulte.
+					que tu entendras souvent sortir des lèvres des personnages. Ne t'inquiète pas, ce n'est pas une insulte.
 					C'est un peu comme «<abbr title="Ta Gueule C'est Harahel ! ;)">TGCH</abbr>». Ouais, c'est parce que Harahel,
 					c'est un Gros Bill et qu'il aime bien se la péter contrairement à Asmodée qui lui sait se faire plus discret. 
 					Bon, je parle, je parle, on dirait Kurt&hellip; Tu as choisi ta race ? 
 				</p>
+				<ul class="list-inline text-center">
+					<li>
+						<button class="btn btn-link" data-toggle="modal" data-target="#modalHumain" onclick="return false;">
+							<i class="fa fa-fw fa-link"></i>&nbsp;Plus d'informations sur les humains&hellip;
+						</button>
+					</li>
+					<li>
+						<button class="btn btn-link" data-toggle="modal" data-target="#modalNephilim" onclick="return false;">
+							<i class="fa fa-fw fa-link"></i>&nbsp;Plus d'informations sur les Nephilim&hellip;
+						</button>
+					</li>
+				</ul>
+				
 				<form class="horizontal-form" action="etape3.php" method="post">
 					{S_HIDDEN_FIELDS}
 					<fieldset>

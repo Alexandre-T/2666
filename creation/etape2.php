@@ -23,8 +23,10 @@ include($phpbb_root_path . 'includes/functions_profile_fields.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_posting.' . $phpEx);
+include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
 include($phpbb_root_path . 'includes/mods/functions_user.' . $phpEx);
 include($phpbb_root_path . 'includes/mods/functions_creation.' . $phpEx);
+include($phpbb_root_path . 'includes/mods/functions_popup.' . $phpEx);
 
 // Start session management
 $user->session_begin();
@@ -52,12 +54,18 @@ unset($user->profile_fields);
 //Rechargement après enregistrement
 $user->get_profile_fields($user->data['user_id']);
 
+//Chargement des contenus des popups
+$messages = get_texts_for_popup(array(POST_HUMAIN,POST_NEPHILIM));
+
 //Vérification des droits
 creation_verification(CREATION_ETAPE);
 
 //Template
 $template->assign_vars(array(
 
+	'POST_HUMAIN'		=> $messages[POST_HUMAIN],
+	'POST_NEPHILIM'		=> $messages[POST_NEPHILIM],
+		
 	'S_FEMME'			  => AT_FEMME    == $user->profile_fields['pf_sexe'],
 	'S_HOMME'			  => AT_HOMME    == $user->profile_fields['pf_sexe'],
 	'S_HUMAIN'			  => AT_HUMAIN   == $user->profile_fields['pf_race'],

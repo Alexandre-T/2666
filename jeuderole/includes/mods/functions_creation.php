@@ -76,28 +76,29 @@ function creation_verification_etape($etape) {
 	$user->get_profile_fields ( $user->data ['user_id'] );
 	$etapes[0] = !creation_verification_groupe();
 	$etapes[1] = $etapes[0];
-	$etapes[2] = empty ( $user->profile_fields ['pf_sexe'] );
-	$etapes[3] = empty ( $user->profile_fields ['pf_race'] );
-	$etapes[4] = empty ( $user->profile_fields ['pf_avatar'] ) || 
+	$etapes[2] = $etapes[1];
+	$etapes[3] = empty ( $user->profile_fields ['pf_sexe'] );
+	$etapes[4] = empty ( $user->profile_fields ['pf_race'] );
+	$etapes[8] = empty ( $user->profile_fields ['pf_avatar'] ) || 
 			     empty ( $user->profile_fields ['pf_sexe'] ) || 
 			     empty ( $user->profile_fields ['pf_ageapparent'] ) ||
 			     empty ( $user->profile_fields ['pf_prenom'] ) || 
 			     AT_DIEU != $user->profile_fields ['pf_race'] && empty ( $user->profile_fields ['pf_nom'] );
-	$etapes[4] = empty ( $user->profile_fields ['pf_dieu'] ) ||
+	$etapes[8] = empty ( $user->profile_fields ['pf_dieu'] ) ||
 				 AT_NONRENSEIGNE == $user->profile_fields ['pf_dieu'] ||
 			     empty ( $user->profile_fields ['pf_passe'] ) || 
 			     empty ( $user->profile_fields ['pf_agereel'] );
-	$etapes[5] = empty ( $user->profile_fields ['pf_nature'] ) || 
+	$etapes[8] = empty ( $user->profile_fields ['pf_nature'] ) || 
 			     empty ( $user->profile_fields ['pf_attitude'] ) || 
 			     empty ( $user->profile_fields ['pf_defaut'] ) || 
 			     empty ( $user->profile_fields ['pf_caractere'] ) || 
 			     empty ( $user->profile_fields ['pf_qualite'] );
-	$etapes[6] = empty( $user->profile_fields['pf_pouvoir'] ) ||
+	$etapes[8] = empty( $user->profile_fields['pf_pouvoir'] ) ||
 				 AT_ANDROID == $user->profile_fields ['pf_race'] && (
 				 empty( $user->profile_fields['pf_plot']) || AT_NONRENSEIGNE == $user->profile_fields['pf_plot']) ||
 				 AT_HUMAIN == $user->profile_fields ['pf_race'] && (
 				 empty( $user->profile_fields['pf_pouvoirdeux'] ) && AT_DIEU_MINEUR != $user->profile_fields ['pf_dieu'] && AT_DIEU_ATHE != $user->profile_fields ['pf_dieu']);
-	$etapes[7] = empty( $user->profile_fields['pf_anonymat'] );
+	$etapes[8] = empty( $user->profile_fields['pf_anonymat'] );
 				
 	//redirection éventuelle		     
 	switch ($etape) {
