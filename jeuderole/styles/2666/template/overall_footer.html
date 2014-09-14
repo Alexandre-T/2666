@@ -60,9 +60,15 @@
 				<ul class="list-unstyled text-muted text-right">
 					<!-- IF not S_IS_BOT --><li class="rightside"><a href="{U_DELETE_COOKIES}"><small><i class="fa fa-trash-o"></i> {L_DELETE_COOKIES}</small></a></li><!-- ENDIF -->
 					<li><small><i class="fa fa-clock-o"></i> {S_TIMEZONE}</small></li>
-					<!-- IF DEBUG_OUTPUT --><li><small>{DEBUG_OUTPUT}</small></li><!-- ENDIF -->
+					<!-- IF DEBUG_OUTPUT -->
+						<li><small>{DEBUG_OUTPUT}</small></li>
+					<!-- ENDIF -->
 				</ul>
 			</div>
+			<div class="col-sm-12 hidden-xs">
+				<div style="padding: 3px; background-color: #FFFFFF; border: 1px solid #d8d8d8; font-size: 1em;"><div style="text-transform: uppercase; border-bottom: 1px solid #CCCCCC; margin-bottom: 3px; font-size: 0.8em; font-weight: bold; display: block;"><span onClick="if (this.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display != '') {  this.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display = ''; this.innerHTML = '<b>Spoiler: </b><a href=\'#\' onClick=\'return false;\'>Cacher</a>'; } else { this.parentNode.parentNode.getElementsByTagName('div')[1].getElementsByTagName('div')[0].style.display = 'none'; this.innerHTML = '<b>Spoiler: </b><a href=\'#\' onClick=\'return false;\'>Afficher</a>'; }" /><b>Spoiler: </b><a href="#" onClick="return false;">Afficher</a></span></div><div class="quotecontent"><div style="display: none;"><pre>{VAR_DUMP}</pre></div></div></div>
+			</div>
+			
 		</div>
 	</div>
 </footer>
