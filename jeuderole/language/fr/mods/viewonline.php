@@ -46,8 +46,14 @@ $lang = array_merge($lang, array(
 	'CREATION_INDEX'			=> 'S’apprête à créer son personnage',
 	'CREATION_ETAPE1'			=> 'Est en train de choisir le sexe de son personnage',
 	'CREATION_ETAPE2'			=> 'Est en train de choisir la race de son personnage',
-	'CREATION_ETAPE3'			=> 'Est en train de préciser les généralités de son personnage (âge, nom, prénom, etc.)',
-	'CREATION_ETAPE4'			=> 'Est en train de décrire ses pouvoirs',
+	'CREATION_ETAPE3'			=> 'Est en train de choisir l’avatar de son personnage principal',
+	'CREATION_ETAPE4'			=> 'Est en train de préciser les généralités de son personnage (âge, nom, prénom, etc.)',
+	'CREATION_ETAPE5'			=> 'Est en train de décrire ses pouvoirs secrets',
+	'CREATION_ETAPE6'			=> 'Est en train de décrire son premier contact',
+	'CREATION_ETAPE7'			=> 'Est en train de décrire son second contact',
+	'CREATION_ETAPE8'			=> 'Est en train de décrire son troisième contact',
+	'CREATION_ETAPE9'			=> 'Est en train de décrire son dernier contact',
+	'CREATION_ETAPE10'			=> 'Est en train d’écrire les résumés publics de ses personnages',
 	'SIGNATURE'					=> 'Est en train de signer ou de relire le réglement',
 ));
 

@@ -236,6 +236,34 @@ while ($row = $db->sql_fetchrow($result))
 			$location = $user->lang['CREATION_ETAPE3'];
 			$location_url = append_sid("{$phpbb_root_path}creation/etape3.$phpEx");
 			break;
+		case 'creation/etape4':
+			$location = $user->lang['CREATION_ETAPE4'];
+			$location_url = append_sid("{$phpbb_root_path}creation/etape4.$phpEx");
+			break;
+		case 'creation/etape5':
+			$location = $user->lang['CREATION_ETAPE5'];
+			$location_url = append_sid("{$phpbb_root_path}creation/etape5.$phpEx");
+			break;
+		case 'creation/etape6':
+			$location = $user->lang['CREATION_ETAPE6'];
+			$location_url = append_sid("{$phpbb_root_path}creation/etape6.$phpEx");
+			break;
+		case 'creation/etape7':
+			$location = $user->lang['CREATION_ETAPE7'];
+			$location_url = append_sid("{$phpbb_root_path}creation/etape7.$phpEx");
+			break;
+		case 'creation/etape8':
+			$location = $user->lang['CREATION_ETAPE8'];
+			$location_url = append_sid("{$phpbb_root_path}creation/etape8.$phpEx");
+			break;
+		case 'creation/etape9':
+			$location = $user->lang['CREATION_ETAPE9'];
+			$location_url = append_sid("{$phpbb_root_path}creation/etape9.$phpEx");
+			break;
+		case 'creation/etape10':
+			$location = $user->lang['CREATION_ETAPE10'];
+			$location_url = append_sid("{$phpbb_root_path}creation/etape10.$phpEx");
+			break;
 		case 'signature':
 				$location = $user->lang['SIGNATURE'];
 				$location_url = append_sid("{$phpbb_root_path}signature.$phpEx");
