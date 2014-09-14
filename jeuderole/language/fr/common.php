@@ -119,6 +119,9 @@ $lang = array_merge($lang, array(
 	'CHANGING_PREFERENCES'	=> 'Modifie les préférences du forum',
 	'CHANGING_PROFILE'		=> 'Modifie son profil',
 	'CLICK_VIEW_PRIVMSG'	=> '%sAller à votre boîte de réception%s',
+	//MOD AT BEGIN
+	'CLOSE'					=> 'Fermer',
+	//MOD AT END
 	'COLLAPSE_VIEW'			=> 'Réduire la vue',
 	'CLOSE_WINDOW'			=> 'Fermer la fenêtre',
 	'COLOUR_SWATCH'			=> 'Palette de couleurs',
