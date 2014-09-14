@@ -168,6 +168,9 @@ div#postingbox{
 div.correction{
 	margin-left:5px;
 }
+.text-justify{
+	text-align:justify;
+}
 
 /* Fond d'écran par défaut */
 header{

@@ -1,0 +1,66 @@
+<!-- INCLUDE overall_header.html -->
+<h2>Création de personnage</h2>
+
+<!-- sINCLUDE progression.html -->
+<div class="corps container">
+<h3 class="soustitre">Allez, regardons un peu ta bouille&nbsp;!</h3>
+	
+<!-- sINCLUDE creation/etape.html -->
+	<div class="row">
+		<div class="col-sm-3">
+			<img src="{T_THEME_PATH}/images/lazer.jpg" width="200" height="320" class="img-thumbnail img-responsive"/>
+		</div>
+		<div class="col-sm-9">
+			<!-- IF S_MESSAGE -->
+				<p class="alert alert-danger">
+					<!-- IF S_FEMME -->
+						Hum hum ! Tu es bien gentille, mais revient par ici s'il-te-plaît.
+						Oui toi, la donzelle qui se balade dans les sas où elle ne doit pas aller.
+						Tu fais comme tu veux ma cocotte, mais si tu te retrouves dans l'espace avant que je ne t'ai
+						donnée ta combinaison spatiale, alors tu ne vas pas rire longtemps.							
+					<!-- ELSE -->
+						Hum hum ! Tu es mignon, mais revient par ici s'il-te-plaît.
+						Oui toi, le mec au joli petit cul qui se balade dans les sas où il ne devrait pas.
+						Tu fais comme tu veux mon coco, mais si tu te retrouves dans l'espace avant que je ne t'ai
+						donnée ta combinaison spatiale, alors tu ne vas pas rire longtemps.
+					<!-- ENDIF -->
+				</p> 
+			<!-- ENDIF -->
+			<p>
+				Bien approche un peu, que je regarde ton visage. Hmmm ! C'est flou tout cela.
+				Tu es sur un jeu par forum avec des avatars réels. Cela veut dire que tu dois
+				choisir une personnalité. Pour moi, par exemple, c'est la sublissime <i>Serinda Swan</i>.
+				<!-- IF S_HOMME -->
+				Evidémment si tu pouvais choisir un avatar masculin, ce serait mieux.
+				<!-- ELSE -->
+				Comme moi, tu dois évidemment choisir un avatar féminin.
+				<!-- ENDIF -->
+			</p>
+			<p>
+				Ensuite quand tu auras choisi, tu devras te rendre dans le panneau de contôle de l'utilisateur,
+				à la rubrique Avatar. Là, tu pourras choisir une photo de ton avatar.
+			</p> 
+			
+			<form class="form-horizontal" action="etape4.php" method="post">
+				{S_HIDDEN_FIELDS}
+				<fieldset>
+					<legend>Mon avatar</legend>
+					<div class="form-group">
+						<label for="avatar" class="col-sm-2 control-label">Avatar</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="avatar" id="avatar" placeholder="Prénom et Nom de l'avatar choisi" value="{FORM_PRENOM}" required="required">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10 btn-group">
+							<input type="submit" class="btn btn-primary" value="Je valide &gt;&gt;"/>
+						</div>
+					</div>
+				</fieldset>
+			</form>	
+			<br/>
+			<br/>
+		</div>
+	</div>
+</div>
+<!-- INCLUDE overall_footer.html -->					

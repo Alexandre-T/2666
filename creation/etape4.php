@@ -15,18 +15,18 @@
 * @ignore
 */
 define('IN_PHPBB', true);
-define('CREATION_ETAPE', 2);
+define('CREATION_ETAPE', 4);
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : '../jeuderole/';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
+include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_profile_fields.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_posting.' . $phpEx);
-include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
 include($phpbb_root_path . 'includes/mods/functions_user.' . $phpEx);
-include($phpbb_root_path . 'includes/mods/functions_creation.' . $phpEx);
 include($phpbb_root_path . 'includes/mods/functions_popup.' . $phpEx);
+include($phpbb_root_path . 'includes/mods/functions_creation.' . $phpEx);
 
 // Start session management
 $user->session_begin();
@@ -35,15 +35,14 @@ $user->setup('mods/creation');
 $user->setup('posting');
 
 //Analyse et traitement de la variable posté
-$sexe  = request_var('sexe', 0);
+$avatar  = request_var('avatar', '');
 $message = request_var('message',0);
-$sexe = ($sexe !== AT_FEMME)?AT_HOMME:AT_FEMME; 
+
 $user->get_profile_fields($user->data['user_id']);
-$cp_data['pf_sexe'] = $sexe;
-if ($sexe != $user->profile_fields['pf_sexe']){
-	//Attention, changement de sexe
-	//On réinitialise l'avatar
-	$cp_data['pf_avatar'] = '';
+$cp_data['pf_avatar'] = trim(strip_tags($avatar));
+if ($avatar != $user->profile_fields['pf_avatar']){
+	//Attention, changement d'avatar
+	//On ajoute ici les modifications qui pourraient survenir
 }
 //Enregistrement
 $cp = new custom_profile();
@@ -53,8 +52,29 @@ unset($user->profile_fields);
 //Rechargement après enregistrement
 $user->get_profile_fields($user->data['user_id']);
 
-//Chargement des contenus des popups
-$messages = get_texts_for_popup(array(POST_HUMAIN,POST_NEPHILIM));
+//Initialisation des variables,
+$a_passe = generate_text_for_edit($user->profile_fields['pf_passe'],$user->profile_fields['pf_passe_uid'],7);
+
+// Generate smiley listing
+//generate_smilies('inline', 1);
+
+///Generate popup
+$messages = get_texts_for_popup(array(POST_CONSEILS_PERSONNAGE));
+
+// Build custom bbcodes array
+display_custom_bbcodes();
+
+$template->assign_vars(array(
+	'FORM_AVATAR'	  	=> $user->profile_fields['pf_avatar'],
+	'FORM_AGE_REEL'	  	=> $user->profile_fields['pf_agereel'],
+	'FORM_PRENOM'	  	=> $user->profile_fields['pf_prenom'],
+	'FORM_NOM'		  	=> $user->profile_fields['pf_nom'],
+	'FORM_PROFESSION'  	=> $user->profile_fields['pf_profession'],
+	'MESSAGE'  			=> $a_passe['text'],
+	'L_MESSAGE'			=> 'Histoire',
+));
+
+
 
 //Vérification des droits
 creation_verification(CREATION_ETAPE);
@@ -62,27 +82,22 @@ creation_verification(CREATION_ETAPE);
 //Template
 $template->assign_vars(array(
 
-	'POST_HUMAIN'		=> $messages[POST_HUMAIN],
-	'POST_NEPHILIM'		=> $messages[POST_NEPHILIM],
-		
 	'S_FEMME'			  => AT_FEMME    == $user->profile_fields['pf_sexe'],
 	'S_HOMME'			  => AT_HOMME    == $user->profile_fields['pf_sexe'],
 	'S_HUMAIN'			  => AT_HUMAIN   == $user->profile_fields['pf_race'],
 	'S_NEPHILIM'		  => AT_NEPHILIM == $user->profile_fields['pf_race'],
 	'S_MESSAGE'	  		  => 1 == $message,
-	
-	'HUMAIN_CHECKED'	  => AT_HUMAIN   == $user->profile_fields['pf_race']?'checked':'',
-	'NEPHILIM_CHECKED'	  => AT_NEPHILIM == $user->profile_fields['pf_race']?'checked':'',
+	'POST_CONSEILS_PERSONNAGE' => $messages[POST_CONSEILS_PERSONNAGE],
 		
-	'HIDDEN_FIELDS' => build_hidden_fields(array('from'=> CREATION_ETAPE)),
+	'HIDDEN_FIELDS' 	  => build_hidden_fields(array('from'=> CREATION_ETAPE)),
 		
 ));
 
 // Output page
-page_header($user->lang['CREATION_ETAPE2']);
+page_header($user->lang['CREATION_ETAPE4']);
 
 $template->set_filenames(array(
-	'body' => 'creation/etape2.html'
+	'body' => 'creation/etape4.html'
 ));
 
 page_footer();
