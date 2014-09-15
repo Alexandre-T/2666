@@ -2,7 +2,7 @@
 
 @font-face{font-family:'coalition';src:url('{T_THEME_PATH}/fonts/coalition.ttf?v=2.0.0');}
 
-h1,h5,h6{
+h1,h5,h6,span.coalition{
 	font-family:'coalition',fantasy;
 }
 
