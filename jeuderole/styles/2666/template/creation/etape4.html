@@ -1,7 +1,6 @@
 <!-- INCLUDE overall_header.html -->
 <h2>Création de personnage</h2>
 
-<!-- sINCLUDE progression.html -->
 <div class="corps container">
 <h3 class="soustitre">Parle-moi un peu de toi !</h3>
 	
@@ -9,6 +8,8 @@
 	<div class="row">
 		<div class="col-sm-3">
 			<img src="{T_THEME_PATH}/images/lazer.jpg" width="200" height="320" class="img-thumbnail img-responsive"/>
+			<hr/>
+			<!-- INCLUDE creation/progression.html -->			
 		</div>
 		<div class="col-sm-9">
 			<!-- IF S_MESSAGE -->
@@ -32,7 +33,7 @@
 				<!-- ELSE -->
 				{FORM_AVATAR}&nbsp;! Très jolie actrice. Je connais deux trois personnages qui vont avoir hâte de jouer avec toi.
 				<!-- ENDIF -->
-				Mais avant cela on va finir ta fiche, tu veux bien ? Allez ne soit pas timide, vient d'asseoir à côté de moi.
+				Mais avant cela on va finir ta fiche, tu veux bien ? Allez ne soit pas timide, vient t'asseoir à côté de moi.
 			</p>
 			<p>
 				Bien quatrième étape, déjà. Nous allons apprendre à nous connaître un petit peu.
@@ -44,30 +45,36 @@
 				vont surtout servir pour la trame, les intrigues. Les autres joueurs ne pourront pas lire ce que tu écris. 
 			</p>	
 			
-			<form class="form-horizontal" action="etape4.php" method="post">
+			<form class="form-horizontal" action="etape5.php" method="post">
 				{S_HIDDEN_FIELDS}
 				<fieldset>
 					<legend>Carte d'identité</legend>
 					<div class="form-group">
 						<label for="prenom" class="col-sm-2 control-label">Prénom</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="prenom" placeholder="Prénom" value="{FORM_PRENOM}" required="required">
+							<input type="text" class="form-control" name="prenom" id="prenom" placeholder="Prénom" value="{FORM_PRENOM}" required="required">
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="nom" class="col-sm-2 control-label">Nom</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" id="nom" placeholder="Nom de famille" value="{FORM_NOM}"  required="required">
+							<input type="text" class="form-control" name="nom" id="nom" placeholder="Nom de famille" value="{FORM_NOM}"  required="required">
 						</div>
 					</div>
 					<!-- IF S_NEPHILIM -->
 					<div class="form-group">
 						<label for="nom" class="col-sm-2 control-label">Âge réel</label>
 						<div class="col-sm-10">
-							<input type="number" class="form-control" id="nom" placeholder="18" min="18" max="9999" value="{FORM_AGEREEL}"  required="required">
+							<input type="number" class="form-control" name="age" id="age" placeholder="18" min="18" max="9999" value="{FORM_AGE_REEL}"  required="required">
 						</div>
 					</div>
 					<!-- ENDIF -->
+					<div class="form-group">
+						<label for="nom" class="col-sm-2 control-label">Profession</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="profession" id="profession" placeholder="Profession exercée à bord" value="{FORM_PROFESSION}"  required="required">
+						</div>
+					</div>
 					<div class="col-sm-offset-2 col-sm-10">
 						<div class="correction">
 							<!-- INCLUDE posting_buttons.html -->

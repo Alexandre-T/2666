@@ -135,6 +135,8 @@ function creation_verification_etape($etape) {
 		'S_BBCODE_ALLOWED'	  => true,
 		'S_BBCODE_CHECKED'    => true,
 		'S_CREATION' 		  => true,
+		'POURCENTAGE'		  => $etape*10,
+		
 		'U_ETAPE_0'			  => append_sid("{$phpbb_root_path}../creation/index.$phpEx"),
 		'U_ETAPE_1'			  => append_sid("{$phpbb_root_path}../creation/etape1.$phpEx"),
 		'U_ETAPE_2'			  => append_sid("{$phpbb_root_path}../creation/etape2.$phpEx"),
@@ -151,6 +153,7 @@ function creation_verification_etape($etape) {
 		'S_ETAPE_5'			  => !$etapes[5],
 		'S_ETAPE_6'			  => !$etapes[6],
 		'S_ETAPE_7'			  => !$etapes[7],
+		
 		'S_HUMAIN'		  	  => ($l_race == AT_HUMAIN),
 		'S_CREE'			  => is_user_in_group(GROUPE_DEMANDE_CREATION),
 		'S_INACTIF'			  => is_user_in_group(GROUPE_INACTIF),
