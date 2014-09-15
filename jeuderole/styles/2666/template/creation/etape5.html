@@ -1,0 +1,210 @@
+	<!-- INCLUDE overall_header.html -->
+	<h2>Création de personnage</h2>
+	
+	<div class="corps container">
+	<h3 class="soustitre">
+		<!-- IF S_NEPHILIM -->
+		Et tes pouvoirs ?
+		<!-- ELSE -->
+		Et sinon, pour quoi es-tu doué<!-- IF S_FEMME -->e<!-- ENDIF -->&nbsp;?
+		<!-- ENDIF --> 
+	</h3>
+		
+	<!-- sINCLUDE creation/etape.html -->
+	<div class="row">
+		<div class="col-sm-3">
+			<img src="{T_THEME_PATH}/images/lazer.jpg" width="200" height="320" class="img-thumbnail img-responsive"/>
+			<hr/>
+			<!-- INCLUDE creation/progression.html -->			
+		</div>
+		<div class="col-sm-9">
+			<!-- IF S_MESSAGE -->
+				<p class="alert alert-danger">
+					<!-- IF S_FEMME -->
+						Hum hum ! Tu es bien gentille, mais revient par ici s'il-te-plaît.
+						Oui toi, la donzelle qui se balade dans les sas où elle ne doit pas aller.
+						Tu fais comme tu veux ma cocotte, mais si tu te retrouves dans l'espace avant que je ne t'ai
+						donnée ta combinaison spatiale, alors tu ne vas pas rire longtemps.							
+					<!-- ELSE -->
+						Hum hum ! Tu es mignon, mais revient par ici s'il-te-plaît.
+						Oui toi, le mec au joli petit cul qui se balade dans les sas où il ne devrait pas.
+						Tu fais comme tu veux mon coco, mais si tu te retrouves dans l'espace avant que je ne t'ai
+						donnée ta combinaison spatiale, alors tu ne vas pas rire longtemps.
+					<!-- ENDIF -->
+				</p> 
+			<!-- ENDIF -->
+			<!-- IF S_NEPHILIM -->
+			<p>
+				Tu es un<!-- IF S_FEMME -->e<!-- ENDIF --> Nephilim et tu fais partie des 
+				<!-- IF S_FEMME -->chanceuses<!-- ELSE -->chanceux<!-- ENDIF --> possédant une voleuse d'âme.
+				Tu vas devoir lui donner un nom, la décrire, elle et son pouvoir.
+				Pour résumer, la voleuse est ton arme la plus précieuse, car elle seule 
+				peut tuer un autre Nephilim, mais surtout les Elohim. Cela fait quelque temps
+				qu'on n'en a pas vu. Mais sait-on jamais ! Si tu souhaites plus d'information, tu en trouveras sur ton
+				holodeck.
+			</p>
+			<p>
+				En tant que Nephilim tu peux également faire partie d'un clan. Ce n'est en rien obligatoire,
+				mais il est difficile ces temps-ci de ne pas avoir le soutien d'un Originel. Ces êtres furent des anges,
+				ils ont quitté l'Eden et ont été déchu. Ils sont puissants et généralement craints. Il existe bien
+				quelques têtes brûlées qui leur tiennent tête, mais ils ne font jamais de vieux os. 
+			</p>	
+			<!-- ELSE -->
+			<p>
+				Bien {FORM_PRENOM}, alors nous avons 
+				<!-- IF S_FEMME -->
+				une jeune femme très intéressante
+				<!-- ELSE -->
+				un jeune homme très intéressant
+				<!-- ENDIF -->
+				qui commence à sortir du lot. Mais bon, les personnages humains joués ont tous un point commun.
+				Ils sont exceptionnels. Ils ont un don. Tu trouveras plus d'information sur les dons dans ton holodeck.
+				Mais pour faire simple, ils sont doués pour un truc. Toi, par exemple, tu pourrais être 
+				<!-- IF S_FEMME -->douée<!-- ELSE -->doué<!-- ENDIF -->
+				pour la mécanique, un peu comme MacGyver ou bien être particulièrement chanceuse. En fait, un don, c'est
+				une capacité hors du commun. Cela n'a rien de comparable à mes pouvoirs magiques, mais contrairement
+				à moi, toi, tu n'as pas besoin d'Orgone. 
+			</p>
+			<p>
+				Maintenant, sortir du lot peut avoir d'autres conséquences, pas toujours réjouissantes. Tu as pu te faire
+				remarquer. Et il vaut mieux ne pas toujours se faire remarquer de certains Originels. Les Originels ont créé
+				des clans. C'est comme une famille. Certains clans protègent les humains, d'autres les traitent tels des égaux, 
+				et d'autres au contraire se servent des humains comme d'esclaves.
+				Moi ? Ne t'occupe pas de moi ! C'est ta fiche qu'on écrit. Sache que ton don est secret. Par contre, si tu fais 
+				parti d'un clan, cela se saura. 
+			</p>
+			<!-- ENDIF -->
+			<ul class="list-inline text-center">
+				<!-- IF S_NEPHILIM -->
+				<li>
+					<button onclick="return false;" class="btn btn-link" data-toggle="modal" data-target="#modalVoleuse">
+						<i class="fa fa-fw fa-link"></i>&nbsp;Les voleuses d'âmes
+					</button>
+				</li>
+				<li>
+					<button onclick="return false;" class="btn btn-link" data-toggle="modal" data-target="#modalPouvoir">
+						<i class="fa fa-fw fa-link"></i>&nbsp;Les pouvoirs Nephilim
+					</button>
+				</li>
+				<!-- ELSE -->
+				<li>
+					<button onclick="return false;" class="btn btn-link" data-toggle="modal" data-target="#modalDon">
+						<i class="fa fa-fw fa-link"></i>&nbsp;Les dons humains
+					</button>
+				</li>
+				<!-- ENDIF -->
+				<li>
+					<button onclick="return false;" class="btn btn-link" data-toggle="modal" data-target="#modalClan">
+						<i class="fa fa-fw fa-link"></i>&nbsp;Les clans Nephilim
+					</button>
+				</li>
+			</ul>
+			
+			
+			<form class="form-horizontal" action="etape5.php" method="post">
+				{S_HIDDEN_FIELDS}
+				
+				<fieldset>
+					<legend><!-- IF S_NEPHILIM -->Nephilim<!-- ELSE --><!-- IF S_FEMME -->Humaine<!-- ELSE -->Humain<!-- ENDIF --><!-- ENDIF --></legend>
+					<div class="form-group">
+						<label for="clan" class="col-sm-2 control-label">Clan</label>
+						<div class="col-sm-10">
+							<select class="form-control" name="clan" id="clan">
+								<option value="Sans clan"{SANSCLAN_CHECKED}>Sans clan</option>
+								<option value="Asmodéen" {ASMODEEN_CHECKED}>Clan des Asmodéens</option>
+								<option value="Infiltré" {INFILTRE_CHECKED}>Clan des Infiltrés</option>
+								<option value="Insoumi"  {INSOUMI_CHECKED} >Clan des Insoumis</option>
+								<option value="Izanaghi" {IZANGHI_CHECKED} >Clan des Izanaghis</option>
+								<option value="Vestal"   {VESTAL_CHECKED}  >Clan des Vestales</option>
+							</select>
+						</div>
+					</div>
+					<!-- IF S_NEPHILIM -->
+					<div class="form-group">
+						<label for="pouvoir" class="col-sm-2 control-label">Pouvoir</label>
+						<div class="col-sm-10">
+							<textarea class="form-control" name="pouvoir" id="pouvoir" placeholder="Pouvoir du Nephilim" 
+									  value="{FORM_DESCRIPTION}" rows="4"></textarea>
+						</div>
+					</div>
+					<!-- ELSE -->
+					<div class="form-group">
+						<label for="don" class="col-sm-2 control-label">Don</label>
+						<div class="col-sm-10">
+							<textarea class="form-control" name="don" id="don" placeholder="Don ou capacité rare" 
+									  value="{FORM_DESCRIPTION}" rows="4"></textarea>
+						</div>
+					</div>
+					<!-- ENDIF -->
+				</fieldset>
+				<!-- IF S_NEPHILIM -->
+				<fieldset>
+					<legend>Ta voleuse d'âme</legend>
+					<div class="form-group">
+						<label for="nom" class="col-sm-2 control-label">Nom</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="nom" id="nom" placeholder="Nom de famille" value="{FORM_NOM}"  required="required">
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="description" class="col-sm-2 control-label">Description</label>
+						<div class="col-sm-10">
+							<textarea class="form-control" name="description" id="description" placeholder="Description de la voleuse d'âmes" 
+									  value="{FORM_DESCRIPTION}" rows="4"></textarea>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="voleuse_pouvoir" class="col-sm-2 control-label">Pouvoir</label>
+						<div class="col-sm-10">
+							<textarea class="form-control" name="voleuse_pouvoir" id="voleuse_pouvoir" placeholder="Pouvoir de la voleuse d'âmes" 
+									  value="{FORM_DESCRIPTION}" rows="4"></textarea>
+						</div>
+					</div>
+				</fieldset>
+				<!-- ELSE -->
+				<!-- ENDIF -->
+				<fieldset>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<input type="submit" class="btn btn-primary" value="Je valide &gt;&gt;"/>
+						</div>
+					</div>
+				</fieldset>
+			</form>	
+			<br/>
+			<br/>
+		</div>
+	</div>
+</div>
+<!-- IF S_NEPHILIM -->
+<!-- DEFINE $MODAL_ID = 'modalVoleuse' -->
+<!-- INCLUDE modal/header.html -->
+Les voleuses d'âmes
+<!-- INCLUDE modal/body.html -->
+{POST_CONSEILS_VOLEUSE}
+<!-- INCLUDE modal/footer.html -->
+
+<!-- DEFINE $MODAL_ID = 'modalPouvoir' -->
+<!-- INCLUDE modal/header.html -->
+Les pouvoirs des Nephilim
+<!-- INCLUDE modal/body.html -->
+{POST_CONSEILS_POUVOIR}
+<!-- INCLUDE modal/footer.html -->
+<!-- ELSE -->
+<!-- DEFINE $MODAL_ID = 'modalDon' -->
+<!-- INCLUDE modal/header.html -->
+Les dons des humains
+<!-- INCLUDE modal/body.html -->
+{POST_CONSEILS_DON}
+<!-- INCLUDE modal/footer.html -->
+<!-- ENDIF -->
+<!-- DEFINE $MODAL_ID = 'modalClan' -->
+<!-- INCLUDE modal/header.html -->
+Les clans
+<!-- INCLUDE modal/body.html -->
+{POST_CONSEILS_CLAN}
+<!-- INCLUDE modal/footer.html -->
+
+
+
+<!-- INCLUDE overall_footer.html -->
