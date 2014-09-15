@@ -87,6 +87,9 @@ $template->assign_vars(array(
 	'S_HUMAIN'			  => AT_HUMAIN   == $user->profile_fields['pf_race'],
 	'S_NEPHILIM'		  => AT_NEPHILIM == $user->profile_fields['pf_race'],
 	'S_MESSAGE'	  		  => 1 == $message,
+		
+	'S_CREATION'		  => true,
+		
 	'POST_CONSEILS_PERSONNAGE' => $messages[POST_CONSEILS_PERSONNAGE],
 		
 	'HIDDEN_FIELDS' 	  => build_hidden_fields(array('from'=> CREATION_ETAPE)),
