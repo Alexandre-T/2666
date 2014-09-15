@@ -84,6 +84,12 @@ display_custom_bbcodes();
 $template->assign_vars(array(
 	'FORM_POUVOIR'	  			=> $user->profile_fields['pf_pouvoir'],
 	'FORM_CLAN'		  			=> $user->profile_fields['pf_clan'],
+	'CHECKED_ASMODEEN'          => $user->profile_fields['pf_clan'] == AT_ASMODEEN,
+    'CHECKED_INSOUMIS'          => $user->profile_fields['pf_clan'] == AT_INSOUMIS,
+    'CHECKED_INFILTRE'          => $user->profile_fields['pf_clan'] == AT_INFILTRE,
+    'CHECKED_IZANAGHI'          => $user->profile_fields['pf_clan'] == AT_IZANAGHI,
+    'CHECKED_VESTAL'            => $user->profile_fields['pf_clan'] == AT_VESTAL,
+    'CHECKED_SANSCLAN'          => $user->profile_fields['pf_clan'] == AT_SANSCLAN,
 	'FORM_DON'	  				=> $user->profile_fields['pf_don'],
 	'FORM_VOLEUSE_NOM'			=> $user->profile_fields['pf_voleuse_nom'],
 	'FORM_VOLEUSE_DESCRIPTION' 	=> $user->profile_fields['pf_voleuse_des'],

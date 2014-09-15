@@ -101,7 +101,7 @@
 			</ul>
 			
 			
-			<form class="form-horizontal" action="etape5.php" method="post">
+			<form class="form-horizontal" action="etape6.php" method="post">
 				{S_HIDDEN_FIELDS}
 				
 				<fieldset>
@@ -110,12 +110,12 @@
 						<label for="clan" class="col-sm-2 control-label">Clan</label>
 						<div class="col-sm-10">
 							<select class="form-control" name="clan" id="clan">
-								<option value="Sans clan"{SANSCLAN_CHECKED}>Sans clan</option>
-								<option value="Asmodéen" {ASMODEEN_CHECKED}>Clan des Asmodéens</option>
-								<option value="Infiltré" {INFILTRE_CHECKED}>Clan des Infiltrés</option>
-								<option value="Insoumi"  {INSOUMI_CHECKED} >Clan des Insoumis</option>
-								<option value="Izanaghi" {IZANGHI_CHECKED} >Clan des Izanaghis</option>
-								<option value="Vestal"   {VESTAL_CHECKED}  >Clan des Vestales</option>
+								<option value="{AT_SANSCLAN}" {SANSCLAN_CHECKED}>Sans clan</option>
+								<option value="{AT_ASMODEEN}" {CHECKED_ASMODEEN}>Clan des Asmodéens</option>
+								<option value="{AT_INFILTRE}" {CHECKED_INFILTRE}>Clan des Infiltrés</option>
+								<option value="{AT_INSOUMIS}" {CHECKED_INSOUMIS}>Clan des Insoumis</option>
+								<option value="{AT_IZANAGHI}" {CHECKED_IZANAGHI}>Clan des Izanaghis</option>
+								<option value="{AT_VESTAL}"   {CHECKED_VESTAL}  >Clan des Vestales</option>
 							</select>
 						</div>
 					</div>
@@ -124,7 +124,7 @@
 						<label for="pouvoir" class="col-sm-2 control-label">Pouvoir</label>
 						<div class="col-sm-10">
 							<textarea class="form-control" name="pouvoir" id="pouvoir" placeholder="Pouvoir du Nephilim" 
-									  value="{FORM_DESCRIPTION}" rows="4"></textarea>
+									  value="{FORM_POUVOIR}" rows="4"></textarea>
 						</div>
 					</div>
 					<!-- ELSE -->
@@ -132,7 +132,7 @@
 						<label for="don" class="col-sm-2 control-label">Don</label>
 						<div class="col-sm-10">
 							<textarea class="form-control" name="don" id="don" placeholder="Don ou capacité rare" 
-									  value="{FORM_DESCRIPTION}" rows="4"></textarea>
+									  value="{FORM_DON}" rows="4"></textarea>
 						</div>
 					</div>
 					<!-- ENDIF -->
@@ -141,23 +141,23 @@
 				<fieldset>
 					<legend>Ta voleuse d'âme</legend>
 					<div class="form-group">
-						<label for="nom" class="col-sm-2 control-label">Nom</label>
+						<label for="voleuse_nom" class="col-sm-2 control-label">Nom</label>
 						<div class="col-sm-10">
-							<input type="text" class="form-control" name="nom" id="nom" placeholder="Nom de famille" value="{FORM_NOM}"  required="required">
+							<input type="text" class="form-control" name="voleuse_nom" id="voleuse_nom" placeholder="Nom de la voleuse d'âmes" value="{FORM_VOLEUSE_NOM}"  required="required">
 						</div>
 					</div>
 					<div class="form-group">
-						<label for="description" class="col-sm-2 control-label">Description</label>
+						<label for="voleuse_description" class="col-sm-2 control-label">Description</label>
 						<div class="col-sm-10">
-							<textarea class="form-control" name="description" id="description" placeholder="Description de la voleuse d'âmes" 
-									  value="{FORM_DESCRIPTION}" rows="4"></textarea>
+							<textarea class="form-control" name="voleuse_description" id="voleuse_description" placeholder="Description de la voleuse d'âmes" 
+									  value="{FORM_VOLEUSE_DESCRIPTION}" rows="4"></textarea>
 						</div>
 					</div>
 					<div class="form-group">
 						<label for="voleuse_pouvoir" class="col-sm-2 control-label">Pouvoir</label>
 						<div class="col-sm-10">
 							<textarea class="form-control" name="voleuse_pouvoir" id="voleuse_pouvoir" placeholder="Pouvoir de la voleuse d'âmes" 
-									  value="{FORM_DESCRIPTION}" rows="4"></textarea>
+									  value="{FORM_VOLEUSE_POUVOIR}" rows="4"></textarea>
 						</div>
 					</div>
 				</fieldset>
