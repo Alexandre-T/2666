@@ -42,6 +42,7 @@ $cp_data['pf_race'] = $race;
 if ($race != $user->profile_fields['pf_race']){
 	//Attention, changement de race
 	//On ajoute ici les modifications qui pourraient survenir
+	$cp_data['pf_agereel'] = '';
 	//On devrait supprimer les dons ou les pouvoirs
 }
 //Enregistrement
