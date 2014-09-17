@@ -1,0 +1,115 @@
+	<!-- INCLUDE overall_header.html -->
+	<h2>Création de personnage</h2>
+	
+	<div class="corps container">
+	<h3 class="soustitre">
+		Et tes contacts ?
+	</h3>
+		
+	<!-- sINCLUDE creation/etape.html -->
+	
+	<div class="row">
+		<div class="col-sm-3">
+			<img src="{T_THEME_PATH}/images/lazer.jpg" width="200" height="320" class="img-thumbnail img-responsive"/>
+			<hr/>
+			<!-- INCLUDE creation/progression.html -->			
+		</div>
+		<div class="col-sm-9">
+			<!-- IF S_MESSAGE -->
+				<p class="alert alert-danger">
+					<!-- IF S_FEMME -->
+						Hum hum ! Tu es bien gentille, mais revient par ici s'il-te-plaît.
+						Oui toi, la donzelle qui se balade dans les sas où elle ne doit pas aller.
+						Tu fais comme tu veux ma cocotte, mais si tu te retrouves dans l'espace avant que je ne t'ai
+						donnée ta combinaison spatiale, alors tu ne vas pas rire longtemps.							
+					<!-- ELSE -->
+						Hum hum ! Tu es mignon, mais revient par ici s'il-te-plaît.
+						Oui toi, le mec au joli petit cul qui se balade dans les sas où il ne devrait pas.
+						Tu fais comme tu veux mon coco, mais si tu te retrouves dans l'espace avant que je ne t'ai
+						donnée ta combinaison spatiale, alors tu ne vas pas rire longtemps.
+					<!-- ENDIF -->
+				</p> 
+			<!-- ENDIF -->
+			<p>
+				Bien, {S_USERNAME}, j'ai toutes les informations sur toi à présent. Nous allons donc parler de tes alliés.
+				C'est une notion particulièrement importante, car seul<!-- IF S_FEMME -->e<!-- ENDIF -->, dis-toi bien
+				que tu as peu de chance de survivre. Moi, par exemple, j'ai Djinn, il m'aide énormément. Nous nous rendons
+				mutuellement service. Dans cette rubrique, je vais te demander de me parler de ce contact. Je voudrais que tu me 
+				parles de ton allié principal. Tu as bien <!-- IF S_FEMME -->un petit ami<!-- ELSE -->une petite amie<!-- ENDIF -->, 
+				quelqu'un qui compte beaucoup, non ? Sinon, cela peut-être un mécène, quelqu'un qui couvre tes conneries pour t'éviter
+				le tribunal. Enfin ce genre de truc quoi&hellip;
+			</p>
+			<p> 
+				Alors, il me faudrait son nom, une description sommaire qui restera entre toi et moi et une photo de 200 pixels par 320.
+				Dans la dernière partie, il me faudrait un petit paragraphe pour résumer tout cela. Attention, ce dernier paragraphe sera
+				public. Donc prend soin de ne révéler que l'image que ce que savent les gens en général. Et n'oublie pas ! C'est ton 
+				<strong>premier</strong> contact, il est important, c'est un véritable allié.
+			</p>   
+			<p>
+				Si tu souhaites plus d'informations encore sur les contacts, tu peux consulter ton holodeck.
+			</p>
+			<hr/>
+			<form class="form-horizontal" action="etape7.php" method="post">
+				{S_HIDDEN_FIELDS}
+				
+				<fieldset>
+					<legend>Ton contact principal</legend>
+					<div class="form-group">
+						<label for="nom" class="col-sm-2 control-label">Nom</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="nom" id="nom" placeholder="Prénom et nom ou surnom de ton contact" value="{FORM_NOM}"  required="required">
+							<span class="help-block text-info">Pour un Nephilim entre son surnom, pour un humain entre son prénom puis son nom.</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-2" for="uploadfile">Photo</label>
+						<div class="col-sm-10">
+							<div class="input-group">
+								<span class="input-group-btn">
+									<span class="btn btn-primary btn-file">
+										<i class="fa fa-folder-open"></i> <input type="file" name="uploadfile" id="uploadfile">
+									</span>
+								</span>
+								<input type="text" class="form-control" readonly value="{FORM_LIEN}">
+							</div>
+							<span class="help-block text-info">Dimensions de la photo largeur: 200 pixels, hauteur: 320 pixels, taille: 650.53 Kio.</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="description" class="col-sm-2 control-label">Description</label>
+						<div class="col-sm-10">
+							<textarea class="form-control" name="description" id="description" placeholder="Description de ton contact" 
+									  rows="4">{FORM_DESCRIPTION}</textarea>
+							<span class="help-block text-info">
+								<i class="fa fa-fw fa-eye-slash"></i>&nbsp;
+								Ces informations sont privées. Tu peux les détailler. Elles ne seront pas partagées. 
+								Pense bien à parler de son pouvoir, de ses fonctions, des ressources qu'il peut t'apporter, bref, tout ce
+								qui pourra m'aider à comprendre cet allié.  
+							</span>
+						</div>
+					</div>
+					<div class="col-sm-offset-2 col-sm-10">
+						<div class="correction">
+							<!-- INCLUDE posting_buttons.html -->
+						</div>
+					</div>
+					<!-- INCLUDE messagebox.inc.html -->					
+				</fieldset>
+				<fieldset>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<button onclick="return false;" class="btn btn-default" data-toggle="modal" data-target="#modalHelp"><i class="fa fa-fw fa-question-circle"></i>&nbsp;J'ai besoin d'aide</button>
+							<input type="submit" class="btn btn-primary" value="Je valide &gt;&gt;"/>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+	</div>		
+<!-- DEFINE $MODAL_ID = 'modalHelp' -->
+<!-- INCLUDE modal/header.html -->
+Les contacts
+<!-- INCLUDE modal/body.html -->
+{POST_CONSEILS_CONTACT}
+<!-- INCLUDE modal/footer.html -->

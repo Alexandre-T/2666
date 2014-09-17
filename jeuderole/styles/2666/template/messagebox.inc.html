@@ -1,9 +1,15 @@
 <!-- IF S_UCP_ACTION and not S_PRIVMSGS and not S_EDIT_DRAFT -->
 	<!-- DEFINE $NAME = 'signature' -->
-<!-- ELSEIF S_CREATION -->
+	<!-- DEFINE $ROWS = '17' -->
+<!-- ELSEIF S_CREATION and S_ETAPE_4 -->	
 	<!-- DEFINE $NAME = 'histoire' -->
+	<!-- DEFINE $ROWS = '17' -->
+<!-- ELSEIF S_CREATION -->	
+	<!-- DEFINE $NAME = 'resume' -->
+	<!-- DEFINE $ROWS = '5' -->
 <!-- ELSE -->
 	<!-- DEFINE $NAME = 'message' -->
+	<!-- DEFINE $ROWS = '17' -->
 <!-- ENDIF -->
 <!-- IF S_SMILIES_ALLOWED and .smiley or S_SHOW_SMILEY_LINK and S_SMILIES_ALLOWED or S_DISPLAY_REVIEW -->
 	<!-- DEFINE $CASE1 = 'col-sm-7' -->
@@ -13,9 +19,19 @@
 	<!-- DEFINE $CASE2 = 'hidden' -->
 <!-- ENDIF -->
 <div class="form-group">
-	<label class="control-label col-sm-2" for="{$NAME}"><!-- IF S_UCP_ACTION and not S_PRIVMSGS and not S_EDIT_DRAFT -->{L_SIGNATURE}<!-- ELSE -->{L_MESSAGE}<!-- ENDIF --> </label>
+	<label class="control-label col-sm-2" for="{$NAME}">
+		<!-- IF S_UCP_ACTION and not S_PRIVMSGS and not S_EDIT_DRAFT -->
+			{L_SIGNATURE}
+		<!-- ELSEIF S_CREATION and S_ETAPE_4 -->
+			{L_HISTOIRE}
+		<!-- ELSEIF S_CREATION -->
+			{L_RESUME}
+		<!-- ELSE -->
+			{L_MESSAGE}
+		<!-- ENDIF -->
+	</label>
 	<div class="{$CASE1}">
-		<textarea name="{$NAME}" id="{$NAME}" rows="17" tabindex="3" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" onfocus="initInsertions();" class="form-control">{MESSAGE}{DRAFT_MESSAGE}{SIGNATURE}</textarea>
+		<textarea name="{$NAME}" id="{$NAME}" rows="{$ROWS}" tabindex="3" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" onfocus="initInsertions();" class="form-control">{MESSAGE}{DRAFT_MESSAGE}{SIGNATURE}</textarea>
 		<!-- IF BBCODE_STATUS -->
 		<span class="help-block">
 			<small>
@@ -27,6 +43,20 @@
 				&bull; {SMILIES_STATUS}
 			<!-- ENDIF -->
 			</small>
+		</span>
+		<!-- ENDIF -->
+		<!-- IF S_CREATION and S_ETAPE_4 -->
+		<span class="help-block">
+			<i class="fa fa-fw fa-eye"></i>&nbsp;
+			Ci-dessus, entrez le passé de votre personnage. Sachez que ces informations seront cachées 
+			aux autres joueurs et que seul le fondateur le lira. Bon après il reste soudoyable ce fondateur.
+			Mais bon, c'est le jeu ma pauv'Lucette&nbsp;!									
+		</span>
+		<!-- ELSEIF S_ETAPE_6 or S_ETAPE_7 or S_ETAPE_8 or S_ETAPE_9 -->
+		<span class="help-block">
+			<i class="fa fa-fw fa-eye"></i>&nbsp;
+			Ces informations publiques seront affichées à tous les utilisateurs. Elles ne sont pas forcément connues. Tous les personnages du jeu,
+			ne connaissent pas forcément votre contact. Mais résumez ici ce qu'on peut facilement savoir sur lui&nbsp;!
 		</span>
 		<!-- ENDIF -->
 	</div>

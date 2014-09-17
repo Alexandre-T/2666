@@ -270,7 +270,10 @@ $lang = array_merge($lang, array(
 	'HIDDEN_USER_TOTAL_AND'			=> '%d invisible et ',
 	'HIDE_GUESTS'					=> 'Masquer les invités',
 	'HIDE_ME'						=> 'Cacher mon statut en ligne pour cette session',
-	'HOURS'							=> 'Heures',
+	//MOD AT BEGIN
+	'HISTOIRE'     					=> 'Histoire',
+	//MOD AT END
+    'HOURS'							=> 'Heures',
 	'HOME'							=> 'Accueil',
 
 	'ICQ'						=> 'ICQ',
@@ -499,7 +502,10 @@ $lang = array_merge($lang, array(
 	'RESEND_ACTIVATION'			=> 'Renvoyer l’e-mail de confirmation',
 	'RESET'						=> 'Réinitialiser',
 	'RESTORE_PERMISSIONS'		=> 'Rétablir les permissions',
-	'RETURN_INDEX'				=> '%sRetourner à l’index du forum%s',
+	//MOD AT BEGIN
+	'RESUME'					=> 'Résumé',
+	//MOD AT END
+    'RETURN_INDEX'				=> '%sRetourner à l’index du forum%s',
 	'RETURN_FORUM'				=> '%sRetourner au dernier forum visité%s',
 	'RETURN_PAGE'				=> '%sRetourner à la page précédente%s',
 	'RETURN_TOPIC'				=> '%sRetourner au dernier sujet visité%s',
