@@ -81,13 +81,15 @@ function creation_verification_etape($etape) {
 	$etapes[4] = empty ( $user->profile_fields ['pf_race'] );
 	$etapes[5] = empty ( $user->profile_fields ['pf_avatar'] );
 	$etapes[6] = empty ( $user->profile_fields ['pf_passe'] ) || 
-			     empty ( $user->profile_fields ['pf_ageapparent'] ) ||
+			     empty ( $user->profile_fields ['pf_agereel'] ) && AT_NEPHILIM == $user->profile_fields ['pf_race'] ||
 			     empty ( $user->profile_fields ['pf_prenom'] ) || 
 			     empty ( $user->profile_fields ['pf_nom'] ); 
-	$etapes[6] = empty ( $user->profile_fields ['pf_dieu'] ) ||
-				 AT_NONRENSEIGNE == $user->profile_fields ['pf_dieu'] ||
-			     empty ( $user->profile_fields ['pf_passe'] ) || 
-			     empty ( $user->profile_fields ['pf_agereel'] );
+	$etapes[7] = empty ( $user->profile_fields ['pf_clan'] ) ||
+				 empty ( $user->profile_fields ['pf_pouvoir'] ) && AT_NEPHILIM == $user->profile_fields ['pf_race'] ||
+			     empty ( $user->profile_fields ['pf_voleuse_nom'] ) && AT_NEPHILIM == $user->profile_fields ['pf_race'] ||
+			     empty ( $user->profile_fields ['pf_voleuse_des'] ) && AT_NEPHILIM == $user->profile_fields ['pf_race'] ||
+			     empty ( $user->profile_fields ['pf_voleuse_pouvoir'] ) && AT_NEPHILIM == $user->profile_fields ['pf_race'] ||
+			     empty ( $user->profile_fields ['pf_don'] ) && AT_HUMAIN == $user->profile_fields ['pf_race'] ||
 	$etapes[7] = empty ( $user->profile_fields ['pf_nature'] ) || 
 			     empty ( $user->profile_fields ['pf_attitude'] ) || 
 			     empty ( $user->profile_fields ['pf_defaut'] ) || 

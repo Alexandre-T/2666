@@ -32,7 +32,6 @@ include($phpbb_root_path . 'includes/mods/functions_creation.' . $phpEx);
 $user->session_begin();
 $auth->acl($user->data);
 $user->setup('mods/creation');
-$user->setup('posting');
 
 //Analyse et traitement de la variable posté
 $cp_data['pf_prenom']		= trim(strip_tags(request_var('prenom', '')));
@@ -69,28 +68,27 @@ unset($user->profile_fields);
 //Rechargement après enregistrement
 $user->get_profile_fields($user->data['user_id']);
 
-//Initialisation des variables,
-$a_passe = generate_text_for_edit($user->profile_fields['pf_passe'],$user->profile_fields['pf_passe_uid'],7);
-
-// Generate smiley listing
-//generate_smilies('inline', 1);
-
 ///Generate popup
 $messages = get_texts_for_popup(array(POST_CONSEILS_POUVOIR,POST_CONSEILS_VOLEUSE,POST_CONSEILS_DON,POST_CONSEILS_CLAN));
-
-// Build custom bbcodes array
-display_custom_bbcodes();
 
 $template->assign_vars(array(
 	'FORM_POUVOIR'	  			=> $user->profile_fields['pf_pouvoir'],
 	'FORM_CLAN'		  			=> $user->profile_fields['pf_clan'],
-	'CHECKED_ASMODEEN'          => $user->profile_fields['pf_clan'] == AT_ASMODEEN,
-    'CHECKED_INSOUMIS'          => $user->profile_fields['pf_clan'] == AT_INSOUMIS,
-    'CHECKED_INFILTRE'          => $user->profile_fields['pf_clan'] == AT_INFILTRE,
-    'CHECKED_IZANAGHI'          => $user->profile_fields['pf_clan'] == AT_IZANAGHI,
-    'CHECKED_VESTAL'            => $user->profile_fields['pf_clan'] == AT_VESTAL,
-    'CHECKED_SANSCLAN'          => $user->profile_fields['pf_clan'] == AT_SANSCLAN,
-	'FORM_DON'	  				=> $user->profile_fields['pf_don'],
+	'SELECTED_ASMODEEN'          => $user->profile_fields['pf_clan'] == AT_ASMODEEN?'selected':'',
+    'SELECTED_INSOUMIS'          => $user->profile_fields['pf_clan'] == AT_INSOUMIS?'selected':'',
+    'SELECTED_INFILTRE'          => $user->profile_fields['pf_clan'] == AT_INFILTRE?'selected':'',
+    'SELECTED_IZANAGHI'          => $user->profile_fields['pf_clan'] == AT_IZANAGHI?'selected':'',
+    'SELECTED_VESTAL'            => $user->profile_fields['pf_clan'] == AT_VESTAL?'selected':'',
+    'SELECTED_SANSCLAN'          => $user->profile_fields['pf_clan'] == AT_SANSCLAN?'selected':'',
+
+    'AT_ASMODEEN'               => AT_ASMODEEN,
+    'AT_INSOUMIS'               => AT_INSOUMIS,
+    'AT_INFILTRE'               => AT_INFILTRE,
+    'AT_IZANAGHI'               => AT_IZANAGHI,
+    'AT_VESTAL'                 => AT_VESTAL,
+    'AT_SANSCLAN'               => AT_SANSCLAN,
+    
+    'FORM_DON'	  				=> $user->profile_fields['pf_don'],
 	'FORM_VOLEUSE_NOM'			=> $user->profile_fields['pf_voleuse_nom'],
 	'FORM_VOLEUSE_DESCRIPTION' 	=> $user->profile_fields['pf_voleuse_des'],
 	'FORM_VOLEUSE_POUVOIR'  	=> $user->profile_fields['pf_voleuse_pouvoir'],
