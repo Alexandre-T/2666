@@ -1,0 +1,154 @@
+
+<script>
+	var form_name = 'postform';
+	var text_name = <!-- IF $SIG_EDIT -->'signature'<!-- ELSE -->'message'<!-- ENDIF -->;
+	var load_draft = false;
+	var upload = false;
+
+	// Define the bbCode tags
+	var bbcode = new Array();
+	var bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[quote]','[/quote]','[code]','[/code]','[list]','[/list]','[list=]','[/list]','[img]','[/img]','[url]','[/url]','[flash=]', '[/flash]','[size=]','[/size]'<!-- BEGIN custom_tags -->, {custom_tags.BBCODE_NAME}<!-- END custom_tags -->);
+	var imageTag = false;
+
+	// Helpline messages
+	var help_line = {
+		b: '{LA_BBCODE_B_HELP}',
+		i: '{LA_BBCODE_I_HELP}',
+		u: '{LA_BBCODE_U_HELP}',
+		q: '{LA_BBCODE_Q_HELP}',
+		c: '{LA_BBCODE_C_HELP}',
+		l: '{LA_BBCODE_L_HELP}',
+		o: '{LA_BBCODE_O_HELP}',
+		p: '{LA_BBCODE_P_HELP}',
+		w: '{LA_BBCODE_W_HELP}',
+		a: '{LA_BBCODE_A_HELP}',
+		s: '{LA_BBCODE_S_HELP}',
+		f: '{LA_BBCODE_F_HELP}',
+		y: '{LA_BBCODE_Y_HELP}',
+		d: '{LA_BBCODE_D_HELP}'
+		<!-- BEGIN custom_tags -->
+			,cb_{custom_tags.BBCODE_ID}: '{custom_tags.A_BBCODE_HELPLINE}'
+		<!-- END custom_tags -->
+	}
+
+	var panels = new Array('options-panel', 'attach-panel', 'poll-panel');
+	var show_panel = 'options-panel';
+
+</script>
+<script src="{T_SUPER_TEMPLATE_PATH}/editor.js"></script>
+
+<!-- IF S_BBCODE_ALLOWED -->
+<div id="colour_palette" style="display: none;" class="form-group">
+	<label class="control-label {$CAPTCHA_COL_LABEL}">{L_FONT_COLOR}</label>
+	<div class="{$CAPTCHA_COL_INPUT}">
+		<script>
+			colorPalette('h', 15, 10);
+		</script>
+	</div>
+</div>
+
+<div class="form-group">
+	<div class="{$CAPTCHA_COL_OFFSET} {$CAPTCHA_COL_INPUT}">
+		<div class="btn-group">
+			<button class="btn btn-default tooltip-link" accesskey="b" name="addbbcode0" value="B" onclick="bbstyle(0); return false;" title="{L_BBCODE_B_HELP}"><i class="fa fa-bold"></i></button>
+			<button class="btn btn-default tooltip-link" accesskey="i" name="addbbcode2" value="i" onclick="bbstyle(2); return false;" title="{L_BBCODE_I_HELP}"><i class="fa fa-italic"></i></button>
+			<button class="btn btn-default tooltip-link" accesskey="u" name="addbbcode4" value="u" onclick="bbstyle(4); return false;" title="{L_BBCODE_U_HELP}"><i class="fa fa-underline"></i></button>
+			<button class="btn btn-default tooltip-link"               name="addbbcode32"value="strike" onclick="bbstyle(32); return false;" title="Texte barré : [strike]{TEXT}[/strike]"><i class="fa fa-strikethrough"></i></button>
+			<button class="btn btn-default tooltip-link"               name="bbpalette" value="{L_FONT_COLOR}" onclick="$('#colour_palette').toggle(); return false;" title="{L_BBCODE_S_HELP}"><i class="fa fa-flask" style="color:darkred;"></i></button>
+		</div>
+		<div class="btn-group">
+			<!-- IF S_BBCODE_QUOTE -->
+				<button class="btn btn-default tooltip-link" accesskey="q" name="addbbcode6" value="Quote" onclick="bbstyle(6); return false;" title="{L_BBCODE_Q_HELP}"><i class="fa fa-quote-right"></i></button>
+			<!-- ELSE -->
+				<button class="btn btn-default tooltip-link" accesskey="c" name="addbbcode8" value="Code" onclick="bbstyle(8);return false;" title="{L_BBCODE_C_HELP}"><i class="fa fa-code"></i></button>
+			<!-- ENDIF -->
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" role="menu">
+				<!-- IF S_BBCODE_QUOTE -->
+				<li><a class="tooltip-left" accesskey="q" name="addbbcode6" value="Quote" onclick="bbstyle(6); return false;" title="{L_BBCODE_Q_HELP}"><i class="fa fa-quote-right fa-fw"></i>&nbsp;Citation</a></li>
+				<!-- ENDIF -->
+				<li><a class="tooltip-left" accesskey="c" name="addbbcode8" value="Code" onclick="bbstyle(8);return false;" title="{L_BBCODE_C_HELP}"><i class="fa fa-code fa-fw"></i>&nbsp;Code</a></li>
+				<!-- IF S_LINKS_ALLOWED -->
+				<li><a class="tooltip-link" accesskey="w" name="addbbcode16" value="URL" onclick=" bbstyle(16); return false;" title="{L_BBCODE_W_HELP}"><i class="fa fa-link fa-fw" style="color:darkblue;"></i>&nbsp;Lien</a></li>
+				<!-- ENDIF -->
+				<li><a class="tooltip-left"               name="addbbcode32" value="spoiler" onclick="bbstyle(32); return false;" title="Cacher un texte à la lecture directe : [spoiler]{TEXT}[/spoiler]"><i class="fa fa-eye-slash fa-fw"></i>&nbsp;Spoiler</a></li>
+			</ul>
+		</div>
+		<div class="btn-group">
+			<button class="btn btn-default tooltip-link" name="addbbcode36" value="titre" onclick="bbstyle(36); return false;" title="Titre : [titre]Texte[/titre]"><i class="fa fa-header"></i></button>
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" role="menu">
+				<li><a class="tooltip-left" href="#" name="addbbcode36" value="titre" onclick="bbstyle(36); return false;" title="Titre : [titre]Texte[/titre]"><i class="fa fa-header fa-fw"></i>&nbsp;Titre</a></li>
+				<li><a class="tooltip-left" href="#" name="addbbcode30" value="soustitre" onclick="bbstyle(30); return false;" title="Ecrire un sous titre : [soustitre]{TEXT}[/soustitre]"><i class="fa fa-fw fa-header fa-fw"></i>&nbsp;Sous-titre</a></li>
+			</ul>
+		</div>
+		<div class="btn-group">
+			<button class="btn btn-default tooltip-link" accesskey="l" name="addbbcode10" value="List" onclick=" bbstyle(10);return false;" title="{L_BBCODE_L_HELP}"><i class="fa fa-list"></i></button>
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" role="menu">
+				<li><a class="tooltip-left" href="#" accesskey="l" name="addbbcode10" value="List" onclick=" bbstyle(10);return false;" title="{L_BBCODE_L_HELP}"><i class="fa fa-list fa-fw"></i>&nbsp;Liste à puces</a></li>
+				<li><a class="tooltip-left" href="#" accesskey="o" name="addbbcode12" value="List=" onclick=" bbstyle(12); return false;" title="{L_BBCODE_O_HELP}"><i class="fa fa-list-ol fa-fw"></i>&nbsp;Liste numérotée</a></li>
+				<li><a class="tooltip-left" href="#" accesskey="y" name="addlistitem" value="[*]" onclick=" return false; bbstyle(-1); return false;" title="{L_BBCODE_LISTITEM_HELP}"><i class="fa fa-plus-circle fa-fw">&nbsp;Nouvelle puce</i></a></li>	
+			</ul>
+		</div>
+		<div class="btn-group">
+			<button class="btn btn-default tooltip-link" value="Musique"  title="Musique"><i class="fa fa-music"></i></button>
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" role="menu">
+				<li><a class="tooltip-left" href="#" name="addbbcode24" value="deezer" onclick="bbstyle(24); return false;" title="Insérer une musique de Deezer : [deezer]numéro de la chanson[/deezer]"><i class="fa fa-fw fa-music"></i>&nbsp;Deezer</a></li>
+				<li><a class="tooltip-left" href="#" name="addbbcode24" value="Grooveshark" onclick="bbstyle(24); return false;" title="Inclure une musique de Grooveshark : [grooveshark]{NUMBER}[/grooveshark]"><i class="fa fa-fw fa-music"></i>&nbsp;Grooveshark</a></li>
+				<li><a class="tooltip-left" href="#" name="addbbcode36" value="youmusic" onclick="bbstyle(36); return false;" title="Musique de Youtube : [youmusic]Code de la musique sur youtube[/youmusic]"><i class="fa fa-fw fa-youtube"></i>&nbsp;Musique Youtube</a></li>
+			</ul>
+		</div>
+		
+		<div class="btn-group">
+			<!-- IF S_BBCODE_IMG -->
+				<button class="btn btn-default tooltip-link" accesskey="p" name="addbbcode14" value="Img" onclick=" bbstyle(14); return false;" title="{L_BBCODE_P_HELP}"><i class="fa fa-picture-o"></i></button>
+			<!-- ELSE -->
+				<button class="btn btn-default tooltip-link" name="addbbcode40" value="youtube" onclick="bbstyle(40); return false;" title="Inclure une vidéo de Youtube : [youtube]{chiffre apres le v}[/youtube]"><i class="fa fa-film"></i></button>
+			<!-- ENDIF -->
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" role="menu">
+				<!-- IF S_BBCODE_IMG -->
+				<li><a class="tooltip-left" href="#" accesskey="p" name="addbbcode14" value="Img" onclick=" bbstyle(14); return false;" title="{L_BBCODE_P_HELP}"><i class="fa fa-picture-o fa-fw"></i>&nbsp;Image</a></li>
+				<!-- ENDIF -->
+				<li><a class="tooltip-left" href="#" name="addbbcode40" value="youtube" onclick="bbstyle(40); return false;" title="Inclure une vidéo de Youtube : [youtube]{chiffre apres le v}[/youtube]"><i class="fa fa-fw fa-film"></i>&nbsp;Vidéo youtube</a></li>
+			</ul>
+		</div>
+		<div class="btn-group">
+			<button class="btn btn-default tooltip-link" accesskey="p" name="addbbcode20" value="Img" onclick="bbfontstyle('[size=100]', '[/size]'); return false;" title="Taille normale de la police: [size=100]texte[/size]"><i class="fa fa-text-height"></i></button>
+			<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+				<span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" role="menu">
+				<li><a class="tooltip-left" href="#" accesskey="p" onclick="bbfontstyle('[size=50]', '[/size]'); return false;" title="Police de très petite taille : [size=50]texte[/size]"><i class="fa fa-text-height fa-fw"></i>&nbsp;{L_FONT_TINY} police</a></li>
+				<li><a class="tooltip-left" href="#" accesskey="p" onclick="bbfontstyle('[size=85]', '[/size]'); return false;" title="Police de petite taille : [size=85]texte[/size]"><i class="fa fa-text-height fa-fw"></i>&nbsp;{L_FONT_SMALL} police</a></li>
+				<li><a class="tooltip-left" href="#" accesskey="p" onclick="bbfontstyle('[size=100]', '[/size]'); return false;" title="Police de taille normale : [size=100]texte[/size]"><i class="fa fa-text-height fa-fw"></i>&nbsp;{L_FONT_NORMAL} police</a></li>
+				<li><a class="tooltip-left" href="#" accesskey="p" onclick="bbfontstyle('[size=150]', '[/size]'); return false;" title="Police de grande taille : [size=150]texte[/size]"><i class="fa fa-text-height fa-fw"></i>&nbsp;{L_FONT_LARGE} police</a></li>
+				<li><a class="tooltip-left" href="#" accesskey="p" onclick="bbfontstyle('[size=200]', '[/size]'); return false;" title="Police de très grande taille : [size=200]texte[/size]"><i class="fa fa-text-height fa-fw"></i>&nbsp;{L_FONT_HUGE} police</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<!-- IF .custom_tags -->
+<div class="form-group hidden">
+	<div class="{$CAPTCHA_COL_OFFSET} {$CAPTCHA_COL_INPUT}">
+		<div class="btn-group">
+		<!-- BEGIN custom_tags -->
+			<button class="btn btn-default tooltip-link" name="addbbcode{custom_tags.BBCODE_ID}" value="{custom_tags.BBCODE_TAG}" onclick="bbstyle({custom_tags.BBCODE_ID}); return false;" title="{custom_tags.BBCODE_HELPLINE}">{custom_tags.BBCODE_TAG}</button>
+		<!-- END custom_tags -->
+		</div>
+	</div>
+</div>
+<!-- ENDIF -->
+<!-- ENDIF -->
