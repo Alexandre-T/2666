@@ -63,8 +63,8 @@ $user->get_profile_fields($user->data['user_id']);
 $messages = get_texts_for_popup(array(POST_CONSEILS_POUVOIR,POST_CONSEILS_VOLEUSE,POST_CONSEILS_DON,POST_CONSEILS_CLAN));
 
 $template->assign_vars(array(
-	'FORM_POUVOIR'	  			=> $user->profile_fields['pf_pouvoir'],
-	'FORM_CLAN'		  			=> $user->profile_fields['pf_clan'],
+	'FORM_POUVOIR'	  			 => $user->profile_fields['pf_pouvoir'],
+	'FORM_CLAN'		  			 => $user->profile_fields['pf_clan'],
 	'SELECTED_ASMODEEN'          => $user->profile_fields['pf_clan'] == AT_ASMODEEN?'selected':'',
     'SELECTED_INSOUMIS'          => $user->profile_fields['pf_clan'] == AT_INSOUMIS?'selected':'',
     'SELECTED_INFILTRE'          => $user->profile_fields['pf_clan'] == AT_INFILTRE?'selected':'',
