@@ -41,6 +41,7 @@ $cp_data['pf_voleuse_nom']		= trim(strip_tags(request_var('voleuse_nom', '')));
 $cp_data['pf_voleuse_pouvoir']	= trim(strip_tags(request_var('voleuse_pouvoir', '')));
 $cp_data['pf_voleuse_des']	    = trim(strip_tags(request_var('voleuse_description', '')));
 $message    = request_var('message',0);
+$erreur     = request_var('erreur',1);
 
 $user->get_profile_fields($user->data['user_id']);
 
@@ -82,7 +83,8 @@ $template->assign_vars(array(
 	'S_HUMAIN'	 => AT_HUMAIN   == $user->profile_fields['pf_race'],
 	'S_NEPHILIM' => AT_NEPHILIM == $user->profile_fields['pf_race'],
 	'S_MESSAGE'	 => 1 == $message,
-    'S_HELPBLOCK_MESSAGE' => true,    
+    'S_HELPBLOCK_MESSAGE' => true,
+    'S_ERREUR'   => $erreur != 0,    
 		
 	'POST_CONSEILS_CONTACT'	=> $messages[POST_CONSEILS_CONTACT],
 		
