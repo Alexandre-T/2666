@@ -4770,7 +4770,7 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'U_REGLEMENT'			=> append_sid("{$phpbb_root_path}accueil-du-jeu/reglement-t2.html"),
 		'U_REGLE_BIENSEANCE'	=> append_sid("{$phpbb_root_path}accueil-du-jeu/la-bienseance-t4.html"),
 		'U_RESUME'				=> append_sid("{$phpbb_root_path}personnages-resumes/"),
-		'U_SYNOPSIS'				=> append_sid("{$phpbb_root_path}description-du-jeu/synopsis-t9.html"),
+		'U_SYNOPSIS'			=> append_sid("{$phpbb_root_path}description-du-jeu/synopsis-t9.html"),
 		//AT END NEW LINK
 
 		'S_USER_LOGGED_IN'		=> ($user->data['user_id'] != ANONYMOUS) ? true : false,
