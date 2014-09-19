@@ -75,12 +75,16 @@
 							<input type="text" class="form-control" name="profession" id="profession" placeholder="Profession exercée à bord" value="{FORM_PROFESSION}"  required="required">
 						</div>
 					</div>
-					<div class="col-sm-offset-2 col-sm-10">
-						<div class="correction">
-							<!-- INCLUDE posting_buttons.html -->
+					<div class="form-group">
+						<label for="nom" class="col-sm-2 control-label">Description</label>
+						<div class="col-sm-10">
+							<textarea class="form-control" name="passe" id="passe" placeholder="Passé et description générale de votre personnage" required="required" rows="17">{FORM_PASSE}</textarea>
+							<span class="help-block">
+								  <i class="fa fa-eye-slash"></i>
+								  Ci-dessus, entrez le passé de votre personnage. Sachez que ces informations seront cachées aux autres joueurs et que seul le fondateur le lira. Bon après il reste soudoyable ce fondateur. C'est le jeu ma pauv'Lucette !
+							</span>
 						</div>
 					</div>
-					<!-- INCLUDE messagebox.inc.html -->
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
 							<button onclick="return false;" class="btn btn-default" data-toggle="modal" data-target="#modalHelp"><i class="fa fa-fw fa-question-circle"></i>&nbsp;J'ai besoin d'aide</button>

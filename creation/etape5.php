@@ -37,18 +37,9 @@ $user->setup('mods/creation');
 $cp_data['pf_prenom']		= trim(strip_tags(request_var('prenom', '')));
 $cp_data['pf_nom']			= trim(strip_tags(request_var('nom', '')));
 $cp_data['pf_profession']	= trim(strip_tags(request_var('profession', '')));
+$cp_data['pf_passe']	    = trim(strip_tags(request_var('passe', '')));
 $agereel	= request_var('age', 0);
-$passe		= trim(strip_tags(request_var('histoire','')));
 $message    = request_var('message',0);
-
-//Traitement du bbcode de description
-$poll = $uid = $bitfield = $options = '';
-$allow_bbcode = $allow_urls = $allow_smilies = true;
-generate_text_for_storage($passe, $uid, $bitfield, $options, $allow_bbcode, $allow_urls, $allow_smilies);
-
-$cp_data['pf_passe']     = $passe;
-$cp_data['pf_passe_uid'] = $uid;
-$cp_data['pf_passe_bit'] = $bitfield;
 
 $user->get_profile_fields($user->data['user_id']);
 

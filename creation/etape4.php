@@ -23,7 +23,6 @@ include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_profile_fields.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
-include($phpbb_root_path . 'includes/functions_posting.' . $phpEx);
 include($phpbb_root_path . 'includes/mods/functions_user.' . $phpEx);
 include($phpbb_root_path . 'includes/mods/functions_popup.' . $phpEx);
 include($phpbb_root_path . 'includes/mods/functions_creation.' . $phpEx);
@@ -52,12 +51,6 @@ unset($user->profile_fields);
 //Rechargement après enregistrement
 $user->get_profile_fields($user->data['user_id']);
 
-//Initialisation des variables,
-$a_passe = generate_text_for_edit($user->profile_fields['pf_passe'],$user->profile_fields['pf_passe_uid'],7);
-
-// Generate smiley listing
-//generate_smilies('inline', 1);
-
 ///Generate popup
 $messages = get_texts_for_popup(array(POST_CONSEILS_PERSONNAGE));
 
@@ -70,8 +63,7 @@ $template->assign_vars(array(
 	'FORM_PRENOM'	  	=> $user->profile_fields['pf_prenom'],
 	'FORM_NOM'		  	=> $user->profile_fields['pf_nom'],
 	'FORM_PROFESSION'  	=> $user->profile_fields['pf_profession'],
-	'MESSAGE'  			=> $a_passe['text'],
-	'L_MESSAGE'			=> 'Histoire',
+	'FORM_PASSE'		=> $user->profile_fields['pf_passe'],
 ));
 
 
