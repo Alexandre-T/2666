@@ -2,8 +2,18 @@
 
 @font-face{font-family:'coalition';src:url('{T_THEME_PATH}/fonts/coalition.ttf?v=2.0.0');}
 
-h1,h5,h6,span.coalition{
-	font-family:'coalition',fantasy;
+h1,h5,h6,
+section h2,
+section h3,
+section h4,
+span.coalition,
+table.table th a,
+table thead tr th,
+.jumbotron p.description,
+ul.accueil2666,
+p.accueil2666
+{
+	font-family:'coalition','Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
 header{
@@ -38,7 +48,6 @@ blockquote{
 }
 .jumbotron p.description{
 	font-size: 16px;
-	font-family:'coalition',fantasy;
 	text-shadow: 2px 2px 2px #2C6CAE;
 }
 .jumbotron p.description,.jumbotron p.help-block a small{
@@ -68,17 +77,11 @@ table.table{
 div.page-header {
 	margin-bottom:0;
 }
-section h2,section h3,section h4,ul.accueil2666{
-	font-family:'coalition',fantasy;
-}
 
 .page-header h1 small {
 	font-size: large;
 }
 
-table.table th a {
-	font-family:'coalition',fantasy;
-}
 body.accueil{
 	background-color: black;
 	background-image : url('{T_THEME_PATH}/images/bg_etoile.jpg');
@@ -120,7 +123,6 @@ p{
 	text-align:justify;
 }
 p.accueil2666{
-	font-family:'coalition',fantasy;
 	color:white;
 	text-shadow: 2px 2px 2px #2C6CAE;
 	vertical-align: bottom;
@@ -137,7 +139,6 @@ table thead tr{
 }
 table thead tr th{
 	color:#333333;
-	font-family:'coalition',fantasy;
 	font-size:xx-small;
 }
 table tbody tr td a{
