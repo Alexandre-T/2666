@@ -24,6 +24,9 @@ class setup_phpbb_seo {
 	*/
 	function init_phpbb_seo() {
 		global $phpEx, $config, $phpbb_root_path;
+		// --> No Dupe
+		$this->seo_opt['no_dupe']['on'] = $this->cache_config['dynamic_options']['no_dupe']['on'] = false;
+		// <-- No Dupe
 		// Let's load config and forum urls, mods adding options in the cache file must do it before
 		if ($this->check_cache()) {
 			foreach($this->cache_config['dynamic_options'] as $optionname => $optionvalue ) {
