@@ -34,30 +34,38 @@ $auth->acl($user->data);
 $user->setup('mods/creation');
 $user->setup('posting');
 
-//Analyse et traitement de la variable posté
-$sexe  = request_var('sexe', 0);
-$message = request_var('message',0);
-$sexe = ($sexe !== AT_FEMME)?AT_HOMME:AT_FEMME; 
+//Chargement des champs de profil
 $user->get_profile_fields($user->data['user_id']);
-$cp_data['pf_sexe'] = $sexe;
-if ($sexe != $user->profile_fields['pf_sexe']){
-	//Attention, changement de sexe
-	//On réinitialise l'avatar
-	$cp_data['pf_avatar'] = '';
-}
-//Enregistrement
-$cp = new custom_profile();
-$cp->update_profile_field_data($user->data['user_id'], $cp_data);
-unset($user->profile_fields);
 
-//Rechargement après enregistrement
-$user->get_profile_fields($user->data['user_id']);
+//Enregistrement ?
+$submit = (isset($_POST['submit'])) ? true : false;
+if ($submit){
+    //Analyse et traitement de la variable posté
+    $race  = request_var('race', 0);
+    $race = ($race !== AT_HUMAIN)?AT_NEPHILIM:AT_HUMAIN;
+    $cp_data['pf_race'] = $race;
+    if ($race != $user->profile_fields['pf_race']){
+        //Attention, changement de race
+        //On ajoute ici les modifications qui pourraient survenir
+        $cp_data['pf_agereel'] = '';
+        //On devrait supprimer les dons ou les pouvoirs
+    }
+    //Enregistrement
+    $cp = new custom_profile();
+    $cp->update_profile_field_data($user->data['user_id'], $cp_data);
+    unset($user->profile_fields);
+    header('Location: etape3.php');
+    die();
+}
+
+//Vérification des droits
+creation_verification(CREATION_ETAPE);
 
 //Chargement des contenus des popups
 $messages = get_texts_for_popup(array(POST_HUMAIN,POST_NEPHILIM));
 
-//Vérification des droits
-creation_verification(CREATION_ETAPE);
+//Gestion du message d'erreur
+$message = request_var('message',0);
 
 //Template
 $template->assign_vars(array(
@@ -71,6 +79,9 @@ $template->assign_vars(array(
 	'S_NEPHILIM'		  => AT_NEPHILIM == $user->profile_fields['pf_race'],
 	'S_MESSAGE'	  		  => 1 == $message,
 	
+    'AT_HUMAIN'			  => AT_HUMAIN,
+    'AT_NEPHILIM'		  => AT_NEPHILIM,
+    
 	'HUMAIN_CHECKED'	  => AT_HUMAIN   == $user->profile_fields['pf_race']?'checked':'',
 	'NEPHILIM_CHECKED'	  => AT_NEPHILIM == $user->profile_fields['pf_race']?'checked':'',
 		
