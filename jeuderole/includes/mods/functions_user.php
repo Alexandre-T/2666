@@ -47,3 +47,59 @@ function is_user_in_group($group_id,$user_id = null){
 	}
 	return in_array($group_id, $users_groups[$user_id]);
 }
+
+/**
+ * Get contact avatar
+ *
+ * @param integer number of the contact
+ * @param string $avatar Users assigned avatar name
+ * @param int $avatar_type Type of avatar
+ * @param string $avatar_width Width of users avatar
+ * @param string $avatar_height Height of users avatar
+ * @param string $alt Optional language string for alt tag within image, can be a language key or text
+ * @param bool $ignore_config Ignores the config-setting, to be still able to view the avatar in the UCP
+ *
+ * @return string Avatar image
+ */
+function get_contact_avatar($contact, $avatar, $avatar_type, $avatar_width, $avatar_height, $alt = 'USER_AVATAR', $ignore_config = false)
+{
+    global $user, $config, $phpbb_root_path, $phpEx;
+    
+    $contact = 'contact'.max(1,min(4,(int)$contact));
+
+    if (empty($avatar) || !$avatar_type || (!$config['allow_avatar'] && !$ignore_config))
+    {
+        return '';
+    }
+
+    $avatar_img = '';
+
+    switch ($avatar_type)
+    {
+        case AVATAR_UPLOAD:
+            if (!$config['allow_avatar_upload'] && !$ignore_config)
+            {
+                return '';
+            }
+            $avatar_img = $phpbb_root_path . "download/contact.$phpEx?contact=$contact&amp;avatar=";
+            break;
+
+        case AVATAR_GALLERY:
+            if (!$config['allow_avatar_local'] && !$ignore_config)
+            {
+                return '';
+            }
+            $avatar_img = $phpbb_root_path . $config['avatar_gallery_path'] . '/';
+            break;
+
+        case AVATAR_REMOTE:
+            if (!$config['allow_avatar_remote'] && !$ignore_config)
+            {
+                return '';
+            }
+            break;
+    }
+
+    $avatar_img .= $avatar;
+    return '<img src="' . (str_replace(' ', '%20', $avatar_img)) . '" width="' . $avatar_width . '" height="' . $avatar_height . '" alt="' . ((!empty($user->lang[$alt])) ? $user->lang[$alt] : $alt) . '" />';
+}

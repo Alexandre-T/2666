@@ -160,6 +160,7 @@ function creation_verification_etape($etape) {
 		'S_ETAPE_10'		  => 10 == $etape,
 		
 		'S_HUMAIN'		  	  => ($l_race == AT_HUMAIN),
+		'S_CREATION'		  => true,
 		'S_CREE'			  => is_user_in_group(GROUPE_DEMANDE_CREATION),
 		'S_INACTIF'			  => is_user_in_group(GROUPE_INACTIF),
 		'S_NEPHILIM'	  	  => ($l_race == AT_NEPHILIM),
@@ -170,6 +171,288 @@ function creation_verification_etape($etape) {
 		'U_ACTION'    		  => creation_action($etape),
 	));
 	return $etapes;
+}
+
+/**
+ * Uploading/Changing contact avatar
+ */
+function contact_process_user(&$error, $custom_userdata = false, $can_upload = null, $number = 1)
+{
+    global $config, $phpbb_root_path, $auth, $user, $db;
+    
+    switch($number){
+        case 4 :       
+            $prefixe  = 'cd';     
+            $a_type   = 'pf_cd_avatar_type';
+            $a_main   = 'pf_cd_avatar';
+            $a_height = 'pf_cd_avatar_height';
+            $a_width  = 'pf_cd_avatar_width';
+            break;
+        case 3 :
+            $prefixe  = 'cc';     
+            $a_type   = 'pf_cc_avatar_type';
+            $a_main   = 'pf_cc_avatar';
+            $a_height = 'pf_cc_avatar_height';
+            $a_width  = 'pf_cc_avatar_width';
+            break;
+        case 2 :
+            $prefixe  = 'cb';     
+            $a_type   = 'pf_cb_avatar_type';
+            $a_main   = 'pf_cb_avatar';
+            $a_height = 'pf_cb_avatar_height';
+            $a_width  = 'pf_cb_avatar_width';            
+            break;
+        default :
+            $prefixe  = 'ca';     
+            $a_type   = 'pf_ca_avatar_type';
+            $a_main   = 'pf_ca_avatar';
+            $a_height = 'pf_ca_avatar_height';
+            $a_width  = 'pf_ca_avatar_width';            
+            break;
+    }
+
+    $data = array(
+        'uploadurl'		=> request_var('uploadurl', ''),
+        'remotelink'	=> request_var('remotelink', ''),
+        'width'			=> request_var('width', 0),
+        'height'		=> request_var('height', 0),
+    );
+
+    $error = validate_data($data, array(
+        'uploadurl'		=> array('string', true, 5, 255),
+        'remotelink'	=> array('string', true, 5, 255),
+        'width'			=> array('string', true, 1, 3),
+        'height'		=> array('string', true, 1, 3),
+    ));
+
+    if (sizeof($error))
+    {
+        return false;
+    }
+
+    $sql_ary = array();
+
+    if ($custom_userdata === false)
+    {
+        $userdata = &$user->data;
+    }
+    else
+    {
+        $userdata = &$custom_userdata;
+    }
+
+    $data['user_id'] = $userdata['user_id'];
+    // AT On autorise toujours le changement de contact.
+    $change_avatar = true;
+    $avatar_select = basename(request_var('avatar_select', ''));
+
+    // Can we upload?
+    if (is_null($can_upload))
+    {
+        $can_upload = ($config['allow_avatar_upload'] && file_exists($phpbb_root_path . $config['avatar_path']) && phpbb_is_writable($phpbb_root_path . $config['avatar_path']) && $change_avatar && (@ini_get('file_uploads') || strtolower(@ini_get('file_uploads')) == 'on')) ? true : false;
+    }
+
+    if ((!empty($_FILES['uploadfile']['name']) || $data['uploadurl']) && $can_upload)
+    {
+        list($sql_ary[$a_type], $sql_ary[$a_main], $sql_ary[$a_width], $sql_ary[$a_height]) = contact_upload($data, $prefixe, $error);
+    }
+    else if ($data['remotelink'] && $change_avatar && $config['allow_avatar_remote'])
+    {
+        list($sql_ary[$a_type], $sql_ary[$a_main], $sql_ary[$a_width], $sql_ary[$a_height]) = avatar_remote($data, $error);
+    }
+    else if ($avatar_select && $change_avatar && $config['allow_avatar_local'])
+    {
+        $category = basename(request_var('category', ''));
+
+        $sql_ary[$a_type] = AVATAR_GALLERY;
+        $sql_ary[$a_main] = $avatar_select;
+
+        // check avatar gallery
+        if (!is_dir($phpbb_root_path . $config['avatar_gallery_path'] . '/' . $category))
+        {
+            $sql_ary[$a_main] = '';
+            $sql_ary[$a_type] = $sql_ary[$a_width] = $sql_ary[$a_height] = 0;
+        }
+        else
+        {
+            list($sql_ary[$a_width], $sql_ary[$a_height]) = getimagesize($phpbb_root_path . $config['avatar_gallery_path'] . '/' . $category . '/' . urldecode($sql_ary[$a_main]));
+            $sql_ary[$a_main] = $category . '/' . $sql_ary[$a_main];
+        }
+    }
+    else if (isset($_POST['delete']) && $change_avatar)
+    {
+        $sql_ary[$a_main] = '';
+        $sql_ary[$a_type] = $sql_ary[$a_width] = $sql_ary[$a_height] = 0;
+    }
+    else if (!empty($userdata[$a_main]))
+    {
+        // Only update the dimensions
+
+        if (empty($data['width']) || empty($data['height']))
+        {
+            if ($dims = avatar_get_dimensions($userdata[$a_main], $userdata[$a_type], $error, $data['width'], $data['height']))
+            {
+                list($guessed_x, $guessed_y) = $dims;
+                if (empty($data['width']))
+                {
+                    $data['width'] = $guessed_x;
+                }
+                if (empty($data['height']))
+                {
+                    $data['height'] = $guessed_y;
+                }
+            }
+        }
+        if (($config['avatar_max_width'] || $config['avatar_max_height']) &&
+            (($data['width'] != $userdata['user_avatar_width']) || $data['height'] != $userdata['user_avatar_height']))
+        {
+            if ($data['width'] > $config['avatar_max_width'] || $data['height'] > $config['avatar_max_height'])
+            {
+                $error[] = sprintf($user->lang['AVATAR_WRONG_SIZE'], $config['avatar_min_width'], $config['avatar_min_height'], $config['avatar_max_width'], $config['avatar_max_height'], $data['width'], $data['height']);
+            }
+        }
+
+        if (!sizeof($error))
+        {
+            if ($config['avatar_min_width'] || $config['avatar_min_height'])
+            {
+                if ($data['width'] < $config['avatar_min_width'] || $data['height'] < $config['avatar_min_height'])
+                {
+                    $error[] = sprintf($user->lang['AVATAR_WRONG_SIZE'], $config['avatar_min_width'], $config['avatar_min_height'], $config['avatar_max_width'], $config['avatar_max_height'], $data['width'], $data['height']);
+                }
+            }
+        }
+
+        if (!sizeof($error))
+        {
+            $sql_ary[$a_width] = $data['width'];
+            $sql_ary[$a_height] = $data['height'];
+        }
+    }
+
+    if (!sizeof($error))
+    {
+        // Do we actually have any data to update?
+        if (sizeof($sql_ary))
+        {
+            $ext_new = $ext_old = '';
+            if (isset($sql_ary[$a_main]))
+            {
+                $ext_new = (empty($sql_ary[$a_main])) ? '' : substr(strrchr($sql_ary[$a_main], '.'), 1);
+                $ext_old = (empty($user->profile_fields[$a_main])) ? '' : substr(strrchr($user->profile_fields[$a_main], '.'), 1);
+
+                if ($user->profile_fields[$a_type] == AVATAR_UPLOAD)
+                {
+                    // Delete old avatar if present
+                    if ((!empty($user->profile_fields[$a_main]) && empty($sql_ary[$a_main]))
+                        || ( !empty($user->profile_fields[$a_main]) && !empty($sql_ary[$a_main]) && $ext_new !== $ext_old))
+                    {
+                        contact_delete($prefixe, $user->profile_fields);
+                    }
+                }
+            }
+
+            $sql = 'UPDATE ' . PROFILE_FIELDS_DATA_TABLE . '
+				SET ' . $db->sql_build_array('UPDATE', $sql_ary) . '
+				WHERE user_id = ' . (($custom_userdata === false) ? $user->data['user_id'] : $custom_userdata['user_id']);
+            $db->sql_query($sql);
+        }
+    }
+
+    return (sizeof($error)) ? false : true;
+}
+
+/**
+ * Avatar upload using the upload class
+ */
+function contact_upload($data, $prefixe, &$error)
+{
+    global $phpbb_root_path, $config, $db, $user, $phpEx;
+
+    // Init upload class
+    include_once($phpbb_root_path . 'includes/functions_upload.' . $phpEx);
+    $upload = new fileupload('AVATAR_', array('jpg', 'jpeg', 'gif', 'png'), $config['avatar_filesize'], $config['avatar_min_width'], $config['avatar_min_height'], $config['avatar_max_width'], $config['avatar_max_height'], (isset($config['mime_triggers']) ? explode('|', $config['mime_triggers']) : false));
+
+    if (!empty($_FILES['uploadfile']['name']))
+    {
+        $file = $upload->form_upload('uploadfile');
+    }
+    else
+    {
+        $file = $upload->remote_upload($data['uploadurl']);
+    }
+
+    $prefix = $config['avatar_salt'] . '_' . $prefixe . '_';
+    $file->clean_filename('avatar', $prefix, $data['user_id']);
+
+    $destination = $config['avatar_path'];
+
+    // Adjust destination path (no trailing slash)
+    if (substr($destination, -1, 1) == '/' || substr($destination, -1, 1) == '\\')
+    {
+        $destination = substr($destination, 0, -1);
+    }
+
+    $destination = str_replace(array('../', '..\\', './', '.\\'), '', $destination);
+    if ($destination && ($destination[0] == '/' || $destination[0] == "\\"))
+    {
+        $destination = '';
+    }
+
+    // Move file and overwrite any existing image
+    $file->move_file($destination, true);
+
+    if (sizeof($file->error))
+    {
+        $file->remove();
+        $error = array_merge($error, $file->error);
+    }
+
+    return array(AVATAR_UPLOAD, $data['user_id'] . '_' . time() . '.' . $file->get('extension'), $file->get('width'), $file->get('height'));
+}
+
+
+/**
+ * Remove avatar
+ */
+function contact_delete($mode, $row, $clean_db = false)
+{
+    global $phpbb_root_path, $config, $db, $user;
+
+    // Check if the users avatar is actually *not* a group avatar
+    /*if ($mode == 'user')
+    {
+        if (strpos($row['user_avatar'], 'g') === 0 || (((int)$row['user_avatar'] !== 0) && ((int)$row['user_avatar'] !== (int)$row['user_id'])))
+        {
+            return false;
+        }
+    }
+
+    if ($clean_db)
+    {
+        avatar_remove_db($row[$mode . '_avatar']);
+    }*/
+    
+    $filename = get_contact_filename($mode, $row['pf_' . $mode . '_avatar']);
+    if (file_exists($phpbb_root_path . $config['avatar_path'] . '/' . $filename))
+    {
+        @unlink($phpbb_root_path . $config['avatar_path'] . '/' . $filename);
+        return true;
+    }
+
+    return false;
+}
+
+/**
+ * Generates contact filename from the database entry
+ */
+function get_contact_filename($mode,$avatar_entry)
+{
+    global $config;
+
+    $ext 			= substr(strrchr($avatar_entry, '.'), 1);
+    $avatar_entry	= intval($avatar_entry);
+    return $config['avatar_salt'] . '_' . $mode . '_' . $avatar_entry . '.' . $ext;
 }
 
 function creation_action($etape){

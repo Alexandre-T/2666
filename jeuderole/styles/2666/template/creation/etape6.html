@@ -48,9 +48,9 @@
 					Si tu souhaites plus d'informations encore sur les contacts, tu peux consulter ton holodeck.
 				</p>
 				<hr/>
-				<form class="form-horizontal" action="etape7.php" method="post">
+				<form id="postform" class="form-horizontal" action="etape6.php" method="post"  enctype="multipart/form-data">
 					{S_HIDDEN_FIELDS}
-					
+					<input type="hidden" name="MAX_FILE_SIZE" value="{AVATAR_SIZE}" />
 					<fieldset>
 						<legend>Ton contact principal</legend>
 						<div class="form-group">
@@ -60,8 +60,25 @@
 								<span class="help-block text-info">Pour un Nephilim entre son surnom, pour un humain entre son prénom puis son nom.</span>
 							</div>
 						</div>
+						<div class="form-group">
+							<label for="avatar" class="col-sm-2 control-label">Avatar</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" name="avatar" id="avatar" placeholder="Prénom et nom de l'avatar" value="{FORM_AVATAR}"  required="required">
+								<span class="help-block text-info">Entre le nom de la personnalité incarnant votre contact.</span>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="uploadfile" class="col-sm-2 control-label">Photo</label>
+							<div class="col-sm-10">
+								<!-- IF AVATAR_CONTACT -->
+								<p class="form-control-static forum-avatar-cadre">{AVATAR_CONTACT}</p>
+								<!-- ELSE -->
+								<p class="form-control-static">Aucun avatar choisi pour le moment</p>
+								<!-- ENDIF -->								
+							</div>
+						</div>
 						<div class="form-group <!-- IF S_ERREUR -->has-error<!-- ENDIF -->">
-							<label class="control-label col-sm-2" for="uploadfile">Photo</label>
+							<label class="control-label col-sm-2" for="uploadfile">Photo locale</label>
 							<div class="col-sm-10">
 								<div class="input-group">
 									<span class="input-group-btn">
@@ -71,9 +88,20 @@
 									</span>
 									<input type="text" class="form-control " readonly value="{FORM_LIEN}">
 								</div>
-								<span class="help-block">Dimensions de la photo largeur: 200 pixels, hauteur: 320 pixels, taille maximale : 650.53 Kio.</span>
+								<span class="help-block">
+									<!-- IF S_ERREUR -->
+										{ERREUR}<br/>
+									<!-- ENDIF -->									
+									Dimensions de la photo largeur: 200 pixels, hauteur: 320 pixels, taille maximale : 650.53 Kio.</span>
 							</div>
 						</div>
+						<div class="form-group  <!-- IF S_ERREUR -->has-error<!-- ENDIF -->">
+							<label class="control-label col-sm-2" for="uploadurl">Photo distante</label>
+								<div class="col-sm-10">
+            						<input type="text" name="uploadurl" id="uploadurl" value="" class="form-control" />
+            						<span class="help-block"><em>Saisissez l’URL de l’image. L’image sera copiée vers ce site.</em></span>
+         						</div>
+      					</div>
 						<div class="form-group">
 							<label for="description" class="col-sm-2 control-label">Description</label>
 							<div class="col-sm-10">
@@ -98,7 +126,8 @@
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
 								<button onclick="return false;" class="btn btn-default" data-toggle="modal" data-target="#modalHelp"><i class="fa fa-fw fa-question-circle"></i>&nbsp;J'ai besoin d'aide</button>
-								<input type="submit" class="btn btn-primary" value="Je valide &gt;&gt;"/>
+								<button type="submit" name="apercu" class="btn btn-default"><i class="fa fa-eye"></i> Aperçu</button>
+								<input type="submit"  name="submit" class="btn btn-primary" value="Je valide &gt;&gt;"/>
 							</div>
 						</div>
 					</fieldset>
@@ -112,3 +141,4 @@ Les contacts
 <!-- INCLUDE modal/body.html -->
 {POST_CONSEILS_CONTACT}
 <!-- INCLUDE modal/footer.html -->
+<!-- INCLUDE overall_footer.html -->
