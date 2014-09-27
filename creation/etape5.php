@@ -22,8 +22,6 @@ include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_profile_fields.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
-include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
-include($phpbb_root_path . 'includes/functions_posting.' . $phpEx);
 include($phpbb_root_path . 'includes/mods/functions_user.' . $phpEx);
 include($phpbb_root_path . 'includes/mods/functions_popup.' . $phpEx);
 include($phpbb_root_path . 'includes/mods/functions_creation.' . $phpEx);
@@ -33,35 +31,38 @@ $user->session_begin();
 $auth->acl($user->data);
 $user->setup('mods/creation');
 
-//Analyse et traitement de la variable posté
-$cp_data['pf_prenom']		= trim(strip_tags(request_var('prenom', '')));
-$cp_data['pf_nom']			= trim(strip_tags(request_var('nom', '')));
-$cp_data['pf_profession']	= trim(strip_tags(request_var('profession', '')));
-$cp_data['pf_passe']	    = trim(strip_tags(request_var('passe', '')));
-$agereel	= request_var('age', 0);
-$message    = request_var('message',0);
-
+//Chargement des champs de profil
 $user->get_profile_fields($user->data['user_id']);
 
-if (AT_HUMAIN == $user->profile_fields['pf_race']){
-	//cas particulier des humains
-	$cp_data['pf_agereel'] = '';
-}else{
-	//cas particulier des Nephilim
-	$cp_data['pf_agereel'] = max(18,min(9999,$agereel));
+//Enregistrement ?
+$submit = (isset($_POST['submit'])) ? true : false;
+if ($submit){
+    //Analyse et traitement de la variable posté
+    $cp_data['pf_pouvoir']		    = trim(strip_tags(request_var('pouvoir', '')));
+    $cp_data['pf_don']		        = trim(strip_tags(request_var('don', '')));
+    $cp_data['pf_clan']		        = trim(strip_tags(request_var('clan', AT_SANSCLAN)));
+    $cp_data['pf_voleuse_nom']		= trim(strip_tags(request_var('voleuse_nom', '')));
+    $cp_data['pf_voleuse_pouvoir']	= trim(strip_tags(request_var('voleuse_pouvoir', '')));
+    $cp_data['pf_voleuse_des']	    = trim(strip_tags(request_var('voleuse_description', '')));
+    
+    //Enregistrement
+    $cp = new custom_profile();
+    $cp->update_profile_field_data($user->data['user_id'], $cp_data);
+    unset($user->profile_fields);
+    header('Location: etape6.php');
+    die();
 }
 
-//Enregistrement
-$cp = new custom_profile();
-$cp->update_profile_field_data($user->data['user_id'], $cp_data);
-unset($user->profile_fields);
-
-//Rechargement après enregistrement
-$user->get_profile_fields($user->data['user_id']);
+//Vérification des droits
+creation_verification(CREATION_ETAPE);
 
 ///Generate popup
 $messages = get_texts_for_popup(array(POST_CONSEILS_POUVOIR,POST_CONSEILS_VOLEUSE,POST_CONSEILS_DON,POST_CONSEILS_CLAN));
 
+//Gestion du message d'erreur
+$message = request_var('message',0);
+
+//Template
 $template->assign_vars(array(
 	'FORM_POUVOIR'	  			 => $user->profile_fields['pf_pouvoir'],
 	'FORM_CLAN'		  			 => $user->profile_fields['pf_clan'],
@@ -78,6 +79,8 @@ $template->assign_vars(array(
     'AT_IZANAGHI'               => AT_IZANAGHI,
     'AT_VESTAL'                 => AT_VESTAL,
     'AT_SANSCLAN'               => AT_SANSCLAN,
+    
+    'S_MESSAGE'	  		        => 1 == $message,
     
     'FORM_DON'	  				=> $user->profile_fields['pf_don'],
 	'FORM_VOLEUSE_NOM'			=> $user->profile_fields['pf_voleuse_nom'],
