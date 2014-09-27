@@ -35,6 +35,9 @@ $user->setup('posting');
 
 gestionContact(2);
 
+$template->assign_vars(array(
+    'CONTACT_1_NOM' => $user->profile_fields['pf_ca_nom'],
+));
 // Output page
 page_header($user->lang['CREATION_ETAPE7']);
 
