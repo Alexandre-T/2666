@@ -51,7 +51,7 @@ if ($submit){
 //Vérification des droits
 creation_verification(CREATION_ETAPE);
 
-//Analyse et traitement de la variable posté
+//Gestion du message d'erreur
 $message = request_var('message',0);
 
 //Template
