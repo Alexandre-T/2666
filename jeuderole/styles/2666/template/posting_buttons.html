@@ -6,7 +6,7 @@
 
 
 	var form_name = 'postform';
-	var text_name = <!-- IF $SIG_EDIT -->'signature'<!-- ELSE -->'message'<!-- ENDIF -->;
+	var text_name = <!-- IF $SIG_EDIT -->'signature'<!-- ELSEIF S_CREATION -->'resume'<!-- ELSE -->'message'<!-- ENDIF -->;
 	var load_draft = false;
 	var upload = false;
 
