@@ -40,18 +40,17 @@ $user->get_profile_fields($user->data['user_id']);
 $submit = (isset($_POST['submit'])) ? true : false;
 if ($submit){
     //Analyse et traitement de la variable posté
-    //Analyse et traitement de la variable posté
-$cp_data['pf_prenom']		= trim(strip_tags(request_var('prenom', '')));
-$cp_data['pf_nom']			= trim(strip_tags(request_var('nom', '')));
-$cp_data['pf_profession']	= trim(strip_tags(request_var('profession', '')));
-$cp_data['pf_passe']	    = trim(strip_tags(request_var('passe', '')));
-$agereel	= request_var('age', 0);
+    $cp_data['pf_prenom']		= trim(strip_tags(request_var('prenom', '')));
+    $cp_data['pf_nom']			= trim(strip_tags(request_var('nom', '')));
+    $cp_data['pf_profession']	= trim(strip_tags(request_var('profession', '')));
+    $cp_data['pf_passe']	    = trim(strip_tags(request_var('passe', '')));
+    $agereel	= request_var('age', 0);
     
     //Enregistrement
     $cp = new custom_profile();
     $cp->update_profile_field_data($user->data['user_id'], $cp_data);
     unset($user->profile_fields);
-    header('Location: etape4.php');
+    header('Location: etape5.php');
     die();
 }
 
