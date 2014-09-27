@@ -33,23 +33,30 @@ $auth->acl($user->data);
 $user->setup('mods/creation');
 $user->setup('posting');
 
-//Analyse et traitement de la variable posté
-$avatar  = request_var('avatar', '');
-$message = request_var('message',0);
-
+//Chargement des champs de profil
 $user->get_profile_fields($user->data['user_id']);
-$cp_data['pf_avatar'] = trim(strip_tags($avatar));
-if ($avatar != $user->profile_fields['pf_avatar']){
-	//Attention, changement d'avatar
-	//On ajoute ici les modifications qui pourraient survenir
+
+//Enregistrement ?
+$submit = (isset($_POST['submit'])) ? true : false;
+if ($submit){
+    //Analyse et traitement de la variable posté
+    //Analyse et traitement de la variable posté
+$cp_data['pf_prenom']		= trim(strip_tags(request_var('prenom', '')));
+$cp_data['pf_nom']			= trim(strip_tags(request_var('nom', '')));
+$cp_data['pf_profession']	= trim(strip_tags(request_var('profession', '')));
+$cp_data['pf_passe']	    = trim(strip_tags(request_var('passe', '')));
+$agereel	= request_var('age', 0);
+    
+    //Enregistrement
+    $cp = new custom_profile();
+    $cp->update_profile_field_data($user->data['user_id'], $cp_data);
+    unset($user->profile_fields);
+    header('Location: etape4.php');
+    die();
 }
-//Enregistrement
-$cp = new custom_profile();
-$cp->update_profile_field_data($user->data['user_id'], $cp_data);
-unset($user->profile_fields);
 
-//Rechargement après enregistrement
-$user->get_profile_fields($user->data['user_id']);
+//Vérification des droits
+creation_verification(CREATION_ETAPE);
 
 ///Generate popup
 $messages = get_texts_for_popup(array(POST_CONSEILS_PERSONNAGE));
@@ -57,23 +64,19 @@ $messages = get_texts_for_popup(array(POST_CONSEILS_PERSONNAGE));
 // Build custom bbcodes array
 display_custom_bbcodes();
 
-$template->assign_vars(array(
-	'FORM_AVATAR'	  	=> $user->profile_fields['pf_avatar'],
-	'FORM_AGE_REEL'	  	=> $user->profile_fields['pf_agereel'],
-	'FORM_PRENOM'	  	=> $user->profile_fields['pf_prenom'],
-	'FORM_NOM'		  	=> $user->profile_fields['pf_nom'],
-	'FORM_PROFESSION'  	=> $user->profile_fields['pf_profession'],
-	'FORM_PASSE'		=> $user->profile_fields['pf_passe'],
-));
-
-
-
-//Vérification des droits
-creation_verification(CREATION_ETAPE);
+//Gestion du message d'erreur
+$message = request_var('message',0);
 
 //Template
 $template->assign_vars(array(
 
+    'FORM_AVATAR'	  	=> $user->profile_fields['pf_avatar'],
+    'FORM_AGE_REEL'	  	=> $user->profile_fields['pf_agereel'],
+    'FORM_PRENOM'	  	=> $user->profile_fields['pf_prenom'],
+    'FORM_NOM'		  	=> $user->profile_fields['pf_nom'],
+    'FORM_PROFESSION'  	=> $user->profile_fields['pf_profession'],
+    'FORM_PASSE'		=> $user->profile_fields['pf_passe'],
+    
 	'S_FEMME'			  => AT_FEMME    == $user->profile_fields['pf_sexe'],
 	'S_HOMME'			  => AT_HOMME    == $user->profile_fields['pf_sexe'],
 	'S_HUMAIN'			  => AT_HUMAIN   == $user->profile_fields['pf_race'],
