@@ -59,6 +59,7 @@ function jumpto() {
 *  in a XHTML 1.x compliant way.
 */
 function phpbb_seo_href() {
+
 	var current_domain = document.domain.toLowerCase();
 	if (!current_domain || !document.getElementsByTagName) return;
 	if (seo_external_sub && current_domain.indexOf('.') >= 0) {
@@ -96,11 +97,12 @@ function phpbb_seo_href() {
 		}
 	}
 }
-if (seo_external || seo_hashfix) {
-	//AT Begin
-	//onload_functions.push('phpbb_seo_href()');
-	//AT End
-}
+// www.phpBB-SEO.com SEO TOOLKIT START (modified by AT for this style)
+$(function() {
+	if (seo_external || seo_hashfix) {
+		phpbb_seo_href();
+	}
+});
 // www.phpBB-SEO.com SEO TOOLKIT END
 
 /**
