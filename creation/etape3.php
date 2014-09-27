@@ -32,36 +32,32 @@ $auth->acl($user->data);
 $user->setup('mods/creation');
 $user->setup('posting');
 
-//Analyse et traitement de la variable posté
-$race  = request_var('race', 0);
-$message = request_var('message',0);
-$race = ($race !== AT_HUMAIN)?AT_NEPHILIM:AT_HUMAIN; 
-
+//Chargement des champs de profil
 $user->get_profile_fields($user->data['user_id']);
-$cp_data['pf_race'] = $race;
-if ($race != $user->profile_fields['pf_race']){
-	//Attention, changement de race
-	//On ajoute ici les modifications qui pourraient survenir
-	$cp_data['pf_agereel'] = '';
-	//On devrait supprimer les dons ou les pouvoirs
+
+//Enregistrement ?
+$submit = (isset($_POST['submit'])) ? true : false;
+if ($submit){
+    //Analyse et traitement de la variable posté
+    $cp_data['pf_avatar'] = trim(strip_tags(request_var('avatar', '')));    
+    //Enregistrement
+    $cp = new custom_profile();
+    $cp->update_profile_field_data($user->data['user_id'], $cp_data);
+    unset($user->profile_fields);
+    header('Location: etape4.php');
+    die();
 }
-//Enregistrement
-$cp = new custom_profile();
-$cp->update_profile_field_data($user->data['user_id'], $cp_data);
-unset($user->profile_fields);
-
-//Rechargement après enregistrement
-$user->get_profile_fields($user->data['user_id']);
-
-$template->assign_vars(array(
-	'FORM_AVATAR'	  	=> $user->profile_fields['pf_avatar'],
-));
 
 //Vérification des droits
 creation_verification(CREATION_ETAPE);
 
+//Analyse et traitement de la variable posté
+$message = request_var('message',0);
+
 //Template
 $template->assign_vars(array(
+    
+    'FORM_AVATAR'	  	=> $user->profile_fields['pf_avatar'],
 
 	'S_FEMME'			  => AT_FEMME    == $user->profile_fields['pf_sexe'],
 	'S_HOMME'			  => AT_HOMME    == $user->profile_fields['pf_sexe'],
