@@ -45,6 +45,13 @@ if ($submit){
     $cp_data['pf_profession']	= trim(strip_tags(request_var('profession', '')));
     $cp_data['pf_passe']	    = trim(strip_tags(request_var('passe', '')));
     $agereel	= request_var('age', 0);
+    if (AT_HUMAIN == $user->profile_fields['pf_race']){
+        //cas particulier des humains
+        $cp_data['pf_agereel'] = '';
+    }else{
+        //cas particulier des Nephilim
+        $cp_data['pf_agereel'] = max(18,min(9999,$agereel));
+    }
     
     //Enregistrement
     $cp = new custom_profile();
