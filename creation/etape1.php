@@ -37,7 +37,26 @@ creation_verification(CREATION_ETAPE);
 //Chargement des champs de profil
 $user->get_profile_fields($user->data['user_id']);
 
-//Initialisation des variables en fonction de l'étape actuelle
+$submit = (isset($_POST['submit'])) ? true : false;
+if ($submit){
+    //Analyse et traitement de la variable posté
+    $sexe  = request_var('sexe', 0);
+    $sexe = ($sexe !== AT_FEMME)?AT_HOMME:AT_FEMME;
+    $cp_data['pf_sexe'] = $sexe;    
+    if ($sexe != $user->profile_fields['pf_sexe']){
+        //Attention, changement de sexe
+        //On réinitialise l'avatar
+        $cp_data['pf_avatar'] = '';
+    }
+    //Enregistrement
+    $cp = new custom_profile();
+    $cp->update_profile_field_data($user->data['user_id'], $cp_data);
+    unset($user->profile_fields);
+    header('Location: etape2.php');
+    die();    
+}
+
+//Initialisation des variables
 if (empty( $user->profile_fields['pf_sexe'])|| AT_FEMME != $user->profile_fields['pf_sexe']){
 	$sexe = AT_HOMME;
 }else{
@@ -47,6 +66,7 @@ if (empty( $user->profile_fields['pf_sexe'])|| AT_FEMME != $user->profile_fields
 //Gestion du message d'erreur
 $message = request_var('message', 0);
 
+//Transmission à la vue
 $template->assign_vars(array(
 	'FEMME_CHECKED' => ($sexe==AT_FEMME)?'checked="checked"':'',
 	'HOMME_CHECKED' => ($sexe==AT_HOMME)?'checked="checked"':'',
