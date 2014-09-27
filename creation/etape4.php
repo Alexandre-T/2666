@@ -60,9 +60,6 @@ creation_verification(CREATION_ETAPE);
 ///Generate popup
 $messages = get_texts_for_popup(array(POST_CONSEILS_PERSONNAGE));
 
-// Build custom bbcodes array
-display_custom_bbcodes();
-
 //Gestion du message d'erreur
 $message = request_var('message',0);
 
