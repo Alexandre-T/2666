@@ -40,10 +40,10 @@ $user->get_profile_fields($user->data['user_id']);
 $submit = (isset($_POST['submit'])) ? true : false;
 if ($submit){
     //Analyse et traitement de la variable posté
-    $cp_data['pf_prenom']		= trim(strip_tags(request_var('prenom', '')));
-    $cp_data['pf_nom']			= trim(strip_tags(request_var('nom', '')));
-    $cp_data['pf_profession']	= trim(strip_tags(request_var('profession', '')));
-    $cp_data['pf_passe']	    = trim(strip_tags(request_var('passe', '')));
+    $cp_data['pf_prenom']		= utf8_normalize_nfc(trim(strip_tags(request_var('prenom', '',true))));
+    $cp_data['pf_nom']			= utf8_normalize_nfc(trim(strip_tags(request_var('nom', '',true))));
+    $cp_data['pf_profession']	= utf8_normalize_nfc(trim(strip_tags(request_var('profession', '',true))));
+    $cp_data['pf_passe']	    = utf8_normalize_nfc(trim(strip_tags(request_var('passe', '',true))));
     $agereel	= request_var('age', 0);
     if (AT_HUMAIN == $user->profile_fields['pf_race']){
         //cas particulier des humains
