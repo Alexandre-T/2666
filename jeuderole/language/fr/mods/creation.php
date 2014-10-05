@@ -49,6 +49,9 @@ $lang = array_merge($lang, array(
 	'CREATION_ETAPE5'	=>	'Création de personnage : Étape 5',
 	'CREATION_ETAPE6'	=>	'Création de personnage : Étape 6',
 	'CREATION_ETAPE7'	=>	'Création de personnage : Étape 7',
+    'CREATION_ETAPE8'	=>	'Création de personnage : Étape 8',
+    'CREATION_ETAPE9'	=>	'Création de personnage : Étape 9',
+    'CREATION_ETAPE10'	=>	'Création de personnage : Étape 10',
 ));
 
 ?>

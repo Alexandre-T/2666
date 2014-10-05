@@ -224,7 +224,22 @@ function play_qt_file(obj)
 	obj.SetControllerVisible(true);
 	obj.Play();
 }
-
+/**
+ * 
+ */
+function activation(bool){
+	$("#nom").prop('disabled', !bool);
+	$("#avatar").prop('disabled', !bool);
+	$("#uploadfile").prop('disabled', !bool);
+	$("#uploadurl").prop('disabled', !bool);
+	$("#description").prop('disabled', !bool);
+	$("#resume").prop('disabled', !bool);
+	if(bool){
+		$("#contact").removeClass('hidden');
+	}else{
+		$("#contact").addClass('hidden');
+	}
+}
 /**
 * Detect JQuery existance. We currently do not deliver it, but some styles do, so why not benefit from it. ;)
 */

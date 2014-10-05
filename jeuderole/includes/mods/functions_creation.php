@@ -77,12 +77,16 @@ function creation_verification_etape($etape)
     $etapes[4] = empty($user->profile_fields['pf_race']);
     $etapes[5] = empty($user->profile_fields['pf_avatar']);
     $etapes[6] = empty($user->profile_fields['pf_passe']) || empty($user->profile_fields['pf_agereel']) && AT_NEPHILIM == $user->profile_fields['pf_race'] || empty($user->profile_fields['pf_prenom']) || empty($user->profile_fields['pf_nom']);
-    $etapes[7] = empty($user->profile_fields['pf_clan']) || empty($user->profile_fields['pf_pouvoir']) && AT_NEPHILIM == $user->profile_fields['pf_race'] || empty($user->profile_fields['pf_voleuse_nom']) && AT_NEPHILIM == $user->profile_fields['pf_race'] || empty($user->profile_fields['pf_voleuse_des']) && AT_NEPHILIM == $user->profile_fields['pf_race'] || empty($user->profile_fields['pf_voleuse_pouvoir']) && AT_NEPHILIM == $user->profile_fields['pf_race'] || empty($user->profile_fields['pf_don']) && AT_HUMAIN == $user->profile_fields['pf_race'] || $etapes[7] = empty($user->profile_fields['pf_nature']) || empty($user->profile_fields['pf_attitude']) || empty($user->profile_fields['pf_defaut']) || empty($user->profile_fields['pf_caractere']) || empty($user->profile_fields['pf_qualite']);
-    $etapes[8] = empty($user->profile_fields['pf_pouvoir']) || AT_ANDROID == $user->profile_fields['pf_race'] && (empty($user->profile_fields['pf_plot']) || AT_NONRENSEIGNE == $user->profile_fields['pf_plot']) || AT_HUMAIN == $user->profile_fields['pf_race'] && (empty($user->profile_fields['pf_pouvoirdeux']) && AT_DIEU_MINEUR != $user->profile_fields['pf_dieu'] && AT_DIEU_ATHE != $user->profile_fields['pf_dieu']);
-    $etapes[8] = empty($user->profile_fields['pf_anonymat']);
+    $etapes[7] = false;
+    $etapes[8] = false;
+    $etapes[9] = false;
+    $etapes[10] = false;
     
     // redirection éventuelle
     switch ($etape) {
+        case 10:
+        case 9:
+        case 8:
         case 7:
         case 6:
             if ($etapes[6]) {
@@ -512,18 +516,44 @@ function gestionContact($numero)
     $submit = (isset($_POST['submit'])) ? true : false;
     $apercu = (isset($_POST['apercu'])) ? true : false;
     if ($submit || $apercu) {
-        // Analyse et traitement de la variable posté
-        $cp_data['pf_'.$prefixe.'_nom'] = utf8_normalize_nfc(request_var('nom', '', true));
-        $cp_data['pf_'.$prefixe.'_description'] = utf8_normalize_nfc(request_var('description', '', true));
-        $cp_data['pf_'.$prefixe.'_avatar_name'] = utf8_normalize_nfc(request_var('avatar', '', true));
-        $resume = utf8_normalize_nfc(request_var('resume', '', true));
+        $checkbox = request_var('checkbox', 0);
+        //Ce test empêche l'écrasement de donnée vide quand la checkbox n'est pas cochée
+        if ($checkbox){
+            
+            // Analyse et traitement de la variable posté
+            $cp_data['pf_'.$prefixe.'_nom'] = utf8_normalize_nfc(request_var('nom', '', true));
+            $cp_data['pf_'.$prefixe.'_description'] = utf8_normalize_nfc(request_var('description', '', true));
+            $cp_data['pf_'.$prefixe.'_avatar_name'] = utf8_normalize_nfc(request_var('avatar', '', true));
+            $resume = utf8_normalize_nfc(request_var('resume', '', true));
+            
+            $poll = $uid = $bitfield = $options = '';
+            $allow_bbcode = $allow_urls = $allow_smilies = true;
+            generate_text_for_storage($resume, $uid, $bitfield, $options, $allow_bbcode, $allow_urls, $allow_smilies);
+            $cp_data['pf_'.$prefixe.'_resume'] = $resume;
+            $cp_data['pf_'.$prefixe.'_uid'] = $uid;
+            $cp_data['pf_'.$prefixe.'_bit'] = $bitfield;
+        }
+
+        //Cas particulier des contacts 3 et 4
+        if ($numero > 2){
+            
+            //Chargement des champs de profil
+            $user->get_profile_fields($user->data['user_id']);
+            if (0 == $checkbox){
+                //Modification de champs
+                if (3 == $numero ){
+                    $cp_data['pf_cc_actif']=false;
+                }
+                $cp_data['pf_cd_actif']=false;
+            }else{
+                //Modification de champs
+                if (3 == $numero ){
+                    $cp_data['pf_cc_actif']=true;
+                }
+                $cp_data['pf_cd_actif']=true;
+            }
+        }
         
-        $poll = $uid = $bitfield = $options = '';
-        $allow_bbcode = $allow_urls = $allow_smilies = true;
-        generate_text_for_storage($resume, $uid, $bitfield, $options, $allow_bbcode, $allow_urls, $allow_smilies);
-        $cp_data['pf_'.$prefixe.'_resume'] = $resume;
-        $cp_data['pf_'.$prefixe.'_uid'] = $uid;
-        $cp_data['pf_'.$prefixe.'_bit'] = $bitfield;
         // Enregistrement
         $cp = new custom_profile();
         $cp->update_profile_field_data($user->data['user_id'], $cp_data);
@@ -533,14 +563,14 @@ function gestionContact($numero)
             $erreurTexte = 'La photo est obligatoire.';
         } elseif ($publication) {
             // Enregistrement de l'avatar !
-            contact_process_user($error, false, true, 1);
+            contact_process_user($error, false, true, $numero);
             if ($error) {
                 $erreurTexte = implode('<br/>', $error);
                 unset($error);
             }
         } else {
             if ($submit) {
-                // Ok on passe à l'étape 7
+                // Ok on passe à l'étape suivante 
                 header('Location: '.$etape);
                 die();
             } else {
@@ -572,17 +602,24 @@ function gestionContact($numero)
     
     // Build custom bbcodes array
     display_custom_bbcodes();
-    
+
+    //Calcul de la case à cocher
+    $checked = '';
+    if ($numero > 2 && $user->profile_fields['pf_'.$prefixe.'_actif']){
+        $checked = 'checked="checked"';
+    }
     // Template
     $template->assign_vars(array(
         
-        'AVATAR_CONTACT' => get_contact_avatar(1, $user->profile_fields['pf_'.$prefixe.'_avatar'], $user->profile_fields['pf_'.$prefixe.'_avatar_type'], $user->profile_fields['pf_'.$prefixe.'_avatar_width'], $user->profile_fields['pf_'.$prefixe.'_avatar_height']),
+        'AVATAR_CONTACT' => get_contact_avatar($numero, $user->profile_fields['pf_'.$prefixe.'_avatar'], $user->profile_fields['pf_'.$prefixe.'_avatar_type'], $user->profile_fields['pf_'.$prefixe.'_avatar_width'], $user->profile_fields['pf_'.$prefixe.'_avatar_height']),
         'AVATAR_SIZE' => $config['avatar_filesize'],
         'FORM_NOM' => $user->profile_fields['pf_'.$prefixe.'_nom'],
         'FORM_AVATAR' => $user->profile_fields['pf_'.$prefixe.'_avatar_name'],
         'MESSAGE' => $a_resume['text'],
         'FORM_LIEN' => $user->profile_fields['pf_'.$prefixe.'_lien'],
         'FORM_DESCRIPTION' => $user->profile_fields['pf_'.$prefixe.'_description'],
+        'CHECKBOX_CHECKED' =>  $checked,
+        'CLASS_HIDDEN' => $checked?'':'hidden',
         
         'S_FEMME' => AT_FEMME == $user->profile_fields['pf_sexe'],
         'S_HOMME' => AT_HOMME == $user->profile_fields['pf_sexe'],
