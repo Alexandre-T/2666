@@ -552,14 +552,13 @@ function gestionContact($numero)
                 }
                 $cp_data['pf_cd_actif']=true;
             }
-        }
-        
-        // Enregistrement
+        }        
+        // Enregistrement        
         $cp = new custom_profile();
         $cp->update_profile_field_data($user->data['user_id'], $cp_data);
         $publication = ! (empty($_FILES['uploadfile']['name']) && empty($_POST['uploadurl']));
         // Enregistrement dans un second temps de l'avatar fourni ;)
-        if (! $publication && empty($user->profile_fields['pf_'.$prefixe.'_avatar'])) {
+        if (! $publication && empty($user->profile_fields['pf_'.$prefixe.'_avatar']) && $checkbox) {
             $erreurTexte = 'La photo est obligatoire.';
         } elseif ($publication) {
             // Enregistrement de l'avatar !

@@ -30,30 +30,26 @@
 					</p> 
 				<!-- ENDIF -->
 				<p>
-					Bien, {S_USERNAME}, j'ai toutes les informations sur toi à présent. Nous allons donc parler de tes alliés.
-					C'est une notion particulièrement importante, car seul<!-- IF S_FEMME -->e<!-- ENDIF -->, dis-toi bien
-					que tu as peu de chance de survivre. Moi, par exemple, j'ai Djinn, il m'aide énormément. Nous nous rendons
-					mutuellement service. Dans cette rubrique, je vais te demander de me parler de ce contact. Je voudrais que tu me 
-					parles de ton allié principal. Tu as bien <!-- IF S_FEMME -->un petit ami<!-- ELSE -->une petite amie<!-- ENDIF -->, 
-					quelqu'un qui compte beaucoup, non ? Sinon, cela peut-être un mécène, quelqu'un qui couvre tes conneries pour t'éviter
-					le tribunal. Enfin ce genre de truc quoi&hellip;
-				</p>
-				<p> 
-					Alors, il me faudrait son nom, une description sommaire qui restera entre toi et moi et une photo de 200 pixels par 320.
-					Dans la dernière partie, il me faudrait un petit paragraphe pour résumer tout cela. Attention, ce dernier paragraphe sera
-					public. Donc prend soin de ne révéler que l'image que ce que savent les gens en général. Et n'oublie pas ! C'est ton 
-					<strong>premier</strong> contact, il est important, c'est un véritable allié.
-				</p>   
-				<p>
-					Si tu souhaites plus d'informations encore sur les contacts, tu peux consulter ton holodeck.
+					Bien, {S_USERNAME}, tu as quasiment terminé. J'ai toutes les informations sur tes trois premiers contact,  {CONTACT_1_NOM}, {CONTACT_2_NOM} et  {CONTACT_3_NOM}. 
+					Nous allons donc passer à l'allié suivant, si tu le souhaites. Ce dernier contact est <strong>optionnel</strong>. 
+					Si tu ne souhaites pas le créer, il te suffit de décocher la case à cocher ci-dessous.
 				</p>
 				<hr/>
-				<form id="postform" class="form-horizontal" action="etape6.php" method="post"  enctype="multipart/form-data">
+				<form id="postform" class="form-horizontal" action="etape9.php" method="post"  enctype="multipart/form-data">
 					{S_HIDDEN_FIELDS}
 					<input type="hidden" name="MAX_FILE_SIZE" value="{AVATAR_SIZE}" />
-					<input type="hidden" name="checkbox" value="1" />
-					<fieldset>
-						<legend>Ton contact principal</legend>
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<div class="checkbox">
+								<label>
+									<input type="hidden" name="checkbox" value="0">
+									<input type="checkbox" {CHECKBOX_CHECKED} name="checkbox" value="1" onchange="activation(this.checked)"> Je souhaite créer un troisième contact
+								</label>
+							</div>
+						</div>
+					</div>
+					<fieldset id="contact" class="{CLASS_HIDDEN}">
+						<legend>Ton troisième contact</legend>
 						<div class="form-group">
 							<label for="nom" class="col-sm-2 control-label">Nom</label>
 							<div class="col-sm-10">
@@ -83,11 +79,11 @@
 							<div class="col-sm-10">
 								<div class="input-group">
 									<span class="input-group-btn">
-										<span class="btn btn-primary btn-file">
+										<span class="btn btn-primary btn-file" id="bouton">
 											<i class="fa fa-folder-open"></i> <input type="file" name="uploadfile" id="uploadfile">
 										</span>
 									</span>
-									<input type="text" class="form-control " readonly value="{FORM_LIEN}">
+									<input type="text" class="form-control " readonly value="{FORM_LIEN}" id="readonly">
 								</div>
 								<span class="help-block">
 									<!-- IF S_ERREUR -->
