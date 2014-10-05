@@ -38,12 +38,12 @@ $user->get_profile_fields($user->data['user_id']);
 $submit = (isset($_POST['submit'])) ? true : false;
 if ($submit){
     //Analyse et traitement de la variable posté
-    $cp_data['pf_pouvoir']		    = trim(strip_tags(request_var('pouvoir', '')));
-    $cp_data['pf_don']		        = trim(strip_tags(request_var('don', '')));
+    $cp_data['pf_pouvoir']		    = utf8_normalize_nfc(trim(strip_tags(request_var('pouvoir', '',true))));
+    $cp_data['pf_don']		        = utf8_normalize_nfc(trim(strip_tags(request_var('don', '',true))));
     $cp_data['pf_clan']		        = trim(strip_tags(request_var('clan', AT_SANSCLAN)));
-    $cp_data['pf_voleuse_nom']		= trim(strip_tags(request_var('voleuse_nom', '')));
-    $cp_data['pf_voleuse_pouvoir']	= trim(strip_tags(request_var('voleuse_pouvoir', '')));
-    $cp_data['pf_voleuse_des']	    = trim(strip_tags(request_var('voleuse_description', '')));
+    $cp_data['pf_voleuse_nom']		= utf8_normalize_nfc(trim(strip_tags(request_var('voleuse_nom', '',true))));
+    $cp_data['pf_voleuse_pouvoir']	= utf8_normalize_nfc(trim(strip_tags(request_var('voleuse_pouvoir', '',true))));
+    $cp_data['pf_voleuse_des']	    = utf8_normalize_nfc(trim(strip_tags(request_var('voleuse_description', '',true))));
     
     //Enregistrement
     $cp = new custom_profile();
