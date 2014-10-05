@@ -65,7 +65,7 @@ function get_contact_avatar($contact, $avatar, $avatar_type, $avatar_width, $ava
 {
     global $user, $config, $phpbb_root_path, $phpEx;
     
-    $contact = 'contact'.max(1,min(4,(int)$contact));
+    $contact = max(1,min(4,(int)$contact));
 
     if (empty($avatar) || !$avatar_type || (!$config['allow_avatar'] && !$ignore_config))
     {
