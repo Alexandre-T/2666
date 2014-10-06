@@ -47,6 +47,31 @@ function is_user_in_group($group_id,$user_id = null){
 	}
 	return in_array($group_id, $users_groups[$user_id]);
 }
+/**
+ * Get clan from personnage
+ * 
+ * @param int clan
+ * @param int sexe (par défaut AT_HOMME)
+ * 
+ * @return string Clan
+ */
+function get_clan($clan, $sexe = AT_HOMME){
+    $homme = $sexe !== AT_FEMME;
+    switch ($clan) {
+        case AT_ASMODEEN:
+            return $homme?'Asmodeen':'Asmodéenne';
+        case AT_INFILTRE:
+            return $homme?'Infiltré':'Infiltrée';
+        case AT_INSOUMIS:
+            return $homme?'Insoumis':'Insoumise';
+        case AT_IZANAGHI:
+            return 'Izanaghi';
+        case AT_VESTAL:
+            return $homme?'Vestal':'Vestale';
+        default:
+            return 'Sans clan';
+    }    
+}
 
 /**
  * Get contact avatar
