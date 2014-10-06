@@ -1,0 +1,78 @@
+<!-- INCLUDE overall_header.html -->
+<h2>Création de personnage</h2>
+
+<div class="creation container">
+<h3 class="soustitre">Et que veux-tu que les autres sachent de toi&nbsp;?</h3>
+	  
+<!-- sINCLUDE creation/etape.html -->
+	<div class="row">
+		<div class="col-sm-3">
+			<img src="{T_THEME_PATH}/images/lazer.jpg" width="200" height="320" class="img-thumbnail img-responsive"/>
+			<hr/>
+			<!-- INCLUDE creation/progression.html -->			
+		</div>
+		<div class="col-sm-9">
+			<!-- IF S_MESSAGE -->
+				<p class="alert alert-danger">
+					<!-- IF S_FEMME -->
+						Hum hum ! Tu es bien gentille, mais revient par ici s'il-te-plaît.
+						Oui toi, la donzelle qui se balade dans les sas où elle ne doit pas aller.
+						Tu fais comme tu veux ma cocotte, mais si tu te retrouves dans l'espace avant que je ne t'ai
+						donnée ta combinaison spatiale, alors tu ne vas pas rire longtemps.							
+					<!-- ELSE -->
+						Hum hum ! Tu es mignon, mais revient par ici s'il-te-plaît.
+						Oui toi, le mec au joli petit cul qui se balade dans les sas où il ne devrait pas.
+						Tu fais comme tu veux mon coco, mais si tu te retrouves dans l'espace avant que je ne t'ai
+						donnée ta combinaison spatiale, alors tu ne vas pas rire longtemps.
+					<!-- ENDIF -->
+				</p> 
+			<!-- ENDIF -->
+			<p>
+				Tu viens de me parler de toi. Mais tu n'as peut-être pas envie que tout le monde te connaisse dans les moindres détails.
+				Je vais garder ton passé pour moi. Mais il faut bien que je donne un peu d'informations sur toi, si tu ne souhaites pas
+				rester <!-- IF S_FEMME -->une parfaite inconnue<!-- ELSE -->un parfait inconnu<!-- ENDIF -->.				
+			</p>
+			<p>
+				Dans cette cinquième étape, tu vas donc me fournir un résumé <strong>public</strong> de ta vie. Tu vas me dire
+				ce que tu souhaites présenter aux autres. Tu peux évidemment y glisser des mensonges. Maintenant, ce n'est pas sûr 
+				que tout le monde apprécie. Mais c'est à toi de voir. 
+				<strong>Bref, résume dans l'encart suivant ce que les autres peuvent savoir de toi.</strong> 
+			</p>	
+			
+			<form id="postform" class="form-horizontal" action="etape5.php" method="post">
+				{S_HIDDEN_FIELDS}
+				<fieldset>
+					<legend>Informations publiques</legend>
+					<!-- IF S_APERCU -->
+					<h4>Aperçu</h4>
+					<p class="col-sm-offset-2 col-sm-10">{RESUME_DISPLAY}</p>
+					<hr/>
+					<!-- ENDIF -->
+					<div class="col-sm-offset-2 col-sm-10">
+						<div class="correction">
+							<!-- INCLUDE posting_buttons.html -->
+						</div>
+					</div>
+					<!-- INCLUDE messagebox.inc.html -->
+					<div class="form-group">
+						<div class="col-sm-offset-2 col-sm-10">
+							<div class="btn-group">
+								<input type="submit" name="apercu" class="btn btn-default" value="Aperçu"/>
+								<input type="submit" name="submit" class="btn btn-primary" value="Je valide &gt;&gt;"/>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>	
+			<br/>
+			<br/>
+		</div>
+	</div>
+</div>
+<!-- DEFINE $MODAL_ID = 'modalHelp' -->
+<!-- INCLUDE modal/header.html -->
+Votre personnage
+<!-- INCLUDE modal/body.html -->
+{POST_CONSEILS_PERSONNAGE}
+<!-- INCLUDE modal/footer.html -->
+<!-- INCLUDE overall_footer.html -->

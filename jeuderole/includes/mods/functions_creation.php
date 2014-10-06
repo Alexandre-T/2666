@@ -488,19 +488,19 @@ function gestionContact($numero)
     switch ($numero) {
         case 4:
             $prefixe = 'cd';
-            $etape = 'etape10.'.$phpEx;
+            $etape = 'etape11.'.$phpEx;
             break;
         case 3:
             $prefixe = 'cc';
-            $etape = 'etape9.'.$phpEx;
+            $etape = 'etape10.'.$phpEx;
             break;
         case 2:
             $prefixe = 'cb';
-            $etape = 'etape8.'.$phpEx;
+            $etape = 'etape9.'.$phpEx;
             break;
         default:
             $prefixe = 'ca';
-            $etape = 'etape7.'.$phpEx;
+            $etape = 'etape8.'.$phpEx;
             break;
     }
     
