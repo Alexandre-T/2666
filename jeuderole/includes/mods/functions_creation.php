@@ -22,10 +22,6 @@ if (! defined('IN_PHPBB')) {
  */
 
 /**
- * Fonctions de ROME
- */
-
-/**
  * Vérifie que l'utilisateur peut participer à la création de personnage
  * ou le redirige vers la première étape manquante
  */
@@ -637,92 +633,3 @@ function gestionContact($numero)
     )
     );
 }
-
-/**
- *
- * @param unknown $dieu            
- * @param string $texte            
- */
-function creation_pouvoirs($dieu, $texte = null)
-{
-    global $template, $phpbb_root_path;
-    switch ($dieu) {
-        case AT_DIEU_JUPITER:
-            $fichier = 'jupiter.csv';
-            break;
-        case AT_DIEU_MINERVE:
-            $fichier = 'minerve.csv';
-            break;
-        case AT_DIEU_PLUTON:
-            $fichier = 'pluton.csv';
-            break;
-        case AT_DIEU_VENUS:
-            $fichier = 'venus.csv';
-            break;
-        case AT_DIEU_NEPTUNE:
-            $fichier = 'neptune.csv';
-            break;
-        case AT_DIEU_VESTA:
-            $fichier = 'vesta.csv';
-            break;
-        default:
-            return;
-    }
-    $contenu = file_get_contents(append_sid("{$phpbb_root_path}../creation/ressources/$fichier"));
-    $index = 1;
-    foreach (explode("\n", $contenu) as $ligne) {
-        $tableau = array();
-        if (empty($ligne) || substr(trim($ligne[0]), 0, 1) == '#')
-            continue;
-        $pouvoir = explode(';', $ligne);
-        if (count($pouvoir) != 2)
-            continue;
-        $template->assign_block_vars('pouvoirs', array(
-            'ID' => ++ $index,
-            'TITRE' => $pouvoir[0],
-            'DESCRIPTION' => $pouvoir[1],
-            'S_SELECTED' => $texte == "[b]{$pouvoir[0]}[/b] : [i]{$pouvoir[1]}[/i]"
-        ));
-    }
-}
-
-function creation_pouvoir($idPouvoir, $dieu)
-{
-    global $phpbb_root_path;
-    switch ($dieu) {
-        case AT_DIEU_JUPITER:
-            $fichier = 'jupiter.csv';
-            break;
-        case AT_DIEU_MINERVE:
-            $fichier = 'minerve.csv';
-            break;
-        case AT_DIEU_PLUTON:
-            $fichier = 'pluton.csv';
-            break;
-        case AT_DIEU_VENUS:
-            $fichier = 'venus.csv';
-            break;
-        case AT_DIEU_NEPTUNE:
-            $fichier = 'neptune.csv';
-            break;
-        case AT_DIEU_VESTA:
-            $fichier = 'vesta.csv';
-            break;
-        default:
-            return;
-    }
-    $contenu = file_get_contents(append_sid("{$phpbb_root_path}../creation/ressources/$fichier"));
-    $index = 1;
-    foreach (explode("\n", $contenu) as $ligne) {
-        $tableau = array();
-        if (empty($ligne) || substr(trim($ligne[0]), 0, 1) == '#')
-            continue;
-        $pouvoir = explode(';', $ligne);
-        if (count($pouvoir) != 2)
-            continue;
-        if ($idPouvoir != ++ $index)
-            continue;
-        return "[b]{$pouvoir[0]}[/b] : [i]{$pouvoir[1]}[/i]";
-    }
-}
-?>
