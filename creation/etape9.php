@@ -15,7 +15,7 @@
 * @ignore
 */
 define('IN_PHPBB', true);
-define('CREATION_ETAPE', 8);
+define('CREATION_ETAPE', 9);
 $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : '../jeuderole/';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
@@ -40,10 +40,10 @@ $template->assign_vars(array(
     'CONTACT_2_NOM' => $user->profile_fields['pf_cb_nom'],
 ));
 // Output page
-page_header($user->lang['CREATION_ETAPE8']);
+page_header($user->lang['CREATION_ETAPE9']);
 
 $template->set_filenames(array(
-	'body' => 'creation/etape8.html'
+	'body' => 'creation/etape9.html'
 ));
 
 page_footer();
