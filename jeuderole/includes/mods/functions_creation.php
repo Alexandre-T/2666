@@ -77,9 +77,11 @@ function creation_verification_etape($etape)
     $etapes[8] = false;
     $etapes[9] = false;
     $etapes[10] = false;
+    $etapes[11] = false;
     
     // redirection éventuelle
     switch ($etape) {
+        case 11:
         case 10:
         case 9:
         case 8:
@@ -116,7 +118,7 @@ function creation_verification_etape($etape)
         'S_BBCODE_ALLOWED' => true,
         'S_BBCODE_CHECKED' => true,
         'S_CREATION' => true,
-        'POURCENTAGE' => $etape * 10,
+        'POURCENTAGE' => ceil($etape * 100 / 11),
         
         'U_ETAPE_0' => append_sid("{$phpbb_root_path}../creation/index.$phpEx"),
         'U_ETAPE_1' => append_sid("{$phpbb_root_path}../creation/etape1.$phpEx"),
@@ -126,6 +128,11 @@ function creation_verification_etape($etape)
         'U_ETAPE_5' => append_sid("{$phpbb_root_path}../creation/etape5.$phpEx"),
         'U_ETAPE_6' => append_sid("{$phpbb_root_path}../creation/etape6.$phpEx"),
         'U_ETAPE_7' => append_sid("{$phpbb_root_path}../creation/etape7.$phpEx"),
+        'U_ETAPE_8' => append_sid("{$phpbb_root_path}../creation/etape8.$phpEx"),
+        'U_ETAPE_9' => append_sid("{$phpbb_root_path}../creation/etape9.$phpEx"),
+        'U_ETAPE_10' => append_sid("{$phpbb_root_path}../creation/etape10.$phpEx"),
+        'U_ETAPE_11' => append_sid("{$phpbb_root_path}../creation/etape10.$phpEx"),
+        
         'S_ETAPE_0' => 0 == $etape,
         'S_ETAPE_1' => 1 == $etape,
         'S_ETAPE_2' => 2 == $etape,
@@ -137,6 +144,7 @@ function creation_verification_etape($etape)
         'S_ETAPE_8' => 8 == $etape,
         'S_ETAPE_9' => 9 == $etape,
         'S_ETAPE_10' => 10 == $etape,
+        'S_ETAPE_11' => 11 == $etape,
         
         'S_HUMAIN' => ($l_race == AT_HUMAIN),
         'S_CREATION' => true,
@@ -460,7 +468,7 @@ function creation_action($etape)
             'S_IS_CAT' => false,
             'S_IS_LINK' => true,
             'S_IS_POST' => false,
-            'FORUM_NAME' => "Étape $etape sur 10",
+            'FORUM_NAME' => "Étape $etape sur 11",
             'FORUM_ID' => 0,
             'U_VIEW_FORUM' => append_sid("{$phpbb_root_path}../creation/etape$etape.$phpEx")
         ));
