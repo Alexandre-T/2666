@@ -192,6 +192,11 @@ header{
 }
 
 /* Fond d'écrans spécialisés */
+body.body-etape9 header.header-etape9,
+body.body-etape10 header.header-etape10{
+	background-position : top center;
+	background-image: url('{T_THEME_PATH}/images/bandeau/creation.jpg');
+}
 
 
 
