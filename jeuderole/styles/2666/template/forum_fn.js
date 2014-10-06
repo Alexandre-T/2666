@@ -224,8 +224,19 @@ function play_qt_file(obj)
 	obj.SetControllerVisible(true);
 	obj.Play();
 }
+//AT MOD_USER BEGIN
 /**
+ * Activation d'un formulaire dans les étapes 7 / 8 et 9 de la création de personnage
  * 
+ * @param button or a (link) element
+ */
+function validerBouton(bouton){
+	bouton.removeClass('btn-default');
+	bouton.addClass('btn-success');
+}
+
+/**
+ * Activation d'un formulaire dans les étapes 7 / 8 et 9 de la création de personnage
  */
 function activation(bool){
 	$("#nom").prop('disabled', !bool);
@@ -240,6 +251,7 @@ function activation(bool){
 		$("#contact").addClass('hidden');
 	}
 }
+//AT MOD_USER END
 /**
 * Detect JQuery existance. We currently do not deliver it, but some styles do, so why not benefit from it. ;)
 */

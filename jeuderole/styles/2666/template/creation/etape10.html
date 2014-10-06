@@ -1,0 +1,88 @@
+<!-- INCLUDE overall_header.html -->
+<h2>Vérification de tes personnages</h2>
+
+<div class="creation container">
+<h3 class="soustitre">Un dernier contrôle avant le grand saut ?</h3>
+
+<!-- sINCLUDE creation/etape.html -->
+	<div class="row">
+		<div class="col-sm-3">
+			<img src="{T_THEME_PATH}/images/lazer.jpg" width="200" height="320" class="img-thumbnail img-responsive"/>
+			<hr/>
+			<!-- INCLUDE creation/progression.html -->
+		</div>
+		<div class="col-sm-9">
+			<p>
+				Et voilà, ton personnage principal et tes {NOMBRE_DE_CONTACTS} contacts sont terminés. J'ai tout enregistré dans mon holodeck.
+				Tient ! Je te laisse jeter un coup d'oeil. Si tout est bon pour toi, tu peux demander la validation de tes fiches. Sinon,
+				il te suffit de cliquer dans l'holodeck lorsque tu veux modifier quelquechose. 
+			</p>
+			<p class="text-center">
+				<button onclick="return false;" class="btn btn-default" data-toggle="modal" data-target="#modalFiche" id="buttonFiche"><i class="fa fa-fw fa-question-circle"></i>&nbsp;Fiche de personnage</button>
+				<button onclick="return false;" class="btn btn-default" data-toggle="modal" data-target="#modalFichePublique" id="buttonFichePublique"><i class="fa fa-fw fa-question-circle"></i>&nbsp;Informations publiques</button>
+			</p>	
+		</div>
+	</div>
+</div>
+<!-- DEFINE $MODAL_ID = 'modalFiche' -->
+<!-- DEFINE $MODAL_OPTIONS = 'modal-lg' -->
+
+
+<!-- Fiche de personnage -->
+<!-- INCLUDE modal/header.html -->
+Fiche de personnage
+<!-- INCLUDE modal/body.html -->
+<h4>Infos générales</h4>
+<p>N'oublie pas, toutes les informations ci-dessous sont secrètes. Bon, je reconnais que pour le sexe, cela se remarquera rapidement et pour la race, cela sera affiché.
+Néanmoins, les autres informations que tu trouveras ci-dessous sont secrètes. Je t'invite à les relire pour ne rien oublier.</p>
+<dl class="dl-horizontal">
+	<dt><a href="etape4.php" title="Changer d'identité">Identité</a>&nbsp;:</dt><dd>{PERSONNAGE_PRENOM} {PERSONNAGE_NOM}</dd>
+	<dt><a href="etape1.php" title="Changer de sexe">Sexe</a>&nbsp;:</dt><dd><!-- IF S_FEMME -->Féminin<!-- ELSE -->Masculin<!-- ENDIF --></dd>
+	<dt><a href="etape2.php" title="Changer de race">Race</a>&nbsp;:</dt><dd><!-- IF S_HUMAIN -->Humain<!-- ELSE -->Nephilim<!-- ENDIF --></dd>
+	<dt><a href="etape5.php" title="Changer de clan">Clan</a>&nbsp;:</dt><dd>{PERSONNAGE_CLAN}</dd>
+	<!-- IF S_NEPHILIM -->
+	<dt><a href="etape4.php" title="Changer d'âge">Âge réel</a>&nbsp;:</dt><dd>{PERSONNAGE_AGE} ans</dd>	
+	<dt><a href="etape5.php" title="Changer de pouvoir">Pouvoir</a>&nbsp;:</dt><dd>{PERSONNAGE_POUVOIR}</dd>
+	<!-- ELSE -->
+	<dt><a href="etape5.php" title="Changer de don">Don</a>&nbsp;:</dt><dd>{PERSONNAGE_DON}</dd>
+	<!-- ENDIF -->
+	<dt><a href="etape4.php" title="Changer ce passé">Passé</a>&nbsp;:</dt><dd>{PERSONNAGE_PASSE}</dd>
+</dl>
+<p></p>   
+<!-- INCLUDE modal/before_footer.html -->
+<div class="btn-group">
+	<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-fw fa-times"></i>&nbsp;Fermer</button>
+	<button type="button" class="btn btn-success" data-dismiss="modal" onclick="validerBouton($('#buttonFiche'));"><i class="fa fa-fw fa-check-square-o"></i>&nbsp;Je valide cette rubrique</button>
+</div>
+<!-- INCLUDE modal/after_footer.html -->
+
+
+<!-- Fiche publique -->
+<!-- DEFINE $MODAL_ID = 'modalFichePublique' -->
+<!-- INCLUDE modal/header.html -->
+Résumé
+<!-- INCLUDE modal/body.html -->
+<h4>Infos publiques</h4>
+<p>Les informations ci-dessous seront présentées aux autres joueurs. Prend donc bien soin des informations que tu y révèles.</p>
+<div class="row">
+	<div class="col-sm-8">
+		<dl class="dl-horizontal">
+			<dt><a href="etape4.php" title="Changer d'identité">Identité</a>&nbsp;:</dt><dd>{PERSONNAGE_PRENOM} {PERSONNAGE_NOM}</dd>
+			<dt><a href="etape1.php" title="Changer de sexe">Sexe</a>&nbsp;:</dt><dd><!-- IF S_FEMME -->Féminin<!-- ELSE -->Masculin<!-- ENDIF --></dd>
+			<dt><a href="etape2.php" title="Changer de race">Race</a>&nbsp;:</dt><dd><!-- IF S_HUMAIN -->Humain<!-- ELSE -->Nephilim<!-- ENDIF --></dd>	
+			<dt><a href="etape6.php" title="Changer ce résumé">Résumé</a>&nbsp;:</dt><dd>{PERSONNAGE_RESUME}</dd>
+		</dl>
+	</div>
+	<div class="col-sm-4 text-center">
+		{PERSONNAGE_AVATAR}
+		<br/>
+		{PERSONNAGE_AVATAR_NOM}
+	</div>
+</div>
+<!-- INCLUDE modal/before_footer.html -->
+<div class="btn-group">
+	<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-fw fa-times"></i>&nbsp;Fermer</button>
+	<button type="button" class="btn btn-success" data-dismiss="modal" onclick="validerBouton($('#buttonFiche'));"><i class="fa fa-fw fa-check-square-o"></i>&nbsp;Je valide cette rubrique</button>
+</div>
+<!-- INCLUDE modal/after_footer.html -->
+<!-- INCLUDE overall_footer.html -->
