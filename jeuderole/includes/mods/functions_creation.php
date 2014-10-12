@@ -619,6 +619,7 @@ function gestionContact($numero)
         'FORM_LIEN' => $user->profile_fields['pf_'.$prefixe.'_lien'],
         'FORM_DESCRIPTION' => $user->profile_fields['pf_'.$prefixe.'_description'],
         'CHECKBOX_CHECKED' =>  $checked,
+        'REQUIRED' => $checked?'required="required"':'',
         'CLASS_HIDDEN' => $checked?'':'hidden',
         
         'S_FEMME' => AT_FEMME == $user->profile_fields['pf_sexe'],

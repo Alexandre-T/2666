@@ -239,11 +239,17 @@ function validerBouton(bouton){
  * Activation d'un formulaire dans les étapes 7 / 8 et 9 de la création de personnage
  */
 function activation(bool){
+	$("#nom").prop('required', bool);
 	$("#nom").prop('disabled', !bool);
+	$("#avatar").prop('required', bool);
 	$("#avatar").prop('disabled', !bool);
+	$("#uploadfile").prop('required', bool);
 	$("#uploadfile").prop('disabled', !bool);
+	$("#uploadurl").prop('required', bool);
 	$("#uploadurl").prop('disabled', !bool);
+	$("#description").prop('required', bool);
 	$("#description").prop('disabled', !bool);
+	$("#resume").prop('required', bool);
 	$("#resume").prop('disabled', !bool);
 	if(bool){
 		$("#contact").removeClass('hidden');
