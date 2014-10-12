@@ -65,51 +65,35 @@ function creation_verification_groupe()
 function creation_verification_etape($etape)
 {
     global $user, $template, $phpEx, $phpbb_root_path;
+    $etapes = array();
     $user->get_profile_fields($user->data['user_id']);
-    $etapes[0] = ! creation_verification_groupe();
+    $etapes[0] = creation_verification_groupe();
     $etapes[1] = $etapes[0];
-    $etapes[2] = $etapes[1];
-    $etapes[3] = empty($user->profile_fields['pf_sexe']);
-    $etapes[4] = empty($user->profile_fields['pf_race']);
-    $etapes[5] = empty($user->profile_fields['pf_avatar']);
-    $etapes[6] = empty($user->profile_fields['pf_passe']) || empty($user->profile_fields['pf_agereel']) && AT_NEPHILIM == $user->profile_fields['pf_race'] || empty($user->profile_fields['pf_prenom']) || empty($user->profile_fields['pf_nom']);
-    $etapes[7] = false;
-    $etapes[8] = false;
-    $etapes[9] = false;
-    $etapes[10] = false;
-    $etapes[11] = false;
+    $etapes[2] = ! empty($user->profile_fields['pf_sexe']) && AT_NONRENSEIGNE !== $user->profile_fields['pf_sexe'];
+    $etapes[3] = ! empty($user->profile_fields['pf_race']) && AT_NONRENSEIGNE !== $user->profile_fields['pf_race'];
+    $etapes[4] = ! empty($user->profile_fields['pf_avatar']);
+    $etapes[5] = ! (empty($user->profile_fields['pf_passe']) || empty($user->profile_fields['pf_agereel']) && AT_NEPHILIM == $user->profile_fields['pf_race'] || empty($user->profile_fields['pf_prenom']) || empty($user->profile_fields['pf_nom']) || empty($user->profile_fields['pf_profession']) );
+    $etapes[6] = ! empty($user->profile_fields['pf_resume']) ;
+    $etapes[7] = ! (empty($user->profile_fields['pf_clan']) || empty($user->profile_fields['pf_don']) && AT_HUMAIN == $user->profile_fields['pf_race'] || (empty($user->profile_fields['pf_pouvoir']) || empty($user->profile_fields['pf_voleuse_nom']) || empty($user->profile_fields['pf_voleuse_des']) || empty($user->profile_fields['pf_voleuse_pouvoir']) ) && AT_NEPHILIM == $user->profile_fields['pf_race'] );
+    $etapes[8] = ! (empty($user->profile_fields['pf_ca_nom']) || empty($user->profile_fields['pf_ca_avatar']) || empty($user->profile_fields['pf_ca_avatar_name']) || empty($user->profile_fields['pf_ca_resume'])); 
+    $etapes[9] = ! (empty($user->profile_fields['pf_cb_nom']) || empty($user->profile_fields['pf_cb_avatar']) || empty($user->profile_fields['pf_cb_avatar_name']) || empty($user->profile_fields['pf_cb_resume']));
+    $etapes[10] = '0' === $user->profile_fields['pf_cc_actif'] || ! (empty($user->profile_fields['pf_cc_nom']) || empty($user->profile_fields['pf_cc_avatar']) || empty($user->profile_fields['pf_cc_avatar_name']) || empty($user->profile_fields['pf_cc_resume']));
+    $etapes[11] = '0' === $user->profile_fields['pf_cd_actif'] || ! (empty($user->profile_fields['pf_cd_nom']) || empty($user->profile_fields['pf_cd_avatar']) || empty($user->profile_fields['pf_cd_avatar_name']) || empty($user->profile_fields['pf_cd_resume']));
     
     // redirection éventuelle
-    switch ($etape) {
-        case 11:
-        case 10:
-        case 9:
-        case 8:
-        case 7:
-        case 6:
-            if ($etapes[6]) {
-                $location = "Location: etape5.$phpEx?message=1";
-            }
-        case 5:
-            if ($etapes[5]) {
-                $location = "Location: etape4.$phpEx?message=1";
-            }
-        case 4:
-            if ($etapes[4]) {
-                $location = "Location: etape3.$phpEx?message=1";
-            }
-        case 3:
-            if ($etapes[3]) {
-                $location = "Location: etape2.$phpEx?message=1";
-            }
-        case 2:
-            if ($etapes[2]) {
-                $location = "Location: etape1.$phpEx?message=1";
-            }
-    }
+    $index = $etape;
+    
+    while (1 < $index ){
+        if (! $etapes[$index]) {
+            $mineur = $index - 1;
+            $location = "Location: etape$mineur.$phpEx?message=1";
+        }
+        $index--;
+    }    
     if (! empty($location)) {
         header($location);
     }
+    
     // Assignation des variables
     $l_race = (key_exists('pf_race', $user->profile_fields)) ? $user->profile_fields['pf_race'] : AT_NONRENSEIGNE;
     $template->assign_vars(array(
@@ -132,6 +116,19 @@ function creation_verification_etape($etape)
         'U_ETAPE_9' => append_sid("{$phpbb_root_path}../creation/etape9.$phpEx"),
         'U_ETAPE_10' => append_sid("{$phpbb_root_path}../creation/etape10.$phpEx"),
         'U_ETAPE_11' => append_sid("{$phpbb_root_path}../creation/etape10.$phpEx"),
+        
+        'S_ETAPE_0_VALIDE'  => 0 == $etapes[0],
+        'S_ETAPE_1_VALIDE'  => 1 == $etapes[1],
+        'S_ETAPE_2_VALIDE'  => 2 == $etapes[2],
+        'S_ETAPE_3_VALIDE'  => 3 == $etapes[3],
+        'S_ETAPE_4_VALIDE'  => 4 == $etapes[4],
+        'S_ETAPE_5_VALIDE'  => 5 == $etapes[5],
+        'S_ETAPE_6_VALIDE'  => 6 == $etapes[6],
+        'S_ETAPE_7_VALIDE'  => 7 == $etapes[7],
+        'S_ETAPE_8_VALIDE'  => 8 == $etapes[8],
+        'S_ETAPE_9_VALIDE'  => 9 == $etapes[9],
+        'S_ETAPE_10_VALIDE' => 10 == $etapes[10],
+        'S_ETAPE_11_VALIDE' => 11 == $etapes[11],
         
         'S_ETAPE_0' => 0 == $etape,
         'S_ETAPE_1' => 1 == $etape,
