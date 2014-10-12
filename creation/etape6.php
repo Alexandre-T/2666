@@ -80,19 +80,10 @@ $template->assign_vars(array(
     'AT_VESTAL'                 => AT_VESTAL,
     'AT_SANSCLAN'               => AT_SANSCLAN,
     
-    'S_MESSAGE'	  		        => 1 == $message,
-    
     'FORM_DON'	  				=> $user->profile_fields['pf_don'],
 	'FORM_VOLEUSE_NOM'			=> $user->profile_fields['pf_voleuse_nom'],
 	'FORM_VOLEUSE_DESCRIPTION' 	=> $user->profile_fields['pf_voleuse_des'],
 	'FORM_VOLEUSE_POUVOIR'  	=> $user->profile_fields['pf_voleuse_pouvoir'],
-));
-
-//Vérification des droits
-creation_verification(CREATION_ETAPE);
-
-//Template
-$template->assign_vars(array(
 
 	'S_FEMME'			  => AT_FEMME    == $user->profile_fields['pf_sexe'],
 	'S_HOMME'			  => AT_HOMME    == $user->profile_fields['pf_sexe'],
