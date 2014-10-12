@@ -159,6 +159,8 @@ div.corps,div#postingbox,div.creation{
 	border-radius: 5px;
 	border : thin solid #428BCA;
 	text-align: justify;
+	padding-left:20px;
+	padding-right:20px;	
 }
 section.section-ucp{
 	background-color: #FFF;
@@ -176,7 +178,7 @@ img.img-thumbnail{
 div#postingbox{
 	padding:4px;
 }
-
+/** Corrections d'alignement **/
 div.correction{
 	margin-left:5px;
 }
@@ -207,6 +209,9 @@ body.body-etape10 header.header-etape10{
 	 Au dessus de 1200
 ------------------------- */
 @media (min-width: 1200px) {
+	.borderedContainer{
+		width:1138px;	
+	}
 	.accueil div.container{
 		width:940px;
 	}
@@ -219,6 +224,9 @@ body.body-etape10 header.header-etape10{
 /* Desktop entre 980 et 1200
 ------------------------- */
 @media (min-width: 980px) and (max-width: 1199px) {
+	.borderedContainer{
+		width:938px;	
+	}
 	div.wrap2666{
 		width:980px;
 		margin:auto;
@@ -228,6 +236,9 @@ body.body-etape10 header.header-etape10{
 /* Tablet to desktop
 ------------------------- */
 @media (min-width: 768px) and (max-width: 979px) {
+	.borderedContainer{
+		width:718px;	
+	}
 	.jumbotron h1{
 		font-size: 60px;
 	}
@@ -240,6 +251,8 @@ body.body-etape10 header.header-etape10{
 /* Tablet Only
 ------------------------- */
 @media (min-width: 481px) and (max-width: 767px) {
+	.borderedContainer{
+	}
 	.jumbotron h1{
 		font-size: 60px;
 	}
@@ -252,6 +265,8 @@ body.body-etape10 header.header-etape10{
 /* Landscape phones and smaller
 ------------------------- */
 @media (max-width: 480px) {
+	.borderedContainer{
+	}
 	.jumbotron h1{
 		font-size: 60px;
 	}
