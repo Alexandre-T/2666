@@ -115,7 +115,7 @@ function creation_verification_etape($etape)
         'U_ETAPE_8' => append_sid("{$phpbb_root_path}../creation/etape8.$phpEx"),
         'U_ETAPE_9' => append_sid("{$phpbb_root_path}../creation/etape9.$phpEx"),
         'U_ETAPE_10' => append_sid("{$phpbb_root_path}../creation/etape10.$phpEx"),
-        'U_ETAPE_11' => append_sid("{$phpbb_root_path}../creation/etape10.$phpEx"),
+        'U_ETAPE_11' => append_sid("{$phpbb_root_path}../creation/etape11.$phpEx"),
         
         'S_ETAPE_0_VALIDE'  => 0 == $etapes[0],
         'S_ETAPE_1_VALIDE'  => 1 == $etapes[1],
