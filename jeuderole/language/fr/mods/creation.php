@@ -53,6 +53,8 @@ $lang = array_merge($lang, array(
     'CREATION_ETAPE9'	=>	'Création de personnage : Étape 9',
     'CREATION_ETAPE10'	=>	'Création de personnage : Étape 10',
     'CREATION_ETAPE11'	=>	'Création de personnage : Étape 11',
+    'DEMANDE_DE_VALIDATION_OK' => 'Votre personnage et vos contacts viennent d’être transmis à Harahel qui va étudier votre fiche. Il reviendra vers vous par MP s’il a besoin de précision. Sinon vous serez averti par MP de la validation de votre personnage. En attendant, l’espace détente vous reste bien sûr ouvert.',
+    'RETURN_ESPACE_DETENTE' => 'Accéder à l’espace détente',
 ));
 
 ?>

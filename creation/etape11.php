@@ -38,8 +38,12 @@ creation_verification(CREATION_ETAPE);
 $submit = (isset($_POST['submit'])) ? true : false;
 if ($submit){
     group_user_add(GROUPE_DEMANDE_CREATION,array($user->data['user_id']),array($user->data['username']));
-    header('Location: enattente.php');
-    die('ok');
+
+    $meta_info = append_sid("{$phpbb_root_path}index.$phpEx");
+    $message = $user->lang['DEMANDE_DE_VALIDATION_OK'] . '<br /><br /><a href="' . "{$phpbb_root_path}espace-detente" . '">' . $user->lang['RETURN_ESPACE_DETENTE'].  '</a>';
+    $message .= '<br /><br />' . sprintf($user->lang['RETURN_INDEX'], '<a href="' . $meta_info . '">', '</a>');
+    meta_refresh(30, $meta_info);
+    trigger_error($message);
 }
 
 //Chargement des champs de profil
