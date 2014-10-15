@@ -69,16 +69,16 @@ function creation_verification_etape($etape)
     $user->get_profile_fields($user->data['user_id']);
     $etapes[0] = creation_verification_groupe();
     $etapes[1] = $etapes[0];
-    $etapes[2] = ! empty($user->profile_fields['pf_sexe']) && AT_NONRENSEIGNE !== $user->profile_fields['pf_sexe'];
-    $etapes[3] = ! empty($user->profile_fields['pf_race']) && AT_NONRENSEIGNE !== $user->profile_fields['pf_race'];
-    $etapes[4] = ! empty($user->profile_fields['pf_avatar']);
-    $etapes[5] = ! (empty($user->profile_fields['pf_passe']) || empty($user->profile_fields['pf_agereel']) && AT_NEPHILIM == $user->profile_fields['pf_race'] || empty($user->profile_fields['pf_prenom']) || empty($user->profile_fields['pf_nom']) || empty($user->profile_fields['pf_profession']) );
-    $etapes[6] = ! empty($user->profile_fields['pf_resume']) ;
-    $etapes[7] = ! (empty($user->profile_fields['pf_clan']) || empty($user->profile_fields['pf_don']) && AT_HUMAIN == $user->profile_fields['pf_race'] || (empty($user->profile_fields['pf_pouvoir']) || empty($user->profile_fields['pf_voleuse_nom']) || empty($user->profile_fields['pf_voleuse_des']) || empty($user->profile_fields['pf_voleuse_pouvoir']) ) && AT_NEPHILIM == $user->profile_fields['pf_race'] );
-    $etapes[8] = ! (empty($user->profile_fields['pf_ca_nom']) || empty($user->profile_fields['pf_ca_avatar']) || empty($user->profile_fields['pf_ca_avatar_name']) || empty($user->profile_fields['pf_ca_resume'])); 
-    $etapes[9] = ! (empty($user->profile_fields['pf_cb_nom']) || empty($user->profile_fields['pf_cb_avatar']) || empty($user->profile_fields['pf_cb_avatar_name']) || empty($user->profile_fields['pf_cb_resume']));
-    $etapes[10] = '0' === $user->profile_fields['pf_cc_actif'] || ! (empty($user->profile_fields['pf_cc_nom']) || empty($user->profile_fields['pf_cc_avatar']) || empty($user->profile_fields['pf_cc_avatar_name']) || empty($user->profile_fields['pf_cc_resume']));
-    $etapes[11] = '0' === $user->profile_fields['pf_cd_actif'] || ! (empty($user->profile_fields['pf_cd_nom']) || empty($user->profile_fields['pf_cd_avatar']) || empty($user->profile_fields['pf_cd_avatar_name']) || empty($user->profile_fields['pf_cd_resume']));
+    $etapes[2] = $etapes[1] && ! empty($user->profile_fields['pf_sexe']) && AT_NONRENSEIGNE !== $user->profile_fields['pf_sexe'];
+    $etapes[3] = $etapes[2] && ! empty($user->profile_fields['pf_race']) && AT_NONRENSEIGNE !== $user->profile_fields['pf_race'];
+    $etapes[4] = $etapes[3] && ! empty($user->profile_fields['pf_avatar']);
+    $etapes[5] = $etapes[4] && ! (empty($user->profile_fields['pf_passe']) || empty($user->profile_fields['pf_agereel']) && AT_NEPHILIM == $user->profile_fields['pf_race'] || empty($user->profile_fields['pf_prenom']) || empty($user->profile_fields['pf_nom']) || empty($user->profile_fields['pf_profession']) );
+    $etapes[6] = $etapes[5] && ! empty($user->profile_fields['pf_resume']) ;
+    $etapes[7] = $etapes[6] && ! (empty($user->profile_fields['pf_clan']) || empty($user->profile_fields['pf_don']) && AT_HUMAIN == $user->profile_fields['pf_race'] || (empty($user->profile_fields['pf_pouvoir']) || empty($user->profile_fields['pf_voleuse_nom']) || empty($user->profile_fields['pf_voleuse_des']) || empty($user->profile_fields['pf_voleuse_pouvoir']) ) && AT_NEPHILIM == $user->profile_fields['pf_race'] );
+    $etapes[8] = $etapes[7] && ! (empty($user->profile_fields['pf_ca_nom']) || empty($user->profile_fields['pf_ca_avatar']) || empty($user->profile_fields['pf_ca_avatar_name']) || empty($user->profile_fields['pf_ca_resume'])); 
+    $etapes[9] = $etapes[8] && ! (empty($user->profile_fields['pf_cb_nom']) || empty($user->profile_fields['pf_cb_avatar']) || empty($user->profile_fields['pf_cb_avatar_name']) || empty($user->profile_fields['pf_cb_resume']));
+    $etapes[10] = $etapes[9] && ('0' === $user->profile_fields['pf_cc_actif'] || ! (empty($user->profile_fields['pf_cc_nom']) || empty($user->profile_fields['pf_cc_avatar']) || empty($user->profile_fields['pf_cc_avatar_name']) || empty($user->profile_fields['pf_cc_resume'])));
+    $etapes[11] = $etapes[10] && ('0' === $user->profile_fields['pf_cd_actif'] || ! (empty($user->profile_fields['pf_cd_nom']) || empty($user->profile_fields['pf_cd_avatar']) || empty($user->profile_fields['pf_cd_avatar_name']) || empty($user->profile_fields['pf_cd_resume'])));
     
     // redirection éventuelle
     $index = $etape;

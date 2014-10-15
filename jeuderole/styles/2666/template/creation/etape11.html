@@ -15,15 +15,45 @@
 		<div class="col-sm-9">
 			<p>
 				Et voilà, ton personnage principal et tes {NOMBRE_DE_CONTACTS} contacts sont terminés. J'ai tout enregistré dans mon holodeck.
-				Tient ! Je te laisse jeter un coup d'oeil. Si tout est bon pour toi, tu peux demander la validation de tes fiches. Sinon,
+				Tiens ! Je te laisse jeter un coup d'oeil. Si tout est bon pour toi, tu peux demander la validation de tes fiches. Sinon,
 				il te suffit de cliquer dans l'holodeck lorsque tu veux modifier quelquechose. 
 			</p>
 			<p class="text-center">
 				<button onclick="return false;" class="btn btn-default" data-toggle="modal" data-target="#modalFiche" id="buttonFiche"><i class="fa fa-fw fa-question-circle"></i>&nbsp;Fiche de personnage</button>
 				<button onclick="return false;" class="btn btn-default" data-toggle="modal" data-target="#modalFichePublique" id="buttonFichePublique"><i class="fa fa-fw fa-question-circle"></i>&nbsp;Informations publiques</button>
-			</p>	
+				<button onclick="return false;" class="btn btn-default" data-toggle="modal" data-target="#modalContact1" id="buttonContact1"><i class="fa fa-fw fa-question-circle"></i>&nbsp;{CONTACT1_NOM}</button>
+				<button onclick="return false;" class="btn btn-default" data-toggle="modal" data-target="#modalContact2" id="buttonContact2"><i class="fa fa-fw fa-question-circle"></i>&nbsp;{CONTACT2_NOM}</button>
+				<!-- IF S_CONTACT_3 -->
+				<button onclick="return false;" class="btn btn-default" data-toggle="modal" data-target="#modalContact3" id="buttonContact3"><i class="fa fa-fw fa-question-circle"></i>&nbsp;{CONTACT3_NOM}</button>
+				<!-- ELSE -->
+				<button class="hidden btn-success" id="buttonContact3"></button>
+				<!-- ENDIF -->
+				<!-- IF S_CONTACT_4 -->
+				<button onclick="return false;" class="btn btn-default" data-toggle="modal" data-target="#modalContact4" id="buttonContact4"><i class="fa fa-fw fa-question-circle"></i>&nbsp;{CONTACT4_NOM}</button>
+				<!-- ELSE -->
+				<button class="hidden btn-success" id="buttonContact4"></button>
+				<!-- ENDIF -->
+			</p>
+			
+			<div>
+				<form method="post" action="etape11.php">
+					<fieldset>
+						<legend>Dernière vérification</legend>
+						<p>
+							Pour que le bouton de validation soit activé, vérifie chaque rubrique ci-dessus. Quand tous les boutons seront passés au vert, 
+							ton dossier sera envoyé à Harahel pour qu'il le relise et vérifie que tout est OK pour toi. Bonne relecture !
+						</p>
+						<div class="text-center">
+							<button type="submit" class="btn btn-primary disabled" name="submit" id="buttonFinal"><i class="fa fa-fw fa-thumbs-o-up"></i>&nbsp;Terminer</button>
+						</div>				
+					</fieldset>
+				</form>
+			</div>
+						
 		</div>
 	</div>
+	
+	
 </div>
 <!-- DEFINE $MODAL_ID = 'modalFiche' -->
 <!-- DEFINE $MODAL_OPTIONS = 'modal-lg' -->
@@ -37,17 +67,17 @@ Fiche de personnage
 <p>N'oublie pas, toutes les informations ci-dessous sont secrètes. Bon, je reconnais que pour le sexe, cela se remarquera rapidement et pour la race, cela sera affiché.
 Néanmoins, les autres informations que tu trouveras ci-dessous sont secrètes. Je t'invite à les relire pour ne rien oublier.</p>
 <dl class="dl-horizontal">
-	<dt><a href="etape4.php" title="Changer d'identité">Identité</a>&nbsp;:</dt><dd>{PERSONNAGE_PRENOM} {PERSONNAGE_NOM}</dd>
-	<dt><a href="etape1.php" title="Changer de sexe">Sexe</a>&nbsp;:</dt><dd><!-- IF S_FEMME -->Féminin<!-- ELSE -->Masculin<!-- ENDIF --></dd>
-	<dt><a href="etape2.php" title="Changer de race">Race</a>&nbsp;:</dt><dd><!-- IF S_HUMAIN -->Humain<!-- ELSE -->Nephilim<!-- ENDIF --></dd>
-	<dt><a href="etape5.php" title="Changer de clan">Clan</a>&nbsp;:</dt><dd>{PERSONNAGE_CLAN}</dd>
+	<dt><a href="etape4.php" class="tooltip-left" title="Changer d'identité">Identité</a>&nbsp;:</dt><dd>{PERSONNAGE_PRENOM} {PERSONNAGE_NOM}</dd>
+	<dt><a href="etape1.php" class="tooltip-left" title="Changer de sexe">Sexe</a>&nbsp;:</dt><dd><!-- IF S_FEMME -->Féminin<!-- ELSE -->Masculin<!-- ENDIF --></dd>
+	<dt><a href="etape2.php" class="tooltip-left" title="Changer de race">Race</a>&nbsp;:</dt><dd><!-- IF S_HUMAIN -->Humain<!-- ELSE -->Nephilim<!-- ENDIF --></dd>
+	<dt><a href="etape5.php" class="tooltip-left" title="Changer de clan">Clan</a>&nbsp;:</dt><dd>{PERSONNAGE_CLAN}</dd>
 	<!-- IF S_NEPHILIM -->
-	<dt><a href="etape4.php" title="Changer d'âge">Âge réel</a>&nbsp;:</dt><dd>{PERSONNAGE_AGE} ans</dd>	
-	<dt><a href="etape5.php" title="Changer de pouvoir">Pouvoir</a>&nbsp;:</dt><dd>{PERSONNAGE_POUVOIR}</dd>
+	<dt><a href="etape4.php" class="tooltip-left" title="Changer d'âge">Âge réel</a>&nbsp;:</dt><dd>{PERSONNAGE_AGE} ans</dd>	
+	<dt><a href="etape5.php" class="tooltip-left" title="Changer de pouvoir">Pouvoir</a>&nbsp;:</dt><dd>{PERSONNAGE_POUVOIR}</dd>
 	<!-- ELSE -->
-	<dt><a href="etape5.php" title="Changer de don">Don</a>&nbsp;:</dt><dd>{PERSONNAGE_DON}</dd>
+	<dt><a href="etape5.php" class="tooltip-left" title="Changer de don">Don</a>&nbsp;:</dt><dd>{PERSONNAGE_DON}</dd>
 	<!-- ENDIF -->
-	<dt><a href="etape4.php" title="Changer ce passé">Passé</a>&nbsp;:</dt><dd>{PERSONNAGE_PASSE}</dd>
+	<dt><a href="etape4.php" class="tooltip-left" title="Changer ce passé">Passé</a>&nbsp;:</dt><dd>{PERSONNAGE_PASSE}</dd>
 </dl>
 <p></p>   
 <!-- INCLUDE modal/before_footer.html -->
@@ -68,22 +98,130 @@ Résumé
 <div class="row">
 	<div class="col-sm-8">
 		<dl class="dl-horizontal">
-			<dt><a href="etape4.php" title="Changer d'identité">Identité</a>&nbsp;:</dt><dd>{PERSONNAGE_PRENOM} {PERSONNAGE_NOM}</dd>
-			<dt><a href="etape1.php" title="Changer de sexe">Sexe</a>&nbsp;:</dt><dd><!-- IF S_FEMME -->Féminin<!-- ELSE -->Masculin<!-- ENDIF --></dd>
-			<dt><a href="etape2.php" title="Changer de race">Race</a>&nbsp;:</dt><dd><!-- IF S_HUMAIN -->Humain<!-- ELSE -->Nephilim<!-- ENDIF --></dd>	
-			<dt><a href="etape6.php" title="Changer ce résumé">Résumé</a>&nbsp;:</dt><dd>{PERSONNAGE_RESUME}</dd>
+			<dt><a href="etape4.php" class="tooltip-left" title="Changer d'identité">Identité</a>&nbsp;:</dt><dd>{PERSONNAGE_PRENOM} {PERSONNAGE_NOM}</dd>
+			<dt><a href="etape1.php" class="tooltip-left" title="Changer de sexe">Sexe</a>&nbsp;:</dt><dd><!-- IF S_FEMME -->Féminin<!-- ELSE -->Masculin<!-- ENDIF --></dd>
+			<dt><a href="etape2.php" class="tooltip-left" title="Changer de race">Race</a>&nbsp;:</dt><dd><!-- IF S_HUMAIN -->Humain<!-- ELSE -->Nephilim<!-- ENDIF --></dd>	
+			<dt><a href="etape6.php" class="tooltip-left" title="Changer ce résumé">Résumé</a>&nbsp;:</dt><dd>{PERSONNAGE_RESUME}</dd>
 		</dl>
 	</div>
 	<div class="col-sm-4 text-center">
-		{PERSONNAGE_AVATAR}
-		<br/>
-		{PERSONNAGE_AVATAR_NOM}
+		<div class="div-thumbnail">{PERSONNAGE_AVATAR}</div>
+		<p class="text-center"><em>{PERSONNAGE_AVATAR_NOM}</em></p>
 	</div>
 </div>
 <!-- INCLUDE modal/before_footer.html -->
 <div class="btn-group">
 	<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-fw fa-times"></i>&nbsp;Fermer</button>
-	<button type="button" class="btn btn-success" data-dismiss="modal" onclick="validerBouton($('#buttonFiche'));"><i class="fa fa-fw fa-check-square-o"></i>&nbsp;Je valide cette rubrique</button>
+	<button type="button" class="btn btn-success" data-dismiss="modal" onclick="validerBouton($('#buttonFichePublique'));"><i class="fa fa-fw fa-check-square-o"></i>&nbsp;Je valide cette rubrique</button>
 </div>
 <!-- INCLUDE modal/after_footer.html -->
 <!-- INCLUDE overall_footer.html -->
+
+
+<!-- Contact 1 -->
+<!-- DEFINE $MODAL_ID = 'modalContact1' -->
+<!-- INCLUDE modal/header.html -->
+Contact principal : {CONTACT1_NOM}
+<!-- INCLUDE modal/body.html -->
+<h4>Infos publiques</h4>
+<div class="row">
+	<div class="col-sm-8">
+		<dl class="dl-horizontal">
+			<dt><a href="{U_ETAPE_7}" class="tooltip-left" title="Modifier ce contact">Visible</a>&nbsp;:</dt><dd>{CONTACT1_RESUME}</dd>
+			<dt><a href="{U_ETAPE_7}" class="tooltip-left" title="Modifier ce contact">Secret</a>&nbsp;:</dt><dd>{CONTACT1_DESCRIPTION}</dd>
+		</dl>
+	</div>
+	<div class="col-sm-4 text-center">
+		<div class="div-thumbnail">{CONTACT1_AVATAR}</div>
+		<p class="text-center"><em>{CONTACT1_AVATAR_NOM}</em></p>
+	</div>
+</div>
+<!-- INCLUDE modal/before_footer.html -->
+<div class="btn-group">
+	<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-fw fa-times"></i>&nbsp;Fermer</button>
+	<button type="button" class="btn btn-success" data-dismiss="modal" onclick="validerBouton($('#buttonContact1'));"><i class="fa fa-fw fa-check-square-o"></i>&nbsp;Je valide cette rubrique</button>
+</div>
+<!-- INCLUDE modal/after_footer.html -->
+<!-- INCLUDE overall_footer.html -->
+
+<!-- Contact 2 -->
+<!-- DEFINE $MODAL_ID = 'modalContact2' -->
+<!-- INCLUDE modal/header.html -->
+Contact principal : {CONTACT2_NOM}
+<!-- INCLUDE modal/body.html -->
+<h4>Infos publiques</h4>
+<div class="row">
+	<div class="col-sm-8">
+		<dl class="dl-horizontal">
+			<dt><a href="{U_ETAPE_7}" class="tooltip-left" title="Modifier ce contact">Visible</a>&nbsp;:</dt><dd>{CONTACT2_RESUME}</dd>
+			<dt><a href="{U_ETAPE_7}" class="tooltip-left" title="Modifier ce contact">Secret</a>&nbsp;:</dt><dd>{CONTACT2_DESCRIPTION}</dd>
+		</dl>
+	</div>
+	<div class="col-sm-4 text-center">
+		<div class="div-thumbnail">{CONTACT2_AVATAR}</div>
+		<p class="text-center"><em>{CONTACT2_AVATAR_NOM}</em></p>
+	</div>
+</div>
+<!-- INCLUDE modal/before_footer.html -->
+<div class="btn-group">
+	<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-fw fa-times"></i>&nbsp;Fermer</button>
+	<button type="button" class="btn btn-success" data-dismiss="modal" onclick="validerBouton($('#buttonContact2'));"><i class="fa fa-fw fa-check-square-o"></i>&nbsp;Je valide cette rubrique</button>
+</div>
+<!-- INCLUDE modal/after_footer.html -->
+<!-- INCLUDE overall_footer.html -->
+
+<!-- IF S_CONTACT_3 -->
+<!-- Contact 3 -->
+<!-- DEFINE $MODAL_ID = 'modalContact3' -->
+<!-- INCLUDE modal/header.html -->
+Contact principal : {CONTACT3_NOM}
+<!-- INCLUDE modal/body.html -->
+<h4>Infos publiques</h4>
+<div class="row">
+	<div class="col-sm-8">
+		<dl class="dl-horizontal">
+			<dt><a href="{U_ETAPE_7}" class="tooltip-left" title="Modifier ce contact">Visible</a>&nbsp;:</dt><dd>{CONTACT3_RESUME}</dd>
+			<dt><a href="{U_ETAPE_7}" class="tooltip-left" title="Modifier ce contact">Secret</a>&nbsp;:</dt><dd>{CONTACT3_DESCRIPTION}</dd>
+		</dl>
+	</div>
+	<div class="col-sm-4 text-center">
+		<div class="div-thumbnail">{CONTACT3_AVATAR}</div>
+		<p class="text-center"><em>{CONTACT3_AVATAR_NOM}</em></p>
+	</div>
+</div>
+<!-- INCLUDE modal/before_footer.html -->
+<div class="btn-group">
+	<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-fw fa-times"></i>&nbsp;Fermer</button>
+	<button type="button" class="btn btn-success" data-dismiss="modal" onclick="validerBouton($('#buttonContact3'));"><i class="fa fa-fw fa-check-square-o"></i>&nbsp;Je valide cette rubrique</button>
+</div>
+<!-- INCLUDE modal/after_footer.html -->
+<!-- INCLUDE overall_footer.html -->
+<!-- ENDIF -->
+
+<!-- IF S_CONTACT_4 -->
+<!-- Contact 4 -->
+<!-- DEFINE $MODAL_ID = 'modalContact4' -->
+<!-- INCLUDE modal/header.html -->
+Contact principal : {CONTACT4_NOM}
+<!-- INCLUDE modal/body.html -->
+<h4>Infos publiques</h4>
+<div class="row">
+	<div class="col-sm-8">
+		<dl class="dl-horizontal">
+			<dt><a href="{U_ETAPE_7}" class="tooltip-left" title="Modifier ce contact">Visible</a>&nbsp;:</dt><dd>{CONTACT4_RESUME}</dd>
+			<dt><a href="{U_ETAPE_7}" class="tooltip-left" title="Modifier ce contact">Secret</a>&nbsp;:</dt><dd>{CONTACT4_DESCRIPTION}</dd>
+		</dl>
+	</div>
+	<div class="col-sm-4 text-center">
+		<div class="div-thumbnail">{CONTACT4_AVATAR}</div>
+		<p class="text-center"><em>{CONTACT4_AVATAR_NOM}</em></p>
+	</div>
+</div>
+<!-- INCLUDE modal/before_footer.html -->
+<div class="btn-group">
+	<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-fw fa-times"></i>&nbsp;Fermer</button>
+	<button type="button" class="btn btn-success" data-dismiss="modal" onclick="validerBouton($('#buttonContact4'));"><i class="fa fa-fw fa-check-square-o"></i>&nbsp;Je valide cette rubrique</button>
+</div>
+<!-- INCLUDE modal/after_footer.html -->
+<!-- INCLUDE overall_footer.html -->
+<!-- ENDIF -->

@@ -171,8 +171,21 @@ div.corps{
 	padding-bottom : 4px;
 	margin-left:-15px;
 }
-
-img.img-thumbnail{
+div.div-thumbnail{
+	padding: 4px;
+	line-height: 1.42857143;
+	background-color: #fff;
+	border: 1px solid #428BCA;
+	border-radius: 4px;
+	-webkit-transition: all .2s ease-in-out;
+	-o-transition: all .2s ease-in-out;
+	transition: all .2s ease-in-out;
+	display: inline-block;
+	width: 100% \9;
+	max-width: 100%;
+	height: auto;
+}
+div.div-thumbnail img, img.img-thumbnail{
 	border-color:#428BCA;
 }
 div#postingbox{
@@ -194,7 +207,16 @@ header{
 }
 
 /* Fond d'écrans spécialisés */
+body.body-etape1 header.header-etape1,
+body.body-etape2 header.header-etape2,
+body.body-etape3 header.header-etape3,
+body.body-etape4 header.header-etape4,
+body.body-etape5 header.header-etape5,
+body.body-etape6 header.header-etape6,
+body.body-etape7 header.header-etape7,
+body.body-etape8 header.header-etape8,
 body.body-etape9 header.header-etape9,
+body.body-etape11 header.header-etape11,
 body.body-etape10 header.header-etape10{
 	background-position : top center;
 	background-image: url('{T_THEME_PATH}/images/bandeau/creation.jpg');

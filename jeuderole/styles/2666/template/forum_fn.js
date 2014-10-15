@@ -233,6 +233,18 @@ function play_qt_file(obj)
 function validerBouton(bouton){
 	bouton.removeClass('btn-default');
 	bouton.addClass('btn-success');
+	changerBoutonFinal();
+}
+function changerBoutonFinal(){
+	var ok = $("#buttonFiche").hasClass('btn-success')
+	      && $("#buttonFichePublique").hasClass('btn-success')
+	      && $("#buttonContact1").hasClass('btn-success')
+	      && $("#buttonContact2").hasClass('btn-success')
+	      && $("#buttonContact3").hasClass('btn-success')
+	      && $("#buttonContact4").hasClass('btn-success');
+	if (ok){
+		$("#buttonFinal").removeClass('disabled');
+	}
 }
 
 /**
