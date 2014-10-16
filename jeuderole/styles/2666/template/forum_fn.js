@@ -255,9 +255,7 @@ function activation(bool){
 	$("#nom").prop('disabled', !bool);
 	$("#avatar").prop('required', bool);
 	$("#avatar").prop('disabled', !bool);
-	$("#uploadfile").prop('required', bool);
 	$("#uploadfile").prop('disabled', !bool);
-	$("#uploadurl").prop('required', bool);
 	$("#uploadurl").prop('disabled', !bool);
 	$("#description").prop('required', bool);
 	$("#description").prop('disabled', !bool);
