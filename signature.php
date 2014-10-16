@@ -37,7 +37,6 @@ $bienseance = request_var('bienseance', 0);
 $pi = request_var('pi', 0);
 
 
-var_dump($age,$bienseance,$pi,$_POST);
 if (! $user->data ['is_bot'] && $user->data ['is_registered'] && ! $s_signature){
 	//Il ne fait pas parti des signatures mais est-ce qu'il vient de signer ?
 	//Analyse éventuelle des variables postées en formulaire
