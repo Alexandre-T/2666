@@ -254,7 +254,7 @@ class acp_faq_manager
 	*/
 	function output_faq($faq, $file)
 	{
-		global $phpbb_root_path, $phpEx;
+		global $phpbb_root_path, $phpEx, $user;
 
 		if (strpos($file, '.') !== false)
 		{
