@@ -47,7 +47,7 @@ if ($submit){
     $agereel	= request_var('age', 0);
     if (AT_HUMAIN == $user->profile_fields['pf_race']){
         //cas particulier des humains
-        $cp_data['pf_agereel'] = '';
+        $cp_data['pf_agereel'] = 0;
     }else{
         //cas particulier des Nephilim
         $cp_data['pf_agereel'] = max(18,min(9999,$agereel));
