@@ -27,6 +27,7 @@
 /jeuderole/store/*
 !/jeuderole/store/.htaccess
 !/jeuderole/store/index.htm
+!/jeuderole/store/fr/index.htm
 /jeuderole/styles/*
 !/jeuderole/styles/2666
 !/jeuderole/styles/phpBBBootstrap
