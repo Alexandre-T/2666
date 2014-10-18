@@ -26,7 +26,13 @@ $mode = request_var('mode', '');
 // Load the appropriate faq file
 switch ($mode)
 {
-	case 'bbcode':
+	case 'pouvoir':
+	    $user->setup('mods/guide_pouvoir');
+		$l_title = $user->lang['POUVOIR_GUIDE'];
+		$user->add_lang('pouvoir', false, true);
+	break;
+    
+    case 'bbcode':
 		$l_title = $user->lang['BBCODE_GUIDE'];
 		$user->add_lang('bbcode', false, true);
 	break;
