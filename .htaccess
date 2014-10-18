@@ -56,6 +56,11 @@ RewriteRule ^jeuderole/non-lu(-([0-9]+))?\.html$ /jeuderole/search.php?search_id
 RewriteRule ^jeuderole/equipe\.html$ /jeuderole/memberlist.php?mode=leaders [QSA,L,NC]
 # HERE IS A GOOD PLACE TO ADD OTHER PHPBB RELATED REWRITERULES
 
+#AT Mod FAQ
+RewriteRule ^jeuderole/aide-pouvoir\.html$ /jeuderole/faq.php?mode=pouvoir [QSA,L,NC]
+RewriteRule ^jeuderole/aide-bbcode\.html$ /jeuderole/faq.php?mode=bbcode [QSA,L,NC]
+RewriteRule ^jeuderole/aide-phpbb\.html$ /jeuderole/faq.php [QSA,L,NC]
+
 # FORUM WITHOUT ID & DELIM ALL MODES
 # THESE THREE LINES MUST BE LOCATED AT THE END OF YOUR HTACCESS TO WORK PROPERLY
 RewriteCond %{REQUEST_FILENAME} !-f
