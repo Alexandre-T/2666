@@ -1,5 +1,6 @@
 @CHARSET "UTF-8";
 
+/** Gestion des polices **/
 @font-face{font-family:'coalition';src:url('{T_THEME_PATH}/fonts/coalition.ttf?v=2.0.0');}
 
 h1,h5,h6,
@@ -15,6 +16,7 @@ p.accueil2666
 {
 	font-family:'coalition','Helvetica Neue', Helvetica, Arial, sans-serif;
 }
+
 table tbody tr td a{
 	font-family:'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
@@ -72,6 +74,17 @@ blockquote{
 	filter:progid:DXImageTransform.Microsoft.Shadow(color=#2C6CAE, Direction=180, Strength=10);*/
 	 
 }
+/** Suppression d'informations **/
+div.inline-attachment dl.file dd{
+	display: none;
+}
+span.pull-right div.inline-attachment{
+	margin-left : 20px;
+}
+span.noborder img.img-thumbnail{
+	border-style: none;
+}
+
 
 table.table{
 	background-color:white;
@@ -144,7 +157,7 @@ table thead tr th{
 	color:#333333;
 	font-size:xx-small;
 }
-table tbody tr td a{
+table tbody tr td a.uppercase{
 	color:#333333;
 	text-transform: uppercase;
 	font-weight: bold;
