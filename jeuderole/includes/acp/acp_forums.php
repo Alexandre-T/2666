@@ -130,6 +130,9 @@ class acp_forums
 						'forum_rules_options'	=> 7,
 						'forum_rules_bitfield'	=> '',
 						'forum_rules_link'		=> request_var('forum_rules_link', ''),
+						//AT MOD ICONE START
+						'forum_icone'			=> request_var('forum_icone', ''),
+						//AT MOD ICONE END
 						'forum_image'			=> request_var('forum_image', ''),
 						'forum_style'			=> request_var('forum_style', 0),
 						'display_subforum_list'	=> request_var('display_subforum_list', false),
@@ -430,6 +433,9 @@ class acp_forums
 							'forum_rules'			=> '',
 							'forum_rules_link'		=> '',
 							'forum_image'			=> '',
+						    //AT MOD ICON START
+						    'forum_icone'			=> '',
+						    //AT MOD ICON END
 							'forum_style'			=> 0,
 							'display_subforum_list'	=> true,
 							'display_on_index'		=> false,
@@ -593,6 +599,9 @@ class acp_forums
 
 					'FORUM_NAME'				=> $forum_data['forum_name'],
 					'FORUM_DATA_LINK'			=> $forum_data['forum_link'],
+					//AT MOD ICONE ON
+					'FORUM_ICONE'				=> $forum_data['forum_icone'],
+					//AT MOD ICONE OFF
 					'FORUM_IMAGE'				=> $forum_data['forum_image'],
 					'FORUM_IMAGE_SRC'			=> ($forum_data['forum_image']) ? $phpbb_root_path . $forum_data['forum_image'] : '',
 					'FORUM_POST'				=> FORUM_POST,

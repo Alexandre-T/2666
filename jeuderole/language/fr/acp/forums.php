@@ -85,6 +85,10 @@ $lang = array_merge($lang, array(
 	'FORUM_DESC_EXPLAIN'				=> 'Toute balise HTML saisie sera affichée telle quelle.',
 	'FORUM_DESC_TOO_LONG'				=> 'La description du forum est trop longue. Elle ne peut contenir plus de 4000 caractères.',
 	'FORUM_EDIT_EXPLAIN'				=> 'Le formulaire suivant vous permet de personnaliser ce forum. Notez que la modération et les paramètres de contrôle des messages sont définis via les permissions pour chaque utilisateur ou groupe.',
+    //AT MOD ICON START
+	'FORUM_ICONE'						=> 'Icone du forum',
+	'FORUM_ICONE_EXPLAIN'				=> 'Code Font-Awesome pour l’icone du forum',
+    //AT MOD ICON STOP
 	'FORUM_IMAGE'						=> 'Image du forum',
 	'FORUM_IMAGE_EXPLAIN'				=> 'Emplacement relatif au répertoire racine de phpBB, d’une image supplémentaire à associer à ce forum.',
 	'FORUM_IMAGE_NO_EXIST'				=> 'L’image spécifiée pour ce forum n’existe pas.',
