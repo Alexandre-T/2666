@@ -522,6 +522,9 @@ function gestionContact($numero)
         if ($checkbox){
             
             // Analyse et traitement de la variable posté
+            $race = request_var('race', AT_HUMAIN);
+            $race = ($race !== AT_NEPHILIM)?AT_HUMAIN:AT_NEPHILIM;
+            $cp_data['pf_'.$prefixe.'_race'] = $race;
             $cp_data['pf_'.$prefixe.'_nom'] = utf8_normalize_nfc(request_var('nom', '', true));
             $cp_data['pf_'.$prefixe.'_description'] = utf8_normalize_nfc(request_var('description', '', true));
             $cp_data['pf_'.$prefixe.'_avatar_name'] = utf8_normalize_nfc(request_var('avatar', '', true));
@@ -626,6 +629,8 @@ function gestionContact($numero)
         'S_HOMME' => AT_HOMME == $user->profile_fields['pf_sexe'],
         'S_HUMAIN' => AT_HUMAIN == $user->profile_fields['pf_race'],
         'S_NEPHILIM' => AT_NEPHILIM == $user->profile_fields['pf_race'],
+        'HUMAIN_CHECKED'   => (AT_NEPHILIM != $user->profile_fields['pf_'.$prefixe.'_race'])?'checked="checked"':'',
+        'NEPHILIM_CHECKED' => (AT_NEPHILIM == $user->profile_fields['pf_'.$prefixe.'_race'])?'checked="checked"':'',
         'S_MESSAGE' => 1 == $message,
         'S_HELPBLOCK_MESSAGE' => true,
         'S_ERREUR' => ! empty($erreurTexte),
