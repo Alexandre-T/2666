@@ -35,7 +35,6 @@ class Reserve{
 	        $resultats[$row['avatar'].'a'.$row['user_id']]['U_RESUME']   =generate_board_url().'/personnages-resumes/'.$row['username_clean'].'-t'. $row['fiche'].'.html';
 	        $resultats[$row['avatar'].'a'.$row['user_id']]['USER_COLOUR']=get_username_string('colour', $row['user_id'], $row['nom'], $row['user_colour'], $row['nom']);
 	        $resultats[$row['avatar'].'a'.$row['user_id']]['USER_NAME']  =get_username_string('username', $row['user_id'], $row['nom'], $row['user_colour'], $row['nom']);
-	        $resultats[$row['avatar'].'a'.$row['user_id']]['ID']=$row['user_id'];
 	    }
 	    $db->sql_freeresult($result);
 	    return $resultats;
@@ -43,10 +42,15 @@ class Reserve{
 	
 	public static function loadContacts($number){
 	    global $db, $template;
-	    
+	    //Initialisation
+	    $couleurs['']          = '333333';
+	    $couleurs[AT_HUMAIN]   = COULEUR_HUMAIN;
+	    $couleurs[AT_NEPHILIM] = COULEUR_NEPHILIM;
+	    $couleurs[AT_ORIGINEL] = COULEUR_ORIGINEL;
 	    switch ($number){
 	        case 4 :
 	            $pf_nom     = 'p.pf_cd_nom';
+	            $pf_race    = 'p.pf_cd_race';
 	            $pf_fiche   = 'p.pf_cd_fiche';
 	            $pf_actif   = 'AND p.pf_cd_actif = 1';
 	            $pf_avatar  = 'p.pf_cd_avatar_name';
@@ -54,6 +58,7 @@ class Reserve{
 	            break;
 	        case 3 :
 	            $pf_nom   = 'p.pf_cc_nom';
+	            $pf_race    = 'p.pf_cc_race';
 	            $pf_fiche   = 'p.pf_cc_fiche';
 	            $pf_actif = 'AND p.pf_cc_actif = 1';
 	            $pf_avatar = 'p.pf_cc_avatar_name';
@@ -61,6 +66,7 @@ class Reserve{
 	            break;
 	        case 2 :
 	            $pf_nom   = 'p.pf_cb_nom';
+	            $pf_race    = 'p.pf_cb_race';
 	            $pf_fiche   = 'p.pf_cb_fiche';
 	            $pf_actif = '';
 	            $pf_avatar = 'p.pf_cb_avatar_name';
@@ -68,6 +74,7 @@ class Reserve{
 	            break;
 	        default :
 	            $pf_nom   = 'p.pf_ca_nom';
+	            $pf_race    = 'p.pf_ca_race';
 	            $pf_fiche   = 'p.pf_ca_fiche';
 	            $pf_actif = '';
 	            $pf_avatar = 'p.pf_ca_avatar_name';
@@ -77,7 +84,7 @@ class Reserve{
 	    
 	    //requête SQL
         $sql = $db->sql_build_query('SELECT', array(
-    	    'SELECT'	=> "u.user_id, -1 as default_group, $pf_nom as nom, u.username_clean, '333333' as user_colour,"
+    	    'SELECT'	=> "u.user_id, -1 as default_group, $pf_nom as nom, u.username_clean, $pf_race as race,"
     	                  ."$pf_avatar as avatar, $pf_nom as nom, $pf_fiche as fiche",
     	
     	    'FROM'		=> array(
@@ -102,8 +109,8 @@ class Reserve{
     	        $resultats[$row['avatar'].$classement.$row['user_id']]['NOM']=$row['nom'];
     	        $resultats[$row['avatar'].$classement.$row['user_id']]['AVATAR']=$row['avatar'];
     	        $resultats[$row['avatar'].$classement.$row['user_id']]['U_RESUME']   =generate_board_url().'/personnages-resumes/'.$row['username_clean'].'-t'. $row['fiche'].'.html';
-    	        $resultats[$row['avatar'].$classement.$row['user_id']]['USER_COLOUR']=get_username_string('colour', $row['user_id'], $row['nom'], $row['user_colour'], $row['nom']);
-    	        $resultats[$row['avatar'].$classement.$row['user_id']]['USER_NAME']  =get_username_string('username', $row['user_id'], $row['nom'], $row['user_colour'], $row['nom']);
+    	        $resultats[$row['avatar'].$classement.$row['user_id']]['USER_COLOUR']=get_username_string('colour', $row['user_id'], $row['nom'], $couleurs[$row['race']], $row['nom']);
+    	        $resultats[$row['avatar'].$classement.$row['user_id']]['USER_NAME']  =get_username_string('username', $row['user_id'], $row['nom'], $couleurs[$row['race']], $row['nom']);
 	        }
 	    }
 	    $db->sql_freeresult($result);
