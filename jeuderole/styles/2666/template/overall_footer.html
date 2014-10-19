@@ -1,35 +1,37 @@
 </section>
-<nav class="container footer">
-	<div class="row">	
-		<div class="breadcrumb">
-			<div class="row">
-				<div class="col-sm-5"><i class="fa fa-home"></i>&nbsp;-&nbsp;<a href="{U_INDEX}" accesskey="h">{L_INDEX}</a></div>
-				<!-- IF S_DISPLAY_POST_INFO -->
-				<div class="col-sm-2 hidden-xs text-center">
-					<div class=" dropup">
-					<!-- IF L_FORUM_PERMISSIONS -->
-					<a class="btn btn-default btn-xs tooltip-link" id="drop-permission" data-toggle="dropdown" href="#" title="{L_FORUM_PERMISSIONS}"><i class="fa fa-cogs"></i>&nbsp;<span class="fa fa-caret-up"></span></a>
-					<!-- ELSE -->
-					<a class="btn btn-default btn-xs tooltip-link" id="drop-permission" data-toggle="dropdown" href="#"><i class="fa fa-cogs"></i>&nbsp;<span class="fa fa-caret-up"></span></a>
-					<!-- ENDIF -->
-				 	<ul class="dropdown-menu">
-						<!-- BEGIN rules --><li class="text-left"><a href="#"><i class="fa fa-cog"></i> {rules.RULE}</a></li><!-- END rules -->
-					</ul>
-					</div>
-				</div>
-				<!-- ENDIF -->
-				<div class="<!-- IF ! S_DISPLAY_POST_INFO -->col-sm-offset-2<!-- ENDIF --> col-sm-5 text-right">
-					<div class="btn-group">
-						<!-- IF U_EMAIL_TOPIC --><a class="btn btn-default btn-xs tooltip-top" href="{U_EMAIL_TOPIC}" title="{L_EMAIL_TOPIC}"><i class="fa fa-envelope"></i><span class="sr-only">{L_EMAIL_TOPIC}</span></a><!-- ENDIF -->
-						<!-- IF U_EMAIL_PM --><a class="btn btn-default btn-xs tooltip-top" href="{U_EMAIL_PM}" title="{L_EMAIL_PM}" class=""><i class="fa fa-envelope"></i><span class="sr-only">{L_EMAIL_PM}</span></a><!-- ENDIF -->
-						<!-- IF U_PRINT_TOPIC --><a class="btn btn-default btn-xs tooltip-top" href="{U_PRINT_TOPIC}" title="{L_PRINT_TOPIC}" accesskey="p"><i class="fa fa-print"></i><span class="sr-only">{L_PRINT_TOPIC}</span></a><!-- ENDIF -->
-						<!-- IF U_PRINT_PM --><a class="btn btn-default btn-xs tooltip-top" href="{U_PRINT_PM}" title="{L_PRINT_PM}" accesskey="p"><i class="fa fa-print"></i><span class="sr-only">{L_PRINT_PM}</span></a><!-- ENDIF -->
-						<!-- IF not S_IS_BOT -->
-							<!-- IF S_WATCH_FORUM_LINK --><a class="btn btn-default btn-xs tooltip-top" href="{S_WATCH_FORUM_LINK}" title="{S_WATCH_FORUM_TITLE}"><i class="fa <!-- IF S_WATCHING_FORUM -->fa-eye-slash<!-- ELSE -->fa-eye<!-- ENDIF -->"></i><span class="sr-only">{S_WATCH_FORUM_TITLE}</span></a><!-- ENDIF -->
-							<!-- IF U_WATCH_TOPIC --><a class="btn btn-default btn-xs tooltip-top" href="{U_WATCH_TOPIC}" title="{L_WATCH_TOPIC}"><i class="fa <!-- IF S_WATCHING_TOPIC -->fa-eye-slash<!-- ELSE -->fa-eye<!-- ENDIF -->"></i><span class="sr-only">{L_WATCH_TOPIC}</span></a><!-- ENDIF -->
-							<!-- IF U_BOOKMARK_TOPIC --><a class="btn btn-default btn-xs tooltip-top" href="{U_BOOKMARK_TOPIC}" title="{L_BOOKMARK_TOPIC}"><i class="fa fa-bookmark"></i><span class="sr-only">{L_BOOKMARK_TOPIC}</span></a><!-- ENDIF -->
-							<!-- IF U_BUMP_TOPIC --><a class="btn btn-default btn-xs tooltip-top" href="{U_BUMP_TOPIC}" title="{L_BUMP_TOPIC}"><i class="fa fa-arrow-circle-o-up"></i><span class="sr-only">{L_BUMP_TOPIC}</span></a><!-- ENDIF -->
+<nav class="footer">
+	<div class="container">
+		<div class="row">	
+			<div class="breadcrumb">
+				<div class="row">
+					<div class="col-sm-5"><i class="fa fa-home"></i>&nbsp;-&nbsp;<a href="{U_INDEX}" accesskey="h">{L_INDEX}</a></div>
+					<!-- IF S_DISPLAY_POST_INFO -->
+					<div class="col-sm-2 hidden-xs text-center">
+						<div class=" dropup">
+						<!-- IF L_FORUM_PERMISSIONS -->
+						<a class="btn btn-default btn-xs tooltip-link" id="drop-permission" data-toggle="dropdown" href="#" title="{L_FORUM_PERMISSIONS}"><i class="fa fa-cogs"></i>&nbsp;<span class="fa fa-caret-up"></span></a>
+						<!-- ELSE -->
+						<a class="btn btn-default btn-xs tooltip-link" id="drop-permission" data-toggle="dropdown" href="#"><i class="fa fa-cogs"></i>&nbsp;<span class="fa fa-caret-up"></span></a>
 						<!-- ENDIF -->
+					 	<ul class="dropdown-menu">
+							<!-- BEGIN rules --><li class="text-left"><a href="#"><i class="fa fa-cog"></i> {rules.RULE}</a></li><!-- END rules -->
+						</ul>
+						</div>
+					</div>
+					<!-- ENDIF -->
+					<div class="<!-- IF ! S_DISPLAY_POST_INFO -->col-sm-offset-2<!-- ENDIF --> col-sm-5 text-right">
+						<div class="btn-group">
+							<!-- IF U_EMAIL_TOPIC --><a class="btn btn-default btn-xs tooltip-top" href="{U_EMAIL_TOPIC}" title="{L_EMAIL_TOPIC}"><i class="fa fa-envelope"></i><span class="sr-only">{L_EMAIL_TOPIC}</span></a><!-- ENDIF -->
+							<!-- IF U_EMAIL_PM --><a class="btn btn-default btn-xs tooltip-top" href="{U_EMAIL_PM}" title="{L_EMAIL_PM}" class=""><i class="fa fa-envelope"></i><span class="sr-only">{L_EMAIL_PM}</span></a><!-- ENDIF -->
+							<!-- IF U_PRINT_TOPIC --><a class="btn btn-default btn-xs tooltip-top" href="{U_PRINT_TOPIC}" title="{L_PRINT_TOPIC}" accesskey="p"><i class="fa fa-print"></i><span class="sr-only">{L_PRINT_TOPIC}</span></a><!-- ENDIF -->
+							<!-- IF U_PRINT_PM --><a class="btn btn-default btn-xs tooltip-top" href="{U_PRINT_PM}" title="{L_PRINT_PM}" accesskey="p"><i class="fa fa-print"></i><span class="sr-only">{L_PRINT_PM}</span></a><!-- ENDIF -->
+							<!-- IF not S_IS_BOT -->
+								<!-- IF S_WATCH_FORUM_LINK --><a class="btn btn-default btn-xs tooltip-top" href="{S_WATCH_FORUM_LINK}" title="{S_WATCH_FORUM_TITLE}"><i class="fa <!-- IF S_WATCHING_FORUM -->fa-eye-slash<!-- ELSE -->fa-eye<!-- ENDIF -->"></i><span class="sr-only">{S_WATCH_FORUM_TITLE}</span></a><!-- ENDIF -->
+								<!-- IF U_WATCH_TOPIC --><a class="btn btn-default btn-xs tooltip-top" href="{U_WATCH_TOPIC}" title="{L_WATCH_TOPIC}"><i class="fa <!-- IF S_WATCHING_TOPIC -->fa-eye-slash<!-- ELSE -->fa-eye<!-- ENDIF -->"></i><span class="sr-only">{L_WATCH_TOPIC}</span></a><!-- ENDIF -->
+								<!-- IF U_BOOKMARK_TOPIC --><a class="btn btn-default btn-xs tooltip-top" href="{U_BOOKMARK_TOPIC}" title="{L_BOOKMARK_TOPIC}"><i class="fa fa-bookmark"></i><span class="sr-only">{L_BOOKMARK_TOPIC}</span></a><!-- ENDIF -->
+								<!-- IF U_BUMP_TOPIC --><a class="btn btn-default btn-xs tooltip-top" href="{U_BUMP_TOPIC}" title="{L_BUMP_TOPIC}"><i class="fa fa-arrow-circle-o-up"></i><span class="sr-only">{L_BUMP_TOPIC}</span></a><!-- ENDIF -->
+							<!-- ENDIF -->
+						</div>
 					</div>
 				</div>
 			</div>
