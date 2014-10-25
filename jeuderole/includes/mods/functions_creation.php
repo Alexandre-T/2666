@@ -480,7 +480,13 @@ function creation_action($etape)
  */
 function gestionContact($numero)
 {
-    global $user, $template, $config,$phpEx;
+    global $user, $template, $config, $phpbb_root_path, $phpEx;
+    
+    //Initialisation
+    $poll = $uid = $bitfield = $options = '';
+    $bbcode_status = $allow_bbcode = $allow_urls = $allow_url_bbcode = $allow_smilies = $allow_img_bbcode = $allow_quote_bbcode = true;
+    $resume_display = $allow_flash_bbcode = false;
+    $resume_display = $resume_edit = $resume_storage = utf8_normalize_nfc(request_var('resume', '', true));
     
     switch ($numero) {
         case 4:
@@ -528,16 +534,12 @@ function gestionContact($numero)
             $cp_data['pf_'.$prefixe.'_nom'] = utf8_normalize_nfc(request_var('nom', '', true));
             $cp_data['pf_'.$prefixe.'_description'] = utf8_normalize_nfc(request_var('description', '', true));
             $cp_data['pf_'.$prefixe.'_avatar_name'] = utf8_normalize_nfc(request_var('avatar', '', true));
-            $resume = utf8_normalize_nfc(request_var('resume', '', true));
-            
-            $poll = $uid = $bitfield = $options = '';
-            $allow_bbcode = $allow_urls = $allow_smilies = true;
-            generate_text_for_storage($resume, $uid, $bitfield, $options, $allow_bbcode, $allow_urls, $allow_smilies);
-            $cp_data['pf_'.$prefixe.'_resume'] = $resume;
+            generate_text_for_storage($resume_storage, $uid, $bitfield, $options, $allow_bbcode, $allow_urls, $allow_smilies);
+            $cp_data['pf_'.$prefixe.'_resume'] = $resume_storage;
             $cp_data['pf_'.$prefixe.'_uid'] = $uid;
             $cp_data['pf_'.$prefixe.'_bit'] = $bitfield;
         }
-
+        
         //Cas particulier des contacts 3 et 4
         if ($numero > 2){
             
@@ -586,6 +588,13 @@ function gestionContact($numero)
     // Chargement ou rechargement (en raison de l'aperçu) des champs de profil
     $user->get_profile_fields($user->data['user_id']);
     
+    if ($apercu){
+        //$resume_display = generate_text_for_display($user->profile_fields['pf_'.$prefixe.'_resume'], $user->profile_fields['pf_'.$prefixe.'_uid'], $user->profile_fields['pf_'.$prefixe.'_bit'], 7);
+        $message_parser = new parse_message($resume_display);
+        $message_parser->parse($allow_bbcode, $allow_urls, $allow_smilies,  $allow_img_bbcode, $allow_flash_bbcode, $allow_quote_bbcode, $allow_url_bbcode);
+        $resume_display = $message_parser->format_display($allow_bbcode, $allow_urls, $allow_smilies, false);
+    }
+    
     // Vérification des droits
     creation_verification(CREATION_ETAPE);
     
@@ -595,7 +604,7 @@ function gestionContact($numero)
     ));
     
     // Initialisation des variables,
-    $a_resume = generate_text_for_edit($user->profile_fields['pf_'.$prefixe.'_resume'], $user->profile_fields['pf_'.$prefixe.'_uid'], 7);
+    $resume_edit = generate_text_for_edit($user->profile_fields['pf_'.$prefixe.'_resume'],$user->profile_fields['pf_'.$prefixe.'_uid'], 7);
     
     // Generate smiley listing
     // generate_smilies('inline', 1);
@@ -618,7 +627,7 @@ function gestionContact($numero)
         'AVATAR_SIZE' => $config['avatar_filesize'],
         'FORM_NOM' => $user->profile_fields['pf_'.$prefixe.'_nom'],
         'FORM_AVATAR' => $user->profile_fields['pf_'.$prefixe.'_avatar_name'],
-        'MESSAGE' => $a_resume['text'],
+        'MESSAGE' => $resume_edit['text'],
         'FORM_LIEN' => $user->profile_fields['pf_'.$prefixe.'_lien'],
         'FORM_DESCRIPTION' => $user->profile_fields['pf_'.$prefixe.'_description'],
         'CHECKBOX_CHECKED' =>  $checked,
@@ -635,6 +644,20 @@ function gestionContact($numero)
         'S_HELPBLOCK_MESSAGE' => true,
         'S_ERREUR' => ! empty($erreurTexte),
         'ERREUR' => $erreurTexte,
+        
+        'BBCODE_STATUS'			=> ($bbcode_status) ? sprintf($user->lang['BBCODE_IS_ON'], '<a href="' . append_sid("{$phpbb_root_path}faq.$phpEx", 'mode=bbcode') . '">', '</a>') : sprintf($user->lang['BBCODE_IS_OFF'], '<a href="' . append_sid("{$phpbb_root_path}faq.$phpEx", 'mode=bbcode') . '">', '</a>'),
+        'IMG_STATUS'			=> ($allow_img_bbcode) ? $user->lang['IMAGES_ARE_ON'] : $user->lang['IMAGES_ARE_OFF'],
+        'FLASH_STATUS'			=> ($allow_flash_bbcode) ? $user->lang['FLASH_IS_ON'] : $user->lang['FLASH_IS_OFF'],
+        'SMILIES_STATUS'		=> ($allow_smilies) ? $user->lang['SMILIES_ARE_ON'] : $user->lang['SMILIES_ARE_OFF'],
+        'URL_STATUS'			=> ($bbcode_status && $allow_url_bbcode) ? $user->lang['URL_IS_ON'] : $user->lang['URL_IS_OFF'],
+        
+        'S_APERCU'              => !empty($resume_display),
+        'RESUME_DISPLAY'        => $resume_display,
+        
+        'S_BBCODE_IMG'			=> $allow_img_bbcode,
+        'S_BBCODE_URL'			=> $allow_url_bbcode,
+        'S_BBCODE_FLASH'		=> $allow_flash_bbcode,
+        'S_BBCODE_QUOTE'		=> $allow_quote_bbcode,
         
         'POST_CONSEILS_CONTACT' => $messages[POST_CONSEILS_CONTACT],
         

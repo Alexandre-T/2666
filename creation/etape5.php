@@ -38,7 +38,8 @@ $user->get_profile_fields($user->data['user_id']);
 
 //Initialisation de variables
 $poll = $uid = $bitfield = $options = '';
-$allow_bbcode = $allow_urls = $allow_smilies = true;
+$bbcode_status = $allow_bbcode = $allow_urls = $allow_url_bbcode = $allow_smilies = $allow_img_bbcode = $allow_quote_bbcode = true;
+$allow_flash_bbcode = false; 
 $resume_storage = $resume_edit = $resume_display = '';
 
 // Build custom bbcodes array
@@ -72,8 +73,8 @@ if ($submit){
 //On regarde
 if ($apercu){
     $message_parser = new parse_message($resume_display);
-    $message_parser->parse(true, true, true, false);
-    $resume_display = $message_parser->format_display(true, true, true, false);
+    $message_parser->parse($allow_bbcode, $allow_urls, $allow_smilies,  $allow_img_bbcode, $allow_flash_bbcode, $allow_quote_bbcode, $allow_url_bbcode);
+    $resume_display = $message_parser->format_display($allow_bbcode, $allow_urls, $allow_smilies, false);
 }else{    
     $resume_edit = $user->profile_fields['pf_resume'];
     $uid = $user->profile_fields['pf_resume_uid'];
@@ -95,6 +96,17 @@ $template->assign_vars(array(
     'S_APERCU'       => $apercu,
     'MESSAGE'        => $resume_edit['text'],
     'RESUME_DISPLAY' => $resume_display,
+    
+    'BBCODE_STATUS'			=> ($bbcode_status) ? sprintf($user->lang['BBCODE_IS_ON'], '<a href="' . append_sid("{$phpbb_root_path}faq.$phpEx", 'mode=bbcode') . '">', '</a>') : sprintf($user->lang['BBCODE_IS_OFF'], '<a href="' . append_sid("{$phpbb_root_path}faq.$phpEx", 'mode=bbcode') . '">', '</a>'),
+    'IMG_STATUS'			=> ($allow_img_bbcode) ? $user->lang['IMAGES_ARE_ON'] : $user->lang['IMAGES_ARE_OFF'],
+    'FLASH_STATUS'			=> ($allow_flash_bbcode) ? $user->lang['FLASH_IS_ON'] : $user->lang['FLASH_IS_OFF'],
+    'SMILIES_STATUS'		=> ($allow_smilies) ? $user->lang['SMILIES_ARE_ON'] : $user->lang['SMILIES_ARE_OFF'],
+    'URL_STATUS'			=> ($bbcode_status && $allow_url_bbcode) ? $user->lang['URL_IS_ON'] : $user->lang['URL_IS_OFF'],
+    
+    'S_BBCODE_IMG'			=> $allow_img_bbcode,
+    'S_BBCODE_URL'			=> $allow_url_bbcode,
+    'S_BBCODE_FLASH'		=> $allow_flash_bbcode,
+    'S_BBCODE_QUOTE'		=> $allow_quote_bbcode,
     
 ));
 
