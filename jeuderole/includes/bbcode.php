@@ -418,7 +418,10 @@ class bbcode
 				'i_close'	=> '</span>',
 				'u_open'	=> '<span style="text-decoration: underline">',
 				'u_close'	=> '</span>',
-				'img'		=> '<img src="$1" alt="' . $user->lang['IMAGE'] . '" />',
+			    //AT MOD BBCODE bootstrap START
+			    //'img'		=> '<img src="$1" alt="' . $user->lang['IMAGE'] . '" />',
+				'img'		=> '<img src="$1" alt="' . $user->lang['IMAGE'] . '" class="img-thumbnail" />',
+			    //AT MOD BBCODE bootstrap END
 				'size'		=> '<span style="font-size: $1%; line-height: normal">$2</span>',
 				'color'		=> '<span style="color: $1">$2</span>',
 				'email'		=> '<a href="mailto:$1">$2</a>'
