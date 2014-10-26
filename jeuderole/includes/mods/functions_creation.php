@@ -530,7 +530,22 @@ function gestionContact($numero)
             // Analyse et traitement de la variable posté
             $race = request_var('race', AT_HUMAIN);
             $race = ($race !== AT_NEPHILIM)?AT_HUMAIN:AT_NEPHILIM;
+            
+            $sexe = request_var('sexe', AT_HOMME);
+            $sexe = ($sexe !== AT_HOMME)?AT_FEMME:AT_HOMME;
+            
+            $clan = request_var('clan', AT_SANSCLAN);
+            $acceptable = array(AT_ASMODEEN,AT_INFILTRE,AT_INSOUMIS,AT_IZANAGHI,AT_SKJALDMEYJAR,AT_VESTAL);
+            if (!in_array($clan, $acceptable)){
+                $clan = AT_SANSCLAN;
+            }
+            if (AT_SKJALDMEYJAR == $clan && AT_HOMME == $sexe){
+                $clan = AT_SANSCLAN;
+            }
+            
             $cp_data['pf_'.$prefixe.'_race'] = $race;
+            $cp_data['pf_'.$prefixe.'_sexe'] = $sexe;
+            $cp_data['pf_'.$prefixe.'_clan'] = $clan;
             $cp_data['pf_'.$prefixe.'_nom'] = utf8_normalize_nfc(request_var('nom', '', true));
             $cp_data['pf_'.$prefixe.'_description'] = utf8_normalize_nfc(request_var('description', '', true));
             $cp_data['pf_'.$prefixe.'_avatar_name'] = utf8_normalize_nfc(request_var('avatar', '', true));
@@ -638,8 +653,29 @@ function gestionContact($numero)
         'S_HOMME' => AT_HOMME == $user->profile_fields['pf_sexe'],
         'S_HUMAIN' => AT_HUMAIN == $user->profile_fields['pf_race'],
         'S_NEPHILIM' => AT_NEPHILIM == $user->profile_fields['pf_race'],
+        
         'HUMAIN_CHECKED'   => (AT_NEPHILIM != $user->profile_fields['pf_'.$prefixe.'_race'])?'checked="checked"':'',
         'NEPHILIM_CHECKED' => (AT_NEPHILIM == $user->profile_fields['pf_'.$prefixe.'_race'])?'checked="checked"':'',
+        
+        'HOMME_CHECKED'   => (AT_HOMME == $user->profile_fields['pf_'.$prefixe.'_sexe'])?'checked="checked"':'',
+        'FEMME_CHECKED'   => (AT_FEMME == $user->profile_fields['pf_'.$prefixe.'_sexe'])?'checked="checked"':'',
+        
+        'SELECTED_ASMODEEN'          => $user->profile_fields['pf_'.$prefixe.'_clan'] == AT_ASMODEEN?'selected':'',
+        'SELECTED_INSOUMIS'          => $user->profile_fields['pf_'.$prefixe.'_clan'] == AT_INSOUMIS?'selected':'',
+        'SELECTED_INFILTRE'          => $user->profile_fields['pf_'.$prefixe.'_clan'] == AT_INFILTRE?'selected':'',
+        'SELECTED_IZANAGHI'          => $user->profile_fields['pf_'.$prefixe.'_clan'] == AT_IZANAGHI?'selected':'',
+        'SELECTED_VESTAL'            => $user->profile_fields['pf_'.$prefixe.'_clan'] == AT_VESTAL?'selected':'',
+        'SELECTED_SANSCLAN'          => $user->profile_fields['pf_'.$prefixe.'_clan'] == AT_SANSCLAN?'selected':'',
+        'SELECTED_SKJALDMEYJAR'      => $user->profile_fields['pf_'.$prefixe.'_clan'] == AT_SKJALDMEYJAR?'selected':'',
+        
+        'AT_ASMODEEN'               => AT_ASMODEEN,
+        'AT_INSOUMIS'               => AT_INSOUMIS,
+        'AT_INFILTRE'               => AT_INFILTRE,
+        'AT_IZANAGHI'               => AT_IZANAGHI,
+        'AT_VESTAL'                 => AT_VESTAL,
+        'AT_SANSCLAN'               => AT_SANSCLAN,
+        'AT_SKJALDMEYJAR'           => AT_SKJALDMEYJAR,
+        
         'S_MESSAGE' => 1 == $message,
         'S_HELPBLOCK_MESSAGE' => true,
         'S_ERREUR' => ! empty($erreurTexte),

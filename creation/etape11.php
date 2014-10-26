@@ -85,8 +85,7 @@ $template->assign_vars(array(
     'PERSONNAGE_PROFESSION' =>  $user->profile_fields['pf_profession'],
     'PERSONNAGE_POUVOIR'    =>  $user->profile_fields['pf_pouvoir'],
     'PERSONNAGE_RESUME'     =>  $resume,
-    
-    
+
     'VOLEUSE_NOM'           =>  $user->profile_fields['pf_voleuse_nom'],
     'VOLEUSE_DESCRIPTION'   =>  $user->profile_fields['pf_voleuse_des'],
     'VOLEUSE_POUVOIR'       =>  $user->profile_fields['pf_voleuse_pouvoir'],
@@ -99,6 +98,9 @@ $template->assign_vars(array(
     'CONTACT1_DESCRIPTION'  =>  $user->profile_fields['pf_ca_description'],
     'CONTACT1_RESUME'       =>  $contact1_resume,
     'CONTACT1_AVATAR'       =>  get_contact_avatar(1, $user->profile_fields['pf_ca_avatar'], $user->profile_fields['pf_ca_avatar_type'], $user->profile_fields['pf_ca_avatar_width'], $user->profile_fields['pf_ca_avatar_height']),
+    'CONTACT1_SEXE'         =>  (AT_HOMME == $user->profile_fields['pf_ca_sexe'])?'Homme':'Femme',
+    'CONTACT1_CLAN'         =>  get_clan($user->profile_fields['pf_ca_clan'], $user->profile_fields['pf_ca_sexe']),
+    'CONTACT1_RACE'         =>  get_race($user->profile_fields['pf_ca_race'], $user->profile_fields['pf_ca_sexe']),
 
     //Contact 2
     'CONTACT2_NOM'          =>  $user->profile_fields['pf_cb_nom'],
@@ -106,6 +108,9 @@ $template->assign_vars(array(
     'CONTACT2_DESCRIPTION'  =>  $user->profile_fields['pf_cb_description'],
     'CONTACT2_RESUME'       =>  $contact2_resume,
     'CONTACT2_AVATAR'       =>  get_contact_avatar(2, $user->profile_fields['pf_cb_avatar'], $user->profile_fields['pf_cb_avatar_type'], $user->profile_fields['pf_cb_avatar_width'], $user->profile_fields['pf_cb_avatar_height']),
+    'CONTACT2_SEXE'         =>  (AT_HOMME == $user->profile_fields['pf_cb_sexe'])?'Homme':'Femme',
+    'CONTACT2_CLAN'         =>  get_clan($user->profile_fields['pf_cb_clan'], $user->profile_fields['pf_cb_sexe']),
+    'CONTACT2_RACE'         =>  get_race($user->profile_fields['pf_cb_race'], $user->profile_fields['pf_cb_sexe']),
     
     //Contact 3
     'CONTACT3_NOM'          =>  $user->profile_fields['pf_cc_nom'],
@@ -113,6 +118,10 @@ $template->assign_vars(array(
     'CONTACT3_DESCRIPTION'  =>  $user->profile_fields['pf_cc_description'],
     'CONTACT3_RESUME'       =>  $contact3_resume,
     'CONTACT3_AVATAR'       =>  get_contact_avatar(3, $user->profile_fields['pf_cc_avatar'], $user->profile_fields['pf_cc_avatar_type'], $user->profile_fields['pf_cc_avatar_width'], $user->profile_fields['pf_cc_avatar_height']),
+    'CONTACT3_SEXE'         =>  (AT_HOMME == $user->profile_fields['pf_cc_sexe'])?'Homme':'Femme',
+    'CONTACT3_CLAN'         =>  get_clan($user->profile_fields['pf_cc_clan'], $user->profile_fields['pf_cc_sexe']),
+    'CONTACT3_RACE'         =>  get_race($user->profile_fields['pf_cc_race'], $user->profile_fields['pf_cc_sexe']),
+    
 
     //Contact 4
     'CONTACT4_NOM'          =>  $user->profile_fields['pf_cd_nom'],
@@ -120,6 +129,9 @@ $template->assign_vars(array(
     'CONTACT4_DESCRIPTION'  =>  $user->profile_fields['pf_cd_description'],
     'CONTACT4_RESUME'       =>  $contact4_resume,
     'CONTACT4_AVATAR'       =>  get_contact_avatar(4, $user->profile_fields['pf_cd_avatar'], $user->profile_fields['pf_cd_avatar_type'], $user->profile_fields['pf_cd_avatar_width'], $user->profile_fields['pf_cd_avatar_height']),
+    'CONTACT4_SEXE'         =>  (AT_HOMME == $user->profile_fields['pf_cd_sexe'])?'Homme':'Femme',
+    'CONTACT4_CLAN'         =>  get_clan($user->profile_fields['pf_cd_clan'], $user->profile_fields['pf_cd_sexe']),
+    'CONTACT4_RACE'         =>  get_race($user->profile_fields['pf_cd_race'], $user->profile_fields['pf_cd_sexe']),
     
     /*''  =>  $user->profile_fields['pf_'],
     ''  =>  $user->profile_fields['pf_'],

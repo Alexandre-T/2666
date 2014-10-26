@@ -64,7 +64,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label for="nom" class="col-sm-2 control-label">Race</label>
+							<label for="race" class="col-sm-2 control-label">Race</label>
 							<div class="col-sm-10">
 								<label class="radio-inline">
   									<input type="radio" name="race" value="3" {HUMAIN_CHECKED}> Humain
@@ -72,7 +72,33 @@
 								<label class="radio-inline">
   									<input type="radio" name="race" value="2" {NEPHILIM_CHECKED}> Nephilim
 								</label>
-								<span class="help-block text-info">Indiquez si votre contact est un humain ou un Nephilim.</span>
+								<span class="help-block text-info">Indiquez si votre contact est un humain ou un Nephilim.</span>								
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="sexe" class="col-sm-2 control-label">Sexe</label>
+							<div class="col-sm-10">
+								<label class="radio-inline">
+  									<input type="radio" name="sexe" value="3" {FEMME_CHECKED}> Femme
+								</label>
+								<label class="radio-inline">
+  									<input type="radio" name="sexe" value="2" {HOMME_CHECKED}> Homme
+								</label>
+								<span class="help-block text-info">Indiquez si votre contact est une femme ou un homme.</span>								
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="clan" class="col-sm-2 control-label">Clan</label>
+							<div class="col-sm-10">
+								<select class="form-control" name="clan" id="clan">
+									<option value="{AT_SANSCLAN}" {SELECTED_SANSCLAN}>Sans clan</option>
+									<option value="{AT_ASMODEEN}" {SELECTED_ASMODEEN}>Clan des Asmodéens</option>
+									<option value="{AT_INFILTRE}" {SELECTED_INFILTRE}>Clan des Infiltrés</option>
+									<option value="{AT_INSOUMIS}" {SELECTED_INSOUMIS}>Clan des Insoumis</option>
+									<option value="{AT_IZANAGHI}" {SELECTED_IZANAGHI}>Clan des Izanaghis</option>
+									<option value="{AT_VESTAL}"   {SELECTED_VESTAL}  >Clan des Vestales</option>
+									<option value="{AT_SKJALDMEYJAR}" {SELECTED_SKJALDMEYJAR}>Corps des Skjaldmeyjar</option>
+								</select>
 							</div>
 						</div>
 						<div class="form-group">

@@ -56,7 +56,7 @@ function is_user_in_group($group_id,$user_id = null){
  * @return string Clan
  */
 function get_clan($clan, $sexe = AT_HOMME){
-    $homme = $sexe !== AT_FEMME;
+    $homme = ($sexe != AT_FEMME);
     switch ($clan) {
         case AT_ASMODEEN:
             return $homme?'Asmodéen':'Asmodéenne';
@@ -73,6 +73,25 @@ function get_clan($clan, $sexe = AT_HOMME){
         default:
             return 'Sans clan';
     }    
+}
+/**
+ * Get race from personnage
+ *
+ * @param int race
+ * @param int sexe (par défaut AT_HOMME)
+ *
+ * @return string Race
+ */
+function get_race($race, $sexe = AT_HOMME){
+    $homme = $sexe != AT_FEMME;
+    switch ($race) {
+        case AT_NEPHILIM:
+            return 'Nephilim';
+        case AT_ORIGINEL:
+            return $homme?'Originel':'Originelle';
+        default:
+            return $homme?'Humain':'Humaine';
+    }
 }
 
 /**
