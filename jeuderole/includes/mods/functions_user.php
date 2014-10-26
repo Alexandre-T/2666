@@ -59,7 +59,7 @@ function get_clan($clan, $sexe = AT_HOMME){
     $homme = $sexe !== AT_FEMME;
     switch ($clan) {
         case AT_ASMODEEN:
-            return $homme?'Asmodeen':'Asmodéenne';
+            return $homme?'Asmodéen':'Asmodéenne';
         case AT_INFILTRE:
             return $homme?'Infiltré':'Infiltrée';
         case AT_INSOUMIS:
@@ -68,6 +68,8 @@ function get_clan($clan, $sexe = AT_HOMME){
             return 'Izanaghi';
         case AT_VESTAL:
             return $homme?'Vestal':'Vestale';
+        case AT_SKJALDMEYJAR:
+            return 'Skjaldmey';
         default:
             return 'Sans clan';
     }    

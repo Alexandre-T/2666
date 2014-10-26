@@ -72,6 +72,7 @@ $template->assign_vars(array(
     'SELECTED_IZANAGHI'          => $user->profile_fields['pf_clan'] == AT_IZANAGHI?'selected':'',
     'SELECTED_VESTAL'            => $user->profile_fields['pf_clan'] == AT_VESTAL?'selected':'',
     'SELECTED_SANSCLAN'          => $user->profile_fields['pf_clan'] == AT_SANSCLAN?'selected':'',
+    'SELECTED_SKJALDMEYJAR'      => $user->profile_fields['pf_clan'] == AT_SKJALDMEYJAR?'selected':'',
 
     'AT_ASMODEEN'               => AT_ASMODEEN,
     'AT_INSOUMIS'               => AT_INSOUMIS,
@@ -79,6 +80,7 @@ $template->assign_vars(array(
     'AT_IZANAGHI'               => AT_IZANAGHI,
     'AT_VESTAL'                 => AT_VESTAL,
     'AT_SANSCLAN'               => AT_SANSCLAN,
+    'AT_SKJALDMEYJAR'           => AT_SKJALDMEYJAR,
     
     'FORM_DON'	  				=> $user->profile_fields['pf_don'],
 	'FORM_VOLEUSE_NOM'			=> $user->profile_fields['pf_voleuse_nom'],

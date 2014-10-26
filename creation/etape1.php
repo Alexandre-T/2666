@@ -47,6 +47,10 @@ if ($submit){
         //Attention, changement de sexe
         //On réinitialise l'avatar
         $cp_data['pf_avatar'] = '';
+        if (AT_HOMME == $sexe && AT_SKJALDMEYJAR == $user->profile_fields['pf_clan']){
+            //Pas d'homme chez les Skjaldmeyjar
+            $user->profile_fields['pf_clan'] = AT_SANSCLAN;
+        }
     }
     //Enregistrement
     $cp = new custom_profile();

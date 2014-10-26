@@ -117,6 +117,9 @@
 								<option value="{AT_INSOUMIS}" {SELECTED_INSOUMIS}>Clan des Insoumis</option>
 								<option value="{AT_IZANAGHI}" {SELECTED_IZANAGHI}>Clan des Izanaghis</option>
 								<option value="{AT_VESTAL}"   {SELECTED_VESTAL}  >Clan des Vestales</option>
+								<!-- IF S_FEMME -->
+								<option value="{AT_SKJALDMEYJAR}" {SELECTED_SKJALDMEYJAR}>Corps des Skjaldmeyjar</option>
+								<!-- ENDIF -->
 							</select>
 						</div>
 					</div>
@@ -132,8 +135,7 @@
 					<div class="form-group">
 						<label for="don" class="col-sm-2 control-label">Don</label>
 						<div class="col-sm-10">
-							<textarea class="form-control" name="don" id="don" placeholder="Don ou capacité rare" 
-									  value="{FORM_DON}" rows="4"></textarea>
+							<textarea class="form-control" name="don" id="don" placeholder="Don ou capacité rare" rows="4">{FORM_DON}</textarea>
 						</div>
 					</div>
 					<!-- ENDIF -->
