@@ -4764,7 +4764,16 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'U_FEED'				=> generate_board_url() . "/feed.$phpEx",
 		
 		//AT BEGIN NEW LINK
-		'U_BACKGROUND'			=> append_sid("{$phpbb_root_path}description-du-jeu/background-t8.html"),
+	    'U_MEMBERLIST_ACTIF'    => append_sid($phpbb_root_path.'groupe-actif-g'.GROUPE_ACTIF.'.html'),
+	    'U_MEMBERLIST_INACTIF'	=> append_sid($phpbb_root_path.'groupe-inactif-g'.GROUPE_INACTIF.'.html'),
+	    'U_MEMBERLIST_ATTENTE'	=> append_sid($phpbb_root_path.'groupe-demandecreation-g'.GROUPE_DEMANDE_CREATION.'.html'),
+	    'U_MEMBERLIST_ASMODEENS'=> append_sid($phpbb_root_path.'groupe-asmodeens-g'.AT_ASMODEEN.'.html'),
+	    'U_MEMBERLIST_INFILTRES'    => append_sid($phpbb_root_path.'groupe-infiltres-g'.AT_INFILTRE.'.html'),
+	    'U_MEMBERLIST_INSOUMIS'		=> append_sid($phpbb_root_path.'groupe-insoumis-g'.AT_INSOUMIS.'.html'),
+	    'U_MEMBERLIST_IZANAGHIS'	=> append_sid($phpbb_root_path.'groupe-izanaghis-g'.AT_IZANAGHI.'.html'),
+	    'U_MEMBERLIST_SKJALDMEYJAR'	=> append_sid($phpbb_root_path.'groupe-skjaldmeyjar-g'.AT_SKJALDMEYJAR.'.html'),
+	    'U_MEMBERLIST_VESTALES'	=> append_sid($phpbb_root_path.'groupe-vestal-g'.AT_VESTAL.'.html'),
+	    'U_BACKGROUND'			=> append_sid("{$phpbb_root_path}description-du-jeu/background-t8.html"),
 		'U_GUIDE'				=> append_sid("{$phpbb_root_path}aides-de-jeu/guide-du-nouvel-arrivant-t3.html"),
 		'U_OU_SUIS_JE'			=> append_sid("{$phpbb_root_path}accueil-du-jeu/ou-suis-je-t7.html"),
 		'U_REGLEMENT'			=> append_sid("{$phpbb_root_path}accueil-du-jeu/reglement-t2.html"),
