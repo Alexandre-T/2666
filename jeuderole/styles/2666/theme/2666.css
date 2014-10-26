@@ -114,6 +114,12 @@ span.pull-right div.inline-attachment{
 span.noborder img.img-thumbnail{
 	border-style: none;
 }
+span.pull-left img.img-thumbnail{
+	margin-right : 5px;
+}
+span.pull-right img.img-thumbnail{
+	margin-left : 5px;
+}
 
 
 table.table{
