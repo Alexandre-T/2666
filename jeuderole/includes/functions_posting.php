@@ -1746,7 +1746,11 @@ function submit_post($mode, $subject, $username, $topic_type, &$poll, &$data, $u
 				'bbcode_bitfield'	=> $data['bbcode_bitfield'],
 				'bbcode_uid'		=> $data['bbcode_uid'],
 				'post_postcount'	=> ($auth->acl_get('f_postcount', $data['forum_id'])) ? 1 : 0,
-				'post_edit_locked'	=> $data['post_edit_locked']
+				//AT MOD CONTACT START
+				//'post_edit_locked'	=> $data['post_edit_locked']
+				'post_edit_locked'	=> $data['post_edit_locked'],
+				'contact_id'        => isset($data['contact_id'])?(int)$data['contact_id']:0,
+				//AT MOD CONTACT END
 			);
 		break;
 

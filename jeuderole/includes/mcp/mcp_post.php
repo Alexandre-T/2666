@@ -469,7 +469,10 @@ function change_poster(&$post_info, $userdata)
 
 	if (file_exists($phpbb_root_path . 'includes/search/' . $search_type . '.' . $phpEx))
 	{
-		require("{$phpbb_root_path}includes/search/$search_type.$phpEx");
+	    //AT MOD AUTOCHANGE USER START
+		//require("{$phpbb_root_path}includes/search/$search_type.$phpEx");
+		require_once("{$phpbb_root_path}includes/search/$search_type.$phpEx");
+		//AT MOD AUTOCHANGE USER END
 
 		// We do some additional checks in the module to ensure it can actually be utilised
 		$error = false;

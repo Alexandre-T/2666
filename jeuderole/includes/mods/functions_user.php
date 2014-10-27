@@ -149,3 +149,12 @@ function get_contact_avatar($contact, $avatar, $avatar_type, $avatar_width, $ava
     $avatar_img .= $avatar;
     return '<img src="' . (str_replace(' ', '%20', $avatar_img)) . '" width="' . $avatar_width . '" height="' . $avatar_height . '" alt="' . ((!empty($user->lang[$alt])) ? $user->lang[$alt] : $alt) . '" />';
 }
+/**
+ * Remplace tous les caractères bizarre par -
+ * 
+ * @param string $nom
+ * @return string
+ */
+function seoencode($nom){
+    return preg_replace('#[^A-Za-z0-9]+#', '-', $nom);
+}

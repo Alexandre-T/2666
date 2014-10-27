@@ -1,0 +1,213 @@
+<!-- INCLUDE overall_header.html -->
+<h2>Validation de {PERSONNAGE_PRENOM} {PERSONNAGE_NOM}</h2>
+
+<div class="creation borderedContainer">
+<h3 class="soustitre">Passera-t-<!-- IF S_PERSONNAGE_FEMME -->elle<!-- ELSE -->il<!-- ENDIF --> le test ou non ?</h3>
+
+	<div class="row">
+		<div class="col-sm-3"> 
+			<img src="{T_THEME_PATH}/images/lazer.jpg" width="200" height="320" class="img-thumbnail img-responsive"/>
+			<hr/>
+		</div>
+		<div class="col-sm-9">
+			<p class="text-center btn-group">
+				<button onclick="return false;" class="btn btn-default" data-toggle="modal" data-target="#modalFiche" id="buttonFiche"><i class="fa fa-fw fa-question-circle"></i>&nbsp;Fiche de personnage</button>
+				<button onclick="return false;" class="btn btn-default" data-toggle="modal" data-target="#modalFichePublique" id="buttonFichePublique"><i class="fa fa-fw fa-question-circle"></i>&nbsp;Informations publiques</button>
+				<button onclick="return false;" class="btn btn-default" data-toggle="modal" data-target="#modalContact1" id="buttonContact1"><i class="fa fa-fw fa-question-circle"></i>&nbsp;{CONTACT1_NOM}</button>
+				<button onclick="return false;" class="btn btn-default" data-toggle="modal" data-target="#modalContact2" id="buttonContact2"><i class="fa fa-fw fa-question-circle"></i>&nbsp;{CONTACT2_NOM}</button>
+				<!-- IF S_CONTACT_3 -->
+				<button onclick="return false;" class="btn btn-default" data-toggle="modal" data-target="#modalContact3" id="buttonContact3"><i class="fa fa-fw fa-question-circle"></i>&nbsp;{CONTACT3_NOM}</button>
+				<!-- ELSE -->
+				<button class="hidden btn-success" id="buttonContact3"></button>
+				<!-- ENDIF -->
+				<!-- IF S_CONTACT_4 -->
+				<button onclick="return false;" class="btn btn-default" data-toggle="modal" data-target="#modalContact4" id="buttonContact4"><i class="fa fa-fw fa-question-circle"></i>&nbsp;{CONTACT4_NOM}</button>
+				<!-- ELSE -->
+				<button class="hidden btn-success" id="buttonContact4"></button>
+				<!-- ENDIF -->
+			</p>
+			<h3>Validation : Dernières vérifications</h3>
+			<!-- @todo ajouter les contrôles -->			
+				<p>
+					Pour que le bouton de validation soit activé, vérifie chaque rubrique ci-dessus. Quand tous les boutons seront passés au vert, 
+					le dossier de {PERSONNAGE_PRENOM} {PERSONNAGE_NOM} sera accepté, tu n'auras plus qu'à cliquer sur Valider. Et je m'occuperai alors de tout !
+					
+					C'est-y pas bon d'avoir une femme vraiment à ton service ? Qui fait exactement ce que tu lui demandes mon chou ?
+				</p>
+				<div class="text-center">
+					<a href="{U_INVALIDATION}" class="btn btn-warning"><i class="fa fa-fw fa-thumbs-o-down"></i>&nbsp;Invalider</a>
+					<a href="{U_VALIDATION}" class="btn btn-success"  id="buttonFinal"><i class="fa fa-fw fa-thumbs-o-up"></i>&nbsp;Valider</a>
+				</div>				
+		</div>
+	</div>
+	
+	
+</div>
+<!-- DEFINE $MODAL_ID = 'modalFiche' -->
+<!-- DEFINE $MODAL_OPTIONS = 'modal-lg' -->
+
+
+<!-- Fiche de personnage -->
+<!-- INCLUDE modal/header.html -->
+Fiche de personnage
+<!-- INCLUDE modal/body.html -->
+<h4>Infos générales</h4>
+<dl class="dl-horizontal">
+	<dt><a href="etape4.php" class="tooltip-left" title="Changer d'identité">Identité</a>&nbsp;:</dt><dd>{PERSONNAGE_PRENOM} {PERSONNAGE_NOM}</dd>
+	<dt><a href="etape1.php" class="tooltip-left" title="Changer de sexe">Sexe</a>&nbsp;:</dt><dd><!-- IF S_FEMME -->Féminin<!-- ELSE -->Masculin<!-- ENDIF --></dd>
+	<dt><a href="etape2.php" class="tooltip-left" title="Changer de race">Race</a>&nbsp;:</dt><dd><!-- IF S_HUMAIN -->Humain<!-- ELSE -->Nephilim<!-- ENDIF --></dd>
+	<dt><a href="etape5.php" class="tooltip-left" title="Changer de clan">Clan</a>&nbsp;:</dt><dd>{PERSONNAGE_CLAN}</dd>
+	<!-- IF S_NEPHILIM -->
+	<dt><a href="etape4.php" class="tooltip-left" title="Changer d'âge">Âge réel</a>&nbsp;:</dt><dd>{PERSONNAGE_AGE} ans</dd>	
+	<dt><a href="etape5.php" class="tooltip-left" title="Changer de pouvoir">Pouvoir</a>&nbsp;:</dt><dd>{PERSONNAGE_POUVOIR}</dd>
+	<!-- ELSE -->
+	<dt><a href="etape5.php" class="tooltip-left" title="Changer de don">Don</a>&nbsp;:</dt><dd>{PERSONNAGE_DON}</dd>
+	<!-- ENDIF -->
+	<dt><a href="etape4.php" class="tooltip-left" title="Changer ce passé">Passé</a>&nbsp;:</dt><dd>{PERSONNAGE_PASSE}</dd>
+</dl>
+<p></p>   
+<!-- INCLUDE modal/before_footer.html -->
+<div class="btn-group">
+	<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-fw fa-times"></i>&nbsp;Fermer</button>
+	<button type="button" class="btn btn-success" data-dismiss="modal" onclick="validerBouton($('#buttonFiche'));"><i class="fa fa-fw fa-check-square-o"></i>&nbsp;Je valide cette rubrique</button>
+</div>
+<!-- INCLUDE modal/after_footer.html -->
+
+
+<!-- Fiche publique -->
+<!-- DEFINE $MODAL_ID = 'modalFichePublique' -->
+<!-- INCLUDE modal/header.html -->
+Résumé
+<!-- INCLUDE modal/body.html -->
+<h4>Infos publiques</h4>
+<p>Les informations ci-dessous seront présentées aux autres joueurs. Prend donc bien soin des informations que tu y révèles.</p>
+<div class="row">
+	<div class="col-sm-8">
+		<dl class="dl-horizontal">
+			<dt><a href="etape4.php" class="tooltip-left" title="Changer d'identité">Identité</a>&nbsp;:</dt><dd>{PERSONNAGE_PRENOM} {PERSONNAGE_NOM}</dd>
+			<dt><a href="etape1.php" class="tooltip-left" title="Changer de sexe">Sexe</a>&nbsp;:</dt><dd><!-- IF S_FEMME -->Féminin<!-- ELSE -->Masculin<!-- ENDIF --></dd>
+			<dt><a href="etape2.php" class="tooltip-left" title="Changer de race">Race</a>&nbsp;:</dt><dd><!-- IF S_HUMAIN -->Humain<!-- ELSE -->Nephilim<!-- ENDIF --></dd>	
+			<dt><a href="etape6.php" class="tooltip-left" title="Changer ce résumé">Résumé</a>&nbsp;:</dt><dd>{PERSONNAGE_RESUME}</dd>
+		</dl>
+	</div>
+	<div class="col-sm-4 text-center">
+		<div class="div-thumbnail">{PERSONNAGE_AVATAR}</div>
+		<p class="text-center"><em>{PERSONNAGE_AVATAR_NOM}</em></p>
+	</div>
+</div>
+<!-- INCLUDE modal/before_footer.html -->
+<div class="btn-group">
+	<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-fw fa-times"></i>&nbsp;Fermer</button>
+	<button type="button" class="btn btn-success" data-dismiss="modal" onclick="validerBouton($('#buttonFichePublique'));"><i class="fa fa-fw fa-check-square-o"></i>&nbsp;Je valide cette rubrique</button>
+</div>
+<!-- INCLUDE modal/after_footer.html -->
+<!-- INCLUDE overall_footer.html -->
+
+
+<!-- Contact 1 -->
+<!-- DEFINE $MODAL_ID = 'modalContact1' -->
+<!-- INCLUDE modal/header.html -->
+Contact principal : {CONTACT1_NOM}
+<!-- INCLUDE modal/body.html -->
+<h4>Infos publiques</h4>
+<div class="row">
+	<div class="col-sm-8">
+		<dl class="dl-horizontal">
+			<dt><a href="{U_ETAPE_7}" class="tooltip-left" title="Modifier ce contact">Visible</a>&nbsp;:</dt><dd>{CONTACT1_RESUME}</dd>
+			<dt><a href="{U_ETAPE_7}" class="tooltip-left" title="Modifier ce contact">Secret</a>&nbsp;:</dt><dd>{CONTACT1_DESCRIPTION}</dd>
+		</dl>
+	</div>
+	<div class="col-sm-4 text-center">
+		<div class="div-thumbnail">{CONTACT1_AVATAR}</div>
+		<p class="text-center"><em>{CONTACT1_AVATAR_NOM}</em></p>
+	</div>
+</div>
+<!-- INCLUDE modal/before_footer.html -->
+<div class="btn-group">
+	<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-fw fa-times"></i>&nbsp;Fermer</button>
+	<button type="button" class="btn btn-success" data-dismiss="modal" onclick="validerBouton($('#buttonContact1'));"><i class="fa fa-fw fa-check-square-o"></i>&nbsp;Je valide cette rubrique</button>
+</div>
+<!-- INCLUDE modal/after_footer.html -->
+<!-- INCLUDE overall_footer.html -->
+
+<!-- Contact 2 -->
+<!-- DEFINE $MODAL_ID = 'modalContact2' -->
+<!-- INCLUDE modal/header.html -->
+Contact principal : {CONTACT2_NOM}
+<!-- INCLUDE modal/body.html -->
+<h4>Infos publiques</h4>
+<div class="row">
+	<div class="col-sm-8">
+		<dl class="dl-horizontal">
+			<dt><a href="{U_ETAPE_7}" class="tooltip-left" title="Modifier ce contact">Visible</a>&nbsp;:</dt><dd>{CONTACT2_RESUME}</dd>
+			<dt><a href="{U_ETAPE_7}" class="tooltip-left" title="Modifier ce contact">Secret</a>&nbsp;:</dt><dd>{CONTACT2_DESCRIPTION}</dd>
+		</dl>
+	</div>
+	<div class="col-sm-4 text-center">
+		<div class="div-thumbnail">{CONTACT2_AVATAR}</div>
+		<p class="text-center"><em>{CONTACT2_AVATAR_NOM}</em></p>
+	</div>
+</div>
+<!-- INCLUDE modal/before_footer.html -->
+<div class="btn-group">
+	<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-fw fa-times"></i>&nbsp;Fermer</button>
+	<button type="button" class="btn btn-success" data-dismiss="modal" onclick="validerBouton($('#buttonContact2'));"><i class="fa fa-fw fa-check-square-o"></i>&nbsp;Je valide cette rubrique</button>
+</div>
+<!-- INCLUDE modal/after_footer.html -->
+<!-- INCLUDE overall_footer.html -->
+
+<!-- IF S_CONTACT_3 -->
+<!-- Contact 3 -->
+<!-- DEFINE $MODAL_ID = 'modalContact3' -->
+<!-- INCLUDE modal/header.html -->
+Contact principal : {CONTACT3_NOM}
+<!-- INCLUDE modal/body.html -->
+<h4>Infos publiques</h4>
+<div class="row">
+	<div class="col-sm-8">
+		<dl class="dl-horizontal">
+			<dt><a href="{U_ETAPE_7}" class="tooltip-left" title="Modifier ce contact">Visible</a>&nbsp;:</dt><dd>{CONTACT3_RESUME}</dd>
+			<dt><a href="{U_ETAPE_7}" class="tooltip-left" title="Modifier ce contact">Secret</a>&nbsp;:</dt><dd>{CONTACT3_DESCRIPTION}</dd>
+		</dl>
+	</div>
+	<div class="col-sm-4 text-center">
+		<div class="div-thumbnail">{CONTACT3_AVATAR}</div>
+		<p class="text-center"><em>{CONTACT3_AVATAR_NOM}</em></p>
+	</div>
+</div>
+<!-- INCLUDE modal/before_footer.html -->
+<div class="btn-group">
+	<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-fw fa-times"></i>&nbsp;Fermer</button>
+	<button type="button" class="btn btn-success" data-dismiss="modal" onclick="validerBouton($('#buttonContact3'));"><i class="fa fa-fw fa-check-square-o"></i>&nbsp;Je valide cette rubrique</button>
+</div>
+<!-- INCLUDE modal/after_footer.html -->
+<!-- INCLUDE overall_footer.html -->
+<!-- ENDIF -->
+
+<!-- IF S_CONTACT_4 -->
+<!-- Contact 4 -->
+<!-- DEFINE $MODAL_ID = 'modalContact4' -->
+<!-- INCLUDE modal/header.html -->
+Contact principal : {CONTACT4_NOM}
+<!-- INCLUDE modal/body.html -->
+<h4>Infos publiques</h4>
+<div class="row">
+	<div class="col-sm-8">
+		<dl class="dl-horizontal">
+			<dt><a href="{U_ETAPE_7}" class="tooltip-left" title="Modifier ce contact">Visible</a>&nbsp;:</dt><dd>{CONTACT4_RESUME}</dd>
+			<dt><a href="{U_ETAPE_7}" class="tooltip-left" title="Modifier ce contact">Secret</a>&nbsp;:</dt><dd>{CONTACT4_DESCRIPTION}</dd>
+		</dl>
+	</div>
+	<div class="col-sm-4 text-center">
+		<div class="div-thumbnail">{CONTACT4_AVATAR}</div>
+		<p class="text-center"><em>{CONTACT4_AVATAR_NOM}</em></p>
+	</div>
+</div>
+<!-- INCLUDE modal/before_footer.html -->
+<div class="btn-group">
+	<button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-fw fa-times"></i>&nbsp;Fermer</button>
+	<button type="button" class="btn btn-success" data-dismiss="modal" onclick="validerBouton($('#buttonContact4'));"><i class="fa fa-fw fa-check-square-o"></i>&nbsp;Je valide cette rubrique</button>
+</div>
+<!-- INCLUDE modal/after_footer.html -->
+<!-- INCLUDE overall_footer.html -->
+<!-- ENDIF -->
