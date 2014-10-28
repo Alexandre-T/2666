@@ -18,6 +18,7 @@ include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_posting.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 include($phpbb_root_path . 'includes/message_parser.' . $phpEx);
+include($phpbb_root_path . 'includes/mods/functions_user.' . $phpEx);
 
 
 // Start session management
@@ -31,6 +32,9 @@ $topic_id	= request_var('t', 0);
 $forum_id	= request_var('f', 0);
 $draft_id	= request_var('d', 0);
 $lastclick	= request_var('lastclick', 0);
+//AT MOD CONTACT START
+$contact_id = request_var('contact',0);
+//AT MOD CONTACT END
 
 $submit		= (isset($_POST['post'])) ? true : false;
 $preview	= (isset($_POST['preview'])) ? true : false;
@@ -1145,7 +1149,10 @@ if ($submit || $preview || $refresh)
 				'message'				=> $message_parser->message,
 				'attachment_data'		=> $message_parser->attachment_data,
 				'filename_data'			=> $message_parser->filename_data,
-
+			    //AT MOD CONTACT start
+			    'contact_id'            => $contact_id,
+			    //AT MOD CONTACT stop
+			    			 
 				'topic_approved'		=> (isset($post_data['topic_approved'])) ? $post_data['topic_approved'] : false,
 				'post_approved'			=> (isset($post_data['post_approved'])) ? $post_data['post_approved'] : false,
 			);
@@ -1512,10 +1519,42 @@ $template->assign_vars(array(
 	'S_BBCODE_URL'			=> $url_status,
 	'S_BBCODE_FLASH'		=> $flash_status,
 	'S_BBCODE_QUOTE'		=> $quote_status,
-
+	
 	'S_POST_ACTION'			=> $s_action,
 	'S_HIDDEN_FIELDS'		=> $s_hidden_fields)
 );
+
+//MOD AT - Poster avec un contact - Start
+if (is_user_in_group(GROUPE_ACTIF)){
+    //Chargement des champs de profil
+    $user->get_profile_fields($user->data['user_id']);
+    $contacts[0] = $user->data['username'];
+    $contacts[1] = $user->profile_fields['pf_ca_nom'];
+    $contacts[2] = $user->profile_fields['pf_cb_nom'];
+    if (AT_ACTIF == $user->profile_fields['pf_cc_actif']){
+        $contacts[3] = $user->profile_fields['pf_cc_nom'];        
+    }
+    if (AT_ACTIF == $user->profile_fields['pf_cd_actif']){
+	    $contacts[4] = $user->profile_fields['pf_cd_nom'];
+    }
+    $contact_options = '';
+    foreach ($contacts as $key => $contact){
+        $contact_options .= sprintf('<option value="%d">%s</option>',$key,$contact);
+    }
+    $template->assign_vars(array(
+        'S_POSTING_CONTACT'     => true,
+        'CONTACT_0_NOM'         => $user->data['username'],
+        'CONTACT_1_NOM'         => $user->profile_fields['pf_ca_nom'],
+        'CONTACT_2_NOM'         => $user->profile_fields['pf_cb_nom'],
+        'CONTACT_3_NOM'         => $user->profile_fields['pf_cc_nom'],
+        'CONTACT_4_NOM'         => $user->profile_fields['pf_cd_nom'],
+        'S_CONTACT_3'           => $user->profile_fields['pf_cc_actif'],
+        'S_CONTACT_4'           => $user->profile_fields['pf_cd_actif'],
+        'CONTACT_OPTIONS'		=> $contact_options,
+    ));
+    
+}
+//MOD AT - Poster avec un contact - End
 
 // Build custom bbcodes array
 display_custom_bbcodes();

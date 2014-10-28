@@ -131,7 +131,16 @@
 		</div>
 	</div>
 	<!-- ENDIF -->
-
+	<!-- IF not S_PRIVMSGS and not S_DISPLAY_USERNAME and S_POSTING_CONTACT -->
+	<div class="form-group">
+		<label class="control-label col-sm-2" for="contact"> {L_POSTER} </label>
+		<div class="col-sm-10">
+			<select name="contact" class="form-control">
+				{CONTACT_OPTIONS}
+			</select>
+		</div>
+	</div>
+	<!-- ENDIF -->
 	<!-- IF S_POST_ACTION or S_PRIVMSGS or S_EDIT_DRAFT -->
 	<div class="form-group">
 		<label class="control-label col-sm-2" for="subject"> {L_SUBJECT} </label>
