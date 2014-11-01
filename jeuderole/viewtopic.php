@@ -17,6 +17,9 @@ $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 include($phpbb_root_path . 'includes/bbcode.' . $phpEx);
+//AT MOD CONTACT STAR
+include($phpbb_root_path . 'includes/mods/functions_user.' . $phpEx);
+//AT MOD CONTACT STOP
 
 // www.phpBB-SEO.com SEO TOOLKIT BEGIN
 if (empty($_REQUEST['f'])) {
@@ -1130,6 +1133,10 @@ while ($row = $db->sql_fetchrow($result))
 		'post_edit_reason'	=> $row['post_edit_reason'],
 		'post_edit_user'	=> $row['post_edit_user'],
 		'post_edit_locked'	=> $row['post_edit_locked'],
+	    
+	    //AT MOD CONTACT START
+	    'contact_id'        => $row['contact_id'],
+	    //AT MOD CONTACT END
 
 		// Make sure the icon actually exists
 		'icon_id'			=> (isset($icons[$row['icon_id']]['img'], $icons[$row['icon_id']]['height'], $icons[$row['icon_id']]['width'])) ? $row['icon_id'] : 0,
@@ -1566,6 +1573,45 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 	if ($config['load_cpf_viewtopic'])
 	{
 		$cp_row = (isset($profile_fields_cache[$poster_id])) ? $cp->generate_profile_fields_template('show', false, $profile_fields_cache[$poster_id]) : array();
+		//AT MOD CONTACT START
+		//race //clan //sexe //nom //avatar
+		$couleur = AT_HUMAIN == $profile_fields_cache[$poster_id]['ca_race']['value']?COULEUR_HUMAIN:(AT_ORIGINEL == $profile_fields_cache[$poster_id]['ca_race']['value']?COULEUR_ORIGINEL: COULEUR_NEPHILIM);
+		$user_cache[$poster_id]['contact1_race']    = get_race($profile_fields_cache[$poster_id]['ca_race']['value'],$profile_fields_cache[$poster_id]['ca_sexe']['value']);
+		$user_cache[$poster_id]['contact1_clan']    = get_clan($profile_fields_cache[$poster_id]['ca_clan']['value'],$profile_fields_cache[$poster_id]['ca_sexe']['value']);
+		$user_cache[$poster_id]['contact1_nom' ]    = $profile_fields_cache[$poster_id]['ca_nom']['value'];
+		$user_cache[$poster_id]['contact1_avatar']  = get_contact_avatar(1, $profile_fields_cache[$poster_id]['ca_avatar']['value'], $profile_fields_cache[$poster_id]['ca_avatar_type']['value'], $profile_fields_cache[$poster_id]['ca_avatar_width']['value'], $profile_fields_cache[$poster_id]['ca_avatar_height']['value']);
+		$user_cache[$poster_id]["contact1_full"]    = get_username_string('full', $poster_id, $profile_fields_cache[$poster_id]['ca_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['ca_nom']['value']);
+		$user_cache[$poster_id]["contact1_colour"]  = get_username_string('colour', $poster_id, $profile_fields_cache[$poster_id]['ca_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['ca_nom']['value']);
+		$user_cache[$poster_id]["contact1_username"]= get_username_string('username', $poster_id, $profile_fields_cache[$poster_id]['ca_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['ca_nom']['value']);
+
+		$couleur = AT_HUMAIN == $profile_fields_cache[$poster_id]['cb_race']['value']?COULEUR_HUMAIN:(AT_ORIGINEL == $profile_fields_cache[$poster_id]['cb_race']['value']?COULEUR_ORIGINEL: COULEUR_NEPHILIM);
+		$user_cache[$poster_id]['contact2_race']    = get_race($profile_fields_cache[$poster_id]['cb_race']['value'],$profile_fields_cache[$poster_id]['cb_sexe']['value']);
+		$user_cache[$poster_id]['contact2_clan']    = get_clan($profile_fields_cache[$poster_id]['cb_clan']['value'],$profile_fields_cache[$poster_id]['cb_sexe']['value']);
+		$user_cache[$poster_id]['contact2_nom' ]    = $profile_fields_cache[$poster_id]['cb_nom']['value'];
+		$user_cache[$poster_id]['contact2_avatar']  = get_contact_avatar(2, $profile_fields_cache[$poster_id]['cb_avatar']['value'], $profile_fields_cache[$poster_id]['cb_avatar_type']['value'], $profile_fields_cache[$poster_id]['cb_avatar_width']['value'], $profile_fields_cache[$poster_id]['cb_avatar_height']['value']);
+		$user_cache[$poster_id]["contact2_full"]    = get_username_string('full', $poster_id, $profile_fields_cache[$poster_id]['cb_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cb_nom']['value']);
+		$user_cache[$poster_id]["contact2_colour"]  = get_username_string('colour', $poster_id, $profile_fields_cache[$poster_id]['cb_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cb_nom']['value']);
+		$user_cache[$poster_id]["contact2_username"]= get_username_string('username', $poster_id, $profile_fields_cache[$poster_id]['cb_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cb_nom']['value']);
+		
+		$couleur = AT_HUMAIN == $profile_fields_cache[$poster_id]['cc_race']['value']?COULEUR_HUMAIN:(AT_ORIGINEL == $profile_fields_cache[$poster_id]['cc_race']['value']?COULEUR_ORIGINEL: COULEUR_NEPHILIM);
+		$user_cache[$poster_id]['contact3_race']    = get_race($profile_fields_cache[$poster_id]['cc_race']['value'],$profile_fields_cache[$poster_id]['cc_sexe']['value']);
+		$user_cache[$poster_id]['contact3_clan']    = get_clan($profile_fields_cache[$poster_id]['cc_clan']['value'],$profile_fields_cache[$poster_id]['cc_sexe']['value']);
+		$user_cache[$poster_id]['contact3_nom' ]    = $profile_fields_cache[$poster_id]['cc_nom']['value'];
+		$user_cache[$poster_id]['contact3_avatar']  = get_contact_avatar(3, $profile_fields_cache[$poster_id]['cc_avatar']['value'], $profile_fields_cache[$poster_id]['cc_avatar_type']['value'], $profile_fields_cache[$poster_id]['cc_avatar_width']['value'], $profile_fields_cache[$poster_id]['cc_avatar_height']['value']);
+		$user_cache[$poster_id]["contact3_full"]    = get_username_string('full', $poster_id, $profile_fields_cache[$poster_id]['cc_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cc_nom']['value']);
+		$user_cache[$poster_id]["contact3_colour"]  = get_username_string('colour', $poster_id, $profile_fields_cache[$poster_id]['cc_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cc_nom']['value']);
+		$user_cache[$poster_id]["contact3_username"]= get_username_string('username', $poster_id, $profile_fields_cache[$poster_id]['cc_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cc_nom']['value']);
+		
+		$couleur = AT_HUMAIN == $profile_fields_cache[$poster_id]['cd_race']['value']?COULEUR_HUMAIN:(AT_ORIGINEL == $profile_fields_cache[$poster_id]['cd_race']['value']?COULEUR_ORIGINEL: COULEUR_NEPHILIM);
+		$user_cache[$poster_id]['contact4_race']    = get_race($profile_fields_cache[$poster_id]['cd_race']['value'],$profile_fields_cache[$poster_id]['cd_sexe']['value']);
+		$user_cache[$poster_id]['contact4_clan']    = get_clan($profile_fields_cache[$poster_id]['cd_clan']['value'],$profile_fields_cache[$poster_id]['cd_sexe']['value']);
+		$user_cache[$poster_id]['contact4_nom' ]    = $profile_fields_cache[$poster_id]['cd_nom']['value'];
+		$user_cache[$poster_id]['contact4_avatar']  = get_contact_avatar(4, $profile_fields_cache[$poster_id]['cd_avatar']['value'], $profile_fields_cache[$poster_id]['cd_avatar_type']['value'], $profile_fields_cache[$poster_id]['cd_avatar_width']['value'], $profile_fields_cache[$poster_id]['cd_avatar_height']['value']);
+		$user_cache[$poster_id]["contact4_full"]    = get_username_string('full', $poster_id, $profile_fields_cache[$poster_id]['cd_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cd_nom']['value']);
+		$user_cache[$poster_id]["contact4_colour"]  = get_username_string('colour', $poster_id, $profile_fields_cache[$poster_id]['cd_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cd_nom']['value']);
+		$user_cache[$poster_id]["contact4_username"]= get_username_string('username', $poster_id, $profile_fields_cache[$poster_id]['cd_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cd_nom']['value']);
+		
+		//AT MOD CONTACT STOP
 	}
 
 	$post_unread = (isset($topic_tracking_info[$topic_id]) && $row['post_time'] > $topic_tracking_info[$topic_id]) ? true : false;
@@ -1679,6 +1725,23 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 	{
 		$postrow = array_merge($postrow, $cp_row['row']);
 	}
+	
+	//AT MOD CONTACT START
+	if (!empty($row['contact_id']) && $poster_id != ANONYMOUS){
+	    //On écrase certaines valeurs
+	    $postrow['POST_AUTHOR_FULL']    = $user_cache[$poster_id]["contact{$row['contact_id']}_full"];
+	    $postrow['POST_AUTHOR_COLOUR']	= $user_cache[$poster_id]["contact{$row['contact_id']}_colour"];
+	    $postrow['POST_AUTHOR']			= $user_cache[$poster_id]["contact{$row['contact_id']}_username"];
+	    $postrow['POSTER_AVATAR']       = $user_cache[$poster_id]["contact{$row['contact_id']}_avatar"];
+	    $postrow['POSTER_RACE']         = $user_cache[$poster_id]["contact{$row['contact_id']}_race"];
+	    $postrow['POSTER_CLAN']         = $user_cache[$poster_id]["contact{$row['contact_id']}_clan"];
+	}elseif ($poster_id != ANONYMOUS){
+	    $postrow['POSTER_RACE']         = get_race($profile_fields_cache[$poster_id]['race']['value'],$profile_fields_cache[$poster_id]['sexe']['value']);
+	    $postrow['POSTER_CLAN']         = get_clan($profile_fields_cache[$poster_id]['clan']['value'],$profile_fields_cache[$poster_id]['sexe']['value']);
+	}
+	$postrow['S_ACTIF'] = AT_ACTIF == $profile_fields_cache[$poster_id]['actif']['value'];
+	
+	//AT MOD CONTACT STOP
 
 	// Dump vars into template
 	$template->assign_block_vars('postrow', $postrow);

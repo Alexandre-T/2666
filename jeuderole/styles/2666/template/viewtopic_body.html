@@ -142,7 +142,8 @@
 					<!-- IF postrow.POSTER_AVATAR -->
 						<li><!-- IF postrow.U_POST_AUTHOR --><a href="{postrow.U_POST_AUTHOR}">{postrow.POSTER_AVATAR}</a><!-- ELSE -->{postrow.POSTER_AVATAR}<!-- ENDIF --></li>
 					<!-- ENDIF -->
-					<li><!-- IF not postrow.U_POST_AUTHOR --><strong>{postrow.POST_AUTHOR_FULL}</strong><!-- ELSE -->{postrow.POST_AUTHOR_FULL}<!-- ENDIF --></li>
+					<li><!-- IF not postrow.U_POST_AUTHOR --><span class="coalition">{postrow.POST_AUTHOR_FULL}</span><!-- ELSE --><span class="coalition">{postrow.POST_AUTHOR_FULL}</span><!-- ENDIF --></li>
+					<!-- IF postrow.S_ACTIF --><li>{postrow.POSTER_CLAN} &bull; {postrow.POSTER_RACE}</li><!-- ENDIF -->
 					<!-- IF postrow.RANK_TITLE  --><li class="terminator">{postrow.RANK_TITLE}</li><!-- ENDIF -->
 					<!-- IF postrow.RANK_IMG --><li>{postrow.RANK_IMG}</li><!-- ENDIF -->
 					<!-- IF postrow.POSTER_ID != 1 -->
@@ -179,26 +180,6 @@
 							<!-- IF postrow.U_JABBER --><li><a href="{postrow.U_JABBER}" onclick="popup(this.href, 550, 320); return false;" title="{L_JABBER}"><i class="fa fa-group"></i> {L_JABBER}</a></li><!-- ENDIF -->							
 							<!-- ENDIF -->
 							<!-- ENDIF -->
-						</ul>
-					</li>
-					<!-- ENDIF -->
-					<!-- IF postrow.S_USER_UTILS -->
-					<li class="divider"></li>
-					<li class="btn-group datacard" > 
-						<a class="btn btn-info terminator" id="drop-permission" data-toggle="dropdown" href="#">
-							<i class="fa fa-user"></i> Datacard
-						</a>
-						<a class="btn dropdown-toggle btn-info" data-toggle="dropdown" href="#"><span class="fa fa-caret-down"></span></a>			
-						<ul class="dropdown-menu">
-						<!-- IF postrow.S_PROFILE_PRENOM --><li><span><strong><i class="fa fa-barcode"></i> {postrow.PROFILE_PRENOM_NAME}:</strong> {postrow.PROFILE_PRENOM_VALUE}</span></li><!-- ENDIF -->
-						<!-- IF postrow.S_PROFILE_NOM --><li><span><strong><i class="fa fa-barcode"></i> {postrow.PROFILE_NOM_NAME}:</strong> {postrow.PROFILE_NOM_VALUE}</span></li><!-- ENDIF -->
-						<!-- IF postrow.S_PROFILE_SURNOM --><li><span><strong><i class="fa fa-barcode"></i> {postrow.PROFILE_SURNOM_NAME}:</strong> {postrow.PROFILE_SURNOM_VALUE}</span></li><!-- ENDIF -->
-						<!-- IF postrow.S_PROFILE_AGEREEL --><li><span><strong><i class="fa fa-barcode"></i> {postrow.PROFILE_AGEREEL_NAME}:</strong> {postrow.PROFILE_AGEREEL_VALUE}</span></li><!-- ENDIF -->
-						<li class="divider"></li>
-						<li><a href="{postrow.U_FICHE}" title="{L_FICHE}"><i class="fa fa-user"></i> {L_FICHE}</a>
-						<li><a href="{postrow.U_RP}" title="{L_RP}"><i class="fa fa-hdd-o"></i> {L_RP_SHORT}</a>
-						<li><a href="{postrow.U_CHRONOLOGIE}" title="{L_CHRONOLOGIE}"><i class="fa fa-calendar"></i> {L_CHRONOLOGIE}</a>
-						<li><a href="{postrow.U_LIEN}" title="{L_LIENS}"><i class="fa fa-link"></i> {L_LIENS}</a>
 						</ul>
 					</li>
 					<!-- ENDIF -->

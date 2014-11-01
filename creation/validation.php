@@ -107,6 +107,12 @@ switch ($action)
         //@todo retirer du groupe actif
         //@todo placer dans le groupe inactif par défaut
         //@todo déplacer dans les x sujets dans le forum résumés
+        
+        //On procède à la dévalidation
+        $cp_data['pf_actif'] = 0;
+        //Enregistrement
+        $cp = new custom_profile();
+        $cp->update_profile_field_data($user->data['user_id'], $cp_data);
         die('devalidate');
 	case 'invalidate':
 	    //REFUS DE LA VALIDATION
@@ -303,7 +309,7 @@ switch ($action)
     		//Changement de posteur
     		change_poster($post_info, $userdata);
 		}
-		
+		$cp_data['pf_actif'] = AT_ACTIF;		
 		//Enregistrement
 		$cp = new custom_profile();
 		$cp->update_profile_field_data($user_id, $cp_data);
