@@ -140,6 +140,7 @@ switch ($action)
 			    break;
 		}
 		//Passage dans le groupe actif
+		group_user_del(GROUPE_DEMANDE_CREATION ,array($member['user_id']),array($member['username']));
 		group_user_add(GROUPE_ACTIF,array($member['user_id']),array($member['username']));
 		//Passage dans le groupe du clan correspondant
 		switch ($user->profile_fields['pf_clan']) {
