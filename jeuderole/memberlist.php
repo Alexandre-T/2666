@@ -16,6 +16,9 @@ $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
+//AT - BEGIN MOD FICHE
+include($phpbb_root_path . 'includes/mods/functions_user.' . $phpEx);
+//AT - END MOD FICHE
 
 // Start session management
 $user->session_begin();
@@ -652,6 +655,41 @@ switch ($mode)
 			'U_ADD_FOE'			=> (!$friend && !$foe && $foes_enabled) ? append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=zebra&amp;mode=foes&amp;add=' . urlencode(htmlspecialchars_decode($member['username']))) : '',
 			'U_REMOVE_FRIEND'	=> ($friend && $friends_enabled) ? append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=zebra&amp;remove=1&amp;usernames[]=' . $user_id) : '',
 			'U_REMOVE_FOE'		=> ($foe && $foes_enabled) ? append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=zebra&amp;remove=1&amp;mode=foes&amp;usernames[]=' . $user_id) : '',
+			
+            //AT - BEGIN MOD FICHE
+			'S_EN_ATTENTE'		=> is_user_in_group(GROUPE_DEMANDE_CREATION,$user_id),
+			'S_ACTIF'			=> is_user_in_group(GROUPE_ACTIF,$user_id),
+			'S_INACTIF'			=> is_user_in_group(GROUPE_INACTIF,$user_id),
+			
+			'S_CONTACT_3'       => AT_ACTIF == $profile_fields['row']['PROFILE_CC_ACTIF_VALUE'],
+			'S_CONTACT_4'       => AT_ACTIF == $profile_fields['row']['PROFILE_CD_ACTIF_VALUE'],
+
+			'GET_CLAN'          => get_clan($profile_fields['row']['PROFILE_CLAN_VALUE'],$profile_fields['row']['PROFILE_SEXE_VALUE']),
+			'GET_CA_CLAN'       => get_clan($profile_fields['row']['PROFILE_CA_CLAN_VALUE'],$profile_fields['row']['PROFILE_CA_SEXE_VALUE']),
+			'GET_CB_CLAN'       => get_clan($profile_fields['row']['PROFILE_CB_CLAN_VALUE'],$profile_fields['row']['PROFILE_CB_SEXE_VALUE']),
+			'GET_CC_CLAN'       => get_clan($profile_fields['row']['PROFILE_CC_CLAN_VALUE'],$profile_fields['row']['PROFILE_CC_SEXE_VALUE']),
+			'GET_CD_CLAN'       => get_clan($profile_fields['row']['PROFILE_CD_CLAN_VALUE'],$profile_fields['row']['PROFILE_CD_SEXE_VALUE']),
+
+			'GET_RACE'          => get_race($profile_fields['row']['PROFILE_RACE_VALUE'],$profile_fields['row']['PROFILE_SEXE_VALUE']),
+			'GET_CA_RACE'       => get_race($profile_fields['row']['PROFILE_CA_RACE_VALUE'],$profile_fields['row']['PROFILE_CA_SEXE_VALUE']),
+			'GET_CB_RACE'       => get_race($profile_fields['row']['PROFILE_CB_RACE_VALUE'],$profile_fields['row']['PROFILE_CB_SEXE_VALUE']),
+			'GET_CC_RACE'       => get_race($profile_fields['row']['PROFILE_CC_RACE_VALUE'],$profile_fields['row']['PROFILE_CC_SEXE_VALUE']),
+			'GET_CD_RACE'       => get_race($profile_fields['row']['PROFILE_CD_RACE_VALUE'],$profile_fields['row']['PROFILE_CD_SEXE_VALUE']),
+				
+			'U_VALIDATION'			    => append_sid("{$phpbb_root_path}../creation/validation.$phpEx",array('u'=>$user_id),true),
+			'U_CONSULTER_FICHE'			=> append_sid("{$phpbb_root_path}personnages-resumes/". seoencode($member['username']) ."-t{$profile_fields['row']['PROFILE_FICHE_VALUE']}.html"),
+			'U_CONSULTER_CA_FICHE'		=> append_sid("{$phpbb_root_path}personnages-resumes/". seoencode($profile_fields['row']['PROFILE_CA_NOM_VALUE']) ."-t{$profile_fields['row']['PROFILE_CA_FICHE_VALUE']}.html"),
+			'U_CONSULTER_CB_FICHE'		=> append_sid("{$phpbb_root_path}personnages-resumes/". seoencode($profile_fields['row']['PROFILE_CB_NOM_VALUE']) ."-t{$profile_fields['row']['PROFILE_CB_FICHE_VALUE']}.html"),
+			'U_CONSULTER_CC_FICHE'		=> append_sid("{$phpbb_root_path}personnages-resumes/". seoencode($profile_fields['row']['PROFILE_CC_NOM_VALUE']) ."-t{$profile_fields['row']['PROFILE_CC_FICHE_VALUE']}.html"),
+			'U_CONSULTER_CD_FICHE'		=> append_sid("{$phpbb_root_path}personnages-resumes/". seoencode($profile_fields['row']['PROFILE_CD_NOM_VALUE']) ."-t{$profile_fields['row']['PROFILE_CD_FICHE_VALUE']}.html"),
+			
+			//'U_CONSULTER_CHRONOLOGIE'	=> append_sid('../chronologie.'.$phpEx,'u='.$user_id),
+			//'U_CONSULTER_LIENS'			=> append_sid('../liens.'.$phpEx,'u='.$user_id),
+			//'U_CHERCHER_RP_EN_COURS'	=> append_sid('search.'.$phpEx,'mode=rpec&u='.$user_id),
+			//'U_CHERCHER_RP_TERMINES'	=> append_sid('search.'.$phpEx,"author={$member['username']}&fid%5B%5D=". FORUM_RPA ."&sc=1&sf=all&sr=topics&sk=t&sd=d&st=0&t=0"),
+			//'U_CHERCHER_RP'				=> append_sid('search.'.$phpEx,"author={$member['username']}&fid%5B%5D=". FORUM_RP ."&sc=1&sf=all&sr=topics&sk=t&sd=d&st=0&t=0"),
+			//AT - END MOD FICHE
+				
 		));
 
 		if (!empty($profile_fields['row']))

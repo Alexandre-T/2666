@@ -1,0 +1,223 @@
+<!-- INCLUDE overall_header.html -->
+<section>
+<div class="creation borderedContainer">
+<form method="post" action="{S_PROFILE_ACTION}" id="viewprofile" class="form-horizontal">
+	<div class="row">
+		<div class="col-sm-8">
+			<h2><span style="<!-- IF USER_COLOR -->color: {USER_COLOR}; <!-- ENDIF -->">{USERNAME}</span> <small>{GET_RACE} &bull; {GET_CLAN}</small></h2>
+			<hr/>
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs" role="tablist">
+				<!-- IF S_ACTIF or S_EN_ATTENTE or S_INACTIF -->
+				<li class="active"><a href="#fiche" role="tab" data-toggle="tab"><h6>Personnage</h6></a></li>
+				<li><a href="#stats" role="tab" data-toggle="tab"><h6>Statistiques</h6></a></li>
+				<!-- ELSE -->
+				<li class="active"><a href="#stats" role="tab" data-toggle="tab"><h6>Statistiques</h6></a></li>
+				<!-- ENDIF -->
+				<li><a href="#groupes" role="tab" data-toggle="tab"><h6>Groupes</h6></a></li>
+			</ul>
+			
+			<!-- Tab panes -->
+			<div class="tab-content">
+				<br/>
+				<!-- IF S_ACTIF or S_EN_ATTENTE or S_INACTIF -->
+				<div class="tab-pane fade in active" id="fiche">
+					<!-- ONGLET FICHE -->
+
+					<!-- IF S_EN_ATTENTE -->
+						<div class="alert alert-info">Personnage et contacts en attente de validation</div>
+					<!-- ENDIF -->
+					<!-- IF S_INACTIF -->
+						<div class="alert alert-info">Ce personnage et ses contacts ne sont actuellement pas actifs. Personnage décédé ou bien joueur absent.</div>
+					<!-- ENDIF -->
+					
+					<!-- IF S_PROFILE_FIELD1 -->
+						<!-- NOTE: Use a construct like this to include admin defined profile fields. Replace FIELD1 with the name of your field. -->
+						<!-- {PROFILE_FIELD1_NAME} -- {PROFILE_FIELD1_VALUE} -->
+					<!-- ENDIF -->
+					<dl class="dl-horizontal">
+						<dt>{USERNAME}</dt>
+						<dd>{GET_RACE} &bull; {GET_CLAN}</dd>
+						<dd><a href="{U_CONSULTER_FICHE}">Consulter sa fiche de personnage</a></dd>
+
+						<dt>{PROFILE_CA_NOM_VALUE}</dt> 
+						<dd>{GET_CA_RACE} &bull; {GET_CA_CLAN}</dd>
+						<dd><a href="{U_CONSULTER_CA_FICHE}">Consulter sa fiche de personnage</a></dd>
+						
+						<dt>{PROFILE_CB_NOM_VALUE}</dt> 
+						<dd>{GET_CB_RACE} &bull; {GET_CB_CLAN}</dd>
+						<dd><a href="{U_CONSULTER_CB_FICHE}">Consulter sa fiche de personnage</a></dd>
+
+						<!-- IF S_CONTACT_3 -->
+						<dt>{PROFILE_CC_NOM_VALUE}</dt> 
+						<dd>{GET_CC_RACE} &bull; {GET_CC_CLAN}</dd>
+						<dd><a href="{U_CONSULTER_CC_FICHE}">Consulter sa fiche de personnage</a></dd>
+						<!-- ENDIF -->
+						
+						<!-- IF S_CONTACT_4 -->
+						<dt>{PROFILE_CD_NOM_VALUE}</dt> 
+						<dd>{GET_CD_RACE} &bull; {GET_CD_CLAN}</dd>
+						<dd><a href="{U_CONSULTER_CD_FICHE}">Consulter sa fiche de personnage</a></dd>
+						<!-- ENDIF -->
+						
+						<!-- * BEGIN custom_fields -->
+							<dt>{custom_fields.PROFILE_FIELD_NAME}</dt>
+							<dd>{custom_fields.PROFILE_FIELD_VALUE}</dd>
+						<!-- * END custom_fields -->
+					</dl>
+					<!-- IF SIGNATURE -->
+						<hr class="forum-small-divider"/>
+						<div class="">{SIGNATURE}</div>
+					<!-- ENDIF -->
+				</div>
+				<div class="tab-pane fade" id="stats">
+				<!-- ELSE -->
+				<div class="tab-pane fade in active" id="stats">
+				<!-- ENDIF -->
+					<!-- ONGLET STATS -->
+					<dl class="dl-horizontal">
+						<!-- IF S_WARNINGS -->
+						<dt>{L_WARNINGS}: </dt>
+						<dd><strong>{WARNINGS}</strong><!-- IF U_NOTES or U_WARN --> [ <!-- IF U_NOTES --><a href="{U_NOTES}">{L_VIEW_NOTES}</a><!-- ENDIF --> <!-- IF U_WARN --><!-- IF U_NOTES --> | <!-- ENDIF --><a href="{U_WARN}">{L_WARN_USER}</a><!-- ENDIF --> ]<!-- ENDIF --></dd>
+						<!-- ENDIF -->
+						<dt>{L_TOTAL_POSTS}</dt>
+							<dd>{POSTS} <!-- IF S_DISPLAY_SEARCH -->| <strong><a href="{U_SEARCH_USER}">{L_SEARCH_USER_POSTS}</a></strong><!-- ENDIF -->
+								<!-- IF POSTS_PCT --><br />({POSTS_PCT} / {POSTS_DAY})<!-- ENDIF -->
+								<!-- IF POSTS_IN_QUEUE and U_MCP_QUEUE --><br />(<a href="{U_MCP_QUEUE}">{L_POSTS_IN_QUEUE}</a>)<!-- ELSEIF POSTS_IN_QUEUE --><br />({L_POSTS_IN_QUEUE})<!-- ENDIF -->
+							</dd>
+						<!-- IF S_SHOW_ACTIVITY and POSTS -->
+							<dt>{L_ACTIVE_IN_FORUM}</dt> <dd><!-- IF ACTIVE_FORUM != '' --><strong><a href="{U_ACTIVE_FORUM}">{ACTIVE_FORUM}</a></strong><br />({ACTIVE_FORUM_POSTS} / {ACTIVE_FORUM_PCT})<!-- ELSE --> - <!-- ENDIF --></dd>
+							<dt>{L_ACTIVE_IN_TOPIC}</dt> <dd><!-- IF ACTIVE_TOPIC != '' --><strong><a href="{U_ACTIVE_TOPIC}">{ACTIVE_TOPIC}</a></strong><br />({ACTIVE_TOPIC_POSTS} / {ACTIVE_TOPIC_PCT})<!-- ELSE --> - <!-- ENDIF --></dd>
+						<!-- ENDIF -->
+					</dl>
+				</div>
+				<div class="tab-pane fade" id="groupes">
+					<!-- ONGLET GROUPES -->
+					<dl class="dl-horizontal">
+						<!-- IF S_GROUP_OPTIONS -->
+						<dt>{L_USERGROUPS}</dt> 
+						<dd class="">
+							<span class="input-group col-md-8">
+								<select class="form-control" name="g">{S_GROUP_OPTIONS}</select>
+								<span class="input-group-btn">
+									<input type="submit" name="submit" value="{L_GO}" class="btn btn-default" />
+								</span>
+							</span>
+						</dd><!-- ENDIF -->
+					</dl>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-4">
+			<br/>
+			<!-- IF AVATAR_IMG -->			
+			<dl class="pull-right forum_rank">
+				<dt class="forum-avatar-cadre">{AVATAR_IMG}</dt>
+				<!-- IF RANK_TITLE --><dd>{RANK_TITLE}</dd><!-- ENDIF -->
+				<!-- IF RANK_IMG --><dd>{RANK_IMG}</dd><!-- ENDIF -->
+			</dl>
+			<!-- ENDIF -->
+		</div>
+	</div>	
+</form>
+</div>
+<br/>
+<div class="text-center">
+	<div class="btn-group">
+		<a href="#" title="{L_JOINED} : {JOINED}" class="btn btn-default btn-lg tooltip-link">
+			<span class="fa-stack">
+				<i class="fa fa-lg fa-calendar"></i>
+			</span>
+		</a>
+		<a href="#" title="{L_VISITED} : {VISITED}" class="btn btn-default btn-lg tooltip-link">
+			<span class="fa-stack">
+				<i class="fa fa-lg fa-calendar"></i>
+			</span>
+		</a>
+	</div>
+	<div class="btn-group">
+		<!-- IF U_EMAIL -->
+			<a href="{U_EMAIL}" title="{L_SEND_EMAIL_USER} {USERNAME}" class="btn btn-default btn-lg tooltip-link">
+				<span class="fa-stack">
+					<i class="fa fa-lg fa-envelope"></i>
+				</span>
+			</a>
+		<!-- ENDIF -->
+		<!-- IF U_PM -->
+			<a href="{U_PM}" title="{L_SEND_PRIVATE_MESSAGE} {USERNAME}" class="btn btn-default btn-lg tooltip-link">
+				<span class="fa-stack">
+					<i class="fa fa-lg fa-envelope-o"></i>
+				</span>
+			</a>
+		<!-- ENDIF -->
+	</div>
+	<div class="btn-group">
+		<!-- IF U_USER_ADMIN -->
+			<a href="{U_USER_ADMIN}" title="{L_USER_ADMIN}" class="btn btn-default btn-lg tooltip-link">
+				<span class="fa-stack">
+					<i class="fa fa-lg fa-gavel"></i>
+				</span>
+			</a>
+			<!-- IF S_EN_ATTENTE --> 
+			<a href="{U_VALIDATION}" title="Validation" class="btn btn-default btn-lg tooltip-link">
+				<span class="fa-stack">
+ 						<i class="fa fa-lg fa-toggle-on text-success "></i>
+				</span>
+			</a>
+			<!-- ENDIF -->
+		<!-- ENDIF -->
+		<!-- IF U_USER_BAN -->
+			<a href="{U_USER_BAN}" title="{L_USER_BAN}" class="btn btn-default btn-lg  tooltip-link">
+				<span class="fa-stack">
+							<i class="fa fa-user "></i>
+							<i class="fa fa-ban fa-stack-2x text-danger"></i>
+				</span>
+			</a>
+		<!-- ENDIF -->
+		<!-- IF U_SWITCH_PERMISSIONS -->
+			<a href="{U_SWITCH_PERMISSIONS}" title="{L_USE_PERMISSIONS}" class="btn btn-default btn-lg  tooltip-link">
+				<span class="fa-stack">
+				<i class="fa fa-lg fa-fw fa-cloud-download"></i>
+				</span>
+			</a>
+		<!-- ENDIF -->
+	</div>
+	<div class="btn-group">
+		<!-- IF S_USER_LOGGED_IN and S_ZEBRA -->
+			<!-- IF U_REMOVE_FRIEND -->
+				<a href="{U_REMOVE_FRIEND}" title="{L_REMOVE_FRIEND}" class="btn btn-default btn-lg  tooltip-link">
+					<span class="fa-stack">
+								<i class="fa fa-user fa-lg text-gold"></i>
+								<i class="fa fa-minus fa-stack-1x fa-stack-upper-right text-danger"></i>
+					</span>
+				</a>
+			<!-- ELSEIF U_REMOVE_FOE -->
+				<a href="{U_REMOVE_FOE}" title="{L_REMOVE_FOE}" class="btn btn-default btn-lg  tooltip-link">
+					<span class="fa-stack">
+								<i class="fa fa-eye-slash fa-lg"></i>
+								<i class="fa fa-minus fa-stack-1x fa-stack-upper-right text-success"></i>
+					</span>
+				</a>
+			<!-- ELSE -->
+				<!-- IF U_ADD_FRIEND -->
+					<a href="{U_ADD_FRIEND}" title="{L_ADD_FRIEND}" class="btn btn-default btn-lg  tooltip-link">
+						<span class="fa-stack">
+ 								<i class="fa fa-user fa-lg text-gold"></i>
+ 								<i class="fa fa-plus fa-stack-1x fa-stack-upper-right text-success"></i>
+						</span>
+					</a>
+				<!-- ENDIF -->
+				<!-- IF U_ADD_FOE -->
+					<a href="{U_ADD_FOE}" title="{L_ADD_FOE}" class="btn btn-default btn-lg  tooltip-link">
+						<span class="fa-stack">
+									<i class="fa fa-eye-slash fa-lg"></i>
+									<i class="fa fa-plus fa-stack-1x fa-stack-upper-right text-danger"></i>
+						</span>
+					</a>
+				<!-- ENDIF -->
+			<!-- ENDIF -->
+		<!-- ENDIF -->
+	</div>
+</div>
+</section>
+<!-- INCLUDE overall_footer.html -->
