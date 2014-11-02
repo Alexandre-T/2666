@@ -20,7 +20,7 @@ class Reserve{
 			    PROFILE_FIELDS_DATA_TABLE => 'p'
 			),
 
-			'WHERE'		=> 'u.user_id = p.user_id AND u.group_id = g.group_id AND u.user_id = ugm.user_id and ugm.group_id = 2 '//GROUPE_ACTIF,
+			'WHERE'		=> 'u.user_id = p.user_id AND u.group_id = g.group_id AND u.user_id = ugm.user_id and ugm.group_id = ' . GROUPE_ACTIF
                           ." AND p.pf_avatar is not null AND p.pf_avatar <> ''", 
 			'ORDER_BY'	=> "p.pf_avatar ASC, u.username_clean ASC"
 		));
@@ -94,7 +94,7 @@ class Reserve{
 			    PROFILE_FIELDS_DATA_TABLE => 'p'
 			),
 
-			'WHERE'		=> 'u.user_id = p.user_id AND u.group_id = g.group_id AND u.user_id = ugm.user_id and ugm.group_id = 2 '//GROUPE_ACTIF,
+			'WHERE'		=> 'u.user_id = p.user_id AND u.group_id = g.group_id AND u.user_id = ugm.user_id and ugm.group_id = ' . GROUPE_ACTIF
                           ." AND p.pf_ca_avatar is not null AND p.pf_ca_avatar <> '' " . $pf_actif, 
 			
             'ORDER_BY'	=> "p.pf_ca_avatar ASC, u.username_clean ASC"
