@@ -44,7 +44,7 @@ function creation_verification_groupe()
     // Le personnage ne doit pas être actif
     if (is_user_in_group(GROUPE_ACTIF)) {
         // l'utilisateur est déjà actif, on le redirige vers sa fiche
-        header("Location: ../fiche.$phpEx?message=1");
+        trigger_error('Votre personnage est déjà actif, vous ne pouvez pas accéder aux fonctions de créations de personnage. Veuillez contacter Harahel par MP.');
     }
     // L'utilisateur doit avoir signé le règlement sinon on ne le laisse pas commencer
     if (! is_user_in_group(GROUPE_SIGNATURE)) {
@@ -53,7 +53,7 @@ function creation_verification_groupe()
     }
     if (is_user_in_group(GROUPE_DEMANDE_CREATION)) {
         // l'utilisateur est en attente, on le redirige vers la page d'attente
-        header("Location: enattente.$phpEx?message=1");
+        trigger_error('Votre demande de validation a bien été enregistrée. Veuillez patienter ou contacter Harahel par MP.');
     }
     return true;
 }
