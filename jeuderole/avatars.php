@@ -26,6 +26,7 @@ $user->setup();
 //Chargement de la langue
 $user->add_lang('mods/avatars', FALSE, FALSE);
 
+//Breadcrumbs
 $template->assign_block_vars('navlinks', array(
 	'S_IS_CAT'		=> false,
 	'S_IS_LINK'		=> true,
@@ -53,16 +54,35 @@ $template->assign_block_vars('navlinks', array(
 	'U_VIEW_FORUM'	=> append_sid("{$phpbb_root_path}avatars.$phpEx"))
 );
 
+//Chargement des avatars pris
 $resultats = Reserve::loadAvatars();
 $resultats = array_merge($resultats, Reserve::loadContacts(1));
 $resultats = array_merge($resultats, Reserve::loadContacts(2));
 $resultats = array_merge($resultats, Reserve::loadContacts(3));
 $resultats = array_merge($resultats, Reserve::loadContacts(4));
+//Chargement des avatars réservés
 $resultats = array_merge($resultats, Reserve::loadFromFile());
-
+//Tri du tableau
 ksort($resultats,SORT_LOCALE_STRING);
-foreach ($resultats as $row){
-    $template->assign_block_vars('avatars', $row);
+//Création du tableau avec les lettres
+$final = array_flip(range('A', 'Z'));
+array_walk($final,'at_return_array');
+//Création du tableau de résultats
+foreach($resultats as $key => $avatar){
+    $final[strtoupper($key[0])][$key] = $avatar;
+}
+//echo('<pre>');var_dump($final,$resultats);die();
+foreach ($final as $clef => $lettres){
+    // categories in this example are "food" and "animal"
+    $template->assign_block_vars('lettres', array(
+        'LETTRE'    => $clef,
+    ));
+    
+    // each item within the category is assigned to the second block.
+    foreach ($lettres as $key => $row)
+    {
+        $template->assign_block_vars('lettres.avatars', $row);
+    }
 }
 
 //Construction de l'entête
@@ -76,4 +96,7 @@ $template->set_filenames(array(
 //Construction du pied de page
 page_footer();
 
+function at_return_array(&$item){
+    $item = array();
+}
 ?>

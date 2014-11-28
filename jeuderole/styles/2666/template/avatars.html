@@ -6,14 +6,25 @@
 		{L_AVATAR_EXPLICATIONS} 
 	</p>
 	<div class="row">
+	<!-- BEGIN lettres -->
+		<!-- IF lettres.S_ROW_COUNT is even -->
+		<div class="clearfix visible-sm-block"></div>
+		<!-- ENDIF -->
+		<!-- IF (lettres.S_ROW_COUNT) % 3 eq 0 -->
+		<div class="clearfix visible-md-block visible-lg-block"></div>
+		<!-- ENDIF -->
+		
+		<div class="col-xs-12 col-sm-6 col-md-4">
+		<h4>{lettres.LETTRE}</h4>
+		<ul class="list-unstyled">		
 		<!-- BEGIN avatars -->
-		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
-			<a href="{avatars.U_RESUME}" style="color:{avatars.USER_COLOUR}"class="tooltip-link" title="Accéder à la fiche : {avatars.NOM}">{avatars.AVATAR}</a>			
-		</div>
-		<!-- BEGINELSE -->
-		<div class="alert alert-success"><p>{L_AVATAR_AUCUN}</p></div>
+			<li><a href="{lettres.avatars.U_RESUME}" style="color:{lettres.avatars.USER_COLOUR}"class="tooltip-link" title="Accéder à la fiche : {lettres.avatars.NOM}">{lettres.avatars.AVATAR}</a></li>			
 		<!-- END avatars -->
-	</div>
-  </div>
+		</ul>
+		</div>
+	<!-- BEGINELSE -->
+		<div class="alert alert-success"><p>{L_AVATAR_AUCUN}</p></div>
+	<!-- END lettres -->
+  	</div>
 </div>  
 <!-- INCLUDE overall_footer.html -->
