@@ -302,6 +302,9 @@ $template->assign_vars(array(
 	'POST_IMG'					=> ($forum_data['forum_status'] == ITEM_LOCKED) ? $user->img('button_topic_locked', $post_alt) : $user->img('button_topic_new', $post_alt),
 	'NEWEST_POST_IMG'			=> $user->img('icon_topic_newest', 'VIEW_NEWEST_POST'),
 	'LAST_POST_IMG'				=> $user->img('icon_topic_latest', 'VIEW_LATEST_POST'),
+    //AT_MOD_ICON
+    'FORUM_ICON_FA'			    => $forum_data['forum_icone'],    
+    //AT_MOD_ICON
 	'FOLDER_IMG'				=> $user->img('topic_read', 'NO_UNREAD_POSTS'),
 	'FOLDER_UNREAD_IMG'			=> $user->img('topic_unread', 'UNREAD_POSTS'),
 	'FOLDER_HOT_IMG'			=> $user->img('topic_read_hot', 'NO_UNREAD_POSTS_HOT'),

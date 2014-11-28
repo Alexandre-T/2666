@@ -136,22 +136,24 @@
 						<span><a href="{topicrow.U_VIEW_TOPIC}" class="btn <!-- IF topicrow.S_UNREAD_TOPIC -->btn-info<!-- ELSE -->btn-default<!-- ENDIF --> <!-- IF topicrow.S_POST_ANNOUNCE or topicrow.S_POST_GLOBAL --> btn-lg <!-- ENDIF --> tooltip-link" title="{topicrow.TOPIC_FOLDER_IMG_ALT}">
 							<!-- IF topicrow.S_TOPIC_LOCKED -->
 								<!-- IF topicrow.S_POST_GLOBAL or topicrow.S_POST_ANNOUNCE -->
-									<i class="fa fa-lock fa-lg"></i>
+									<i class="fa fa-fw fa-lock fa-lg"></i>
 								<!-- ELSE -->
-									<i class="fa fa-lock"></i>
+									<i class="fa fa-fw fa-lock"></i>
 								<!-- ENDIF -->
 							<!-- ELSEIF topicrow.S_POST_GLOBAL -->
-								<i class="fa fa-info-circle fa-lg"></i>
+								<i class="fa fa-fw fa-info-circle fa-lg"></i>
 							<!-- ELSEIF topicrow.S_POST_ANNOUNCE -->
-								<i class="fa fa-info-circle fa-lg"></i>
+								<i class="fa fa-fw fa-info-circle fa-lg"></i>
 							<!-- ELSEIF topicrow.S_POST_STICKY -->
-								<i class="fa fa-thumb-tack"></i>
+								<i class="fa fa-fw fa-thumb-tack"></i>
 							<!-- ELSEIF topicrow.S_TOPIC_MOVED -->
-								<i class="fa fa-share"></i>
+								<i class="fa fa-fw fa-share"></i>
 							<!-- ELSEIF topicrow.S_HAS_POLL -->
-								<i class="fa fa-comment-o"></i>
+								<i class="fa fa-fw fa-comment-o"></i>
+							<!-- ELSEIF FORUM_ICON_FA -->
+								<i class="fa fa-fw {FORUM_ICON_FA}"></i>
 							<!-- ELSE -->
-								<i class="fa fa-space-shuttle"></i>
+								<i class="fa fa-fw fa-space-shuttle"></i>
 							<!-- ENDIF --> 
 						</a></span>
 					</div>
