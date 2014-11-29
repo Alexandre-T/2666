@@ -22,7 +22,6 @@ include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_posting.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_convert.' . $phpEx);
 include($phpbb_root_path . 'includes/mods/functions_user.' . $phpEx);
-include($phpbb_root_path . 'includes/mods/functions_fiche.' . $phpEx);
 include($phpbb_root_path . 'includes/mcp/mcp_post.' . $phpEx);
 
 
@@ -96,24 +95,84 @@ if ('devalidate' == $action && !is_user_in_group(GROUPE_ACTIF,$user_id)){
 switch ($action)
 {
     case 'revalidate':
-        //@FIXME Créer la revalidation
-        //@todo retirer du groupe inactif
-        //@todo placer dans le groupe actif
-        //@todo placer dans le groupe "race" par défaut
-        //@todo déplacer dans les x sujets dans le forum résumés
-        die('revalidate');
+		//Chargement des valeurs de profil
+		$user->get_profile_fields($member['user_id']);
+        //placer dans le groupe "race" par défaut
+		//Passage dans le groupe humain ou nephilim
+		switch ($user->profile_fields['pf_race']) {
+			case AT_NEPHILIM:
+				group_user_attributes('default',GROUPE_NEPHILIM,array($member['user_id']),array($member['username']));
+				break;
+			case AT_HUMAIN:
+				group_user_attributes('default',GROUPE_HUMAIN,array($member['user_id']),array($member['username']));
+				break;
+		}
+		//retirer du groupe inactif
+        group_user_del(GROUPE_INACTIF ,array($member['user_id']),array($member['username']));
+        //placer dans le groupe actif
+        group_user_add(GROUPE_ACTIF ,array($member['user_id']),array($member['username']));
+        //déverrouiller les x sujets dans le forum résumés
+        $sql = 'UPDATE ' . TOPICS_TABLE . ' set topic_status = 0 WHERE ';
+        //Chargement des valeurs de profil
+        $user->get_profile_fields($member['user_id']);
+        //Création du tableau de modification
+        $id = array(
+            (int) $user->profile_fields['pf_fiche'],
+            (int) $user->profile_fields['pf_ca_fiche'],
+            (int) $user->profile_fields['pf_cb_fiche'],
+            (int) $user->profile_fields['pf_cc_fiche'],
+            (int) $user->profile_fields['pf_cd_fiche'],
+        );
+        $sql = $sql . $db->sql_in_set('topic_id',$id);
+        $result = $db->sql_query($sql);
+        //Message d'information
+        $url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "t=".$user->profile_fields['pf_fiche']);
+        $message   = $user->lang['DEVALIDATED'];
+        $message  .= '<br/><br/>';
+        $meta_info = append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=group&amp;g=".GROUPE_ACTIF);
+        $message  .=  '<a href="' . $meta_info . '">'.$user->lang['ACTIF_MEMBERLIST'] .'</a>';
+        $message  .= '<br/><br/>';
+        $message  .=  '<a href="' . $url . '">'.$user->lang['GOTO_FICHE'] .'</a>';
+        trigger_error($message);
+        die();
+        break;
     case 'devalidate':
-        //@FIXME Créer la dévalidation
-        //@todo retirer du groupe actif
-        //@todo placer dans le groupe inactif par défaut
-        //@todo déplacer dans les x sujets dans le forum résumés
-        
+        //placer dans le groupe inactif par défaut
+        group_user_add(GROUPE_INACTIF ,array($member['user_id']),array($member['username']),false,true);
+        //retirer du groupe actif
+        group_user_del(GROUPE_ACTIF ,array($member['user_id']),array($member['username']));
+        //verrouiller les x sujets dans le forum résumés
+        $sql = 'UPDATE ' . TOPICS_TABLE . ' set topic_status = 1 WHERE ';
+        //Chargement des valeurs de profil
+        $user->get_profile_fields($member['user_id']);
+        //Création du tableau de modification
+        $id = array(
+            (int) $user->profile_fields['pf_fiche'],
+            (int) $user->profile_fields['pf_ca_fiche'],
+            (int) $user->profile_fields['pf_cb_fiche'],
+            (int) $user->profile_fields['pf_cc_fiche'],
+            (int) $user->profile_fields['pf_cd_fiche'],
+        );        
+        $sql = $sql . $db->sql_in_set('topic_id',$id);
+        $result = $db->sql_query($sql);
+        unset($sql,$id);
         //On procède à la dévalidation
         $cp_data['pf_actif'] = 0;
         //Enregistrement
         $cp = new custom_profile();
         $cp->update_profile_field_data($user->data['user_id'], $cp_data);
-        die('devalidate');
+        //Message d'information
+        $url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", "t=".$user->profile_fields['pf_fiche']);
+		$message   = $user->lang['DEVALIDATED'];
+		$message  .= '<br/><br/>';
+		$meta_info = append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=group&amp;g=".GROUPE_INACTIF);
+		$message  .=  '<a href="' . $meta_info . '">'.$user->lang['INACTIF_MEMBERLIST'] .'</a>';
+		$message  .= '<br/><br/>';
+		$message  .=  '<a href="' . $url . '">'.$user->lang['GOTO_FICHE'] .'</a>';
+		trigger_error($message);
+		die();
+    	break;
+        
 	case 'invalidate':
 	    //REFUS DE LA VALIDATION
 	    //Cette astuce permet d'ajouter l'utilisateur à un groupe par défaut sans avatar pour ne pas supprimer le sien.

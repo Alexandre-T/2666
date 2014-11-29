@@ -76,6 +76,20 @@
 				<!-- ENDIF -->
 					<!-- ONGLET STATS -->
 					<dl class="dl-horizontal">
+						<!-- IF U_ACP -->
+						<dt>Administration:</dt>
+						<dd>
+							[
+							<!-- IF S_ACTIF -->
+							<a href="{U_DESACTIVER}" title="Désactiver ce personnage et ses contacts">Désactiver</a>
+							<!-- ELSEIF S_INACTIF -->
+							<a href="{U_REACTIVER}" title="Réactiver ce personnage et ses contacts">Réactiver</a>
+							<!-- ELSEIF S_EN_ATTENTE -->
+							<a href="{U_ACTIVER}" title="Activer ce personnage et ses contacts">Activer</a>
+							<!-- ENDIF -->
+							]
+						</dd>
+						<!-- ENDIF -->
 						<!-- IF S_WARNINGS -->
 						<dt>{L_WARNINGS}: </dt>
 						<dd><strong>{WARNINGS}</strong><!-- IF U_NOTES or U_WARN --> [ <!-- IF U_NOTES --><a href="{U_NOTES}">{L_VIEW_NOTES}</a><!-- ENDIF --> <!-- IF U_WARN --><!-- IF U_NOTES --> | <!-- ENDIF --><a href="{U_WARN}">{L_WARN_USER}</a><!-- ENDIF --> ]<!-- ENDIF --></dd>

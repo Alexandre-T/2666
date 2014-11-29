@@ -1769,6 +1769,11 @@ function show_profile($data, $user_notes_enabled = false, $warn_user_enabled = f
 
 		'S_WARNINGS'	=> ($auth->acl_getf_global('m_') || $auth->acl_get('m_warn')) ? true : false,
 
+	    //MOD AT DEVALIDATION BEGIN
+		'U_ACTIVER'	    => ($auth->acl_getf_global('a_')) ? append_sid("{$phpbb_root_path}../creation/validation.$phpEx", "u=$user_id") : '',
+	    'U_REACTIVER'	=> ($auth->acl_getf_global('a_')) ? append_sid("{$phpbb_root_path}../creation/validation.$phpEx", "u=$user_id&amp;action=revalidate") : '',
+	    'U_DESACTIVER'	=> ($auth->acl_getf_global('a_')) ? append_sid("{$phpbb_root_path}../creation/validation.$phpEx", "u=$user_id&amp;action=devalidate") : '',
+		//MOD AT DEVALIDATION END
 		'U_SEARCH_USER'	=> ($auth->acl_get('u_search')) ? append_sid("{$phpbb_root_path}search.$phpEx", "author_id=$user_id&amp;sr=posts") : '',
 		'U_NOTES'		=> ($user_notes_enabled && $auth->acl_getf_global('m_')) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=notes&amp;mode=user_notes&amp;u=' . $user_id, true, $user->session_id) : '',
 		'U_WARN'		=> ($warn_user_enabled && $auth->acl_get('m_warn')) ? append_sid("{$phpbb_root_path}mcp.$phpEx", 'i=warn&amp;mode=warn_user&amp;u=' . $user_id, true, $user->session_id) : '',
