@@ -38,7 +38,7 @@ if (empty($lang) || !is_array($lang))
 
 // Common
 $lang = array_merge($lang, array(
-	'ACP_ADMINISTRATORS'		=> 'Administrateurs',
+	'ACP_ADMINISTRATORS'		=> 'Originels',
 	'ACP_ADMIN_LOGS'			=> 'Journal d’administration',
 	'ACP_ADMIN_ROLES'			=> 'Modèles d’administration',
 	'ACP_ATTACHMENTS'			=> 'Fichiers joints',
