@@ -4764,6 +4764,7 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'U_FEED'				=> generate_board_url() . "/feed.$phpEx",
 		
 		//AT BEGIN NEW LINK
+		'U_SEARCH_RP_EN_COURS'	=> ($auth->acl_get('u_search')) ? append_sid("{$phpbb_root_path}search.$phpEx", "author={$user->data['username']}&amp;fid%5B%5D=".FORUM_RP."&amp;sc=1&amp;sf=all&amp;sr=topics&amp;lock=2") : '',
 	    'U_MEMBERLIST_ACTIF'    => append_sid($phpbb_root_path.'groupe-actif-g'.GROUPE_ACTIF.'.html'),
 	    'U_MEMBERLIST_INACTIF'	=> append_sid($phpbb_root_path.'groupe-inactif-g'.GROUPE_INACTIF.'.html'),
 	    'U_MEMBERLIST_ATTENTE'	=> append_sid($phpbb_root_path.'groupe-demandecreation-g'.GROUPE_DEMANDE_CREATION.'.html'),

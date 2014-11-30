@@ -541,6 +541,9 @@ $lang = array_merge($lang, array(
 	'SEARCH_FOR'				=> 'Rechercher',
 	'SEARCH_FORUM'				=> 'Dans ce forum…',
 	'SEARCH_NEW'				=> 'Voir les nouveaux messages',
+    //MOD AT BEGIN
+    'SEARCH_RP'					=> 'Voir mes RPs',
+    //MOD AT END
 	'SEARCH_POSTS_BY'			=> 'Rechercher les messages de',
 	'SEARCH_SELF'				=> 'Voir mes messages',
 	'SEARCH_TOPIC'				=> 'Dans ce sujet…',

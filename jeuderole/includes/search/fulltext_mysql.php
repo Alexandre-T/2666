@@ -533,8 +533,11 @@ class fulltext_mysql extends search_backend
 	*
 	* @access	public
 	*/
-	function author_search($type, $firstpost_only, $sort_by_sql, $sort_key, $sort_dir, $sort_days, $ex_fid_ary, $m_approve_fid_ary, $topic_id, $author_ary, $author_name, &$id_ary, $start, $per_page)
-	{
+	//START MOD SEARCH RP
+	function author_search($type, $firstpost_only, $sort_by_sql, $sort_key, $sort_dir, $sort_days, $ex_fid_ary, $m_approve_fid_ary, $topic_id, $author_ary, $author_name, &$id_ary, $start, $per_page, $topic_type= POST_NORMAL_STICKY_ANNOUNCE, $topic_status = TOPIC_LOCK_OR_UNLOCK)
+	//function author_search($type, $firstpost_only, $sort_by_sql, $sort_key, $sort_dir, $sort_days, $ex_fid_ary, $m_approve_fid_ary, $topic_id, $author_ary, $author_name, &$id_ary, $start, $per_page)
+	//END MOD SEARCH RP
+    {
 		global $config, $db;
 
 		// No author? No posts.
@@ -557,6 +560,10 @@ class fulltext_mysql extends search_backend
 			implode(',', $m_approve_fid_ary),
 			implode(',', $author_ary),
 			$author_name,
+		    //START MOD SEARCH RP
+			$topic_type,
+			$topic_status,
+		    //END MOD SEARCH RP
 		)));
 
 		// try reading the results from cache
@@ -582,6 +589,31 @@ class fulltext_mysql extends search_backend
 		$sql_topic_id	= ($topic_id) ? ' AND p.topic_id = ' . (int) $topic_id : '';
 		$sql_time		= ($sort_days) ? ' AND p.post_time >= ' . (time() - ($sort_days * 86400)) : '';
 		$sql_firstpost = ($firstpost_only) ? ' AND p.post_id = t.topic_first_post_id' : '';
+		//START SEARCH RP
+		switch ($topic_type){
+			case POST_NORMAL :
+				$sql_topic_type = ' AND t.topic_type = 0 ';
+				break;
+			case POST_STICKY :
+				$sql_topic_type = ' AND ' . $db->sql_in_set('t.topic_type', array(POST_NORMAL,POST_STICKY));
+				break;
+			case POST_ANNOUNCE :
+				$sql_topic_type = ' AND ' . $db->sql_in_set('t.topic_type', array(POST_NORMAL,POST_ANNOUNCE));
+				break;
+			default :
+				$sql_topic_type ='';
+		}		
+		switch ($topic_status){
+			case TOPIC_UNLOCK :
+				$sql_topic_status = ' AND t.topic_status = 0 ';
+				break;
+			case TOPIC_LOCK :
+				$sql_topic_status = ' AND t.topic_status = 1 ';
+				break;
+			default :
+				$sql_topic_status ='';
+		}
+		//END SEARCH RP
 
 		// Build sql strings for sorting
 		$sql_sort = $sort_by_sql[$sort_key] . (($sort_dir == 'a') ? ' ASC' : ' DESC');
@@ -628,6 +660,8 @@ class fulltext_mysql extends search_backend
 				WHERE $sql_author
 					$sql_topic_id
 					$sql_firstpost
+					$sql_topic_type
+					$sql_topic_status
 					$m_approve_fid_sql
 					$sql_fora
 					$sql_sort_join
@@ -642,6 +676,8 @@ class fulltext_mysql extends search_backend
 				WHERE $sql_author
 					$sql_topic_id
 					$sql_firstpost
+					$sql_topic_type
+					$sql_topic_status
 					$m_approve_fid_sql
 					$sql_fora
 					AND t.topic_id = p.topic_id

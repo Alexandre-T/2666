@@ -40,6 +40,9 @@ $start			= max(request_var('start', 0), 0);
 $post_id		= request_var('p', 0);
 $topic_id		= request_var('t', 0);
 $view			= request_var('view', '');
+//AT MOD SEARCH RP BEGIN
+$lock		    = request_var('lock',2);
+//AT MOD SEARCH RP END
 
 $submit			= request_var('submit', false);
 $keywords		= utf8_normalize_nfc(request_var('keywords', '', true));
@@ -112,6 +115,13 @@ if ($user->load && $config['limit_search_load'] && ($user->load > doubleval($con
 	$template->assign_var('S_NO_SEARCH', true);
 	trigger_error('NO_SEARCH_TIME');
 }
+
+//START SEARCH RP
+//Traitement des verrous
+if (!in_array($lock,array(0,1,2))){
+    $lock = 2;
+}
+//END SEARCH RP
 
 // It is applicable if the configuration setting is non-zero, and the user cannot
 // ignore the flood setting, and the search is a keyword search.
@@ -549,7 +559,13 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 	else if (sizeof($author_id_ary))
 	{
 		$firstpost_only = ($search_fields === 'firstpost' || $search_fields == 'titleonly') ? true : false;
-		$total_match_count = $search->author_search($show_results, $firstpost_only, $sort_by_sql, $sort_key, $sort_dir, $sort_days, $ex_fid_ary, $m_approve_fid_ary, $topic_id, $author_id_ary, $sql_author_match, $id_ary, $start, $per_page);
+		// START SEARCH RP
+		if ($lock || in_array(FORUM_RP, $search_forum) || in_array(FORUM_RPA, $search_forum) ){
+			$ex_fid_ary = array_merge($ex_fid_ary,array_map('intval', explode(',',FORUM_EXCLUS)));
+		}	
+		$total_match_count = $search->author_search($show_results, $firstpost_only, $sort_by_sql, $sort_key, $sort_dir, $sort_days, $ex_fid_ary, $m_approve_fid_ary, $topic_id, $author_id_ary, $sql_author_match, $id_ary, $start, $per_page, POST_NORMAL, $lock);
+		//$total_match_count = $search->author_search($show_results, $firstpost_only, $sort_by_sql, $sort_key, $sort_dir, $sort_days, $ex_fid_ary, $m_approve_fid_ary, $topic_id, $author_id_ary, $sql_author_match, $id_ary, $start, $per_page);
+		// END SEARCH RP
 	}
 
 	// For some searches we need to print out the "no results" page directly to allow re-sorting/refining the search options.
