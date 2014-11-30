@@ -1,0 +1,9 @@
+[titre]Les contacts de {PERSONNAGE}[/titre]
+
+[list]
+{CONTACTS}
+[/list]
+
+[titre]Les liens de {PERSONNAGE} et de ses contacts[/titre]
+
+[i]NB de Lazer : Ce sujet est le tien, tu peux l'éditer intégralement ou ajouter des messages complémentaires à la suite. Amuse-toi bien ![/i]

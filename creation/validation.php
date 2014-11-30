@@ -21,6 +21,7 @@ include($phpbb_root_path . 'includes/functions_display.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_user.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_posting.' . $phpEx);
 include($phpbb_root_path . 'includes/functions_convert.' . $phpEx);
+include($phpbb_root_path . 'includes/mods/functions_creation.' . $phpEx);
 include($phpbb_root_path . 'includes/mods/functions_user.' . $phpEx);
 include($phpbb_root_path . 'includes/mcp/mcp_post.' . $phpEx);
 
@@ -122,6 +123,8 @@ switch ($action)
             (int) $user->profile_fields['pf_cb_fiche'],
             (int) $user->profile_fields['pf_cc_fiche'],
             (int) $user->profile_fields['pf_cd_fiche'],
+            (int) $user->profile_fields['pf_sujet_lien'],
+            (int) $user->profile_fields['pf_sujet_resume'],
         );
         $sql = $sql . $db->sql_in_set('topic_id',$id);
         $result = $db->sql_query($sql);
@@ -152,6 +155,8 @@ switch ($action)
             (int) $user->profile_fields['pf_cb_fiche'],
             (int) $user->profile_fields['pf_cc_fiche'],
             (int) $user->profile_fields['pf_cd_fiche'],
+            (int) $user->profile_fields['pf_sujet_lien'],
+            (int) $user->profile_fields['pf_sujet_resume'],            
         );        
         $sql = $sql . $db->sql_in_set('topic_id',$id);
         $result = $db->sql_query($sql);
@@ -176,7 +181,7 @@ switch ($action)
 	case 'invalidate':
 	    //REFUS DE LA VALIDATION
 	    //Cette astuce permet d'ajouter l'utilisateur à un groupe par défaut sans avatar pour ne pas supprimer le sien.
-		group_user_add(GROUPE_SIGNATURE ,array($member['user_id']),array($member['username']),false,true);
+		group_user_attributes('default',GROUPE_SIGNATURE ,array($member['user_id']),array($member['username']));
 		//On retire l'utilisateur du groupe de demande de validation
 		group_user_del(GROUPE_DEMANDE_CREATION ,array($member['user_id']),array($member['username']));
 		//On redirige vers la page de création de MP
@@ -296,6 +301,10 @@ switch ($action)
 		$data['bbcode_bitfield'] = $user->profile_fields['pf_ca_bit'];
 		$data['bbcode_uid']  = $user->profile_fields['pf_ca_uid'];
 		$data['topic_title'] = truncate_string($subject);
+		//PREPARATION POUR LES LIENS
+		$contacts[1]['NOM']  = $user->profile_fields['pf_ca_nom'];
+		$contacts[1]['CLAN'] = get_clan($user->profile_fields['pf_ca_clan'],$user->profile_fields['pf_ca_sexe']);
+		$contacts[1]['RACE'] = get_race($user->profile_fields['pf_ca_race'],$user->profile_fields['pf_ca_sexe']);
 		//ENVOI DU MESSAGE
 		submit_post ( $mode,  $subject,  $username,  $topic_type,  $poll,  $data);
 		$cp_data['pf_ca_fiche'] = $data['topic_id'];
@@ -316,7 +325,11 @@ switch ($action)
 		$data['bbcode_bitfield'] = $user->profile_fields['pf_cb_bit'];
 		$data['bbcode_uid']  = $user->profile_fields['pf_cb_uid'];
 		$data['topic_title'] = truncate_string($subject);
-		//ENVOI DU MESSAGE
+		//PREPARATION POUR LES LIENS
+		$contacts[2]['NOM']  = $user->profile_fields['pf_cb_nom'];
+		$contacts[2]['CLAN'] = get_clan($user->profile_fields['pf_cb_clan'],$user->profile_fields['pf_cb_sexe']);
+		$contacts[2]['RACE'] = get_race($user->profile_fields['pf_cb_race'],$user->profile_fields['pf_cb_sexe']);
+	   //ENVOI DU MESSAGE
 		submit_post ( $mode,  $subject,  $username,  $topic_type,  $poll,  $data);
 		$cp_data['pf_cb_fiche'] = $data['topic_id'];
 		//Préparation pour le changement de posteur
@@ -337,6 +350,10 @@ switch ($action)
     		$data['bbcode_bitfield'] = $user->profile_fields['pf_cc_bit'];
     		$data['bbcode_uid']  = $user->profile_fields['pf_cc_uid'];
     		$data['topic_title'] = truncate_string($subject);
+    		//PREPARATION POUR LES LIENS
+    		$contacts[3]['NOM']  = $user->profile_fields['pf_cc_nom'];
+    		$contacts[3]['CLAN'] = get_clan($user->profile_fields['pf_cc_clan'],$user->profile_fields['pf_cc_sexe']);
+    		$contacts[3]['RACE'] = get_race($user->profile_fields['pf_cc_race'],$user->profile_fields['pf_cc_sexe']);
     		//ENVOI DU MESSAGE
     		submit_post ( $mode,  $subject,  $username,  $topic_type,  $poll,  $data);
     		$cp_data['pf_cc_fiche'] = $data['topic_id'];
@@ -359,6 +376,10 @@ switch ($action)
     		$data['bbcode_bitfield'] = $user->profile_fields['pf_cd_bit'];
     		$data['bbcode_uid']  = $user->profile_fields['pf_cd_uid'];
     		$data['topic_title'] = truncate_string($subject);
+    		//PREPARATION POUR LES LIENS
+    		$contacts[4]['NOM']  = $user->profile_fields['pf_cd_nom'];
+    		$contacts[4]['CLAN'] = get_clan($user->profile_fields['pf_cd_clan'],$user->profile_fields['pf_cd_sexe']);
+    		$contacts[4]['RACE'] = get_race($user->profile_fields['pf_cd_race'],$user->profile_fields['pf_cd_sexe']);
     		//ENVOI DU MESSAGE
     		submit_post ( $mode,  $subject,  $username,  $topic_type,  $poll,  $data);
     		$cp_data['pf_cd_fiche'] = $data['topic_id'];
@@ -369,7 +390,129 @@ switch ($action)
     		//Changement de posteur
     		change_poster($post_info, $userdata);
 		}
-		$cp_data['pf_actif'] = AT_ACTIF;		
+		$cp_data['pf_actif'] = AT_ACTIF;
+
+		/*******************************************LIENS DU PERSONNAGE**********************************************/
+		$subject    = 'Liens et contacts de ' . $member['username'];
+		$message_lien = creation_message_lien($member['username'],$contacts);
+		// New Topic 
+		$data = array(
+		    // General Posting Settings
+		    'forum_id'  => FORUM_LIENS_PERSONNAGES,    // The forum ID in which the post will be placed. (int)
+		    'topic_id'  => FORUM_NEW_TOPIC,             // Post a new topic or in an existing one? Set to 0 to create a new one, if not, specify your topic ID here instead.
+		    'icon_id'   => false,                       // The Icon ID in which the post will be displayed with on the viewforum, set to false for icon_id. (int)
+		    'contact_id'=> 0,  //The ID of the contact 0 or 1 to 4
+		
+		    // Defining Post Options
+		    'enable_bbcode'  => true,    // Enable BBcode in this post. (bool)
+		    'enable_smilies' => true,    // Enabe smilies in this post. (bool)
+		    'enable_urls'    => true,    // Enable self-parsing URL links in this post. (bool)
+		    'enable_sig'     => true,    // Enable the signature of the poster to be displayed in the post. (bool)
+		
+		    // Message Body
+		    'message'        => $message_lien['message'],       // Your text you wish to have submitted. It should pass through generate_text_for_storage() before this. (string)
+		    'message_md5'    => md5($message_lien['message']),  // The md5 hash of your message
+		
+		    // Values from generate_text_for_storage()
+    		'bbcode_bitfield' => $message_lien['bit'],    // Value created from the generate_text_for_storage() function.
+    		'bbcode_uid'      => $message_lien['uid'],    // Value created from the generate_text_for_storage() function.
+    		
+    		// Other Options
+    		'post_edit_locked'   => 1,   // Disallow post editing? 1 = Yes, 0 = No
+    		'topic_title'        => truncate_string($subject),  // Subject/Title of the topic. (string)
+    		
+    		// Email Notification Settings
+    		'notify_set'        => false, // (bool)
+    		'notify'            => false, // (bool)
+    		'post_time'         => 0,        // Set a specific time, use 0 to let submit_post() take care of getting the proper time (int)
+    		'forum_name'        => '',        // For identifying the name of the forum in a notification email. (string)
+    		
+    		// Indexing
+    		'enable_indexing'   => true,        // Allow indexing the post? (bool)
+    		
+    		// 3.0.6
+    		'force_approved_state' => true, // Allow the post to be submitted without going into unapproved queue
+    		
+    		// 3.1-dev, overwrites force_approve_state
+    		'force_visibility'     => true, // Allow the post to be submitted without going into unapproved queue, or make it be deleted
+		);
+		
+		submit_post ( $mode,  $subject,  $username,  $topic_type,  $poll,  $data);
+		
+		//Préparation pour le changement de poster
+		$post_info['user_id']=$user->data['user_id'];
+		$post_info['topic_id'] = $data['topic_id'];
+		$post_info['topic_last_post_id'] = $post_info['post_id'] = $post_info['forum_last_post_id'] = $post_info['topic_first_post_id'] = $data['post_id'];
+		$post_info['post_postcount'] = $post_info['post_approved'] = true;
+		$post_info['post_attachment'] = false;
+		$post_info['forum_id'] = FORUM_LIENS_PERSONNAGES;
+		$userdata['user_id']=$user_id;
+		$userdata['username']=$member['username'];
+		
+		//Changement de poster
+		change_poster($post_info, $userdata);
+		$cp_data['pf_sujet_lien'] = $data['topic_id'];
+        /**********************************RESUMES RP **************************************************/		
+		$subject        = 'Résumés des RP de ' . $member['username'];
+		$message_resume = creation_message_resume($member['username'],$contacts);
+		// New Topic
+		$data = array(
+		    // General Posting Settings
+		    'forum_id'  => FORUM_RESUMES_RP,    // The forum ID in which the post will be placed. (int)
+		    'topic_id'  => FORUM_NEW_TOPIC,             // Post a new topic or in an existing one? Set to 0 to create a new one, if not, specify your topic ID here instead.
+		    'icon_id'   => false,                       // The Icon ID in which the post will be displayed with on the viewforum, set to false for icon_id. (int)
+		    'contact_id'=> 0,  //The ID of the contact 0 or 1 to 4
+		
+		    // Defining Post Options
+		    'enable_bbcode'  => true,    // Enable BBcode in this post. (bool)
+		    'enable_smilies' => true,    // Enabe smilies in this post. (bool)
+		    'enable_urls'    => true,    // Enable self-parsing URL links in this post. (bool)
+		    'enable_sig'     => true,    // Enable the signature of the poster to be displayed in the post. (bool)
+		
+		    // Message Body
+		    'message'        => $message_resume['message'],       // Your text you wish to have submitted. It should pass through generate_text_for_storage() before this. (string)
+		    'message_md5'    => md5($message_resume['message']),  // The md5 hash of your message
+		
+		    // Values from generate_text_for_storage()
+		    'bbcode_bitfield' => $message_resume['bit'],    // Value created from the generate_text_for_storage() function.
+		    'bbcode_uid'      => $message_resume['uid'],    // Value created from the generate_text_for_storage() function.
+		
+		    // Other Options
+		    'post_edit_locked'   => 1,   // Disallow post editing? 1 = Yes, 0 = No
+		    'topic_title'        => truncate_string($subject),  // Subject/Title of the topic. (string)
+		
+		    // Email Notification Settings
+		    'notify_set'        => false, // (bool)
+		    'notify'            => false, // (bool)
+		    'post_time'         => 0,        // Set a specific time, use 0 to let submit_post() take care of getting the proper time (int)
+		    'forum_name'        => '',        // For identifying the name of the forum in a notification email. (string)
+		
+		    // Indexing
+		    'enable_indexing'   => true,        // Allow indexing the post? (bool)
+		
+		    // 3.0.6
+		    'force_approved_state' => true, // Allow the post to be submitted without going into unapproved queue
+		
+		    // 3.1-dev, overwrites force_approve_state
+		    'force_visibility'     => true, // Allow the post to be submitted without going into unapproved queue, or make it be deleted
+		);
+		
+		submit_post ( $mode,  $subject,  $username,  $topic_type,  $poll,  $data);
+		
+		//Préparation pour le changement de poster
+		$post_info['user_id']=$user->data['user_id'];
+		$post_info['topic_id'] = $data['topic_id'];
+		$post_info['topic_last_post_id'] = $post_info['post_id'] = $post_info['forum_last_post_id'] = $post_info['topic_first_post_id'] = $data['post_id'];
+		$post_info['post_postcount'] = $post_info['post_approved'] = true;
+		$post_info['post_attachment'] = false;
+		$post_info['forum_id'] = FORUM_RESUMES_RP;
+		$userdata['user_id']=$user_id;
+		$userdata['username']=$member['username'];
+		
+		//Changement de poster
+		change_poster($post_info, $userdata);
+		$cp_data['pf_sujet_resume'] = $data['topic_id'];
+		
 		//Enregistrement
 		$cp = new custom_profile();
 		$cp->update_profile_field_data($user_id, $cp_data);
