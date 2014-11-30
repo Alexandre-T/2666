@@ -1195,7 +1195,12 @@ while ($row = $db->sql_fetchrow($result))
 				'jabber'			=> '',
 				'search'			=> '',
 				'age'				=> '',
-
+			    
+			    // START Recherche RP
+			    'search_rp'			=> '',
+			    'search_rpa'		=> '',
+			    // END Recherche RP
+			    			 
 				'username'			=> $row['username'],
 				'user_colour'		=> $row['user_colour'],
 
@@ -1249,6 +1254,11 @@ while ($row = $db->sql_fetchrow($result))
 				'jabber'		=> ($row['user_jabber'] && $auth->acl_get('u_sendim')) ? append_sid("{$phpbb_root_path}memberlist.$phpEx", "mode=contact&amp;action=jabber&amp;u=$poster_id") : '',
 				'search'		=> ($auth->acl_get('u_search')) ? append_sid("{$phpbb_root_path}search.$phpEx", "author_id=$poster_id&amp;sr=posts") : '',
 
+				// START Recherche RP
+				'search_rp'		=> ($auth->acl_get('u_search')) ? append_sid("{$phpbb_root_path}search.$phpEx", "author={$row['username']}&fid%5B%5D=".FORUM_RP."&sc=1&sr=topics&lock=0") : '',
+				'search_rpa'	=> ($auth->acl_get('u_search')) ? append_sid("{$phpbb_root_path}search.$phpEx", "author={$row['username']}&fid%5B%5D=".FORUM_RPA."&sc=1&sr=topics&lock=1") : '',
+				// END Recherche RP
+				
 				'author_full'		=> get_username_string('full', $poster_id, $row['username'], $row['user_colour']),
 				'author_colour'		=> get_username_string('colour', $poster_id, $row['username'], $row['user_colour']),
 				'author_username'	=> get_username_string('username', $poster_id, $row['username'], $row['user_colour']),
@@ -1678,6 +1688,10 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 
 		'U_PROFILE'		=> $user_cache[$poster_id]['profile'],
 		'U_SEARCH'		=> $user_cache[$poster_id]['search'],
+		//START SEARCH RP
+		'U_SEARCH_RP'	=> $user_cache[$poster_id]['search_rp'],
+		'U_SEARCH_RPA'	=> $user_cache[$poster_id]['search_rpa'],
+		//END SEARCH RP		
 		'U_PM'			=> ($poster_id != ANONYMOUS && $config['allow_privmsg'] && $auth->acl_get('u_sendpm') && ($user_cache[$poster_id]['allow_pm'] || $auth->acl_gets('a_', 'm_') || $auth->acl_getf_global('m_'))) ? append_sid("{$phpbb_root_path}ucp.$phpEx", 'i=pm&amp;mode=compose&amp;action=quotepost&amp;p=' . $row['post_id']) : '',
 		'U_EMAIL'		=> $user_cache[$poster_id]['email'],
 		'U_WWW'			=> $user_cache[$poster_id]['www'],

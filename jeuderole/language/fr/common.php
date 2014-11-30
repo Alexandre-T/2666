@@ -514,6 +514,10 @@ $lang = array_merge($lang, array(
 	'FEED_NEWS'					=> 'Nouvelles informations',
 	'FEED_TOPICS_ACTIVE'		=> 'Sujets actifs',
 	'FEED_TOPICS_NEW'			=> 'Nouveaux sujets',
+    //MOD AT BEGIN
+    'RP_EN_COURS'               => 'RP en cours',
+    'RP_ARCHIVE'                => 'RP terminés',
+    //MOD AT END
 	'RULES_ATTACH_CAN'			=> 'Vous <strong>pouvez</strong> joindre des fichiers',
 	'RULES_ATTACH_CANNOT'		=> 'Vous <strong>ne pouvez pas</strong> joindre des fichiers',
 	'RULES_DELETE_CAN'			=> 'Vous <strong>pouvez</strong> supprimer vos messages',
@@ -550,6 +554,13 @@ $lang = array_merge($lang, array(
 	'SEARCH_UNANSWERED'			=> 'Voir les messages sans réponses',
 	'SEARCH_UNREAD'				=> 'Voir les messages non lus',
 	'SEARCH_USER_POSTS'			=> 'Rechercher les messages de l’utilisateur',
+    //MOD AT BEGIN    
+    'SEARCH_USER_RP'   			=> 'Voir ses RPs en cours',
+    'SEARCH_USER_RPA' 			=> 'Voir ses RPs terminés',
+    'SEARCH_USER_RP_ARCHIVE'    => 'Rechercher les RPs archivés de ce personnage',
+    'SEARCH_USER_RP_EN_COURS'   => 'Rechercher les RPs en cours de ce personnage',
+    'SEARCH_USER_RP_ARCHIVE'    => 'Rechercher les RPs archivés de ce personnage',
+    //MOD AT END
 	'SECONDS'					=> 'secondes',
 	'SELECT'					=> 'Sélectionner',
 	'SELECT_ALL_CODE'			=> 'Tout sélectionner',

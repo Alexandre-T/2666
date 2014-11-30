@@ -59,12 +59,20 @@
 						<dd>{GET_CD_RACE} &bull; {GET_CD_CLAN}</dd>
 						<dd><a href="{U_CONSULTER_CD_FICHE}">Consulter sa fiche de personnage</a></dd>
 						<!-- ENDIF -->
+					</dl>
 						
+					<!-- Module Harahel -->
+					<!-- IF S_DISPLAY_SEARCH -->
+					<dl  class="dl-horizontal">
+						<dt>{L_RP_EN_COURS}</dt><dd><a href="{U_SEARCH_USER_RP_EN_COURS}" title="{L_SEARCH_USER_RP_EN_COURS}">{L_SEARCH_USER_RP_EN_COURS}</a></dd>
+						<dt>{L_RP_ARCHIVE}</dt><dd><a href="{U_SEARCH_USER_RP_ARCHIVES}" title="{L_SEARCH_USER_RP_ARCHIVE}">{L_SEARCH_USER_RP_ARCHIVE}</a></dd>
+						<!-- ENDIF -->
+						<!-- Module Harahel -->
+					</dl>	
 						<!-- * BEGIN custom_fields -->
 							<dt>{custom_fields.PROFILE_FIELD_NAME}</dt>
 							<dd>{custom_fields.PROFILE_FIELD_VALUE}</dd>
 						<!-- * END custom_fields -->
-					</dl>
 					<!-- IF SIGNATURE -->
 						<hr class="forum-small-divider"/>
 						<div class="">{SIGNATURE}</div>
