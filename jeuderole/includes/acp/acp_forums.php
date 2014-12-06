@@ -134,6 +134,9 @@ class acp_forums
 						'forum_icone'			=> request_var('forum_icone', ''),
 						//AT MOD ICONE END
 						'forum_image'			=> request_var('forum_image', ''),
+						//AT MOD ICONE SEARCH RP START
+						'forum_rp'				=> request_var('forum_rp', false),
+						//AT MOD ICONE SEARCH RP END
 						'forum_style'			=> request_var('forum_style', 0),
 						'display_subforum_list'	=> request_var('display_subforum_list', false),
 						'display_on_index'		=> request_var('display_on_index', false),
@@ -436,6 +439,9 @@ class acp_forums
 						    //AT MOD ICON START
 						    'forum_icone'			=> '',
 						    //AT MOD ICON END
+							//AT MOD SEARCH RP START
+							'forum_rp'				=> 0,
+							//AT MOD SEARCH RP END
 							'forum_style'			=> 0,
 							'display_subforum_list'	=> true,
 							'display_on_index'		=> false,
@@ -642,6 +648,9 @@ class acp_forums
 					'S_DISPLAY_SUBFORUM_LIST'	=> ($forum_data['display_subforum_list']) ? true : false,
 					'S_DISPLAY_ON_INDEX'		=> ($forum_data['display_on_index']) ? true : false,
 					'S_PRUNE_ENABLE'			=> ($forum_data['enable_prune']) ? true : false,
+					//AT MOD SEARCH RP START
+					'S_FORUM_RP'				=> ($forum_data['forum_rp']) ? true : false,
+					//AT MOD SEARCH RP END
 					'S_FORUM_LINK_TRACK'		=> ($forum_data['forum_flags'] & FORUM_FLAG_LINK_TRACK) ? true : false,
 					'S_PRUNE_OLD_POLLS'			=> ($forum_data['forum_flags'] & FORUM_FLAG_PRUNE_POLL) ? true : false,
 					'S_PRUNE_ANNOUNCE'			=> ($forum_data['forum_flags'] & FORUM_FLAG_PRUNE_ANNOUNCE) ? true : false,

@@ -54,6 +54,10 @@ $lang = array_merge($lang, array(
 	'NO_NEW_POSTS_HOT'		=> 'Pas de nouveaux messages [ Populaires ]',	// Not used anymore
 	'NO_NEW_POSTS_LOCKED'	=> 'Pas de nouveaux messages [ Verrouillés ]',	// Not used anymore
 	'NO_READ_ACCESS'		=> 'Vous n’avez pas les permissions requises pour lire les sujets de ce forum.',
+    //AT MOD FORUM RP START
+    'NO_RP'                 => 'Aucun RP en cours',
+    'NO_RPA'                => 'Aucun RP archivé',
+    //AT MOD FORUM RP END
 	'NO_UNREAD_POSTS_HOT'		=> 'Pas de messages non lus [ Populaires ]',
 	'NO_UNREAD_POSTS_LOCKED'	=> 'Pas de messages non lus [ Verrouillés ]',
 

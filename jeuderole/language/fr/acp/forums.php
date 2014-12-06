@@ -108,6 +108,10 @@ $lang = array_merge($lang, array(
 	'FORUM_PASSWORD_MISMATCH'			=> 'Les mots de passe saisis ne concordent pas.',
 	'FORUM_PRUNE_SETTINGS'				=> 'Paramètres du délestage des forums',
 	'FORUM_RESYNCED'					=> 'Le forum « %s » a été resynchronisé',
+    //AT MOD SEARCH RP START
+	'FORUM_RP'							=> 'Forum RP',
+	'FORUM_RP_EXPLAIN'					=> 'Déclare ce forum comme faisant parti des forums RP. Les forums RPs sont remontés dans les recherches spécifiques (Rechercher mes RPs, Rechercher les RPs d\'un personnage, etc...)',
+    //AT MOD SEARCH RP START
 	'FORUM_RULES_EXPLAIN'				=> 'Les règles du forum sont affichées sur chaque page du forum.',
 	'FORUM_RULES_LINK'					=> 'Lien vers les règles',
 	'FORUM_RULES_LINK_EXPLAIN'			=> 'Vous pouvez indiquer l’URL de la page ou du message contenant vos règles. Ce paramètre annulera tout texte de règles de forum que vous avez renseigné.',

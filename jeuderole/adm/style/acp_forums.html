@@ -208,6 +208,13 @@
 			<dt><label for="forum_status">{L_FORUM_STATUS}:</label></dt>
 			<dd><select id="forum_status" name="forum_status">{S_STATUS_OPTIONS}</select></dd>
 		</dl>
+		<!-- AT MOD SEARCH RP START -->
+		<dl>
+			<dt><label for="forum_rp">{L_FORUM_RP}:</label><br /><span>{L_FORUM_RP_EXPLAIN}</span></dt>
+			<dd><label><input type="radio" class="radio" name="forum_rp" value="1"<!-- IF S_FORUM_RP --> id="forum_rp" checked="checked"<!-- ENDIF --> /> {L_YES}</label>
+				<label><input type="radio" class="radio" name="forum_rp" value="0"<!-- IF not S_FORUM_RP --> id="forum_rp" checked="checked"<!-- ENDIF --> /> {L_NO}</label></dd>
+		</dl>
+		<!-- AT MOD SEARCH RP END -->
 		<dl>
 			<dt><label for="display_subforum_list">{L_LIST_SUBFORUMS}:</label><br /><span>{L_LIST_SUBFORUMS_EXPLAIN}</span></dt>
 			<dd><label><input type="radio" class="radio" name="display_subforum_list" value="1"<!-- IF S_DISPLAY_SUBFORUM_LIST --> id="display_subforum_list" checked="checked"<!-- ENDIF --> /> {L_YES}</label>

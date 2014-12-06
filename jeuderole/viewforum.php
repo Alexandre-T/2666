@@ -159,7 +159,10 @@ else
 page_header($user->lang['VIEW_FORUM'] . ' - ' . $forum_data['forum_name'], true, $forum_id);
 
 $template->set_filenames(array(
-	'body' => 'viewforum_body.html')
+    //MOD AT FORUM RP START : Classement des sujets
+    //If this is an RP Forum, We used another template
+	'body' => $forum_data['forum_rp'] == '1'?'viewforum_body_rp.html':'viewforum_body.html')
+    //MOD AT FORUM RP END : Classement des sujets
 );
 
 make_jumpbox(append_sid("{$phpbb_root_path}viewforum.$phpEx"), $forum_id);
@@ -688,8 +691,17 @@ if (sizeof($topic_list))
 		}
 		// www.phpBB-SEO.com SEO TOOLKIT END -> no dupe
 		// Send vars to template
-		$template->assign_block_vars('topicrow', array(
-			'FORUM_ID'					=> $topic_forum_id,
+		
+		//AT_MOD START : Classement des sujets
+		$cible = 'topicrow';
+		if ($forum_data['forum_rp'] == '1' && $row['topic_type'] == POST_NORMAL && $row['topic_status'] == ITEM_LOCKED ){
+		    $cible = 'archiverow';
+		}elseif($forum_data['forum_rp'] == '1' && $row['topic_type'] == POST_STICKY ){
+		    $cible = 'descriptionrow';
+		}
+		$template->assign_block_vars($cible, array(
+		//AT_MOD END : Classement des sujets
+		    'FORUM_ID'					=> $topic_forum_id,
 			'TOPIC_ID'					=> $topic_id,
 			'TOPIC_AUTHOR'				=> get_username_string('username', $row['topic_poster'], $row['topic_first_poster_name'], $row['topic_first_poster_colour']),
 			'TOPIC_AUTHOR_COLOUR'		=> get_username_string('colour', $row['topic_poster'], $row['topic_first_poster_name'], $row['topic_first_poster_colour']),
