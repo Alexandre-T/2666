@@ -140,7 +140,11 @@
 			<div class="col-sm-3 avatar text-center hidden-xs">
 				<ul class="list-unstyled">
 					<!-- IF postrow.POSTER_AVATAR -->
-						<li><!-- IF postrow.U_POST_AUTHOR --><a href="{postrow.U_POST_AUTHOR}">{postrow.POSTER_AVATAR}</a><!-- ELSE -->{postrow.POSTER_AVATAR}<!-- ENDIF --></li>
+						<!-- IF postrow.S_ACTIF or postrow.S_INACTIF -->
+						<li><a class="" href="#" data-toggle="modal" data-target="#modal{postrow.POST_ID}">{postrow.POSTER_AVATAR}</a></li>
+						<!-- ELSE -->
+						<li>{postrow.POSTER_AVATAR}</li>
+						<!-- ENDIF -->
 					<!-- ENDIF -->
 					<li><!-- IF not postrow.U_POST_AUTHOR --><span class="coalition">{postrow.POST_AUTHOR_FULL}</span><!-- ELSE --><span class="coalition">{postrow.POST_AUTHOR_FULL}</span><!-- ENDIF --></li>
 					<!-- IF postrow.S_ACTIF --><li>{postrow.POSTER_CLAN} &bull; {postrow.POSTER_RACE}</li><!-- ENDIF -->
@@ -148,6 +152,144 @@
 					<!-- IF postrow.RANK_IMG --><li>{postrow.RANK_IMG}</li><!-- ENDIF -->
 					<!-- IF postrow.POSTER_ID != 1 -->
 				</ul>
+				<!-- IF postrow.S_ACTIF or postrow.S_INACTIF -->
+				<!-- DEBUT DE LA POPUP -->
+				<div class="modal fade" id="modal{postrow.POST_ID}">
+					<div class="modal-dialog modal-lg">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">{L_CLOSE}</span></button>
+								<h4 class="modal-title">
+									{postrow.POST_AUTHOR_FULL}&nbsp;<small>{postrow.POSTER_CLAN} &bull; {postrow.POSTER_RACE}</small>
+								</h4>
+							</div>
+		      				<div class="modal-body modal-large text-justify">
+		      					<div>
+
+									<!-- Nav tabs -->
+									<ul class="nav nav-tabs">
+										<li class="<!-- IF postrow.S_POSTER_PRINCIPAL -->active<!-- ENDIF -->"><a href="#modalhome{postrow.POST_ID}" aria-controls="modalhome{postrow.POST_ID}" role="tab" data-toggle="tab">{postrow.POST_ORIGINAL}</a></li>
+										<li class="<!-- IF postrow.S_POSTER_A -->active<!-- ENDIF -->"><a href="#modalca{postrow.POST_ID}" aria-controls="modalca{postrow.POST_ID}" role="tab" data-toggle="tab">{postrow.PROFILE_CA_NOM_VALUE}</a></li>
+										<li class="<!-- IF postrow.S_POSTER_B -->active<!-- ENDIF -->"><a href="#modalcb{postrow.POST_ID}" aria-controls="modalcb{postrow.POST_ID}" role="tab" data-toggle="tab">{postrow.PROFILE_CB_NOM_VALUE}</a></li>
+										<!-- IF postrow.S_CONTACT_3 --><li class="<!-- IF postrow.S_POSTER_C -->active<!-- ENDIF -->"><a href="#modalcc{postrow.POST_ID}" aria-controls="modalcc{postrow.POST_ID}" role="tab" data-toggle="tab">{postrow.PROFILE_CC_NOM_VALUE}</a></li><!-- ENDIF -->
+										<!-- IF postrow.S_CONTACT_4 --><li class="<!-- IF postrow.S_POSTER_D -->active<!-- ENDIF -->"><a href="#modalcd{postrow.POST_ID}" aria-controls="modalcd{postrow.POST_ID}" role="tab" data-toggle="tab">{postrow.PROFILE_CD_NOM_VALUE}</a></li><!-- ENDIF -->
+										<li><a href="#modalprofile{postrow.POST_ID}" aria-controls="modalprofile{postrow.POST_ID}" role="tab" data-toggle="tab">Informations privées</a></li>
+									</ul>
+									<!-- Tab panes -->
+									<div class="tab-content">
+										<div class="tab-pane <!-- IF postrow.S_POSTER_PRINCIPAL -->active<!-- ENDIF -->" id="modalhome{postrow.POST_ID}">
+											<br/>
+											<h5>Résumé des informations concernant {postrow.POST_ORIGINAL_FULL}</h5>
+											<p>{postrow.RESUME}</p>
+										</div>
+										<div class="tab-pane <!-- IF postrow.S_POSTER_A -->active<!-- ENDIF -->" id="modalca{postrow.POST_ID}">
+											<br/>
+											<h5>Résumé des informations concernant {postrow.PROFILE_CA_NOM_VALUE}</h5>
+											
+											<dl class="dl-horizontal">
+												<dt>Clan</dt>
+												<dd>{postrow.POSTER_A_CLAN}</dd>
+												<dt>Race</dt>
+												<dd>{postrow.POSTER_A_RACE}</dd>
+												<dt>Résumé</dt>				
+												<dd>{postrow.POSTER_A_RESUME}</dd>								
+											</dl>
+										</div>
+										<div class="tab-pane <!-- IF postrow.S_POSTER_B -->active<!-- ENDIF -->" id="modalcb{postrow.POST_ID}">
+											<br/>
+											<h5>Résumé des informations concernant {postrow.PROFILE_CB_NOM_VALUE}</h5>
+											<dl class="dl-horizontal">
+												<dt>Clan</dt>
+												<dd>{postrow.POSTER_B_CLAN}</dd>
+												<dt>Race</dt>
+												<dd>{postrow.POSTER_B_RACE}</dd>
+												<dt>Résumé</dt>				
+												<dd>{postrow.POSTER_B_RESUME}</dd>								
+											</dl>
+										</div>
+										<!-- IF postrow.S_CONTACT_3 -->
+										<div class="tab-pane <!-- IF postrow.S_POSTER_C -->active<!-- ENDIF -->" id="modalcc{postrow.POST_ID}">
+											<br/>
+											<h5>Résumé des informations concernant {postrow.PROFILE_CC_NOM_VALUE}</h5>
+											<dl class="dl-horizontal">
+												<dt>Clan</dt>
+												<dd>{postrow.POSTER_C_CLAN}</dd>
+												<dt>Race</dt>
+												<dd>{postrow.POSTER_C_RACE}</dd>
+												<dt>Résumé</dt>				
+												<dd>{postrow.POSTER_C_RESUME}</dd>								
+											</dl>
+										</div>
+										<!-- ENDIF -->
+										<!-- IF postrow.S_CONTACT_4 -->
+										<div class="tab-pane <!-- IF postrow.S_POSTER_D -->active<!-- ENDIF -->" id="modalcd{postrow.POST_ID}">
+											<br/>
+											<h5>Résumé des informations concernant {postrow.PROFILE_CD_NOM_VALUE}</h5>
+											<dl class="dl-horizontal">
+												<dt>Clan</dt>
+												<dd>{postrow.POSTER_D_CLAN}</dd>
+												<dt>Race</dt>
+												<dd>{postrow.POSTER_D_RACE}</dd>
+												<dt>Résumé</dt>				
+												<dd>{postrow.POSTER_D_RESUME}</dd>								
+											</dl>
+										</div>
+										<!-- ENDIF -->
+										<div class="tab-pane" id="modalprofile{postrow.POST_ID}">
+											<br/>
+											<div class="alert alert-warning">
+												<p>Ces informations sont privées, seul l'administrateur et vous y avez accès.</p>
+											</div>
+											<!-- IF U_ACP or postrow.S_MYSELF-->
+											<h5>{postrow.POST_ORIGINAL_FULL}</h5>
+											<dl class="dl-horizontal">
+												<dt>Passé</dt>				
+												<dd>{postrow.PROFILE_PASSE_VALUE}</dd>
+												<!-- IF postrow.S_HUMAIN -->
+												<dt>Don</dt>
+												<dd>{postrow.PROFILE_DON_VALUE}</dd>
+												<!-- ELSE -->
+												<dt>Pouvoir Nephilim</dt>
+												<dd>{postrow.PROFILE_POUVOIR_VALUE}</dd>
+												<dt>Voleuse d'âme</dt>
+												<dd><strong>{postrow.PROFILE_VOLEUSE_NOM_VALUE}</strong></dd>												
+												<dd>{postrow.PROFILE_VOLEUSE_DES_VALUE}</dd>												
+												<dd>Pouvoir : {postrow.PROFILE_VOLEUSE_POUVOIR_VALUE}</dd>
+												<!-- ENDIF -->
+												
+											</dl>
+											<h5>Contacts</h5>
+											<dl class="dl-horizontal">
+												<dt>{postrow.PROFILE_CA_NOM_VALUE}</dt>
+												<dd>{postrow.PROFILE_CA_DESCRIPTION_VALUE}</dd>
+												<dt>{postrow.PROFILE_CB_NOM_VALUE}</dt>
+												<dd>{postrow.PROFILE_CB_DESCRIPTION_VALUE}</dd>
+												<!-- IF postrow.S_CONTACT_3 -->
+												<dt>{postrow.PROFILE_CC_NOM_VALUE}</dt>				
+												<dd>{postrow.PROFILE_CC_DESCRIPTION_VALUE}</dd>
+												<!-- ENDIF -->
+												<!-- IF postrow.S_CONTACT_4 -->					
+												<dt>{postrow.PROFILE_CD_NOM_VALUE}</dt>				
+												<dd>{postrow.PROFILE_CD_DESCRIPTION_VALUE}</dd>
+												<!-- ENDIF -->
+											</dl>
+											<!-- ELSE -->
+											<div class="alert alert-warning">
+												<p>Vous n'avez pas accès aux informations privées de ce personnage.</p>
+											</div>
+											<!-- ENDIF -->
+										</div>
+									</div>
+								</div>
+					      	</div>
+					      	<div class="modal-footer">
+					        		<button type="button" class="btn btn-primary" data-dismiss="modal">{L_CLOSE}</button>
+					      	</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->				
+				<!-- FIN DE LA POPUP -->
+				<!-- ENDIF -->
 					<div class="btn-group dropup" >
 						<a class="btn <!-- IF postrow.S_ONLINE and not postrow.S_IGNORE_POST -->btn-success<!-- ELSE -->btn-default<!-- ENDIF -->" data-toggle="dropdown" href="#">
 							<!-- IF postrow.S_ONLINE and not postrow.S_IGNORE_POST -->
@@ -158,13 +300,12 @@
 						</a>
 						<a class="btn <!-- IF postrow.S_ONLINE and not postrow.S_IGNORE_POST -->btn-success<!-- ELSE -->btn-default<!-- ENDIF --> dropdown-toggle" data-toggle="dropdown" href="#"><span class="fa fa-caret-up"></span></a>
 						<ul class="dropdown-menu text-left">
+							<!-- IF postrow.U_POST_AUTHOR --><li><a href="{postrow.U_POST_AUTHOR}" title="Consulter son profil"><i class="fa fa-fw fa-user"></i> Consulter son profil</a></li><!-- ENDIF -->
 							<!-- IF postrow.POSTER_POSTS != '' --><li><span><strong><i class="fa fa-fw fa-comments-o"></i> {L_POSTS} :</strong> {postrow.POSTER_POSTS}</span></li><!-- ENDIF -->
 							<!-- IF postrow.POSTER_FROM --><li><span><strong><i class="fa fa-fw fa-map-marker"></i> {L_LOCATION} :</strong> {postrow.POSTER_FROM}</span></li><!-- ENDIF -->
 							<!-- IF postrow.POSTER_AGE --><li><span><strong><i class="fa fa-fw fa-calendar"></i> Âge du joueur : {postrow.POSTER_AGE}</strong></span><!-- ENDIF -->
 							<!-- IF postrow.S_USERID_BANNED --><li><span><strong><i class="fa fa-fw fa-exclamation-triangle"></i> {L_CURRENTLY_BANNED}</strong></span></li>
 							<!-- ELSEIF postrow.POSTER_WARNINGS --><li><span><strong><i class="fa fa-fw fa-exclamation-triangle"></i> {L_WARNINGS}:</strong> {postrow.POSTER_WARNINGS}</span></li><!-- ENDIF -->	
-							<!-- IF postrow.S_PROFILE_COMPTE_PRINCIPAL --><li><span><strong><i class="fa fa-fw fa-user"></i> {postrow.PROFILE_COMPTE_PRINCIPAL_NAME}:</strong> {postrow.PROFILE_COMPTE_PRINCIPAL_VALUE}</span></li><!-- ENDIF -->
-							<!-- IF postrow.S_PROFILE_COMPTE_SECONDAIRE --><li><span><strong><i class="fa fa-fw fa-user"></i> {postrow.PROFILE_COMPTE_SECONDAIRE_NAME}:</strong> {postrow.PROFILE_COMPTE_SECONDAIRE_VALUE}</span></li><!-- ENDIF -->
 							<!-- IF not S_IS_BOT -->
 							<!-- IF postrow.U_PM or postrow.U_EMAIL or postrow.U_WWW or postrow.U_MSN or postrow.U_ICQ or postrow.U_YIM or postrow.U_AIM or postrow.U_JABBER -->
 							<li class="divider"></li>
