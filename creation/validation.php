@@ -402,7 +402,8 @@ switch ($action)
 		    'topic_id'  => FORUM_NEW_TOPIC,             // Post a new topic or in an existing one? Set to 0 to create a new one, if not, specify your topic ID here instead.
 		    'icon_id'   => false,                       // The Icon ID in which the post will be displayed with on the viewforum, set to false for icon_id. (int)
 		    'contact_id'=> 0,  //The ID of the contact 0 or 1 to 4
-		
+		    'post_edit_locked'  => 0,   // Disallow post editing? 1 = Yes, 0 = No
+
 		    // Defining Post Options
 		    'enable_bbcode'  => true,    // Enable BBcode in this post. (bool)
 		    'enable_smilies' => true,    // Enabe smilies in this post. (bool)
@@ -462,7 +463,8 @@ switch ($action)
 		    'topic_id'  => FORUM_NEW_TOPIC,             // Post a new topic or in an existing one? Set to 0 to create a new one, if not, specify your topic ID here instead.
 		    'icon_id'   => false,                       // The Icon ID in which the post will be displayed with on the viewforum, set to false for icon_id. (int)
 		    'contact_id'=> 0,  //The ID of the contact 0 or 1 to 4
-		
+		    'post_edit_locked'  => 0,   // Disallow post editing? 1 = Yes, 0 = No
+		    
 		    // Defining Post Options
 		    'enable_bbcode'  => true,    // Enable BBcode in this post. (bool)
 		    'enable_smilies' => true,    // Enabe smilies in this post. (bool)
