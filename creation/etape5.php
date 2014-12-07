@@ -86,9 +86,6 @@ $resume_edit = generate_text_for_edit($resume_edit , $uid, 7);
 //Vérification des droits
 creation_verification(CREATION_ETAPE);
 
-//Gestion du message d'erreur
-$message = request_var('message',0);
-
 //Template
 $template->assign_vars(array(
     

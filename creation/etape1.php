@@ -67,9 +67,6 @@ if (empty( $user->profile_fields['pf_sexe'])|| AT_FEMME != $user->profile_fields
 	$sexe = $user->profile_fields['pf_sexe'];
 }
 
-//Gestion du message d'erreur
-$message = request_var('message', 0);
-
 //Transmission à la vue
 $template->assign_vars(array(
 	'FEMME_CHECKED' => ($sexe==AT_FEMME)?'checked="checked"':'',
@@ -77,7 +74,6 @@ $template->assign_vars(array(
 	'HIDDEN_FIELDS' => build_hidden_fields(array('from'=> CREATION_ETAPE )),
 	'AT_HOMME' 		=> AT_HOMME,
 	'AT_FEMME' 		=> AT_FEMME, 
-	'S_MESSAGE'	  	=> 1 === $message,
 ));
 
 // Output page

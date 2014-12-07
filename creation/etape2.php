@@ -69,9 +69,6 @@ $messages = get_texts_for_popup(array(
     POST_NEPHILIM
 ));
 
-// Gestion du message d'erreur
-$message = request_var('message', 0);
-
 // Template
 $template->assign_vars(array(
     

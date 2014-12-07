@@ -59,9 +59,6 @@ creation_verification(CREATION_ETAPE);
 ///Generate popup
 $messages = get_texts_for_popup(array(POST_CONSEILS_POUVOIR,POST_CONSEILS_VOLEUSE,POST_CONSEILS_DON,POST_CONSEILS_CLAN));
 
-//Gestion du message d'erreur
-$message = request_var('message',0);
-
 //Template
 $template->assign_vars(array(
 	'FORM_POUVOIR'	  			 => $user->profile_fields['pf_pouvoir'],

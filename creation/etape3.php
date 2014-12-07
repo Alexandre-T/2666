@@ -51,9 +51,6 @@ if ($submit){
 //Vérification des droits
 creation_verification(CREATION_ETAPE);
 
-//Gestion du message d'erreur
-$message = request_var('message',0);
-
 //Template
 $template->assign_vars(array(
     
