@@ -72,7 +72,7 @@ function creation_verification_etape($etape)
     $etapes[2] = $etapes[1] && ! empty($user->profile_fields['pf_sexe']) && AT_NONRENSEIGNE !== $user->profile_fields['pf_sexe'];
     $etapes[3] = $etapes[2] && ! empty($user->profile_fields['pf_race']) && AT_NONRENSEIGNE !== $user->profile_fields['pf_race'];
     $etapes[4] = $etapes[3] && ! empty($user->profile_fields['pf_avatar']);
-    $etapes[5] = $etapes[4] && ! (empty($user->profile_fields['pf_passe']) || empty($user->profile_fields['pf_agereel']) && AT_NEPHILIM == $user->profile_fields['pf_race'] || empty($user->profile_fields['pf_prenom']) || empty($user->profile_fields['pf_nom']) || empty($user->profile_fields['pf_profession']) );
+    $etapes[5] = $etapes[4] && ! (empty($user->profile_fields['pf_passe']) || empty($user->profile_fields['pf_agereel']) && AT_NEPHILIM == $user->profile_fields['pf_race'] || empty($user->profile_fields['pf_prenom']) || empty($user->profile_fields['pf_nom']) && AT_HUMAIN == $user->profile_fields['pf_race'] || empty($user->profile_fields['pf_profession']) );
     $etapes[6] = $etapes[5] && ! empty($user->profile_fields['pf_resume']) ;
     $etapes[7] = $etapes[6] && ! (empty($user->profile_fields['pf_clan']) || empty($user->profile_fields['pf_don']) && AT_HUMAIN == $user->profile_fields['pf_race'] || (empty($user->profile_fields['pf_pouvoir']) || empty($user->profile_fields['pf_voleuse_nom']) || empty($user->profile_fields['pf_voleuse_des']) || empty($user->profile_fields['pf_voleuse_pouvoir']) ) && AT_NEPHILIM == $user->profile_fields['pf_race'] );
     $etapes[8] = $etapes[7] && ! (empty($user->profile_fields['pf_ca_nom']) || empty($user->profile_fields['pf_ca_avatar']) || empty($user->profile_fields['pf_ca_avatar_name']) || empty($user->profile_fields['pf_ca_resume'])); 
@@ -93,6 +93,9 @@ function creation_verification_etape($etape)
     if (! empty($location)) {
         header($location);
     }
+    
+    //Gestion du message d'erreur
+    $message = request_var('message',0);
     
     // Assignation des variables
     $l_race = (key_exists('pf_race', $user->profile_fields)) ? $user->profile_fields['pf_race'] : AT_NONRENSEIGNE;

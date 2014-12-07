@@ -51,6 +51,9 @@ if ($submit){
     }else{
         //cas particulier des Nephilim
         $cp_data['pf_agereel'] = max(18,min(9999,$agereel));
+        if (empty($cp_data['pf_prenom'])){
+            $cp_data['pf_prenom'] = $user->data['username'];
+        }
     }
     
     //Enregistrement
@@ -67,9 +70,6 @@ creation_verification(CREATION_ETAPE);
 ///Generate popup
 $messages = get_texts_for_popup(array(POST_CONSEILS_PERSONNAGE));
 
-//Gestion du message d'erreur
-$message = request_var('message',0);
-
 //Template
 $template->assign_vars(array(
 
@@ -79,9 +79,9 @@ $template->assign_vars(array(
     'FORM_NOM'		  	=> $user->profile_fields['pf_nom'],
     'FORM_PROFESSION'  	=> $user->profile_fields['pf_profession'],
     'FORM_PASSE'		=> $user->profile_fields['pf_passe'],
+    'FORM_NOM_REQUIRED' => AT_HUMAIN == $user->profile_fields['pf_race']?'required="required"':'',
+    'FORM_PRENOM_REQUIRED' => AT_HUMAIN == $user->profile_fields['pf_race']?'required="required"':'',
     
-	'S_CREATION'		  => true,
-		
 	'POST_CONSEILS_PERSONNAGE' => $messages[POST_CONSEILS_PERSONNAGE],
 		
 	'HIDDEN_FIELDS' 	  => build_hidden_fields(array('from'=> CREATION_ETAPE)),
