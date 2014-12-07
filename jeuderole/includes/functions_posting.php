@@ -1814,8 +1814,12 @@ function submit_post($mode, $subject, $username, $topic_type, &$poll, &$data, $u
 				'post_attachment'	=> (!empty($data['attachment_data'])) ? 1 : 0,
 				'bbcode_bitfield'	=> $data['bbcode_bitfield'],
 				'bbcode_uid'		=> $data['bbcode_uid'],
-				'post_edit_locked'	=> $data['post_edit_locked'])
-			);
+				//AT MOD CONTACT START
+				//'post_edit_locked'	=> $data['post_edit_locked']
+				'post_edit_locked'	=> $data['post_edit_locked'],
+				'contact_id'        => isset($data['contact_id']) ? (int)$data['contact_id'] : 0
+				//AT MOD CONTACT END
+			));
 
 			if ($update_message)
 			{
