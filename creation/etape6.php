@@ -87,12 +87,6 @@ $template->assign_vars(array(
 	'FORM_VOLEUSE_DESCRIPTION' 	=> $user->profile_fields['pf_voleuse_des'],
 	'FORM_VOLEUSE_POUVOIR'  	=> $user->profile_fields['pf_voleuse_pouvoir'],
 
-	'S_FEMME'			  => AT_FEMME    == $user->profile_fields['pf_sexe'],
-	'S_HOMME'			  => AT_HOMME    == $user->profile_fields['pf_sexe'],
-	'S_HUMAIN'			  => AT_HUMAIN   == $user->profile_fields['pf_race'],
-	'S_NEPHILIM'		  => AT_NEPHILIM == $user->profile_fields['pf_race'],
-	'S_MESSAGE'	  		  => 1 == $message,
-		
 	'S_PRENOM'			  => $user->profile_fields['pf_prenom'],
 	
 	'POST_CONSEILS_DON' 	=> $messages[POST_CONSEILS_DON],

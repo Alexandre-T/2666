@@ -58,14 +58,6 @@ $message = request_var('message',0);
 $template->assign_vars(array(
     
     'FORM_AVATAR'	  	=> $user->profile_fields['pf_avatar'],
-
-	'S_FEMME'			  => AT_FEMME    == $user->profile_fields['pf_sexe'],
-	'S_HOMME'			  => AT_HOMME    == $user->profile_fields['pf_sexe'],
-	'S_HUMAIN'			  => AT_HUMAIN   == $user->profile_fields['pf_race'],
-	'S_NEPHILIM'		  => AT_NEPHILIM == $user->profile_fields['pf_race'],
-		
-	'S_MESSAGE'	  		  => 1 == $message,
-		
 	'HIDDEN_FIELDS' 	  => build_hidden_fields(array('from'=> CREATION_ETAPE)),
 		
 ));

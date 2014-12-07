@@ -80,12 +80,6 @@ $template->assign_vars(array(
     'FORM_PROFESSION'  	=> $user->profile_fields['pf_profession'],
     'FORM_PASSE'		=> $user->profile_fields['pf_passe'],
     
-	'S_FEMME'			  => AT_FEMME    == $user->profile_fields['pf_sexe'],
-	'S_HOMME'			  => AT_HOMME    == $user->profile_fields['pf_sexe'],
-	'S_HUMAIN'			  => AT_HUMAIN   == $user->profile_fields['pf_race'],
-	'S_NEPHILIM'		  => AT_NEPHILIM == $user->profile_fields['pf_race'],
-	'S_MESSAGE'	  		  => 1 == $message,
-		
 	'S_CREATION'		  => true,
 		
 	'POST_CONSEILS_PERSONNAGE' => $messages[POST_CONSEILS_PERSONNAGE],

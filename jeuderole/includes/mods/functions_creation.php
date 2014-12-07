@@ -143,8 +143,13 @@ function creation_verification_etape($etape)
         'S_ETAPE_10' => 10 == $etape,
         'S_ETAPE_11' => 11 == $etape,
         
-        'S_HUMAIN' => ($l_race == AT_HUMAIN),
+        'S_FEMME' => AT_FEMME == $user->profile_fields['pf_sexe'],
+        'S_HOMME' => AT_HOMME == $user->profile_fields['pf_sexe'],
+        'S_HUMAIN' => AT_HUMAIN == $user->profile_fields['pf_race'],
+        'S_NEPHILIM' => AT_NEPHILIM == $user->profile_fields['pf_race'],
+        'S_MESSAGE'	 => 1 == $message,
         'S_CREATION' => true,
+
         'S_CREE' => is_user_in_group(GROUPE_DEMANDE_CREATION),
         'S_INACTIF' => is_user_in_group(GROUPE_INACTIF),
         'S_NEPHILIM' => ($l_race == AT_NEPHILIM),
@@ -648,11 +653,6 @@ function gestionContact($numero)
         'CHECKBOX_CHECKED' =>  $checked,
         'REQUIRED' => $checked?'required="required"':'',
         'CLASS_HIDDEN' => $checked?'':'hidden',
-        
-        'S_FEMME' => AT_FEMME == $user->profile_fields['pf_sexe'],
-        'S_HOMME' => AT_HOMME == $user->profile_fields['pf_sexe'],
-        'S_HUMAIN' => AT_HUMAIN == $user->profile_fields['pf_race'],
-        'S_NEPHILIM' => AT_NEPHILIM == $user->profile_fields['pf_race'],
         
         'HUMAIN_CHECKED'   => (AT_NEPHILIM != $user->profile_fields['pf_'.$prefixe.'_race'])?'checked="checked"':'',
         'NEPHILIM_CHECKED' => (AT_NEPHILIM == $user->profile_fields['pf_'.$prefixe.'_race'])?'checked="checked"':'',
