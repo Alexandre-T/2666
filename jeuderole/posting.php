@@ -1538,8 +1538,11 @@ if (is_user_in_group(GROUPE_ACTIF)){
 	    $contacts[4] = $user->profile_fields['pf_cd_nom'];
     }
     $contact_options = '';
-    foreach ($contacts as $key => $contact){
-        $contact_options .= sprintf('<option value="%d">%s</option>',$key,$contact);
+    foreach ($contacts as $key => $contactLibelle){
+        $contact_options .= sprintf('<option value="%d" %s >%s</option>',
+            $key, 
+            (isset($post_data['contact_id']) && $key == $post_data['contact_id'])?'selected="selected"':'',
+            $contactLibelle);
     }
     $template->assign_vars(array(
         'S_POSTING_CONTACT'     => true,
@@ -1552,7 +1555,16 @@ if (is_user_in_group(GROUPE_ACTIF)){
         'S_CONTACT_4'           => $user->profile_fields['pf_cd_actif'],
         'CONTACT_OPTIONS'		=> $contact_options,
     ));
-    
+}else{
+    if($mode == 'edit'){
+        $contact_id = $post_data['contact_id'];
+    }
+    $template->assign_vars(array(
+        'S_POSTING_CONTACT'     => false,
+        'CONTACT_HIDDEN_FIELDS' => build_hidden_fields(array(
+            'contact' => $contact_id,
+        ))
+    )); 
 }
 //MOD AT - Poster avec un contact - End
 
