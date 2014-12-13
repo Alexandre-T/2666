@@ -89,7 +89,6 @@ creation_verification(CREATION_ETAPE);
 //Template
 $template->assign_vars(array(
     
-    'S_MESSAGE'	  	 => 1 == $message,
     'S_APERCU'       => $apercu,
     'MESSAGE'        => $resume_edit['text'],
     'RESUME_DISPLAY' => $resume_display,
