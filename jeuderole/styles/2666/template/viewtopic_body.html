@@ -318,7 +318,9 @@
 							<!-- IF postrow.U_AIM --><li><a href="{postrow.U_AIM}" onclick="popup(this.href, 550, 320); return false;" title="{L_AIM}"><i class="fa fa-fw fa-group"></i> {L_AIM}</a></li><!-- ENDIF -->
 							<!-- IF postrow.U_JABBER --><li><a href="{postrow.U_JABBER}" onclick="popup(this.href, 550, 320); return false;" title="{L_JABBER}"><i class="fa fa-fw fa-group"></i> {L_JABBER}</a></li><!-- ENDIF -->
 							<!-- ENDIF -->
-							<!-- IF postrow.U_SEARCH_RP or postrow.U_SEARCH_RPA -->
+							<!-- IF ( postrow.S_ACTIF or postrow.S_INACTIF ) and ( postrow.U_SEARCH_RP or postrow.U_SEARCH_RPA ) -->
+							<li class="divider"></li>
+							<li><a href="{postrow.U_TELEPHONE}" title="{postrow.TELEPHONE_LONG}"><i class="fa fa-fw fa-phone"></i> {postrow.TELEPHONE}</a>
 							<li class="divider"></li>
 							<!-- IF postrow.U_SEARCH_RP --><li><a href="{postrow.U_SEARCH_RP}" title="{L_SEARCH_USER_RP}"><i class="fa fa-fw fa-file-text-o"></i> {L_SEARCH_USER_RP}</a></li><!-- ENDIF -->
 							<!-- IF postrow.U_SEARCH_RPA --><li><a href="{postrow.U_SEARCH_RPA}" title="{L_SEARCH_USER_RPA}"><i class="fa fa-fw fa-lock"></i> {L_SEARCH_USER_RPA}</a></li><!-- ENDIF -->

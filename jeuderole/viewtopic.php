@@ -1588,46 +1588,51 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 		$couleur = AT_HUMAIN == $profile_fields_cache[$poster_id]['ca_race']['value']?COULEUR_HUMAIN:(AT_ORIGINEL == $profile_fields_cache[$poster_id]['ca_race']['value']?COULEUR_ORIGINEL: COULEUR_NEPHILIM);
 		
 		$user_cache[$poster_id]['resume']           = generate_text_for_display($profile_fields_cache[$poster_id]['resume']['value'], $profile_fields_cache[$poster_id]['resume_uid']['value'], $profile_fields_cache[$poster_id]['resume_bit']['value'], 7);
+		$user_cache[$poster_id]['telephone']        = $profile_fields_cache[$poster_id]['telephone']['value'];
 		
-		$user_cache[$poster_id]['contact1_race']    = get_race($profile_fields_cache[$poster_id]['ca_race']['value'],$profile_fields_cache[$poster_id]['ca_sexe']['value']);
-		$user_cache[$poster_id]['contact1_clan']    = get_clan($profile_fields_cache[$poster_id]['ca_clan']['value'],$profile_fields_cache[$poster_id]['ca_sexe']['value']);
-		$user_cache[$poster_id]['contact1_nom' ]    = $profile_fields_cache[$poster_id]['ca_nom']['value'];
-		$user_cache[$poster_id]['contact1_avatar']  = get_contact_avatar(1, $profile_fields_cache[$poster_id]['ca_avatar']['value'], $profile_fields_cache[$poster_id]['ca_avatar_type']['value'], $profile_fields_cache[$poster_id]['ca_avatar_width']['value'], $profile_fields_cache[$poster_id]['ca_avatar_height']['value']);
-		$user_cache[$poster_id]["contact1_full"]    = get_username_string('full', $poster_id, $profile_fields_cache[$poster_id]['ca_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['ca_nom']['value']);
-		$user_cache[$poster_id]["contact1_colour"]  = get_username_string('colour', $poster_id, $profile_fields_cache[$poster_id]['ca_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['ca_nom']['value']);
-		$user_cache[$poster_id]["contact1_username"]= get_username_string('username', $poster_id, $profile_fields_cache[$poster_id]['ca_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['ca_nom']['value']);
-		$user_cache[$poster_id]["contact1_resume"]  = generate_text_for_display($profile_fields_cache[$poster_id]['ca_resume']['value'], $profile_fields_cache[$poster_id]['ca_uid']['value'], $profile_fields_cache[$poster_id]['ca_bit']['value'], 7);
+		$user_cache[$poster_id]['contact1_race']      = get_race($profile_fields_cache[$poster_id]['ca_race']['value'],$profile_fields_cache[$poster_id]['ca_sexe']['value']);
+		$user_cache[$poster_id]['contact1_clan']      = get_clan($profile_fields_cache[$poster_id]['ca_clan']['value'],$profile_fields_cache[$poster_id]['ca_sexe']['value']);
+		$user_cache[$poster_id]['contact1_nom' ]      = $profile_fields_cache[$poster_id]['ca_nom']['value'];
+		$user_cache[$poster_id]['contact1_avatar']    = get_contact_avatar(1, $profile_fields_cache[$poster_id]['ca_avatar']['value'], $profile_fields_cache[$poster_id]['ca_avatar_type']['value'], $profile_fields_cache[$poster_id]['ca_avatar_width']['value'], $profile_fields_cache[$poster_id]['ca_avatar_height']['value']);
+		$user_cache[$poster_id]["contact1_full"]      = get_username_string('full', $poster_id, $profile_fields_cache[$poster_id]['ca_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['ca_nom']['value']);
+		$user_cache[$poster_id]["contact1_colour"]    = get_username_string('colour', $poster_id, $profile_fields_cache[$poster_id]['ca_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['ca_nom']['value']);
+		$user_cache[$poster_id]["contact1_username"]  = get_username_string('username', $poster_id, $profile_fields_cache[$poster_id]['ca_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['ca_nom']['value']);
+		$user_cache[$poster_id]["contact1_resume"]    = generate_text_for_display($profile_fields_cache[$poster_id]['ca_resume']['value'], $profile_fields_cache[$poster_id]['ca_uid']['value'], $profile_fields_cache[$poster_id]['ca_bit']['value'], 7);
+		$user_cache[$poster_id]["contact1_telephone"] = $profile_fields_cache[$poster_id]['ca_telephone']['value'];
 		
 		
 		$couleur = AT_HUMAIN == $profile_fields_cache[$poster_id]['cb_race']['value']?COULEUR_HUMAIN:(AT_ORIGINEL == $profile_fields_cache[$poster_id]['cb_race']['value']?COULEUR_ORIGINEL: COULEUR_NEPHILIM);
-		$user_cache[$poster_id]['contact2_race']    = get_race($profile_fields_cache[$poster_id]['cb_race']['value'],$profile_fields_cache[$poster_id]['cb_sexe']['value']);
-		$user_cache[$poster_id]['contact2_clan']    = get_clan($profile_fields_cache[$poster_id]['cb_clan']['value'],$profile_fields_cache[$poster_id]['cb_sexe']['value']);
-		$user_cache[$poster_id]['contact2_nom' ]    = $profile_fields_cache[$poster_id]['cb_nom']['value'];
-		$user_cache[$poster_id]['contact2_avatar']  = get_contact_avatar(2, $profile_fields_cache[$poster_id]['cb_avatar']['value'], $profile_fields_cache[$poster_id]['cb_avatar_type']['value'], $profile_fields_cache[$poster_id]['cb_avatar_width']['value'], $profile_fields_cache[$poster_id]['cb_avatar_height']['value']);
-		$user_cache[$poster_id]["contact2_full"]    = get_username_string('full', $poster_id, $profile_fields_cache[$poster_id]['cb_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cb_nom']['value']);
-		$user_cache[$poster_id]["contact2_colour"]  = get_username_string('colour', $poster_id, $profile_fields_cache[$poster_id]['cb_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cb_nom']['value']);
-		$user_cache[$poster_id]["contact2_username"]= get_username_string('username', $poster_id, $profile_fields_cache[$poster_id]['cb_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cb_nom']['value']);
-		$user_cache[$poster_id]["contact2_resume"]  = generate_text_for_display($profile_fields_cache[$poster_id]['cb_resume']['value'], $profile_fields_cache[$poster_id]['cb_uid']['value'], $profile_fields_cache[$poster_id]['cb_bit']['value'], 7);
+		$user_cache[$poster_id]['contact2_race']      = get_race($profile_fields_cache[$poster_id]['cb_race']['value'],$profile_fields_cache[$poster_id]['cb_sexe']['value']);
+		$user_cache[$poster_id]['contact2_clan']      = get_clan($profile_fields_cache[$poster_id]['cb_clan']['value'],$profile_fields_cache[$poster_id]['cb_sexe']['value']);
+		$user_cache[$poster_id]['contact2_nom' ]      = $profile_fields_cache[$poster_id]['cb_nom']['value'];
+		$user_cache[$poster_id]['contact2_avatar']    = get_contact_avatar(2, $profile_fields_cache[$poster_id]['cb_avatar']['value'], $profile_fields_cache[$poster_id]['cb_avatar_type']['value'], $profile_fields_cache[$poster_id]['cb_avatar_width']['value'], $profile_fields_cache[$poster_id]['cb_avatar_height']['value']);
+		$user_cache[$poster_id]["contact2_full"]      = get_username_string('full', $poster_id, $profile_fields_cache[$poster_id]['cb_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cb_nom']['value']);
+		$user_cache[$poster_id]["contact2_colour"]    = get_username_string('colour', $poster_id, $profile_fields_cache[$poster_id]['cb_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cb_nom']['value']);
+		$user_cache[$poster_id]["contact2_username"]  = get_username_string('username', $poster_id, $profile_fields_cache[$poster_id]['cb_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cb_nom']['value']);
+		$user_cache[$poster_id]["contact2_resume"]    = generate_text_for_display($profile_fields_cache[$poster_id]['cb_resume']['value'], $profile_fields_cache[$poster_id]['cb_uid']['value'], $profile_fields_cache[$poster_id]['cb_bit']['value'], 7);
+		$user_cache[$poster_id]["contact2_telephone"] = $profile_fields_cache[$poster_id]['cb_telephone']['value'];
 		
 		$couleur = AT_HUMAIN == $profile_fields_cache[$poster_id]['cc_race']['value']?COULEUR_HUMAIN:(AT_ORIGINEL == $profile_fields_cache[$poster_id]['cc_race']['value']?COULEUR_ORIGINEL: COULEUR_NEPHILIM);
-		$user_cache[$poster_id]['contact3_race']    = get_race($profile_fields_cache[$poster_id]['cc_race']['value'],$profile_fields_cache[$poster_id]['cc_sexe']['value']);
-		$user_cache[$poster_id]['contact3_clan']    = get_clan($profile_fields_cache[$poster_id]['cc_clan']['value'],$profile_fields_cache[$poster_id]['cc_sexe']['value']);
-		$user_cache[$poster_id]['contact3_nom' ]    = $profile_fields_cache[$poster_id]['cc_nom']['value'];
-		$user_cache[$poster_id]['contact3_avatar']  = get_contact_avatar(3, $profile_fields_cache[$poster_id]['cc_avatar']['value'], $profile_fields_cache[$poster_id]['cc_avatar_type']['value'], $profile_fields_cache[$poster_id]['cc_avatar_width']['value'], $profile_fields_cache[$poster_id]['cc_avatar_height']['value']);
-		$user_cache[$poster_id]["contact3_full"]    = get_username_string('full', $poster_id, $profile_fields_cache[$poster_id]['cc_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cc_nom']['value']);
-		$user_cache[$poster_id]["contact3_colour"]  = get_username_string('colour', $poster_id, $profile_fields_cache[$poster_id]['cc_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cc_nom']['value']);
-		$user_cache[$poster_id]["contact3_username"]= get_username_string('username', $poster_id, $profile_fields_cache[$poster_id]['cc_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cc_nom']['value']);
-		$user_cache[$poster_id]["contact3_resume"]  = generate_text_for_display($profile_fields_cache[$poster_id]['cc_resume']['value'], $profile_fields_cache[$poster_id]['cc_uid']['value'], $profile_fields_cache[$poster_id]['cc_bit']['value'], 7);
+		$user_cache[$poster_id]['contact3_race']      = get_race($profile_fields_cache[$poster_id]['cc_race']['value'],$profile_fields_cache[$poster_id]['cc_sexe']['value']);
+		$user_cache[$poster_id]['contact3_clan']      = get_clan($profile_fields_cache[$poster_id]['cc_clan']['value'],$profile_fields_cache[$poster_id]['cc_sexe']['value']);
+		$user_cache[$poster_id]['contact3_nom' ]      = $profile_fields_cache[$poster_id]['cc_nom']['value'];
+		$user_cache[$poster_id]['contact3_avatar']    = get_contact_avatar(3, $profile_fields_cache[$poster_id]['cc_avatar']['value'], $profile_fields_cache[$poster_id]['cc_avatar_type']['value'], $profile_fields_cache[$poster_id]['cc_avatar_width']['value'], $profile_fields_cache[$poster_id]['cc_avatar_height']['value']);
+		$user_cache[$poster_id]["contact3_full"]      = get_username_string('full', $poster_id, $profile_fields_cache[$poster_id]['cc_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cc_nom']['value']);
+		$user_cache[$poster_id]["contact3_colour"]    = get_username_string('colour', $poster_id, $profile_fields_cache[$poster_id]['cc_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cc_nom']['value']);
+		$user_cache[$poster_id]["contact3_username"]  = get_username_string('username', $poster_id, $profile_fields_cache[$poster_id]['cc_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cc_nom']['value']);
+		$user_cache[$poster_id]["contact3_resume"]    = generate_text_for_display($profile_fields_cache[$poster_id]['cc_resume']['value'], $profile_fields_cache[$poster_id]['cc_uid']['value'], $profile_fields_cache[$poster_id]['cc_bit']['value'], 7);
+		$user_cache[$poster_id]["contact3_telephone"] = $profile_fields_cache[$poster_id]['cc_telephone']['value'];
 		
 		$couleur = AT_HUMAIN == $profile_fields_cache[$poster_id]['cd_race']['value']?COULEUR_HUMAIN:(AT_ORIGINEL == $profile_fields_cache[$poster_id]['cd_race']['value']?COULEUR_ORIGINEL: COULEUR_NEPHILIM);
-		$user_cache[$poster_id]['contact4_race']    = get_race($profile_fields_cache[$poster_id]['cd_race']['value'],$profile_fields_cache[$poster_id]['cd_sexe']['value']);
-		$user_cache[$poster_id]['contact4_clan']    = get_clan($profile_fields_cache[$poster_id]['cd_clan']['value'],$profile_fields_cache[$poster_id]['cd_sexe']['value']);
-		$user_cache[$poster_id]['contact4_nom' ]    = $profile_fields_cache[$poster_id]['cd_nom']['value'];
-		$user_cache[$poster_id]['contact4_avatar']  = get_contact_avatar(4, $profile_fields_cache[$poster_id]['cd_avatar']['value'], $profile_fields_cache[$poster_id]['cd_avatar_type']['value'], $profile_fields_cache[$poster_id]['cd_avatar_width']['value'], $profile_fields_cache[$poster_id]['cd_avatar_height']['value']);
-		$user_cache[$poster_id]["contact4_full"]    = get_username_string('full', $poster_id, $profile_fields_cache[$poster_id]['cd_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cd_nom']['value']);
-		$user_cache[$poster_id]["contact4_colour"]  = get_username_string('colour', $poster_id, $profile_fields_cache[$poster_id]['cd_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cd_nom']['value']);
-		$user_cache[$poster_id]["contact4_username"]= get_username_string('username', $poster_id, $profile_fields_cache[$poster_id]['cd_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cd_nom']['value']);
-		$user_cache[$poster_id]["contact4_resume"]  = generate_text_for_display($profile_fields_cache[$poster_id]['cd_resume']['value'], $profile_fields_cache[$poster_id]['cd_uid']['value'], $profile_fields_cache[$poster_id]['cd_bit']['value'], 7);
+		$user_cache[$poster_id]['contact4_race']      = get_race($profile_fields_cache[$poster_id]['cd_race']['value'],$profile_fields_cache[$poster_id]['cd_sexe']['value']);
+		$user_cache[$poster_id]['contact4_clan']      = get_clan($profile_fields_cache[$poster_id]['cd_clan']['value'],$profile_fields_cache[$poster_id]['cd_sexe']['value']);
+		$user_cache[$poster_id]['contact4_nom' ]      = $profile_fields_cache[$poster_id]['cd_nom']['value'];
+		$user_cache[$poster_id]['contact4_avatar']    = get_contact_avatar(4, $profile_fields_cache[$poster_id]['cd_avatar']['value'], $profile_fields_cache[$poster_id]['cd_avatar_type']['value'], $profile_fields_cache[$poster_id]['cd_avatar_width']['value'], $profile_fields_cache[$poster_id]['cd_avatar_height']['value']);
+		$user_cache[$poster_id]["contact4_full"]      = get_username_string('full', $poster_id, $profile_fields_cache[$poster_id]['cd_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cd_nom']['value']);
+		$user_cache[$poster_id]["contact4_colour"]    = get_username_string('colour', $poster_id, $profile_fields_cache[$poster_id]['cd_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cd_nom']['value']);
+		$user_cache[$poster_id]["contact4_username"]  = get_username_string('username', $poster_id, $profile_fields_cache[$poster_id]['cd_nom']['value'], $couleur, $profile_fields_cache[$poster_id]['cd_nom']['value']);
+		$user_cache[$poster_id]["contact4_resume"]    = generate_text_for_display($profile_fields_cache[$poster_id]['cd_resume']['value'], $profile_fields_cache[$poster_id]['cd_uid']['value'], $profile_fields_cache[$poster_id]['cd_bit']['value'], 7);
+		$user_cache[$poster_id]["contact4_telephone"] = $profile_fields_cache[$poster_id]['cd_telephone']['value'];
 		//AT MOD CONTACT STOP
 	}
 
@@ -1792,6 +1797,10 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
     	    'S_POSTER_D'           => 4 == $row['contact_id'],
     	    'S_CONTACT_3'          => AT_ACTIF == $profile_fields_cache[$poster_id]['cc_actif']['value'],
     	    'S_CONTACT_4'          => AT_ACTIF == $profile_fields_cache[$poster_id]['cd_actif']['value'],
+    	    
+    	    'U_TELEPHONE'          => append_sid("{$phpbb_root_path}messagerie-f".FORUM_TELEPHONE_PORTABLE."/messagerie-de-".$user_cache[$poster_id]['username']."-t".$user_cache[$poster_id]['telephone'].".html"),
+    	    'TELEPHONE'            => 'Téléphone de '.$user_cache[$poster_id]['username'],
+    	    'TELEPHONE_LONG'       => 'Consulter le téléphone de '.$user_cache[$poster_id]['username'],
     	));
     }
     if (!empty($row['contact_id']) && $poster_id != ANONYMOUS){
@@ -1803,7 +1812,10 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
             'POSTER_AVATAR'        => $user_cache[$poster_id]["contact{$row['contact_id']}_avatar"],
             'POSTER_RACE'          => $user_cache[$poster_id]["contact{$row['contact_id']}_race"],
             'POSTER_CLAN'          => $user_cache[$poster_id]["contact{$row['contact_id']}_clan"],
-    
+            'U_TELEPHONE'          => append_sid("{$phpbb_root_path}messagerie-f".FORUM_TELEPHONE_PORTABLE."/messagerie-de-"
+                                     .str_replace(' ', '-', strtolower($user_cache[$poster_id]["contact{$row['contact_id']}_username"]."-contact-de-".$user_cache[$poster_id]['username']))
+                                     ."-t".$user_cache[$poster_id]["contact{$row['contact_id']}_telephone"].".html"),
+            
             'ORIGINAL_AVATAR'      => $user_cache[$poster_id]["contact{$row['contact_id']}_avatar"],
             'ORIGINAL_RACE'        => $user_cache[$poster_id]["contact{$row['contact_id']}_race"],
             'ORIGINAL_CLAN'        => $user_cache[$poster_id]["contact{$row['contact_id']}_clan"],
@@ -1814,6 +1826,10 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
             'POSTER_AVATAR'        => $user_cache[$poster_id]["contact{$row['contact_id']}_avatar"],
             'POSTER_RACE'          => $user_cache[$poster_id]["contact{$row['contact_id']}_race"],
             'POSTER_CLAN'          => $user_cache[$poster_id]["contact{$row['contact_id']}_clan"],
+
+            'TELEPHONE'            => 'Téléphone de '.$user_cache[$poster_id]["contact{$row['contact_id']}_username"],
+            'TELEPHONE_LONG'       => 'Consulter le téléphone de '.$user_cache[$poster_id]["contact{$row['contact_id']}_username"],
+            
         ));
     }
 	//AT MOD CONTACT STOP
