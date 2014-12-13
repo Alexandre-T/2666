@@ -1,0 +1,5 @@
+[titre]Le téléphone portable de {PERSONNAGE}[/titre]
+
+[i]« Bonjour, vous êtes sur un répondeur automatique. Veuillez laisser votre message après le signal sonore. »[/i] 
+
+[i]NB de Lazer : Ce sujet est le tien, tu peux l'éditer intégralement pour personnaliser ta boîte vocale.[/i]

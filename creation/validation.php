@@ -125,6 +125,11 @@ switch ($action)
             (int) $user->profile_fields['pf_cd_fiche'],
             (int) $user->profile_fields['pf_sujet_lien'],
             (int) $user->profile_fields['pf_sujet_resume'],
+            (int) $user->profile_fields['pf_telephone'],
+            (int) $user->profile_fields['pf_ca_telephone'],
+            (int) $user->profile_fields['pf_cb_telephone'],
+            (int) $user->profile_fields['pf_cc_telephone'],
+            (int) $user->profile_fields['pf_cd_telephone'],
         );
         $sql = $sql . $db->sql_in_set('topic_id',$id);
         $result = $db->sql_query($sql);
@@ -157,6 +162,11 @@ switch ($action)
             (int) $user->profile_fields['pf_cd_fiche'],
             (int) $user->profile_fields['pf_sujet_lien'],
             (int) $user->profile_fields['pf_sujet_resume'],            
+            (int) $user->profile_fields['pf_telephone'],
+            (int) $user->profile_fields['pf_ca_telephone'],
+            (int) $user->profile_fields['pf_cb_telephone'],
+            (int) $user->profile_fields['pf_cc_telephone'],
+            (int) $user->profile_fields['pf_cd_telephone'],
         );        
         $sql = $sql . $db->sql_in_set('topic_id',$id);
         $result = $db->sql_query($sql);
@@ -514,6 +524,162 @@ switch ($action)
 		//Changement de poster
 		change_poster($post_info, $userdata);
 		$cp_data['pf_sujet_resume'] = $data['topic_id'];
+		
+		
+		
+		/**********************************TELEPHONE PORTABLE RP MEMBRE PRINCIPAL **************************************************/
+		$subject           = 'Messagerie de ' . $member['username'];
+		$message_telephone = creation_message_telephone($member['username'],$contacts);
+		// New Topic
+		$data = array(
+		    // General Posting Settings
+		    'forum_id'  => FORUM_TELEPHONE_PORTABLE,    // The forum ID in which the post will be placed. (int)
+		    'topic_id'  => FORUM_NEW_TOPIC,             // Post a new topic or in an existing one? Set to 0 to create a new one, if not, specify your topic ID here instead.
+		    'icon_id'   => false,                       // The Icon ID in which the post will be displayed with on the viewforum, set to false for icon_id. (int)
+		    'contact_id'=> 0,  //The ID of the contact 0 or 1 to 4
+		    'post_edit_locked'  => 0,   // Disallow post editing? 1 = Yes, 0 = No
+		
+		    // Defining Post Options
+		    'enable_bbcode'  => true,    // Enable BBcode in this post. (bool)
+		    'enable_smilies' => true,    // Enabe smilies in this post. (bool)
+		    'enable_urls'    => true,    // Enable self-parsing URL links in this post. (bool)
+		    'enable_sig'     => true,    // Enable the signature of the poster to be displayed in the post. (bool)
+		
+		    // Message Body
+		    'message'        => $message_telephone['message'],       // Your text you wish to have submitted. It should pass through generate_text_for_storage() before this. (string)
+		    'message_md5'    => md5($message_telephone['message']),  // The md5 hash of your message
+		
+		    // Values from generate_text_for_storage()
+		    'bbcode_bitfield' => $message_telephone['bit'],    // Value created from the generate_text_for_storage() function.
+		    'bbcode_uid'      => $message_telephone['uid'],    // Value created from the generate_text_for_storage() function.
+		
+		    // Other Options
+		    'post_edit_locked'   => 1,   // Disallow post editing? 1 = Yes, 0 = No
+		    'topic_title'        => truncate_string($subject),  // Subject/Title of the topic. (string)
+		
+		    // Email Notification Settings
+		    'notify_set'        => false, // (bool)
+		    'notify'            => false, // (bool)
+		    'post_time'         => 0,        // Set a specific time, use 0 to let submit_post() take care of getting the proper time (int)
+		    'forum_name'        => '',        // For identifying the name of the forum in a notification email. (string)
+		
+		    // Indexing
+		    'enable_indexing'   => true,        // Allow indexing the post? (bool)
+		
+		    // 3.0.6
+		    'force_approved_state' => true, // Allow the post to be submitted without going into unapproved queue
+		
+		    // 3.1-dev, overwrites force_approve_state
+		    'force_visibility'     => true, // Allow the post to be submitted without going into unapproved queue, or make it be deleted
+		);
+		
+		submit_post ( $mode,  $subject,  $username,  $topic_type,  $poll,  $data);
+		
+		//Préparation pour le changement de poster
+		$post_info['user_id']=$user->data['user_id'];
+		$post_info['topic_id'] = $data['topic_id'];
+		$post_info['topic_last_post_id'] = $post_info['post_id'] = $post_info['forum_last_post_id'] = $post_info['topic_first_post_id'] = $data['post_id'];
+		$post_info['post_postcount'] = $post_info['post_approved'] = true;
+		$post_info['post_attachment'] = false;
+		$post_info['forum_id'] = FORUM_TELEPHONE_PORTABLE;
+		$userdata['user_id']=$user_id;
+		$userdata['username']=$member['username'];
+		
+		//Changement de poster
+		change_poster($post_info, $userdata);
+		$cp_data['pf_telephone'] = $data['topic_id'];
+
+		//* ***********************************************CONTACT 1************************************* */
+		//On ne modifie que les champs à modifier
+	    $message_telephone = creation_message_telephone($user->profile_fields['pf_ca_nom'],$contacts);
+	    $subject = 'Messagerie de ' . $user->profile_fields['pf_ca_nom'] . ' Contact de ' . $member['username'];
+	    $data['post_id']     = null;
+	    $data['topic_id']    = FORUM_NEW_TOPIC;
+	    $data['contact_id']  = 1;
+	    $data['message']     = $message_telephone['message'];
+	    $data['message_md5'] = md5($message_telephone['message']);
+	    $data['bbcode_bitfield'] = $message_telephone['bit'];
+	    $data['bbcode_uid']  = $message_telephone['uid'];
+	    $data['topic_title'] = truncate_string($subject);
+	    //ENVOI DU MESSAGE
+	    submit_post ( $mode,  $subject,  $username,  $topic_type,  $poll,  $data);
+	    $cp_data['pf_ca_telephone'] = $data['topic_id'];
+	    //Préparation pour le changement de posteur
+	    $post_info['user_id']  = $user->data['user_id'];
+	    $post_info['topic_id'] = $data['topic_id'];
+	    $post_info['topic_last_post_id'] = $post_info['post_id'] = $post_info['forum_last_post_id'] = $post_info['topic_first_post_id'] = $data['post_id'];
+	    //Changement de posteur
+	    change_poster($post_info, $userdata);
+		
+		//* ***********************************************CONTACT 2************************************* */
+		//On ne modifie que les champs à modifier
+	    $message_telephone = creation_message_telephone($user->profile_fields['pf_cb_nom'],$contacts);
+	    $subject = 'Messagerie de ' . $user->profile_fields['pf_cb_nom'] . ' Contact de ' . $member['username'];
+	    $data['post_id']     = null;
+	    $data['topic_id']    = FORUM_NEW_TOPIC;
+	    $data['contact_id']  = 2;
+	    $data['message']     = $message_telephone['message'];
+	    $data['message_md5'] = md5($message_telephone['message']);
+	    $data['bbcode_bitfield'] = $message_telephone['bit'];
+	    $data['bbcode_uid']  = $message_telephone['uid'];
+	    $data['topic_title'] = truncate_string($subject);
+	    //ENVOI DU MESSAGE
+	    submit_post ( $mode,  $subject,  $username,  $topic_type,  $poll,  $data);
+	    $cp_data['pf_cc_telephone'] = $data['topic_id'];
+	    //Préparation pour le changement de posteur
+	    $post_info['user_id']  = $user->data['user_id'];
+	    $post_info['topic_id'] = $data['topic_id'];
+	    $post_info['topic_last_post_id'] = $post_info['post_id'] = $post_info['forum_last_post_id'] = $post_info['topic_first_post_id'] = $data['post_id'];
+	    //Changement de posteur
+	    change_poster($post_info, $userdata);
+		
+		//* ***********************************************CONTACT 3************************************* */
+		//On ne modifie que les champs à modifier
+		if (AT_ACTIF == $user->profile_fields['pf_cc_actif']){
+		    $message_telephone = creation_message_telephone($user->profile_fields['pf_cc_nom'],$contacts);
+		    $subject = 'Messagerie de ' . $user->profile_fields['pf_cc_nom'] . ' Contact de ' . $member['username'];
+		    $data['post_id']     = null;
+		    $data['topic_id']    = FORUM_NEW_TOPIC;
+		    $data['contact_id']  = 3;
+		    $data['message']     = $message_telephone['message'];
+		    $data['message_md5'] = md5($message_telephone['message']);
+		    $data['bbcode_bitfield'] = $message_telephone['bit'];
+		    $data['bbcode_uid']  = $message_telephone['uid'];
+		    $data['topic_title'] = truncate_string($subject);
+		    //ENVOI DU MESSAGE
+		    submit_post ( $mode,  $subject,  $username,  $topic_type,  $poll,  $data);
+		    $cp_data['pf_cc_telephone'] = $data['topic_id'];
+		    //Préparation pour le changement de posteur
+		    $post_info['user_id']  = $user->data['user_id'];
+		    $post_info['topic_id'] = $data['topic_id'];
+		    $post_info['topic_last_post_id'] = $post_info['post_id'] = $post_info['forum_last_post_id'] = $post_info['topic_first_post_id'] = $data['post_id'];
+		    //Changement de posteur
+		    change_poster($post_info, $userdata);
+		}
+		
+		//* ***********************************************CONTACT 4************************************* */
+		//On ne modifie que les champs à modifier
+		if (AT_ACTIF == $user->profile_fields['pf_cd_actif']){
+		    $message_telephone = creation_message_telephone($user->profile_fields['pf_cd_nom'],$contacts);
+		    $subject = 'Messagerie de ' . $user->profile_fields['pf_cd_nom'] . ' Contact de ' . $member['username'];
+		    $data['post_id']     = null;
+		    $data['topic_id']    = FORUM_NEW_TOPIC;
+		    $data['contact_id']     = 4;
+		    $data['message']     = $message_telephone['message'];
+		    $data['message_md5'] = md5($message_telephone['message']);
+		    $data['bbcode_bitfield'] = $message_telephone['bit'];
+		    $data['bbcode_uid']  = $message_telephone['uid'];
+		    $data['topic_title'] = truncate_string($subject);
+		    //ENVOI DU MESSAGE
+		    submit_post ( $mode,  $subject,  $username,  $topic_type,  $poll,  $data);
+		    $cp_data['pf_cd_telephone'] = $data['topic_id'];
+		    //Préparation pour le changement de posteur
+		    $post_info['user_id']  = $user->data['user_id'];
+		    $post_info['topic_id'] = $data['topic_id'];
+		    $post_info['topic_last_post_id'] = $post_info['post_id'] = $post_info['forum_last_post_id'] = $post_info['topic_first_post_id'] = $data['post_id'];
+		    //Changement de posteur
+		    change_poster($post_info, $userdata);
+		}
 		
 		//Enregistrement
 		$cp = new custom_profile();

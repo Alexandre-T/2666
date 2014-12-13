@@ -707,51 +707,34 @@ function gestionContact($numero)
     );
 }
 function creation_message_lien($personnage,array $contacts){
-    
-    //Initialisation de variables
-    $poll = $uid = $bitfield = $options = '';
-    $bbcode_status = $allow_bbcode = $allow_urls = $allow_url_bbcode = $allow_smilies = $allow_img_bbcode = $allow_quote_bbcode = true;
-    $allow_flash_bbcode = false;
-    
-    //Construction du texte
-    $message_storage = file_get_contents(__DIR__ . '/message_lien.txt');
-    $message_storage = str_replace('{PERSONNAGE}', $personnage, $message_storage);
-    $contacts_txt = '';
-    foreach($contacts as $contact){
-        $contacts_txt .= "[*] {$contact['NOM']} - {$contact['RACE']} - {$contact['CLAN']}";
-    }
-    $message_storage = str_replace('{CONTACTS}', $contacts_txt, $message_storage);
-    
-    //Création du storage
-    generate_text_for_storage($message_storage, $uid, $bitfield, $options, $allow_bbcode, $allow_urls, $allow_smilies);
-    $message['message'] = $message_storage;
-    $message['uid']  = $uid;
-    $message['bit']  = $bitfield;
-    
-    return $message;
+    return creation_message($personnage, $contacts, 'message_lien.txt');
 }
-
 function creation_message_resume($personnage,array $contacts){
-
+    return creation_message($personnage, $contacts, 'message_resume.txt');
+}
+function creation_message_telephone($personnage,array $contacts){
+    return creation_message($personnage, $contacts, 'message_telephone.txt');
+}
+function creation_message($personnage,array $contacts,$file){
     //Initialisation de variables
     $poll = $uid = $bitfield = $options = '';
     $bbcode_status = $allow_bbcode = $allow_urls = $allow_url_bbcode = $allow_smilies = $allow_img_bbcode = $allow_quote_bbcode = true;
     $allow_flash_bbcode = false;
-
+    
     //Construction du texte
-    $message_storage = file_get_contents(__DIR__ . '/message_resume.txt');
+    $message_storage = file_get_contents(__DIR__ . '/' .$file);
     $message_storage = str_replace('{PERSONNAGE}', $personnage, $message_storage);
     $contacts_txt = '';
     foreach($contacts as $contact){
         $contacts_txt .= "[*] {$contact['NOM']} - {$contact['RACE']} - {$contact['CLAN']}";
     }
     $message_storage = str_replace('{CONTACTS}', $contacts_txt, $message_storage);
-
+    
     //Création du storage
     generate_text_for_storage($message_storage, $uid, $bitfield, $options, $allow_bbcode, $allow_urls, $allow_smilies);
     $message['message'] = $message_storage;
     $message['uid']  = $uid;
     $message['bit']  = $bitfield;
-
-    return $message;
+    
+    return $message;    
 }
