@@ -4774,13 +4774,14 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 	    'U_MEMBERLIST_IZANAGHIS'	=> append_sid($phpbb_root_path.'groupe-izanaghis-g'.AT_IZANAGHI.'.html'),
 	    'U_MEMBERLIST_SKJALDMEYJAR'	=> append_sid($phpbb_root_path.'groupe-skjaldmeyjar-g'.AT_SKJALDMEYJAR.'.html'),
 	    'U_MEMBERLIST_VESTALES'	=> append_sid($phpbb_root_path.'groupe-vestal-g'.AT_VESTAL.'.html'),
+	    'U_HOME'                => "/",
 	    'U_BACKGROUND'			=> append_sid("{$phpbb_root_path}description-du-jeu/background-t8.html"),
 		'U_GUIDE'				=> append_sid("{$phpbb_root_path}aides-de-jeu/guide-du-nouvel-arrivant-t3.html"),
 		'U_OU_SUIS_JE'			=> append_sid("{$phpbb_root_path}accueil-du-jeu/ou-suis-je-t7.html"),
 		'U_REGLEMENT'			=> append_sid("{$phpbb_root_path}accueil-du-jeu/reglement-t2.html"),
 		'U_REGLE_BIENSEANCE'	=> append_sid("{$phpbb_root_path}accueil-du-jeu/la-bienseance-t4.html"),
 		'U_RESUME'				=> append_sid("{$phpbb_root_path}personnages-resumes/"),
-		'U_SYNOPSIS'			=> append_sid("{$phpbb_root_path}description-du-jeu/synopsis-t9.html"),
+		'U_SYNOPSIS'			=> append_sid("{$phpbb_root_path}description-du-jeu/synopsis-t9.html"),		
 		//AT END NEW LINK
 
 		'S_USER_LOGGED_IN'		=> ($user->data['user_id'] != ANONYMOUS) ? true : false,
