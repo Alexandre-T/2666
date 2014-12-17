@@ -1,0 +1,48 @@
+<!-- INCLUDE mcp_header.html -->
+<form method="post" id="mcp" action="{U_POST_ACTION}">
+
+<div class="panel panel-default">
+	<div class="panel-heading">
+		<h3 class="panel-title">{L_WARN_USER}&nbsp;: «&nbsp;{USERNAME_FULL}&nbsp;»</h3>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class="col-md-4 avatar">
+				<!-- IF AVATAR_IMG --><span class="center-block avatar">{AVATAR_IMG}</span><!-- ENDIF -->
+				<ul class="list-group">
+					<!-- IF RANK_TITLE --><li class="list-group-item">{L_RANK}&nbsp;: {RANK_TITLE}</li><!-- ENDIF -->
+  					<li class="list-group-item"><span class="badge">{JOINED}</span>{L_JOINED}</li>
+  					<li class="list-group-item"><span class="badge">{POSTS}</span>{L_TOTAL_POSTS}</li>
+  					<li class="list-group-item"><span class="badge">{WARNINGS}</span>{L_WARNINGS}</li>
+				</ul>
+			</div>
+			<div class="col-md-8 corps">
+				<h4 class="fieldset">{L_ADD_WARNING}</h4>
+				<p>{L_ADD_WARNING_EXPLAIN}</p>
+				<fieldset>
+					<div class="form-group">
+						<textarea class="form-control" name="warning" id="warning" cols="40" rows="3"></textarea>
+					</div>
+					<!-- IF S_CAN_NOTIFY -->
+					<div class="form-group">
+						<div class="checkbox">
+							<label><input type="checkbox" name="notify_user" checked="checked" /> {L_NOTIFY_USER_WARN}</label>
+						</div>
+					</div>
+					<!-- ENDIF -->
+				</fieldset>
+			</div>
+		</div>
+	</div>
+	<div class="panel-footer">
+		{S_FORM_TOKEN}
+		<fieldset class="btn-group">
+			<input type="reset" value="{L_RESET}" name="reset" class="btn btn-default" />
+			<input type="submit" name="action[add_warning]" value="{L_SUBMIT}" class="btn btn-primary" />
+		</fieldset>
+	</div>
+</div>
+
+</form>
+
+<!-- INCLUDE mcp_footer.html -->

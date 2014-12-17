@@ -1,0 +1,64 @@
+<div id="preview" class="form-horizontal">
+	<!-- IF S_HAS_POLL_OPTIONS -->
+		<h3>{L_PREVIEW} : {POLL_QUESTION}</h3>
+		<div class="alert alert-info text-center alert-dismissable">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			<p><!-- IF L_POLL_LENGTH -->{L_POLL_LENGTH}<br /><!-- ENDIF -->{L_MAX_VOTES}</p>
+		</div>
+		<fieldset class="polls">
+		<!-- BEGIN poll_option -->
+		<div class="form-group">
+			<div class="col-xs-offset-1 col-xs-2 text-right">
+				<p class="form-control-static">{L_NO_VOTES}</p>
+			</div>
+			<div class="col-xs-1 text-center hidden-xs">
+				<p class="form-control-static">
+					<span class="btn btn-default btn-xs disabled" title="Vous n'avez pas voté pour"><i class="fa fa-times-sign"></i></span>
+				</p>
+			</div>
+			<div class="col-xs-4 text-left hidden-xs">
+				<div class="progress forum_progress">
+ 						<div class="progress-bar" style="width: 0%;"></div>
+				</div>				
+			</div>
+			<div class="col-xs-4">
+				<div class="<!-- IF S_IS_MULTI_CHOICE -->checkbox<!-- ELSE -->radio<!-- ENDIF -->">
+					<label>
+						<!-- IF S_IS_MULTI_CHOICE -->  						
+							<input type="checkbox" name="vote_id[]" id="vote_{poll_option.POLL_OPTION_ID}" value="{poll_option.POLL_OPTION_ID}" />
+						<!-- ELSE -->
+							<input type="radio" name="vote_id[]" id="vote_{poll_option.POLL_OPTION_ID}" value="{poll_option.POLL_OPTION_ID}" />
+						<!-- ENDIF -->
+						&nbsp;
+						{poll_option.POLL_OPTION_CAPTION}						
+ 					</label>
+				</div>
+			</div>
+		</div>
+		<!-- END poll_option -->
+		</fieldset>
+		<hr/>
+	<!-- ENDIF -->
+	<div class="row">
+		<div class="col-sm-2 text-center hidden-xs">
+			<i class="fa fa-eye fa-4x"></i>
+		</div>
+		<div class="col-sm-10 col-xs-12">
+			<h4 class="fieldset">{L_PREVIEW}: {PREVIEW_SUBJECT}</h4>
+			
+			<p class="content">{PREVIEW_MESSAGE}</p>
+		
+			<!-- IF .attachment -->
+				<h4 class="fieldset">{L_ATTACHMENTS}</h4>
+				<!-- BEGIN attachment -->
+				<div>{attachment.DISPLAY_ATTACHMENT}</div>
+				<!-- END attachment -->
+			<!-- ENDIF -->
+			
+			<!-- IF PREVIEW_SIGNATURE --><div class="signature">{PREVIEW_SIGNATURE}</div><!-- ENDIF -->
+		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<hr />

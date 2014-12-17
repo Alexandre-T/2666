@@ -1,0 +1,43 @@
+<!-- BEGIN dropdown -->
+<select class="form-control" name="{dropdown.FIELD_IDENT}" id="{dropdown.FIELD_IDENT}">
+	<!-- BEGIN options --><option value="{dropdown.options.OPTION_ID}"{dropdown.options.SELECTED}>{dropdown.options.VALUE}</option><!-- END options -->
+</select>
+<!-- END dropdown -->
+
+<!-- BEGIN text -->
+<textarea class="form-control" name="{text.FIELD_IDENT}" id="{text.FIELD_IDENT}" rows="{text.FIELD_ROWS}" cols="{text.FIELD_COLS}" >{text.FIELD_VALUE}</textarea>
+<!-- END text -->
+
+<!-- BEGIN string -->
+<div class="input-group">			
+	<div class="input-group-addon"><i class="fa fa-align-justify"></i></div>
+	<input class="form-control" type="text" name="{string.FIELD_IDENT}" id="{string.FIELD_IDENT}" maxlength="{string.FIELD_MAXLEN}" value="{string.FIELD_VALUE}" />
+</div>
+<!-- END string -->
+
+<!-- BEGIN bool -->
+<!-- IF bool.FIELD_LENGTH eq 1 -->
+	<!-- BEGIN options --><label class="radio-inline"><input type="radio" name="{bool.FIELD_IDENT}" id="{bool.FIELD_IDENT}_{bool.options.OPTION_ID}" value="{bool.options.OPTION_ID}" {bool.options.CHECKED} /> {bool.options.VALUE}</label><!-- END options -->
+<!-- ELSE -->
+<div class="checkbox">
+	<label>
+		<input type="checkbox" name="{bool.FIELD_IDENT}" id="{bool.FIELD_IDENT}"<!-- IF bool.FIELD_VALUE --> checked="checked"<!-- ENDIF --> /> 
+	</label>
+</div>
+<!-- ENDIF -->
+<!-- END bool -->
+
+<!-- BEGIN int -->
+<div class="input-group">			
+	<div class="input-group-addon"><i class="fa fa-list-ol"></i></div>
+	<input class="form-control" type="text" name="{int.FIELD_IDENT}" id="{int.FIELD_IDENT}" value="{int.FIELD_VALUE}" />
+</div>
+<!-- END int -->
+
+<!-- BEGIN date -->
+<div class="form-inline">
+	<label for="{date.FIELD_IDENT}_day">{L_DAY}&nbsp;: <select class="form-control" name="{date.FIELD_IDENT}_day" id="{date.FIELD_IDENT}_day">{date.S_DAY_OPTIONS}</select></label> 
+	&nbsp;<label for="{date.FIELD_IDENT}_month">{L_MONTH}&nbsp;: <select class="form-control" name="{date.FIELD_IDENT}_month" id="{date.FIELD_IDENT}_month">{date.S_MONTH_OPTIONS}</select></label> 
+	&nbsp;<label for="{date.FIELD_IDENT}_year">{L_YEAR}&nbsp;: <select class="form-control"  name="{date.FIELD_IDENT}_year" id="{date.FIELD_IDENT}_year">{date.S_YEAR_OPTIONS}</select></label>
+</div>
+<!-- END date -->
