@@ -625,7 +625,7 @@ switch ($action)
 	    $data['topic_title'] = truncate_string($subject);
 	    //ENVOI DU MESSAGE
 	    submit_post ( $mode,  $subject,  $username,  $topic_type,  $poll,  $data);
-	    $cp_data['pf_cc_telephone'] = $data['topic_id'];
+	    $cp_data['pf_cb_telephone'] = $data['topic_id'];
 	    //Préparation pour le changement de posteur
 	    $post_info['user_id']  = $user->data['user_id'];
 	    $post_info['topic_id'] = $data['topic_id'];
