@@ -1589,6 +1589,8 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 		
 		$user_cache[$poster_id]['resume']           = generate_text_for_display($profile_fields_cache[$poster_id]['resume']['value'], $profile_fields_cache[$poster_id]['resume_uid']['value'], $profile_fields_cache[$poster_id]['resume_bit']['value'], 7);
 		$user_cache[$poster_id]['telephone']        = $profile_fields_cache[$poster_id]['telephone']['value'];
+		$user_cache[$poster_id]['sujet-lien']       = $profile_fields_cache[$poster_id]['sujet_lien']['value'];
+		$user_cache[$poster_id]['sujet-resume']     = $profile_fields_cache[$poster_id]['sujet_resume']['value'];
 		
 		$user_cache[$poster_id]['contact1_race']      = get_race($profile_fields_cache[$poster_id]['ca_race']['value'],$profile_fields_cache[$poster_id]['ca_sexe']['value']);
 		$user_cache[$poster_id]['contact1_clan']      = get_clan($profile_fields_cache[$poster_id]['ca_clan']['value'],$profile_fields_cache[$poster_id]['ca_sexe']['value']);
@@ -1798,9 +1800,23 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
     	    'S_CONTACT_3'          => AT_ACTIF == $profile_fields_cache[$poster_id]['cc_actif']['value'],
     	    'S_CONTACT_4'          => AT_ACTIF == $profile_fields_cache[$poster_id]['cd_actif']['value'],
     	    
-    	    'U_TELEPHONE'          => append_sid("{$phpbb_root_path}messagerie-f".FORUM_TELEPHONE_PORTABLE."/messagerie-de-".$user_cache[$poster_id]['username']."-t".$user_cache[$poster_id]['telephone'].".html"),
+    	    'U_TELEPHONE'          => append_sid("{$phpbb_root_path}messagerie/messagerie-de-"
+    	                             .str_replace(' ', '-', strtolower($user_cache[$poster_id]['username']))
+    	                             ."-t".$user_cache[$poster_id]['telephone'].".html"),
     	    'TELEPHONE'            => 'Téléphone de '.$user_cache[$poster_id]['username'],
     	    'TELEPHONE_LONG'       => 'Consulter le téléphone de '.$user_cache[$poster_id]['username'],
+    	    
+    	    'U_RESUMES'            => append_sid("{$phpbb_root_path}resumes-rp/resumes-de-"
+    	                             .str_replace(' ', '-', strtolower($user_cache[$poster_id]['username']))
+    	                             ."-t".$user_cache[$poster_id]['sujet-resume'].".html"),
+    	    'RESUMES'              => 'Résumés RP de '.$user_cache[$poster_id]['username'],
+    	    'RESUMES_LONG'         => 'Consulter les résumés RP de '.$user_cache[$poster_id]['username'],
+    	    	
+    	    'U_LIENS'            => append_sid("{$phpbb_root_path}personnages-liens/liens-et-contacts-de-"
+    	                             .str_replace(' ', '-', strtolower($user_cache[$poster_id]['username']))
+    	                             ."-t".$user_cache[$poster_id]['sujet-lien'].".html"),
+    	    'LIENS'              => 'Contacts de '.$user_cache[$poster_id]['username'],
+    	    'LIENS_LONG'         => 'Consulter les contacts de '.$user_cache[$poster_id]['username'],
     	));
     }
     if (!empty($row['contact_id']) && $poster_id != ANONYMOUS){
@@ -1812,7 +1828,7 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
             'POSTER_AVATAR'        => $user_cache[$poster_id]["contact{$row['contact_id']}_avatar"],
             'POSTER_RACE'          => $user_cache[$poster_id]["contact{$row['contact_id']}_race"],
             'POSTER_CLAN'          => $user_cache[$poster_id]["contact{$row['contact_id']}_clan"],
-            'U_TELEPHONE'          => append_sid("{$phpbb_root_path}messagerie-f".FORUM_TELEPHONE_PORTABLE."/messagerie-de-"
+            'U_TELEPHONE'          => append_sid("{$phpbb_root_path}messagerie/messagerie-de-"
                                      .str_replace(' ', '-', strtolower($user_cache[$poster_id]["contact{$row['contact_id']}_username"]."-contact-de-".$user_cache[$poster_id]['username']))
                                      ."-t".$user_cache[$poster_id]["contact{$row['contact_id']}_telephone"].".html"),
             
@@ -1829,7 +1845,13 @@ for ($i = 0, $end = sizeof($post_list); $i < $end; ++$i)
 
             'TELEPHONE'            => 'Téléphone de '.$user_cache[$poster_id]["contact{$row['contact_id']}_username"],
             'TELEPHONE_LONG'       => 'Consulter le téléphone de '.$user_cache[$poster_id]["contact{$row['contact_id']}_username"],
+
+            'LIENS'              => 'Contacts de '.$user_cache[$poster_id]["contact{$row['contact_id']}_username"],
+            'LIENS_LONG'         => 'Consulter les contacts de '.$user_cache[$poster_id]["contact{$row['contact_id']}_username"],
             
+            'RESUMES'              => 'Résumés RP de '.$user_cache[$poster_id]["contact{$row['contact_id']}_username"],
+            'RESUMES_LONG'         => 'Consulter les résumés RP de '.$user_cache[$poster_id]["contact{$row['contact_id']}_username"],
+            	
         ));
     }
 	//AT MOD CONTACT STOP
