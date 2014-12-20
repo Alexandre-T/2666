@@ -103,6 +103,36 @@ function mcp_post_details($id, $mode, $action)
 			}
 
 		break;
+		//MOD AT Changement de contact START
+		case 'chgcontact':
+		    $contact_id = request_var('c', 0);
+		    $sql_where = 'user_id = ' . $post_info['user_id'];
+		    
+		    $sql = 'SELECT *
+				FROM ' . USERS_TABLE . '
+				WHERE ' . $sql_where;
+		    $result = $db->sql_query($sql);
+		    $row = $db->sql_fetchrow($result);
+		    $db->sql_freeresult($result);
+		    
+		    if (!$row)
+		    {
+		        trigger_error('NO_USER');
+		    }
+		    
+		    if ($auth->acl_get('m_chgposter', $post_info['forum_id']))
+		    {
+		        if (check_form_key('mcp_post_details'))
+		        {
+		            change_contact($post_info, $row, $contact_id);
+		        }
+		        else
+		        {
+		            trigger_error('FORM_INVALID');
+		        }
+		    }
+		break;
+		//MOD AT Changement de contact END
 	}
 
 	// Set some vars
@@ -386,7 +416,23 @@ function mcp_post_details($id, $mode, $action)
 
 		$template->assign_var('S_USER_SELECT', $user_select);
 	}
-
+    // MOD AT Changement de contact START
+    //Chargement des champs de profil
+    $user->get_profile_fields($post_info['poster_id']);
+    $template->assign_var('S_CONTACT_ACTIF', AT_ACTIF == $user->profile_fields['pf_actif']);
+    if (AT_ACTIF == $user->profile_fields['pf_actif']){
+        $contact_select  =  '<option value="0">' . $user->profile_fields['pf_prenom'] .' '. $user->profile_fields['pf_nom'] . "</option>\n";
+        $contact_select .=  '<option value="1">' . $user->profile_fields['pf_ca_nom'] . "</option>\n";
+        $contact_select .=  '<option value="2">' . $user->profile_fields['pf_cb_nom'] . "</option>\n";
+        if (AT_ACTIF == $user->profile_fields['pf_cc_actif']){
+            $contact_select .=  '<option value="3">' . $user->profile_fields['pf_cc_nom'] . "</option>\n";
+        }
+        if (AT_ACTIF == $user->profile_fields['pf_cd_actif']){
+            $contact_select .=  '<option value="4">' . $user->profile_fields['pf_cd_nom'] . "</option>\n";
+        }
+    }
+    $template->assign_var('S_CONTACT_SELECT', $contact_select);
+	// MOD AT Changement de contact END
 }
 
 /**
@@ -500,5 +546,67 @@ function change_poster(&$post_info, $userdata)
 	// Now add log entry
 	add_log('mod', $post_info['forum_id'], $post_info['topic_id'], 'LOG_MCP_CHANGE_POSTER', $post_info['topic_title'], $from_username, $to_username);
 }
+
+/**
+ * Change a post's poster
+ */
+function change_contact(&$post_info, $userdata, $contact_id)
+{
+    global $auth, $db, $config, $phpbb_root_path, $phpEx, $user;
+
+    if (empty($userdata) || $contact_id == $post_info['contact_id'])
+    {
+        return;
+    }
+    
+    $user->get_profile_fields($userdata['user_id']);
+
+    $post_id = $post_info['post_id'];
+    switch ($post_info['contact_id']){
+        case 1 :
+            $from_contact = $user->profile_fields['pf_ca_nom'];
+            break;
+        case 2 :
+            $from_contact = $user->profile_fields['pf_cb_nom'];
+            break;
+        case 3 :
+            $from_contact = $user->profile_fields['pf_cc_nom'];
+            break;
+        case 4 :
+            $from_contact = $user->profile_fields['pf_cd_nom'];
+            break;
+        default :
+            $from_contact = $userdata['username'];
+            break;
+    }
+    switch ($contact_id){
+        case 1 :
+            $to_contact = $user->profile_fields['pf_ca_nom'];
+            break;
+        case 2 :
+            $to_contact = $user->profile_fields['pf_cb_nom'];
+            break;
+        case 3 :
+            $to_contact = $user->profile_fields['pf_cc_nom'];
+            break;
+        case 4 :
+            $to_contact = $user->profile_fields['pf_cd_nom'];
+            break;
+        default :
+            $to_contact = $userdata['username'];
+            break;
+    }
+    
+
+    $sql = 'UPDATE ' . POSTS_TABLE . "
+        SET contact_id = $contact_id
+        WHERE post_id = $post_id";
+    $db->sql_query($sql);
+
+   
+    // Now add log entry
+    add_log('mod', $post_info['forum_id'], $post_info['topic_id'], 'LOG_MCP_CHANGE_CONTACT', $post_info['topic_title'], $from_contact, $to_contact);
+}
+
 
 ?>

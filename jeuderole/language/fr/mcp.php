@@ -59,6 +59,9 @@ $lang = array_merge($lang, array(
 	'CANNOT_WARN_ANONYMOUS'	=> 'Vous ne pouvez pas avertir un visiteur.',
 	'CANNOT_WARN_SELF'		=> 'Vous ne pouvez pas vous donner un avertissement.',
 	'CAN_LEAVE_BLANK'		=> 'Ceci peut être laissé vide.',
+    // MOD AT Changement de posteur START
+    'CHANGE_CONTACT'        => 'Changer le contact',
+    // MOD AT Changement de posteur END
 	'CHANGE_POSTER'			=> 'Changer le nom du posteur',
 	'CLOSE_PM_REPORT'		=> 'Clôturer le rapport de MP',
 	'CLOSE_PM_REPORT_CONFIRM'	=> 'Êtes-vous sûr de vouloir clôturer le rapport de MP sélectionné ?',

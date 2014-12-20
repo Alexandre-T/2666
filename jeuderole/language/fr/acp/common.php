@@ -620,6 +620,9 @@ $lang = array_merge($lang, array(
 
 	'LOG_MASS_EMAIL'		=> '<strong>Envoi d’un e-mail de masse</strong><br />» %s',
 
+    //AT MOD Changement de contact Start
+    'LOG_MCP_CHANGE_CONTACT'	=> '<strong>Modification du contact du sujet « %1$s »</strong><br />» de %2$s en %3$s',
+    //AT MOD Changement de contact ENd
 	'LOG_MCP_CHANGE_POSTER'	=> '<strong>Modification de l’auteur du sujet « %1$s »</strong><br />» de %2$s en %3$s',
 
 	'LOG_MODULE_DISABLE'	=> '<strong>Désactivation d’un module</strong><br />» %s',
