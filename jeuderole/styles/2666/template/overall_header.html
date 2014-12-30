@@ -89,8 +89,7 @@ var seo_hashfix = {SEO_HASHFIX};
 	<div class="<!-- IF SCRIPT_NAME eq index -->jumbotron<!-- ELSE -->page-header<!-- ENDIF --> ">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-7">
-					<!-- @todo <a href="{U_INDEX}" title="{L_INDEX}" id="logo">{SITE_LOGO_IMG}</a>  -->
+				<div class="col-sm-7">
 					<!-- IF SCRIPT_NAME eq index -->
 						<h1>{SITENAME}</h1>			
 						<p class="description hidden-xs hidden-sm">{SITE_DESCRIPTION}</p>
@@ -99,10 +98,10 @@ var seo_hashfix = {SEO_HASHFIX};
 					<!-- ENDIF -->
 					<p class="sr-only"><a href="#start_here">{L_SKIP}</a></p>
 				</div>
-				<div class="col-md-5 text-right">
+				<div class="col-sm-5 text-right">
 					<!-- IF S_DISPLAY_SEARCH and not S_IN_SEARCH -->
 					<div class="row">
-					<div class="col-sm-6 col-md-9 pull-right">
+					<div class="col-sm-12 col-md-9 pull-right">
 					<form class="form-search hidden-xs" action="{U_SEARCH}" method="get">
 						{S_SEARCH_HIDDEN_FIELDS}
 						<div class="form-group">
@@ -112,7 +111,7 @@ var seo_hashfix = {SEO_HASHFIX};
 					    			<button type="submit" class="btn btn-default"><i class="fa fa-search"></i> {L_SEARCH}</button>
 					    		</div>
 							</div>
-							<p class="help-block"><a class="" href="{U_SEARCH}" title="{L_SEARCH_ADV_EXPLAIN}"><small>{L_SEARCH_ADV}&hellip;</small></a></p>
+							<p class="help-block recherche-avancee"><a class="" href="{U_SEARCH}" title="{L_SEARCH_ADV_EXPLAIN}"><small>{L_SEARCH_ADV}&hellip;</small></a></p>
 						</div>
 						
 					</form>
@@ -173,4 +172,4 @@ var seo_hashfix = {SEO_HASHFIX};
 	</ul>
 </nav>
 
-<section class="section-{SCRIPT_NAME} container" id="start_here">
+<section class="section-{SCRIPT_NAME} container principal" id="start_here">

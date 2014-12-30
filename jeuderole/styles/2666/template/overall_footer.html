@@ -1,65 +1,61 @@
 </section>
-<nav class="footer">
-	<div class="container">
-		<div class="breadcrumb">
-			<div class="row">
-				<div class="col-sm-5"><i class="fa fa-home"></i>&nbsp;-&nbsp;<a href="{U_INDEX}" accesskey="h">{L_INDEX}</a></div>
-				<!-- IF S_DISPLAY_POST_INFO -->
-				<div class="col-sm-2 hidden-xs text-center">
-					<div class=" dropup">
-					<!-- IF L_FORUM_PERMISSIONS -->
-					<a class="btn btn-default btn-xs tooltip-link" id="drop-permission" data-toggle="dropdown" href="#" title="{L_FORUM_PERMISSIONS}"><i class="fa fa-cogs"></i>&nbsp;<span class="fa fa-caret-up"></span></a>
-					<!-- ELSE -->
-					<a class="btn btn-default btn-xs tooltip-link" id="drop-permission" data-toggle="dropdown" href="#"><i class="fa fa-cogs"></i>&nbsp;<span class="fa fa-caret-up"></span></a>
-					<!-- ENDIF -->
-				 	<ul class="dropdown-menu">
-						<!-- BEGIN rules --><li class="text-left"><a href="#"><i class="fa fa-cog"></i> {rules.RULE}</a></li><!-- END rules -->
-					</ul>
-					</div>
-				</div>
+<nav class="footer container">
+	<div class="breadcrumb">
+		<div class="row">
+			<div class="col-sm-5"><i class="fa fa-home"></i>&nbsp;-&nbsp;<a href="{U_INDEX}" accesskey="h">{L_INDEX}</a></div>
+			<!-- IF S_DISPLAY_POST_INFO -->
+			<div class="col-sm-2 hidden-xs text-center">
+				<div class=" dropup">
+				<!-- IF L_FORUM_PERMISSIONS -->
+				<a class="btn btn-default btn-xs tooltip-link" id="drop-permission" data-toggle="dropdown" href="#" title="{L_FORUM_PERMISSIONS}"><i class="fa fa-cogs"></i>&nbsp;<span class="fa fa-caret-up"></span></a>
+				<!-- ELSE -->
+				<a class="btn btn-default btn-xs tooltip-link" id="drop-permission" data-toggle="dropdown" href="#"><i class="fa fa-cogs"></i>&nbsp;<span class="fa fa-caret-up"></span></a>
 				<!-- ENDIF -->
-				<div class="<!-- IF ! S_DISPLAY_POST_INFO -->col-sm-offset-2<!-- ENDIF --> col-sm-5 text-right">
-					<div class="btn-group">
-						<!-- IF U_EMAIL_TOPIC --><a class="btn btn-default btn-xs tooltip-top" href="{U_EMAIL_TOPIC}" title="{L_EMAIL_TOPIC}"><i class="fa fa-envelope"></i><span class="sr-only">{L_EMAIL_TOPIC}</span></a><!-- ENDIF -->
-						<!-- IF U_EMAIL_PM --><a class="btn btn-default btn-xs tooltip-top" href="{U_EMAIL_PM}" title="{L_EMAIL_PM}" class=""><i class="fa fa-envelope"></i><span class="sr-only">{L_EMAIL_PM}</span></a><!-- ENDIF -->
-						<!-- IF U_PRINT_TOPIC --><a class="btn btn-default btn-xs tooltip-top" href="{U_PRINT_TOPIC}" title="{L_PRINT_TOPIC}" accesskey="p"><i class="fa fa-print"></i><span class="sr-only">{L_PRINT_TOPIC}</span></a><!-- ENDIF -->
-						<!-- IF U_PRINT_PM --><a class="btn btn-default btn-xs tooltip-top" href="{U_PRINT_PM}" title="{L_PRINT_PM}" accesskey="p"><i class="fa fa-print"></i><span class="sr-only">{L_PRINT_PM}</span></a><!-- ENDIF -->
-						<!-- IF not S_IS_BOT -->
-							<!-- IF S_WATCH_FORUM_LINK --><a class="btn btn-default btn-xs tooltip-top" href="{S_WATCH_FORUM_LINK}" title="{S_WATCH_FORUM_TITLE}"><i class="fa <!-- IF S_WATCHING_FORUM -->fa-eye-slash<!-- ELSE -->fa-eye<!-- ENDIF -->"></i><span class="sr-only">{S_WATCH_FORUM_TITLE}</span></a><!-- ENDIF -->
-							<!-- IF U_WATCH_TOPIC --><a class="btn btn-default btn-xs tooltip-top" href="{U_WATCH_TOPIC}" title="{L_WATCH_TOPIC}"><i class="fa <!-- IF S_WATCHING_TOPIC -->fa-eye-slash<!-- ELSE -->fa-eye<!-- ENDIF -->"></i><span class="sr-only">{L_WATCH_TOPIC}</span></a><!-- ENDIF -->
-							<!-- IF U_BOOKMARK_TOPIC --><a class="btn btn-default btn-xs tooltip-top" href="{U_BOOKMARK_TOPIC}" title="{L_BOOKMARK_TOPIC}"><i class="fa fa-bookmark"></i><span class="sr-only">{L_BOOKMARK_TOPIC}</span></a><!-- ENDIF -->
-							<!-- IF U_BUMP_TOPIC --><a class="btn btn-default btn-xs tooltip-top" href="{U_BUMP_TOPIC}" title="{L_BUMP_TOPIC}"><i class="fa fa-arrow-circle-o-up"></i><span class="sr-only">{L_BUMP_TOPIC}</span></a><!-- ENDIF -->
-						<!-- ENDIF -->
-					</div>
+			 	<ul class="dropdown-menu">
+					<!-- BEGIN rules --><li class="text-left"><a href="#"><i class="fa fa-cog"></i> {rules.RULE}</a></li><!-- END rules -->
+				</ul>
 				</div>
 			</div>
+			<!-- ENDIF -->			
+			<div class="<!-- IF ! S_DISPLAY_POST_INFO -->col-sm-offset-2<!-- ENDIF --> col-sm-5 text-right">
+				<!-- IF S_USER_LOGGED_IN or U_ACP or U_MCP or U_EMAIL_TOPIC or U_EMAIL_PM or U_PRINT_TOPIC or U_PRINT_PM or S_WATCH_FORUM_LINK or U_WATCH_TOPIC or U_BOOKMARK_TOPIC or U_BUMP_TOPIC -->
+				<div class="btn-group">
+					<!-- IF S_USER_LOGGED_IN --><a href="{U_PROFILE}" class="btn btn-default btn-xs tooltip-top" title="{L_PROFILE}"><i class="fa fa-user"></i><span class="sr-only">{L_PROFILE}</span></a><!-- ENDIF -->
+					<!-- IF U_MCP --><a href="{U_MCP}" class="btn btn-xs btn-warning tooltip-top" title="{L_MCP}"><i class="fa fa-legal"></i><span class="sr-only">{L_MCP}</span></a><!-- ENDIF -->
+					<!-- IF U_ACP --><a href="{U_ACP}" class="btn btn-xs btn-danger tooltip-top" title="{L_ACP}"><i class="fa fa-wrench"></i><span class="sr-only">{L_ACP}</span></a><!-- ENDIF -->
+					<!-- IF U_EMAIL_TOPIC --><a class="btn btn-default btn-xs tooltip-top" href="{U_EMAIL_TOPIC}" title="{L_EMAIL_TOPIC}"><i class="fa fa-envelope"></i><span class="sr-only">{L_EMAIL_TOPIC}</span></a><!-- ENDIF -->
+					<!-- IF U_EMAIL_PM --><a class="btn btn-default btn-xs tooltip-top" href="{U_EMAIL_PM}" title="{L_EMAIL_PM}" class=""><i class="fa fa-envelope"></i><span class="sr-only">{L_EMAIL_PM}</span></a><!-- ENDIF -->
+					<!-- IF U_PRINT_TOPIC --><a class="btn btn-default btn-xs tooltip-top" href="{U_PRINT_TOPIC}" title="{L_PRINT_TOPIC}" accesskey="p"><i class="fa fa-print"></i><span class="sr-only">{L_PRINT_TOPIC}</span></a><!-- ENDIF -->
+					<!-- IF U_PRINT_PM --><a class="btn btn-default btn-xs tooltip-top" href="{U_PRINT_PM}" title="{L_PRINT_PM}" accesskey="p"><i class="fa fa-print"></i><span class="sr-only">{L_PRINT_PM}</span></a><!-- ENDIF -->
+					<!-- IF not S_IS_BOT -->
+						<!-- IF S_WATCH_FORUM_LINK --><a class="btn btn-default btn-xs tooltip-top" href="{S_WATCH_FORUM_LINK}" title="{S_WATCH_FORUM_TITLE}"><i class="fa <!-- IF S_WATCHING_FORUM -->fa-eye-slash<!-- ELSE -->fa-eye<!-- ENDIF -->"></i><span class="sr-only">{S_WATCH_FORUM_TITLE}</span></a><!-- ENDIF -->
+						<!-- IF U_WATCH_TOPIC --><a class="btn btn-default btn-xs tooltip-top" href="{U_WATCH_TOPIC}" title="{L_WATCH_TOPIC}"><i class="fa <!-- IF S_WATCHING_TOPIC -->fa-eye-slash<!-- ELSE -->fa-eye<!-- ENDIF -->"></i><span class="sr-only">{L_WATCH_TOPIC}</span></a><!-- ENDIF -->
+						<!-- IF U_BOOKMARK_TOPIC --><a class="btn btn-default btn-xs tooltip-top" href="{U_BOOKMARK_TOPIC}" title="{L_BOOKMARK_TOPIC}"><i class="fa fa-bookmark"></i><span class="sr-only">{L_BOOKMARK_TOPIC}</span></a><!-- ENDIF -->
+						<!-- IF U_BUMP_TOPIC --><a class="btn btn-default btn-xs tooltip-top" href="{U_BUMP_TOPIC}" title="{L_BUMP_TOPIC}"><i class="fa fa-arrow-circle-o-up"></i><span class="sr-only">{L_BUMP_TOPIC}</span></a><!-- ENDIF -->
+					<!-- ENDIF -->
+				</div>
+				<!-- ENDIF -->
+			</div>
 		</div>
-	</div>
+	</div>	
 </nav>
 
-<footer id="bottom" >
+<footer id="bottom" class="navbar">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-5 col-sm-5 hidden-xs">	
+			<div class="col-lg-4 col-sm-4 hidden-xs">	
 				<ul class="list-unstyled text-muted">
 					<!-- IF U_TEAM --><li class="rightside"><a href="{U_TEAM}"><small><i class="fa fa-group"></i> {L_THE_TEAM}</small></a></li><!-- ENDIF -->
 				</ul>
 			</div>
 
-			<div class="col-lg-2 col-sm-2 text-center">	
-				<!-- IF S_USER_LOGGED_IN or U_ACP or U_MCP  -->
-				<div class="btn-group">
-					<!-- IF S_USER_LOGGED_IN --><a href="{U_PROFILE}" class="btn btn-default btn-xs tooltip-top" title="{L_PROFILE}"><i class="fa fa-user"></i><span class="sr-only">{L_PROFILE}</span></a><!-- ENDIF -->
-					<!-- IF U_MCP --><a href="{U_MCP}" class="btn btn-xs btn-warning tooltip-top" title="{L_MCP}"><i class="fa fa-legal"></i><span class="sr-only">{L_MCP}</span></a><!-- ENDIF -->
-					<!-- IF U_ACP --><a href="{U_ACP}" class="btn btn-xs btn-danger tooltip-top" title="{L_ACP}"><i class="fa fa-wrench"></i><span class="sr-only">{L_ACP}</span></a><!-- ENDIF -->
-				</div>
-				<!-- ENDIF -->
+			<div class="col-lg-4 col-sm-4 text-center">
+				<small>Copyright www.jeuforum.fr 2015</small>	
 			</div>
 		
-			<div class="col-lg-5 col-sm-5 hidden-xs">
+			<div class="col-lg-4 col-sm-4 hidden-xs">
 				<ul class="list-unstyled text-muted text-right">
 					<!-- IF not S_IS_BOT --><li class="rightside"><a href="{U_DELETE_COOKIES}"><small><i class="fa fa-trash-o"></i> {L_DELETE_COOKIES}</small></a></li><!-- ENDIF -->
-					<li><small><i class="fa fa-clock-o"></i> {S_TIMEZONE}</small></li>
 					<!-- IF DEBUG_OUTPUT -->
 						<li><small>{DEBUG_OUTPUT}</small></li>
 					<!-- ENDIF -->
