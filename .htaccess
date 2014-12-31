@@ -1,3 +1,9 @@
+IndexIgnore .htaccess */.??* *~ *# */HEADER* */README* */_vti*
+
+#SecFilterEngine Off
+#SecFilterScanPOST Off
+#SetEnv APPLICATION_ENV development
+
 # You may need to un-comment the following lines
 # Options +FollowSymlinks
 # To make sure that rewritten dir or file (/|.html) will not load dir.php in case it exist
