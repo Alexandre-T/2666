@@ -203,7 +203,6 @@ while ($row = $db->sql_fetchrow($result))
 		}
 		//AT MOD VIEWONLINE END
 	}
-	var_dump($row['session_page'],$on_page[1]);
 	switch ($on_page[1])
 	{
 		case 'index':
