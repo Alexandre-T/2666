@@ -103,7 +103,8 @@ class Reserve{
 	    $result = $db->sql_query($sql);
 	    $resultats = array();
 	    while ($row = $db->sql_fetchrow($result)){
-	        if (!empty(trim($row['avatar']))){
+	        $row['avatar'] = trim($row['avatar']);
+	        if (!empty($row['avatar'])){
     	        //La clef sert pour le tri
     	        $resultats[$row['avatar'].$classement.$row['user_id']]['ID']=$row['user_id'];
     	        $resultats[$row['avatar'].$classement.$row['user_id']]['NOM']=$row['nom'];
