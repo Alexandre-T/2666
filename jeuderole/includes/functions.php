@@ -4108,6 +4108,14 @@ function msg_handler($errno, $msg_text, $errfile, $errline)
 				'S_USER_WARNING'	=> ($errno == E_USER_WARNING) ? true : false,
 				'S_USER_NOTICE'		=> ($errno == E_USER_NOTICE) ? true : false)
 			);
+			//AT MOD BACKGROUND START
+			global $data;
+			if (isset($data['forum_id'])){
+			    $template->assign_vars(array(
+			        'FORUM_ID'		=> (int)$data['forum_id'],
+			    ));
+			}
+			//AT MOD BACKGROUND END
 
 			// We do not want the cron script to be called on error messages
 			define('IN_CRON', true);
