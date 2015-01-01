@@ -1,7 +1,10 @@
 IndexIgnore .htaccess */.??* *~ *# */HEADER* */README* */_vti*
 
-#SecFilterEngine Off
-#SecFilterScanPOST Off
+<IfModule mod_security.c>
+	SecFilterEngine Off
+	SecFilterScanPOST Off
+</IfModule>
+
 #SetEnv APPLICATION_ENV development
 
 # You may need to un-comment the following lines
@@ -68,6 +71,9 @@ RewriteRule ^jeuderole/aide-bbcode\.html$ /jeuderole/faq.php?mode=bbcode [QSA,L,
 RewriteRule ^jeuderole/aide-phpbb\.html$ /jeuderole/faq.php [QSA,L,NC]
 #AT Mod Avatars
 RewriteRule ^jeuderole/aides-de-jeu/avatars-reserves\.html$ /jeuderole/avatars.php [QSA,L,NC]
+#AT Mod Boutique
+RewriteRule ^boutique/livre\.html$ /boutique/livre.php [QSA,L,NC]
+#RewriteRule ^boutique/video\.html$ /boutique/video.php [QSA,L,NC]
 
 # FORUM WITHOUT ID & DELIM ALL MODES
 # THESE THREE LINES MUST BE LOCATED AT THE END OF YOUR HTACCESS TO WORK PROPERLY
