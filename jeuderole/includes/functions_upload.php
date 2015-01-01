@@ -857,7 +857,10 @@ class fileupload
 		}
 
 		$tmp_path = (!@ini_get('safe_mode') || strtolower(@ini_get('safe_mode')) == 'off') ? false : $phpbb_root_path . 'cache';
-		$filename = tempnam($tmp_path, unique_id() . '-');
+		//AT MOD Permettre l'envoi
+		//$filename = tempnam($tmp_path, unique_id() . '-');
+		$filename = tempnam($phpbb_root_path . 'cache', unique_id() . '-');
+		//AT MOD Permettre l'envoi
 
 		if (!($fp = @fopen($filename, 'wb')))
 		{
