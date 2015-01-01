@@ -554,7 +554,6 @@ switch ($action)
 		    'bbcode_uid'      => $message_telephone['uid'],    // Value created from the generate_text_for_storage() function.
 		
 		    // Other Options
-		    'post_edit_locked'   => 1,   // Disallow post editing? 1 = Yes, 0 = No
 		    'topic_title'        => truncate_string($subject),  // Subject/Title of the topic. (string)
 		
 		    // Email Notification Settings
