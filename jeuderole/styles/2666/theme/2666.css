@@ -382,8 +382,12 @@ body.body-f31{
 body.body-f33{
 	background-image:url('{T_THEME_PATH}/images/background/visioconference.jpg');
 }
-
-
+body.body-f35{
+	background-image:url('{T_THEME_PATH}/images/background/enerim.jpg');
+}
+body.body-f36{
+	background-image:url('{T_THEME_PATH}/images/background/service-medical.jpg');
+}
 /** Visière bleue par défaut **/
 body header{
 	background: -moz-linear-gradient(top,  rgba(44,108,174,1) 0%, rgba(44,108,174,0.2) 100%); /* FF3.6+ */
