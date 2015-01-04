@@ -56,12 +56,14 @@ Fiche de personnage
 	<dt><a href="etape1.php" class="tooltip-left" title="Changer de sexe">Sexe</a>&nbsp;:</dt><dd><!-- IF S_FEMME -->Féminin<!-- ELSE -->Masculin<!-- ENDIF --></dd>
 	<dt><a href="etape2.php" class="tooltip-left" title="Changer de race">Race</a>&nbsp;:</dt><dd><!-- IF S_HUMAIN -->Humain<!-- ELSE -->Nephilim<!-- ENDIF --></dd>
 	<dt><a href="etape5.php" class="tooltip-left" title="Changer de clan">Clan</a>&nbsp;:</dt><dd>{PERSONNAGE_CLAN}</dd>
-	<!-- IF S_NEPHILIM -->
+	<!-- IF S_PERSONNAGE_NEPHILIM -->
 	<dt><a href="etape4.php" class="tooltip-left" title="Changer d'âge">Âge réel</a>&nbsp;:</dt><dd>{PERSONNAGE_AGE} ans</dd>	
 	<dt><a href="etape5.php" class="tooltip-left" title="Changer de pouvoir">Pouvoir</a>&nbsp;:</dt><dd>{PERSONNAGE_POUVOIR}</dd>
-	<!-- ELSE -->
+	<!-- ENDIF -->
+	<!-- IF S_PERSONNAGE_HUMAIN -->
 	<dt><a href="etape5.php" class="tooltip-left" title="Changer de don">Don</a>&nbsp;:</dt><dd>{PERSONNAGE_DON}</dd>
 	<!-- ENDIF -->
+	<dt><a href="etape4.php" class="tooltip-left" title="Changer ce passé">Profession</a>&nbsp;:</dt><dd>{PERSONNAGE_PROFESSION}</dd>
 	<dt><a href="etape4.php" class="tooltip-left" title="Changer ce passé">Passé</a>&nbsp;:</dt><dd>{PERSONNAGE_PASSE}</dd>
 </dl>
 <p></p>   
@@ -118,6 +120,9 @@ Contact principal : {CONTACT1_NOM}
 	<div class="col-sm-4 text-center">
 		<div class="div-thumbnail">{CONTACT1_AVATAR}</div>
 		<p class="text-center"><em>{CONTACT1_AVATAR_NOM}</em></p>
+		<p class="text-center"><em>{CONTACT1_CLAN}</em></p>
+		<p class="text-center"><em>{CONTACT1_RACE}</em></p>
+		
 	</div>
 </div>
 <!-- INCLUDE modal/before_footer.html -->
@@ -143,6 +148,8 @@ Contact principal : {CONTACT2_NOM}
 	<div class="col-sm-4 text-center">
 		<div class="div-thumbnail">{CONTACT2_AVATAR}</div>
 		<p class="text-center"><em>{CONTACT2_AVATAR_NOM}</em></p>
+		<p class="text-center"><em>{CONTACT2_CLAN}</em></p>
+		<p class="text-center"><em>{CONTACT2_RACE}</em></p>
 	</div>
 </div>
 <!-- INCLUDE modal/before_footer.html -->
@@ -169,6 +176,8 @@ Contact principal : {CONTACT3_NOM}
 	<div class="col-sm-4 text-center">
 		<div class="div-thumbnail">{CONTACT3_AVATAR}</div>
 		<p class="text-center"><em>{CONTACT3_AVATAR_NOM}</em></p>
+		<p class="text-center"><em>{CONTACT3_CLAN}</em></p>
+		<p class="text-center"><em>{CONTACT3_RACE}</em></p>
 	</div>
 </div>
 <!-- INCLUDE modal/before_footer.html -->
@@ -196,6 +205,9 @@ Contact principal : {CONTACT4_NOM}
 	<div class="col-sm-4 text-center">
 		<div class="div-thumbnail">{CONTACT4_AVATAR}</div>
 		<p class="text-center"><em>{CONTACT4_AVATAR_NOM}</em></p>
+		<p class="text-center"><em>{CONTACT4_CLAN}</em></p>
+		<p class="text-center"><em>{CONTACT4_RACE}</em></p>
+		
 	</div>
 </div>
 <!-- INCLUDE modal/before_footer.html -->
