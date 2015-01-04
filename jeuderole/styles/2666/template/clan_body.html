@@ -1,0 +1,53 @@
+<!-- INCLUDE overall_header.html -->	
+<h2><i class="fa fa-group"></i> {CLAN_NAME}</h2>
+<p>{CLAN_DESCRIPTION}</p>
+	
+<table class="table table-bordered table-hover table-striped forum-top-buffer" id="clanlist">
+	<thead>
+	<tr>
+		<th class="name">{L_CLAN_MEMBERS}</th>
+		<th class="name">{L_CONTACT}</th>
+		<th class="forum-posts">{L_POSTS}</th>
+		<th class="information">&nbsp;</th>
+		<th class="joined">{L_JOINED}</th>
+	</tr>
+	</thead>
+	<tbody>
+	<!-- BEGIN memberrow -->
+		<tr>
+			<td><!-- IF memberrow.S_CONTACT -->{memberrow.CONTACT_FULL}<!-- ELSE -->{memberrow.USERNAME_FULL}<!-- ENDIF --></td>
+			<td>
+				<!-- IF memberrow.S_CONTACT -->
+					{L_CONTACT_DE} {memberrow.PRINCIPAL_FULL}
+				<!-- ELSE -->
+					<!-- IF memberrow.U_FICHE -->
+					<a href="{memberrow.U_FICHE}" class="tooltip-link" title="Consulter sa fiche">
+						{L_PERSONNAGE_PRINCIPAL}
+					</a>
+					<!-- ELSE -->
+					{L_PERSONNAGE_PRINCIPAL}
+					<!-- ENDIF -->
+				<!-- ENDIF -->
+			</td>
+			<td class="text-center"><!-- IF S_DISPLAY_SEARCH --><a class="btn btn-info btn-xs" href="{memberrow.U_SEARCH_USER}" title="{L_SEARCH_USER_POSTS}"><i class="fa fa-search"></i> {memberrow.POSTS}</a><!-- ELSE --><span class="label">{memberrow.POSTS}</span><!-- ENDIF --></td>
+			<td>{memberrow.JOINED}</td>
+			<!-- IF S_VIEWONLINE --><td>{memberrow.VISITED}&nbsp;</td><!-- ENDIF -->
+		</tr>
+	<!-- BEGINELSE -->
+		<tr class="bg1">
+			<td colspan="<!-- IF S_VIEWONLINE -->5<!-- ELSE -->4<!-- ENDIF -->">{L_NO_MEMBERS}</td>
+		</tr>
+	<!-- END memberrow -->
+	</tbody>
+</table>
+<div class="row">
+	<div class="col-md-6">
+		<!-- INCLUDE pagination.html -->
+	</div>
+	<div class="col-md-6 text-right">
+		<!-- INCLUDE jumpbox.html -->
+	</div>
+</div>
+
+<!-- INCLUDE jumppage.html -->
+<!-- INCLUDE overall_footer.html -->

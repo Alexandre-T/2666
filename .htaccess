@@ -74,6 +74,15 @@ RewriteRule ^jeuderole/aides-de-jeu/avatars-reserves\.html$ /jeuderole/avatars.p
 #AT Mod Boutique
 RewriteRule ^boutique/livre\.html$ /boutique/livre.php [QSA,L,NC]
 #RewriteRule ^boutique/video\.html$ /boutique/video.php [QSA,L,NC]
+#AT Mod Clab
+RewriteRule ^clan/asmodeens.html$ /jeuderole/clan.php?clan=14 [QSA,L,NC]
+RewriteRule ^clan/infiltres.html$ /jeuderole/clan.php?clan=15 [QSA,L,NC]
+RewriteRule ^clan/insoumis.html$ /jeuderole/clan.php?clan=16 [QSA,L,NC]
+RewriteRule ^clan/izanaghis.html$ /jeuderole/clan.php?clan=17 [QSA,L,NC]
+RewriteRule ^clan/sans-clan.html$ /jeuderole/clan.php?clan=19 [QSA,L,NC]
+RewriteRule ^clan/vestales.html$ /jeuderole/clan.php?clan=18 [QSA,L,NC]
+RewriteRule ^clan/skjaldmeyjar.html$ /jeuderole/clan.php?clan=20 [QSA,L,NC]
+
 
 # FORUM WITHOUT ID & DELIM ALL MODES
 # THESE THREE LINES MUST BE LOCATED AT THE END OF YOUR HTACCESS TO WORK PROPERLY
