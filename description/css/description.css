@@ -11,7 +11,14 @@ body{
     text-shadow: 2px 2px 2px #2C6CAE;
 }
 
+footer a{
+	color:white;
+	text-shadow: 2px 2px 2px #2C6CAE;
+	font-size: 24px;
+}
+
 .jumbotron {
+	color:white;
     background-color: black;
     background: -moz-linear-gradient(top,  rgba(30,87,153,1) 0%, rgba(0,0,0,0.6) 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(30,87,153,1)), color-stop(100%,rgba(0,0,0,0.6))); /* Chrome,Safari4+ */
@@ -58,7 +65,8 @@ ul.accueil2666,
 p.accueil2666,
 span.coalition,
 ul.nav-tabs,
-a.navbar-brand
+a.navbar-brand,
+footer
 {
     font-family:'coalition','Helvetica Neue', Helvetica, Arial, sans-serif;
 }
