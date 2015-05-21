@@ -118,3 +118,17 @@ div#peggi{
 div#peggi img{
 	border: thin solid #428BCA;
 }
+.vcenter {
+	display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+.m840{
+	max-width:840px;
+	margin:40px auto 20px auto;
+	padding-top:30px;
+}
+
+.carousel-inner h1,.carousel-inner p{
+    text-shadow: 2px 2px 0px #000;	
+}
