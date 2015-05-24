@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>2666 : le jeu de rôle par forum</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css?v=3.3.4" rel="stylesheet">
+    <link href="css/bootstrap.theme.min.css?v=3.3.4" rel="stylesheet">
+    <link href="css/font-awesome.min.css?v=4.3.0" rel="stylesheet">
+    <link href="css/description.css?v=1.1.0" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div id="bg"></div>
+    <nav class="navbar navbar-inverse navbar-fixed-top _navbar-inverse navbar-static-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-header-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand active" href="http://2666.jeuforum.fr"><i class="fa fa-space-shuttle"></i>&nbsp;2666</a>
+        </div>    
+        <div class="navbar-inner">
+            <!-- Everything you want hidden at 940px or less, place within here -->
+                <div class="collapse navbar-collapse" id="bs-header-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-question-circle"></i> Guide<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="http://2666.jeuforum.fr/jeuderole/aides-de-jeu/guide-du-nouvel-arrivant-t3.html" title="Guide du nouvel arrivant"><i class="fa fa-fw fa-graduation-cap"></i> Guide du nouvel arrivant</a></li>
+                                <li class="divider"></li>
+                                <li><a href="http://2666.jeuforum.fr/jeuderole/accueil-du-jeu/reglement-t2.html" title="Réglement"><i class="fa fa-fw fa-book"></i> Réglement</a></li>
+                                <li><a href="http://2666.jeuforum.fr/jeuderole/accueil-du-jeu/la-bienseance-t4.html" title="Règles de bienséance"><i class="fa fa-fw fa-smile-o"></i> Règles de bienséance</a></li>
+                                <li class="divider"></li>
+                                <li><a href="http://2666.jeuforum.fr/jeuderole/description-du-jeu/synopsis-t9.html" title="Synopsis de l'histoire de 2666"><i class="fa fa-fw fa-file-text-o"></i> Synopsis</a></li>
+                                <li><a href="http://2666.jeuforum.fr/jeuderole/description-du-jeu/background-t8.html" title="Background complet"><i class="fa fa-fw fa-book"></i> Background</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-group"></i> Membres<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="http://2666.jeuforum.fr/jeuderole/memberlist.php" title="Voir la liste complète des membres"><i class="fa fa-fw fa-group"></i>Tous les membres</a></li>
+                                <li class="divider"></li>
+                                <li><a href="http://2666.jeuforum.fr/jeuderole/groupe-actif-g10.html"><i class="fa fa-fw fa-group"></i> Membres actifs</a></li>
+                                <li><a href="http://2666.jeuforum.fr/jeuderole/groupe-demandecreation-g13.html"><i class="fa fa-fw fa-group"></i> Membres en attente de validation</a></li>
+                                <li class="divider"></li>
+                                <li><a href="http://2666.jeuforum.fr/clan/asmodeens.html"><i class="fa fa-fw fa-group"></i> Asmodéens</a></li>
+                                <li><a href="http://2666.jeuforum.fr/clan/infiltres.html"><i class="fa fa-fw fa-group"></i> Infiltrés</a></li>
+                                <li><a href="http://2666.jeuforum.fr/clan/insoumis.html"><i class="fa fa-fw fa-group"></i> Insoumis</a></li>
+                                <li><a href="http://2666.jeuforum.fr/clan/izanaghis.html"><i class="fa fa-fw fa-group"></i> Izanaghis</a></li>
+                                <li><a href="http://2666.jeuforum.fr/clan/skjaldmeyjar.html"><i class="fa fa-fw fa-group"></i> Skjaldmeyjar</a></li>
+                                <li><a href="http://2666.jeuforum.fr/clan/vestales.html"><i class="fa fa-fw fa-group"></i> Vestales</a></li>
+                                <li><a href="http://2666.jeuforum.fr/clan/sans-clan.html"><i class="fa fa-fw fa-group"></i> Sans clans</a></li>                                    
+                                <li class="divider"></li>
+                                <li><a href="./groupe-inactif-g12.html"><i class="fa fa-fw fa-group"></i> Les disparus</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="http://2666.jeuforum.fr/jeuderole/" title="Tester !" accesskey="x"><i class="fa fa-sign-out"></i> Jouer ! </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="header-index">
+        <div class="jumbotron ">
+            <div class="container">
+                <div id="peggi" class="pull-right">
+                    <img src="img/grossier.gif" class="img-thumbnail tooltip-link" title="Ce jeu contient des expressions grossières."/>
+                    <img src="img/sexe.gif" class="img-thumbnail tooltip-link" title="Ce jeu décrit des scènes de nudité et / ou des comportements ou des allusions de nature sexuelle."/>
+                    <img src="img/online.gif" class="img-thumbnail tooltip-link" title="Possibilité de jouer à ce jeu en ligne"/>
+                    <img src="img/violence.gif" class="img-thumbnail tooltip-link" title="Ce jeu contient des scènes violentes"/>
+                    <img src="img/pegi16.gif" class="img-thumbnail tooltip-link" title="Jeu réservé aux 16 ans et plus."/>
+                </div>           
+                <div class="">
+                    <h1>2666</h1>
+                    <p class="description">A la recherche d'une nouvelle Terre...</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="start_here" class="container">
+        <div role="tabpanel">
+
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#synopsis"
+                    aria-controls="synopsis" role="tab" data-toggle="tab"><i
+                        class="fa fa-file-text-o"></i> Synopsis</a></li>
+                <li role="presentation"><a href="#background"
+                    aria-controls="background" role="tab" data-toggle="tab"><i
+                        class="fa fa-book"></i> Background</a></li>
+                <li role="presentation"><a href="#team"
+                    aria-controls="team" role="tab" data-toggle="tab"><i
+                        class="fa fa-users"></i> Une équipe</a></li>
+                <!-- <li role="presentation"><a href="#pv"
+                    aria-controls="pv" role="tab" data-toggle="tab"><i
+                        class="fa fa-users"></i> Personnages vacants</a></li>
+                 -->
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane fade in active" id="synopsis">
+                    <h1>L'exode&hellip;</h1>
+                    <p class="text-justify">Les Nephilim, accompagnés
+                        d'humains, ont été contraints de fuir précipitamment le
+                        système solaire. Le « San Djinn Bar » a beau être le
+                        vaisseau le plus puissant de l'armada Nephilim, il fait
+                        désormais des bonds spatiaux quand cela lui chante.
+                        Abandonner le «San Djinn Bar» serait une hérésie tant sa
+                        technologie est indispensable aux survivants. Alors,
+                        quand il bondit, les capitaines des navires voisins
+                        n'ont d'autres choix que de le suivre dans les trois
+                        minutes. S'ils ne bondissent pas durant ce court
+                        créneau, ils ne rejoindront jamais la flotte, car il est
+                        impossible de choisir sa destination. Dans ces
+                        conditions, généralement, toutes les navettes qui
+                        assurent les voyages d'un vaisseau à l'autre et les
+                        petits vaisseaux de combat, appontent en urgence sur les
+                        quais des transporteurs.</p>
+                    <p class="text-justify">
+                        <strong>2666</strong> suit l'épopée du «San Djinn Barr»
+                        et de la centaine de vaisseaux qui l'accompagnent. Ce
+                        jeu de rôle par forum vous permettra d'incarner un
+                        personnage principal, mais également ses contacts. Notre
+                        assistante, Lazer sera là pour vous guider dans cette
+                        étape novatrice.
+                    </p>
+                    <p class="text-justify">Le jeu se déroulera bond par
+                        bond. À chaque bond effectué, une nouvelle intrigue
+                        commencera et plongera vos personnages dans la tourmente
+                        et la passion de rencontres improbables.</p>
+                    <p class="text-justify">
+                        <em>Bon jeu à vous et au plaisir de vous lire !</em>
+                    </p>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="background">
+                    <h1 class="bbcode">2666</h1>
+                    <h2 class="bbcode">À la recherche d&#39;une nouvelle
+                        Terre</h2>
+                    <p class="text-justify">
+                        Les philosophes décrivent plusieurs ères dans notre
+                        monde. L'écriture marque la fin de la préhistoire.
+                        L'avènement d'Internet marque le début de l'ère
+                        numérique. Et la révélation de l'existence des Nephilim
+                        et des Elohim marque le début d'une nouvelle ère, <span
+                            style="font-style: italic">la chasse</span>. Les
+                        humains n'étaient pas seuls, ils cherchaient aux quatre
+                        coins de l'espace des formes de vies, mais les Nephilim,
+                        des anges déchus, et les Elohim des anges se livraient
+                        une guerre secrète et ésotérique depuis des millénaires
+                        sous leurs yeux.
+                    </p>
+                    <p class="text-justify">Quand les humains s'en rendirent
+                        compte, ils décidèrent de prendre leur destin en main.
+                        Guidés par la plus intense volonté de survivre et par le
+                        désir absolu d'être maîtres de leurs destins, ils se
+                        jetèrent dans une guerre dévastatrice contre les deux
+                        races angéliques. Déchus ou non, cela ne faisait pas de
+                        différence pour eux, ils devaient les détruire. Le
+                        fanatisme religieux a d'abord totalement disparu. Des
+                        scientifiques humains ont tenté les pires expériences
+                        sur les Nephilim, mais également sur des Elohim pour
+                        s'accaparer leurs pouvoirs.</p>
+                    <p class="text-justify">Les anges ont commencé à
+                        disparaître de la surface de la Terre, retournant en
+                        Eden au côté d'Eloha, leur Dieu. Son courroux était
+                        redouté, certains humains demandaient la clémence,
+                        effrayés par la menace d'un nouvel Armageddon. Mais rien
+                        ne survint ! La peur s'est tue comme les propos de ces
+                        humains. Les Nephilim ont commencé à se faire discrets.
+                        Sariel compta alors le plus grands nombres de disciples
+                        et son clan atteignit son apogée. Ce Nephilim originel
+                        possédait le don de dissimuler son aura Nephilim et il
+                        l'octroyait à tous ceux de son clan. Face aux
+                        forfaitures humaines, il n'eut guère de mal à recruter
+                        des Nephilim voulant se venger et asservir l'humanité.</p>
+                    <p class="text-justify">Et le feu démoniaque vint
+                        finalement du soleil. Certains y virent la colère de
+                        Dieu, d'autres une inopportune explosion solaire. Les
+                        systèmes informatiques non protégés furent dévastés. Les
+                        téléphones cellulaires rendirent l'âme, les satellites
+                        de communication également. Seuls les systèmes
+                        militaires tinrent à peu près le choc. Et il s'en suivit
+                        une guerre ouverte, car les Nephilim y virent là une
+                        chance de porter une attaque sans précédent pour prendre
+                        le contrôle du continent océanique.</p>
+                    <p class="text-justify">Il n'y eut aucun vainqueur, la
+                        Terre mourrait, ses ressources dévorées par l'humanité
+                        galopante. Et finalement, la dernière solution fut
+                        l'Espace. L'humanité entreprit la construction de grands
+                        vaisseaux grâce aux ascenseurs spatiaux. Les Nephilim ne
+                        purent accéder à ses ressources. Ils auraient pu
+                        détruire les ascenseurs, mais cela aurait condamné les
+                        deux espèces. Un autre originel travaillait dans
+                        l'ombre. Harahel, grâce au portail de Kabbale, permit
+                        également la construction de vaisseaux spatiaux,
+                        expédiant les différents métaux directement dans les sas
+                        d'un vaisseau dérobé par les Infiltrés, le croiseur
+                        «Caym». Dans ce vaisseau, les Asmodéens transformèrent
+                        et usinèrent les métaux recueillis. Les clans Nephilim
+                        s'unirent pour leur survie. Harahel fournissait le métal
+                        et l'expédiait, les Asmodéens le forgeaient, les
+                        Izanaghis s'occupaient de l'électronique embarquée.</p>
+                    <p class="text-justify">Cachée, cette puissante armada
+                        devint l'espoir Nephilim. Mais c'était sans compter sur
+                        les dissensions entre les clans. Plus de cinq cents
+                        navires se détachèrent de l'escouade qui en comptait
+                        deux milliers. À leur tête, Asmodée et Sariel entrèrent
+                        en guerre avec les vaisseaux des humains espérant une
+                        Blitz Krieg, une guerre éclaire dévastatrice. L'effet de
+                        surprise devait marquer une grande victoire. Pourtant
+                        aucun vaisseau n'en revint et, aujourd'hui encore,
+                        personne ne sait ce qu'il s'était passé.</p>
+                    <p class="text-justify">
+                        Cette défaite Nephilim ne s'arrêta pas en si mauvais
+                        chemin. Les vaisseaux humains guidés par un homme d'un
+                        rare charisme menèrent une traque inlassable en tout
+                        recoin du système solaire, frontière infranchissable. En
+                        surnombre, ils les contraignirent à rester très loin de
+                        la Terre. C'est ainsi que la plupart des Insoumis et des
+                        Vestales restés sur Terre avec leurs chefs de clan
+                        respectifs, <a
+                            href="http://2666.jeuforum.fr/jeuderole/membre/Harahel/"
+                            class="postlink">Harahel</a> et Vesta, furent
+                        abandonnés.
+                    </p>
+                    <p class="text-justify">
+                        De son côté, <a
+                            href="http://2666.jeuforum.fr/jeuderole/membre/Djinn/"
+                            class="postlink">Djinn</a>, éminent scientifique,
+                        avait découvert une autre façon de voyager et avait
+                        équipé certains vaisseaux du système de bonds. Mais il
+                        refusait de tester le système sur un vaisseau. Les
+                        sondes qu'il avait paramétrées pour effectuer deux
+                        bonds, un aller, un retour, n'étaient jamais revenues et
+                        il ignorait toujours pourquoi. Seulement, face à la
+                        menace humaine grandissante et aux pertes de plus en
+                        plus lourdes, les Nephilim envisagèrent sérieusement cet
+                        ultime recours. Malgré les frappes éclairs de <a
+                            href="http://2666.jeuforum.fr/jeuderole/membre/Raven/"
+                            class="postlink">Raven</a>, les Nephilim allaient
+                        perdre. Alors, les vaisseaux non équipés furent
+                        abandonnés et les autres se réunirent.
+                    </p>
+                    <p class="text-justify">
+                        Ainsi le grand bond eut lieu. L'an Zéro. Une nouvelle
+                        ère commença pour les Nephilim et les humains qui les
+                        accompagnaient. Elle portait le triste nom d'Exode. <a
+                            href="http://2666.jeuforum.fr/jeuderole/membre/Djinn/"
+                            class="postlink">Djinn</a> comprit pourquoi les
+                        sondes ne revenaient pas. Ils pouvaient entrer les
+                        coordonnées qu'il voulait, aucune science ne permettait
+                        de diriger le bond. Non seulement, ils voyageaient dans
+                        l'espace, mais il voyageait également dans le temps.
+                    </p>
+                    <h2 class="bbcode">L&#39;exode</h2>
+                    <p class="text-justify">
+                    L'exode... Les règles du jeu sont simples. Le « San
+                    Djinn Bar » a beau être le vaisseau le plus puissant de
+                    l'armada, il fait désormais des bonds quand cela lui chante.
+                    Et là, deux choix s'imposent aux capitaines des navires
+                    voisins. Soit ils bondissent dans les trois minutes avec lui
+                    et le rejoignent. Soit ils ne bondissent pas et pourront
+                    faire un autre bond plus tard, vers une destination alors
+                    inconnue. « 2666 » suit l'épopée du « <a
+                        href="http://2666.jeuforum.fr/jeuderole/san-djinn-barr/"
+                        class="postlink">San Djinn Barr</a> » et de la centaine
+                    de vaisseau qui l'accompagne. Quand le « San Djinn Barr »
+                    s'apprête à bondir, ses moteurs s'enclenchent. Il reste
+                    alors une minute avant le bond. Toutes les navettes et les
+                    Viper appontent en urgence sur les quais des transporteurs.
+                    Le San Djinn Barr effectuera son bond quoi qu'il arrive.
+                    Personne ne parvient à le stopper. Les autres commandants
+                    ont alors trois minutes pour faire le bond. Sachant que leur
+                    moteur mettent une minute à démarrer, ils doivent prendre
+                    rapidement leur décision. Si une navette n'est pas rentrée à
+                    temps. Elle est perdue, son équipage également.
+                    </p>
+                    <p class="text-justify">
+                        Vous faites partie du voyage. Vous étiez à bord d'un
+                        vaisseau dont le capitaine a choisi de suivre le « San
+                        Djinn Barr » dans ses sauts. Humain ou Nephilim, vous
+                        appartenez à la flotte et voyagez avec elle dans le
+                        temps et l'espace. Oubliez les beaux vaisseaux rutilant
+                        de Star Trek et Star Wars ! Si vous n'êtes pas à bord du
+                        « <a
+                            href="http://2666.jeuforum.fr/jeuderole/vaisseau-monde/"
+                            class="postlink">Vaisseau-Monde</a> », poussière,
+                        suie, crasse vous entourent mais sont désormais les
+                        cadets de vos soucis. Vous avez faim, vous manquez
+                        constamment de ressources. Vous vivez au rythme des
+                        bonds du « San Djinn Barr ».
+                    </p>
+                    <p class="text-right">
+                        <strong>Les alarmes
+                            retentissent. Vous courrez à votre poste. Il vous
+                            reste trois minutes avant le prochain bond</strong>.
+                    </p>
+                </div>
+                <div role="tabpanel" class="tab-pane fade" id="team">
+                    <h1 class="bbcode">Les contacts</h1>
+                    <p class="text-justify">
+                        <img id="lazer" data-toggle="popover"
+                            title="Lazer" 
+                            data-content="Lazer sera votre assistante durant tout le processus de création de personnage"
+                            data-placement="left"
+                            src="http://2666.jeuforum.fr/jeuderole/styles/2666/theme/images/lazer.jpg"
+                            width="200" height="320"
+                            class="img-thumbnail img-responsive pull-right lazer">
+                        Ce jeu par forum vous permet d'incarner un personnage
+                        principal, mais également de deux à quatre contacts. Ils
+                        connaissent votre personnage principal et sont liés
+                        d'une façon ou d'une autre à lui. Lorsque vous souhaitez
+                        poster un message dans les forums RP, vous pourrez
+                        choisir avec qui vous publiez le message. Grâce à une
+                        liste déroulante située sous le titre, vous pourrez
+                        sélectionner l'auteur du message.
+                    </p>
+                    <p class="text-justify">
+                        Les contacts sont donc des personnages que vous allez
+                        décrire durant la création de personnage. L'<a
+                            href="http://2666.jeuforum.fr/creation/index.php"
+                            class="postlink">assistante de création</a>, Lazer,
+                        vous fournira les informations nécessaires. Mais
+                        attention, quelques règles importantes diffèrent.
+                    </p>
+                    <p class="text-justify">En premier lieu, sachez que vos
+                        contacts sont des personnages en étroite relation avec
+                        votre personnage principal. Si vous jouez un membre d'un
+                        vaisseau, cela peut être des membres de votre équipage.
+                        Si vous choisissez le capitaine comme allié, décrivez
+                        bien la relation et expliquez pourquoi il vous aide.</p>
+                    <p class="text-justify">La relation vous unissant à ces
+                        contacts n'est pas forcément basée sur l'amour, l'amitié
+                        ou le respect. Si vous incarnez un être crapuleux, la
+                        relation avec la capitaine peut naître d'un odieux
+                        chantage. Vous possédez une vidéo où elle éjecte une
+                        rivale dans l'espace, vous la menacez de diffuser une
+                        sex-tape. Les motifs de ces relations sont
+                        indénombrables.</p>
+                    <p class="text-justify">
+                        <strong>Vous pouvez donc
+                            jouer vos contacts comme des multicomptes, mais
+                            aussi vous servir d'eux comme d'alliés dans vos RPs
+                            avec vos personnages principaux.</strong>
+                </div>
+                <!-- 
+                    <div role="tabpanel" class="tab-pane fade" id="pv">...</div>
+                 -->
+            </div>
+        </div>
+    </section>
+    <footer>
+        <p class="description text-center">
+            <a href="http://2666.jeuforum.fr/jeuderole/" title="Jouer !"><i
+                class="fa fa-link"></i>&nbsp;http://2666.jeuforum.fr/</a>
+        </p>
+    </footer>
+    
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js?v=3.3.4"></script>
+    <script src="js/initialisation.js?v=1.0.0"></script>
+  </body>
+</html>
