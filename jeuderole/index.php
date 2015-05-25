@@ -36,6 +36,26 @@ $l_total_user_s = ($total_users == 0) ? 'TOTAL_USERS_ZERO' : 'TOTAL_USERS_OTHER'
 $l_total_post_s = ($total_posts == 0) ? 'TOTAL_POSTS_ZERO' : 'TOTAL_POSTS_OTHER';
 $l_total_topic_s = ($total_topics == 0) ? 'TOTAL_TOPICS_ZERO' : 'TOTAL_TOPICS_OTHER';
 
+//AT MOD MULTICOMPTE START
+$total_users	= $config['num_users'];
+$sql = 'SELECT count(pf_actif) as inactif
+		FROM ' . PROFILE_FIELDS_DATA_TABLE . '
+		WHERE pf_actif = 0';
+$result = $db->sql_query($sql);
+$total_inactifs = (int) $db->sql_fetchfield('inactif');
+$sql = 'SELECT count(pf_actif) * 3 as actif, sum(pf_cc_actif) as cc, sum(pf_cd_actif) as cd
+		FROM ' . PROFILE_FIELDS_DATA_TABLE . '
+		WHERE pf_actif = 1';
+$result = $db->sql_query($sql);
+$total_actifs = (int) $db->sql_fetchfield('actif');
+$total_3j     = (int) $db->sql_fetchfield('cc');
+$total_4j     = (int) $db->sql_fetchfield('cd');
+$total_users  = $total_inactifs + $total_actifs + $total_3j + $total_4j + 4; //(Harahel est inactif mais à 4 contacts)  
+
+$l_total_user_s = 'TOTAL_PERSONNAGES_OTHER';
+
+//AT MOD MULTICOMPTE STOP
+
 // Grab group details for legend display
 if ($auth->acl_gets('a_group', 'a_groupadd', 'a_groupdel'))
 {
