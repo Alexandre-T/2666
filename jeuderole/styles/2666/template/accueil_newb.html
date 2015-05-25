@@ -1,94 +1,112 @@
 <!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>2666 : le jeu de rôle par forum</title>
-
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css?v=3.3.4" rel="stylesheet">
-    <link href="css/bootstrap-theme.min.css?v=3.3.4" rel="stylesheet">
-    <link href="css/font-awesome.min.css?v=4.3.0" rel="stylesheet">
-    <link href="css/description.css?v=1.1.0" rel="stylesheet">
+<html dir="{S_CONTENT_DIRECTION}" lang="{S_USER_LANG}">
+<head>
+{SEO_BASE_HREF}
+<script>
+// www.phpBB-SEO.com SEO TOOLKIT BEGIN
+var seo_delim_start = '{SEO_START_DELIM}';
+var seo_static_pagination = '{SEO_SATIC_PAGE}';
+var seo_ext_pagination = '{SEO_EXT_PAGE}';
+var seo_external = {SEO_EXTERNAL};
+var seo_external_sub = {SEO_EXTERNAL_SUB};
+var seo_ext_classes = {SEO_EXT_CLASSES};
+var seo_hashfix = {SEO_HASHFIX};
+// www.phpBB-SEO.com SEO TOOLKIT END
+</script>
+    <link href="description/css/bootstrap.min.css?v=3.3.4" rel="stylesheet">
+    <link href="description/css/bootstrap-theme.min.css?v=3.3.4" rel="stylesheet">
+    <link href="description/css/font-awesome.min.css?v=4.3.0" rel="stylesheet">
+    <link href="description/css/description.css?v=1.1.0" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
-  <body>
-    <div id="bg"></div>
-    <nav class="navbar navbar-inverse navbar-fixed-top _navbar-inverse navbar-static-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-header-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand active" href="http://2666.jeuforum.fr/jeuderole/"><i class="fa fa-space-shuttle"></i>&nbsp;2666</a>
-        </div>    
-        <div class="navbar-inner">
-            <!-- Everything you want hidden at 940px or less, place within here -->
-                <div class="collapse navbar-collapse" id="bs-header-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-question-circle"></i> Guide<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="http://2666.jeuforum.fr/jeuderole/aides-de-jeu/guide-du-nouvel-arrivant-t3.html" title="Guide du nouvel arrivant"><i class="fa fa-fw fa-graduation-cap"></i> Guide du nouvel arrivant</a></li>
-                                <li class="divider"></li>
-                                <li><a href="http://2666.jeuforum.fr/jeuderole/accueil-du-jeu/reglement-t2.html" title="Réglement"><i class="fa fa-fw fa-book"></i> Réglement</a></li>
-                                <li><a href="http://2666.jeuforum.fr/jeuderole/accueil-du-jeu/la-bienseance-t4.html" title="Règles de bienséance"><i class="fa fa-fw fa-smile-o"></i> Règles de bienséance</a></li>
-                                <li class="divider"></li>
-                                <li><a href="http://2666.jeuforum.fr/jeuderole/description-du-jeu/synopsis-t9.html" title="Synopsis de l'histoire de 2666"><i class="fa fa-fw fa-file-text-o"></i> Synopsis</a></li>
-                                <li><a href="http://2666.jeuforum.fr/jeuderole/description-du-jeu/background-t8.html" title="Background complet"><i class="fa fa-fw fa-book"></i> Background</a></li>
-                            </ul>
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-group"></i> Membres<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li><a href="http://2666.jeuforum.fr/jeuderole/memberlist.php" title="Voir la liste complète des membres"><i class="fa fa-fw fa-group"></i>Tous les membres</a></li>
-                                <li class="divider"></li>
-                                <li><a href="http://2666.jeuforum.fr/jeuderole/groupe-actif-g10.html"><i class="fa fa-fw fa-group"></i> Membres actifs</a></li>
-                                <li><a href="http://2666.jeuforum.fr/jeuderole/groupe-demandecreation-g13.html"><i class="fa fa-fw fa-group"></i> Membres en attente de validation</a></li>
-                                <li class="divider"></li>
-                                <li><a href="http://2666.jeuforum.fr/clan/asmodeens.html"><i class="fa fa-fw fa-group"></i> Asmodéens</a></li>
-                                <li><a href="http://2666.jeuforum.fr/clan/infiltres.html"><i class="fa fa-fw fa-group"></i> Infiltrés</a></li>
-                                <li><a href="http://2666.jeuforum.fr/clan/insoumis.html"><i class="fa fa-fw fa-group"></i> Insoumis</a></li>
-                                <li><a href="http://2666.jeuforum.fr/clan/izanaghis.html"><i class="fa fa-fw fa-group"></i> Izanaghis</a></li>
-                                <li><a href="http://2666.jeuforum.fr/clan/skjaldmeyjar.html"><i class="fa fa-fw fa-group"></i> Skjaldmeyjar</a></li>
-                                <li><a href="http://2666.jeuforum.fr/clan/vestales.html"><i class="fa fa-fw fa-group"></i> Vestales</a></li>
-                                <li><a href="http://2666.jeuforum.fr/clan/sans-clan.html"><i class="fa fa-fw fa-group"></i> Sans clans</a></li>                                    
-                                <li class="divider"></li>
-                                <li><a href="./groupe-inactif-g12.html"><i class="fa fa-fw fa-group"></i> Les disparus</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <ul class="nav navbar-nav navbar-right">
-						<li>
-                       		<form action="jeuderole/" class="navbar-form navbar-right" role="search" method="get">
-                       			<button type="submit" accesskey="x" class="btn btn-primary"><i class="fa fa-sign-out"></i>&nbsp;Jouer !</button>
-     						</form>
-   						</li>
+
+</head>
+<body>
+	<div id="bg"></div>
+	<nav class="navbar navbar-inverse navbar-fixed-top navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-header-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand <!-- IF SCRIPT_NAME eq 'index' -->active<!-- ENDIF -->" href="{U_INDEX}"><i class="fa fa-space-shuttle"></i>&nbsp;{SITENAME}</a>
+			</div>    
+			<div class="navbar-inner">
+				<!-- Everything you want hidden at 940px or less, place within here -->
+				<div class="collapse navbar-collapse" id="bs-header-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+		     				<!-- IF not S_IS_BOT and S_USER_LOGGED_IN -->
+		     					<li><a href="{U_PROFILE}" title="{L_PROFILE}" accesskey="e"><i class="fa fa-user"></i> {L_PROFILE}</a></li>
+		     					<!-- IF S_DISPLAY_PM --><li><a href="{U_PRIVATEMSGS}"><i class="fa fa-envelope"></i> {PRIVATE_MESSAGE_INFO}</a></li><!-- ENDIF -->
+							<!-- IF U_RESTORE_PERMISSIONS --><li><a href="{U_RESTORE_PERMISSIONS}"><i class="fa fa-key"></i> {L_RESTORE_PERMISSIONS}</a></li><!-- ENDIF -->
+						<!-- ENDIF -->
+						<li class="hidden-sm hidden-xs dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-question-circle"></i> Guide<span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="{U_GUIDE}" title="Guide du nouvel arrivant"><i class="fa fa-fw fa-graduation-cap"></i> Guide du nouvel arrivant</a></li>
+								<li class="divider"></li>
+								<li><a href="{U_REGLEMENT}" title="Réglement"><i class="fa fa-fw fa-book"></i> Réglement</a></li>
+								<li><a href="{U_REGLE_BIENSEANCE}" title="Règles de bienséance"><i class="fa fa-fw fa-smile-o"></i> Règles de bienséance</a></li>
+								<li class="divider"></li>
+								<li><a href="{U_SYNOPSIS}" title="Synopsis de l'histoire de 2666"><i class="fa fa-fw fa-file-text-o"></i> Synopsis</a></li>
+								<li><a href="{U_REGLE_BIENSEANCE}" title="Background complet"><i class="fa fa-fw fa-book"></i> Background</a></li>
+							</ul>
+						</li>
+						<!-- IF not S_IS_BOT -->
+							<!-- IF S_DISPLAY_MEMBERLIST -->
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-group"></i> {L_MEMBERLIST}<span class="caret"></span></a>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="{U_MEMBERLIST}" title="{L_MEMBERLIST_EXPLAIN}"><i class="fa fa-fw fa-group"></i>Tous les membres</a></li>
+										<li class="divider"></li>
+										<li><a href="{U_MEMBERLIST_ACTIF}"><i class="fa fa-fw fa-group"></i> Membres actifs</a></li>
+										<li><a href="{U_MEMBERLIST_ATTENTE}"><i class="fa fa-fw fa-group"></i> Membres en attente de validation</a></li>
+										<li class="divider"></li>
+										<li><a href="{U_MEMBERLIST_ASMODEENS}"><i class="fa fa-fw fa-group"></i> Asmodéens</a></li>
+										<li><a href="{U_MEMBERLIST_INFILTRES}"><i class="fa fa-fw fa-group"></i> Infiltrés</a></li>
+										<li><a href="{U_MEMBERLIST_INSOUMIS}"><i class="fa fa-fw fa-group"></i> Insoumis</a></li>
+										<li><a href="{U_MEMBERLIST_IZANAGHIS}"><i class="fa fa-fw fa-group"></i> Izanaghis</a></li>
+										<li><a href="{U_MEMBERLIST_SKJALDMEYJAR}"><i class="fa fa-fw fa-group"></i> Skjaldmeyjar</a></li>
+										<li><a href="{U_MEMBERLIST_VESTALES}"><i class="fa fa-fw fa-group"></i> Vestales</a></li>
+										<li><a href="{U_MEMBERLIST_SANS_CLAN}"><i class="fa fa-fw fa-group"></i> Sans clans</a></li>									
+										<li class="divider"></li>
+										<li><a href="{U_MEMBERLIST_INACTIF}"><i class="fa fa-fw fa-group"></i> Les disparus</a></li>
+									</ul>
+								</li>
+							<!-- ENDIF -->
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+							<!-- IF not S_USER_LOGGED_IN and S_REGISTER_ENABLED and not (S_SHOW_COPPA or S_REGISTRATION) --><li><a href="{U_REGISTER}"><i class="fa fa-sign-in fa-rotate-270"></i> {L_REGISTER}</a></li><!-- ENDIF -->
+							<li><a href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}" accesskey="x"><!-- IF S_USER_LOGGED_IN --><i class="fa fa-sign-out"></i> {L_LOGOUT} <!-- ELSE --><i class="fa fa-sign-in"></i> {L_LOGIN} <!-- ENDIF --></a></li>
+							<li class="pull-right">
+                        		<form action="jeuderole/" class="navbar-form navbar-right" role="search" method="get">
+                        			<button type="submit" accesskey="x" class="btn btn-primary"><i class="fa fa-sign-out"></i>&nbsp;Jouer !</button>
+      							</form>
+      						</li>
+							
+						<!-- ENDIF -->
 		   			</ul>
-                </div>
-            </div>
-        </div>
-    </nav>
+				</div>
+			</div>
+		</div>
+	</nav>
 
     <header class="header-index">
         <div class="jumbotron ">
             <div class="container">
                 <div id="peggi" class="pull-right">
-                    <img src="img/grossier.gif" class="img-thumbnail tooltip-link" title="Ce jeu contient des expressions grossières."/>
-                    <img src="img/sexe.gif" class="img-thumbnail tooltip-link" title="Ce jeu décrit des scènes de nudité et / ou des comportements ou des allusions de nature sexuelle."/>
-                    <img src="img/online.gif" class="img-thumbnail tooltip-link" title="Possibilité de jouer à ce jeu en ligne"/>
-                    <img src="img/violence.gif" class="img-thumbnail tooltip-link" title="Ce jeu contient des scènes violentes"/>
-                    <img src="img/pegi16.gif" class="img-thumbnail tooltip-link" title="Jeu réservé aux 16 ans et plus."/>
+                    <img src="description/img/grossier.gif" class="img-thumbnail tooltip-link" title="Ce jeu contient des expressions grossières."/>
+                    <img src="description/img/sexe.gif" class="img-thumbnail tooltip-link" title="Ce jeu décrit des scènes de nudité et / ou des comportements ou des allusions de nature sexuelle."/>
+                    <img src="description/img/online.gif" class="img-thumbnail tooltip-link" title="Possibilité de jouer à ce jeu en ligne"/>
+                    <img src="description/img/violence.gif" class="img-thumbnail tooltip-link" title="Ce jeu contient des scènes violentes"/>
+                    <img src="description/img/pegi16.gif" class="img-thumbnail tooltip-link" title="Jeu réservé aux 16 ans et plus."/>
                 </div>           
                 <div class="">
                     <h1>2666</h1>
@@ -103,7 +121,10 @@
 
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
-                <li role="presentation" class="active"><a href="#synopsis"
+                <li role="presentation" class="active"><a href="#bienvenue"
+                    aria-controls="bienvenue" role="tab" data-toggle="tab"><i
+                        class="fa fa-file-text-o"></i> Bienvenue</a></li>
+                <li role="presentation"><a href="#synopsis"
                     aria-controls="synopsis" role="tab" data-toggle="tab"><i
                         class="fa fa-file-text-o"></i> Synopsis</a></li>
                 <li role="presentation"><a href="#background"
@@ -120,7 +141,43 @@
 
             <!-- Tab panes -->
             <div class="tab-content">
-                <div role="tabpanel" class="tab-pane fade in active" id="synopsis">
+            	<div role="tabpanel" class="tab-pane fade in active" id="bienvenue">
+            		<h1>Bienvenue sur 2666</h1>
+					<p class="text-justify">
+						<img src="resources/decorum/personnages.jpg" alt="Personnage"class="lazer img-thumbnail pull-right"/>
+						2666 est un forum de jeu de rôles
+						fantastique. Le but de ce jeu est de s'amuser en créant un
+						personnage que vous ferez évoluer dans un univers futuriste. De
+						nombreuses interactions entre votre personnage et ceux des autres
+						joueurs vont avoir lieu. Il n’y a pas de récompenses, pas de
+						niveau à atteindre, pas de scores à battre, si ce n’est de voir
+						son personnage évoluer et vivre des événements issus de notre
+						imaginaire. Le but du jeu est de s’amuser, de se détendre et de
+						passer de bons moments.</p>
+					<p class="text-justify">Le jeu par forum ressemble à un système de
+						correspondance. Une fois son personnage validé, un joueur contacte
+						un autre joueur via les différents outils de ce forum, les
+						messages privés, les salons de l'espace détente, ou en indiquant
+						qu'il est disponible pour jouer. Chacun découvre succinctement le
+						personnage de l'autre et recherche une raison de se rencontrer.
+						N'allez surtout pas plus loin, ne décrivez pas trop ce que vous
+						allez faire sous peine de gâcher la surprise. Alors, le premier
+						joueur publie un message et décrit le décorum, détaille les
+						actions de son personnage. C'est alors au joueur suivant d'en
+						faire de même et d'interagir avec vous. C'est comme un livre que
+						vous écrivez à tour de rôles.
+					</p>
+					<p class="text-right">
+						<a href="{U_GUIDE}" title="Consultez le guide du nouvel arrivant"
+							class="tooltip-left">En savoir plus sur les règles et le jeu&hellip;</a>
+					</p>
+					<div class="text-center">
+			            <form action="jeuderole/" class=" " role="search" method="get">
+                      		<button type="submit" accesskey="x" class="btn btn-primary"><i class="fa fa-sign-out"></i>&nbsp;Jouer !</button>
+    					</form>
+    				</div>
+				</div>
+                <div role="tabpanel" class="tab-pane fade" id="synopsis">
                     <h1>L'exode&hellip;</h1>
                     <p class="text-justify">Les Nephilim, accompagnés
                         d'humains, ont été contraints de fuir précipitamment le
@@ -382,7 +439,7 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js?v=3.3.4"></script>
-    <script src="js/initialisation.js?v=1.0.0"></script>
-  </body>
+    <script src="description/js/bootstrap.min.js?v=3.3.4"></script>
+    <script src="description/js/initialisation-accueil.js?v=1.0.0"></script> 
+</body>
 </html>

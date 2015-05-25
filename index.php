@@ -29,7 +29,7 @@ page_header($user->lang['INDEX']);
 $template->assign_var('S_ACCUEIL',true);
 
 $template->set_filenames(array(
-	'body' => 'accueil.html')
+	'body' => 'accueil_newb.html')
 );
 
 page_footer();
