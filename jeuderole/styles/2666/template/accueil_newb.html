@@ -13,9 +13,10 @@ var seo_ext_classes = {SEO_EXT_CLASSES};
 var seo_hashfix = {SEO_HASHFIX};
 // www.phpBB-SEO.com SEO TOOLKIT END
 </script>
-    <link href="description/css/bootstrap.min.css?v=3.3.4" rel="stylesheet">
-    <link href="description/css/bootstrap-theme.min.css?v=3.3.4" rel="stylesheet">
+    <link href="description/css/bootstrap.min.css?v=3.3.4.a" rel="stylesheet">
+    <link href="description/css/bootstrap-theme.min.css?v=3.3.4.a" rel="stylesheet">
     <link href="description/css/font-awesome.min.css?v=4.3.0" rel="stylesheet">
+    <link href="description/css/animate.css?v=3.3.0" rel="stylesheet">
     <link href="description/css/description.css?v=1.1.0" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,11 +44,11 @@ var seo_hashfix = {SEO_HASHFIX};
 				<div class="collapse navbar-collapse" id="bs-header-navbar-collapse-1">
 					<ul class="nav navbar-nav">
 		     				<!-- IF not S_IS_BOT and S_USER_LOGGED_IN -->
-		     					<li><a href="{U_PROFILE}" title="{L_PROFILE}" accesskey="e"><i class="fa fa-user"></i> {L_PROFILE}</a></li>
-		     					<!-- IF S_DISPLAY_PM --><li><a href="{U_PRIVATEMSGS}"><i class="fa fa-envelope"></i> {PRIVATE_MESSAGE_INFO}</a></li><!-- ENDIF -->
+		     					<li class="hidden-xs hidden-sm"><a href="{U_PROFILE}" title="{L_PROFILE}" accesskey="e"><i class="fa fa-user"></i> {L_PROFILE}</a></li>
+		     					<!-- IF S_DISPLAY_PM --><li class="hidden-xs hidden-sm"><a href="{U_PRIVATEMSGS}"><i class="fa fa-envelope"></i> {PRIVATE_MESSAGE_INFO}</a></li><!-- ENDIF -->
 							<!-- IF U_RESTORE_PERMISSIONS --><li><a href="{U_RESTORE_PERMISSIONS}"><i class="fa fa-key"></i> {L_RESTORE_PERMISSIONS}</a></li><!-- ENDIF -->
 						<!-- ENDIF -->
-						<li class="hidden-sm hidden-xs dropdown">
+						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-question-circle"></i> Guide<span class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="{U_GUIDE}" title="Guide du nouvel arrivant"><i class="fa fa-fw fa-graduation-cap"></i> Guide du nouvel arrivant</a></li>
@@ -82,12 +83,12 @@ var seo_hashfix = {SEO_HASHFIX};
 								</li>
 							<!-- ENDIF -->
 					</ul>
-					<ul class="nav navbar-nav navbar-right">
-							<!-- IF not S_USER_LOGGED_IN and S_REGISTER_ENABLED and not (S_SHOW_COPPA or S_REGISTRATION) --><li><a href="{U_REGISTER}"><i class="fa fa-sign-in fa-rotate-270"></i> {L_REGISTER}</a></li><!-- ENDIF -->
-							<li><a href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}" accesskey="x"><!-- IF S_USER_LOGGED_IN --><i class="fa fa-sign-out"></i> {L_LOGOUT} <!-- ELSE --><i class="fa fa-sign-in"></i> {L_LOGIN} <!-- ENDIF --></a></li>
+					<ul class="nav navbar-nav navbar-right  animated bounceInRight">
+							<!-- IF not S_USER_LOGGED_IN and S_REGISTER_ENABLED and not (S_SHOW_COPPA or S_REGISTRATION) --><li class="hidden-xs"><a href="{U_REGISTER}"><i class="fa fa-sign-in fa-rotate-270"></i> {L_REGISTER}</a></li><!-- ENDIF -->
+							<li class="hidden-xs"><a href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}" accesskey="x"><!-- IF S_USER_LOGGED_IN --><i class="fa fa-sign-out"></i> {L_LOGOUT} <!-- ELSE --><i class="fa fa-sign-in"></i> {L_LOGIN} <!-- ENDIF --></a></li>
 							<li class="pull-right">
-                        		<form action="jeuderole/" class="navbar-form navbar-right" role="search" method="get">
-                        			<button type="submit" accesskey="x" class="btn btn-primary"><i class="fa fa-sign-out"></i>&nbsp;Jouer !</button>
+                        		<form action="{U_INDEX}" class="navbar-form navbar-right" role="search" method="get">
+                        			<button type="submit" accesskey="x" class="btn btn-primary jeu"><i class="fa fa-sign-out"></i>&nbsp;Jouer !</button>
       							</form>
       						</li>
 							
@@ -173,7 +174,7 @@ var seo_hashfix = {SEO_HASHFIX};
 					</p>
 					<div class="text-center">
 			            <form action="jeuderole/" class=" " role="search" method="get">
-                      		<button type="submit" accesskey="x" class="btn btn-primary"><i class="fa fa-sign-out"></i>&nbsp;Jouer !</button>
+                      		<button type="submit" accesskey="x" class="btn btn-primary "><i class="fa fa-sign-out"></i>&nbsp;Jouer !</button>
     					</form>
     				</div>
 				</div>
@@ -429,7 +430,7 @@ var seo_hashfix = {SEO_HASHFIX};
         </div>
     </section>
     <footer>
-        <p class="description text-center">
+        <p class="description text-center animated bounceInUp">
             <a href="http://2666.jeuforum.fr/jeuderole/" title="Jouer !"><i
                 class="fa fa-link"></i>&nbsp;http://2666.jeuforum.fr/</a>
         </p>
@@ -439,7 +440,7 @@ var seo_hashfix = {SEO_HASHFIX};
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="description/js/bootstrap.min.js?v=3.3.4"></script>
+    <script src="description/js/bootstrap.min.js?v=3.3.4.a"></script>
     <script src="description/js/initialisation-accueil.js?v=1.0.0"></script> 
 </body>
 </html>

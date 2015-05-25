@@ -53,6 +53,22 @@
    	  'vaisseau-monde.jpg',
    	  'visioconference.jpg',
     ];
+    
+    var rotateEvery2 = 5; //seconds
+    setInterval(delayFunction2, rotateEvery2*1000);
+    function delayFunction2() {
+    	var animates=[
+      	  'bounce',
+      	  'flash',
+      	  'shake',
+      	  'swing',
+      	  'tada',
+       ];
+    	$('#jeu').removeClass('animated bounceInRight bounce flash shake swing tada');
+    	var x = Math.floor((Math.random() * animates.length));
+    	$('#jeu').addClass('animated ' + animates[x]);
+    }
+    
     var rotateEvery = 20; //seconds
     setInterval(delayFunction, rotateEvery*1000);
     function delayFunction() {

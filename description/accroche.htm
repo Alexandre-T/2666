@@ -8,9 +8,10 @@
     <title>2666 : le jeu de rôle par forum</title>
 
     <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css?v=3.3.4" rel="stylesheet">
-    <link href="css/bootstrap-theme.min.css?v=3.3.4" rel="stylesheet">
+    <link href="css/bootstrap.min.css?v=3.3.4.a" rel="stylesheet">
+    <link href="css/bootstrap-theme.min.css?v=3.3.4.a" rel="stylesheet">
     <link href="css/font-awesome.min.css?v=4.3.0" rel="stylesheet">
+    <link href="css/animate.css?v=3.3.0" rel="stylesheet">
     <link href="css/description.css?v=1.1.0" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -66,8 +67,14 @@
                                 <li><a href="./groupe-inactif-g12.html"><i class="fa fa-fw fa-group"></i> Les disparus</a></li>
                             </ul>
                         </li>
-                        <li><a href="http://2666.jeuforum.fr/jeuderole/" title="Tester !" accesskey="x"><i class="fa fa-sign-out"></i> Jouer ! </a></li>
                     </ul>
+	                <ul class="nav navbar-nav navbar-right animated bounceInRight" id="jeu" style="margin-right:10px">
+						<li>
+	                  		<form action="http://2666.jeuforum.fr/jeuderole/" class="navbar-form navbar-right" role="search" method="get">
+	                   			<button type="submit" accesskey="x" class="btn btn-primary"><i class="fa fa-sign-out"></i>&nbsp;Jouer !</button>
+	  						</form>
+						</li>
+		   			</ul>
                 </div>
             </div>
         </div>
@@ -153,7 +160,7 @@
 
     </section>
     <footer>
-        <p class="description text-center">
+        <p class="description text-center animated bounceInUp">
             <a href="http://2666.jeuforum.fr/jeuderole/" title="Jouer !"><i
                 class="fa fa-link"></i>&nbsp;http://2666.jeuforum.fr/</a>
         </p>
@@ -163,7 +170,7 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js?v=3.3.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.4.a"></script> 
     <script src="js/initialisation-a.js?v=1.0.0"></script>    
   </body>
 </html>
