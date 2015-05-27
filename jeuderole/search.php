@@ -88,7 +88,7 @@ switch ($search_id)
 			login_box('', $user->lang['LOGIN_EXPLAIN_UNREADSEARCH']);
 		}
 	break;
-	
+
 	// The "new posts" search uses user_lastvisit which is user based, so it should require user to log in.
 	case 'newposts':
 		if ($user->data['user_id'] == ANONYMOUS)
@@ -96,7 +96,7 @@ switch ($search_id)
 			login_box('', $user->lang['LOGIN_EXPLAIN_NEWPOSTS']);
 		}
 	break;
-	
+
 	default:
 		// There's nothing to do here for now ;)
 	break;
@@ -562,7 +562,7 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 		// START SEARCH RP
 		if ($lock || in_array(FORUM_RP, $search_forum) || in_array(FORUM_RPA, $search_forum) ){
 			$ex_fid_ary = array_merge($ex_fid_ary,array_map('intval', explode(',',FORUM_EXCLUS)));
-		}	
+		}
 		$total_match_count = $search->author_search($show_results, $firstpost_only, $sort_by_sql, $sort_key, $sort_dir, $sort_days, $ex_fid_ary, $m_approve_fid_ary, $topic_id, $author_id_ary, $sql_author_match, $id_ary, $start, $per_page, POST_NORMAL, $lock);
 		//$total_match_count = $search->author_search($show_results, $firstpost_only, $sort_by_sql, $sort_key, $sort_dir, $sort_days, $ex_fid_ary, $m_approve_fid_ary, $topic_id, $author_id_ary, $sql_author_match, $id_ary, $start, $per_page);
 		// END SEARCH RP
@@ -657,8 +657,8 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 	}
 	$u_search = append_sid( "{$phpbb_root_path}search.$phpEx" . (!empty($u_search) ? '?' . $u_search : '') );
 	// www.phpBB-SEO.com SEO TOOLKIT END
-	
-	
+
+
 
 	$template->assign_vars(array(
 		'SEARCH_TITLE'		=> $l_search_title,
@@ -703,7 +703,10 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 			}
 			$db->sql_freeresult($result);
 
-			$sql = 'SELECT p.*, f.forum_id, f.forum_name, t.*, u.username, u.username_clean, u.user_sig, u.user_sig_bbcode_uid, u.user_colour
+			//AT Forum ICONE START
+			//$sql = 'SELECT p.*, f.forum_id, f.forum_name, t.*, u.username, u.username_clean, u.user_sig, u.user_sig_bbcode_uid, u.user_colour
+			//AT Forum ICONE END
+			$sql = 'SELECT p.*, f.forum_id, f.forum_name, f.forum_icone, t.*, u.username, u.username_clean, u.user_sig, u.user_sig_bbcode_uid, u.user_colour
 				FROM ' . POSTS_TABLE . ' p
 					LEFT JOIN ' . TOPICS_TABLE . ' t ON (p.topic_id = t.topic_id)
 					LEFT JOIN ' . FORUMS_TABLE . ' f ON (p.forum_id = f.forum_id)
@@ -715,7 +718,10 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 			$sql_from = TOPICS_TABLE . ' t
 				LEFT JOIN ' . FORUMS_TABLE . ' f ON (f.forum_id = t.forum_id)
 				' . (($sort_key == 'a') ? ' LEFT JOIN ' . USERS_TABLE . ' u ON (u.user_id = t.topic_poster) ' : '');
-			$sql_select = 't.*, f.forum_id, f.forum_name';
+			//AT Forum ICONE START
+			//$sql_select = 't.*, f.forum_id, f.forum_name';
+			//AT Forum ICONE END
+			$sql_select = 't.*, f.forum_id, f.forum_name, f.forum_icone';
 
 			if ($user->data['is_registered'])
 			{
@@ -950,7 +956,7 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 			$phpbb_seo->set_url($row['forum_name'], $u_forum_id, 'forum');
 			$phpbb_seo->prepare_iurl($row, 'topic', $row['topic_type'] == POST_GLOBAL ? $phpbb_seo->seo_static['global_announce'] : $phpbb_seo->seo_url['forum'][$u_forum_id]);
 			// www.phpBB-SEO.com SEO TOOLKIT END
-			
+
 			$view_topic_url_params = "f=$u_forum_id&amp;t=$result_topic_id" . (($u_hilit) ? "&amp;hilit=$u_hilit" : '');
 			$view_topic_url = append_sid("{$phpbb_root_path}viewtopic.$phpEx", $view_topic_url_params);
 
@@ -1005,6 +1011,18 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 					'S_TOPIC_TYPE'			=> $row['topic_type'],
 					'S_USER_POSTED'			=> (!empty($row['topic_posted'])) ? true : false,
 					'S_UNREAD_TOPIC'		=> $unread_topic,
+
+					//mod at icones on
+					'S_HAS_POLL'			=> ($row['poll_start']) ? true : false,
+					'S_POST_ANNOUNCE'		=> ($row['topic_type'] == POST_ANNOUNCE) ? true : false,
+					'S_POST_GLOBAL'			=> ($row['topic_type'] == POST_GLOBAL) ? true : false,
+					'S_POST_STICKY'			=> ($row['topic_type'] == POST_STICKY) ? true : false,
+					'S_TOPIC_LOCKED'		=> ($row['topic_status'] == ITEM_LOCKED) ? true : false,
+					'S_TOPIC_MOVED'			=> ($row['topic_status'] == ITEM_MOVED) ? true : false,
+					'S_HAS_ICONE'			=> (!empty($row['forum_icone'])) ? true : false,
+					'FORUM_ICONE'			=> $row['forum_icone'],
+					// mod at icones off
+
 
 					'S_TOPIC_REPORTED'		=> (!empty($row['topic_reported']) && $auth->acl_get('m_report', $forum_id)) ? true : false,
 					'S_TOPIC_UNAPPROVED'	=> $topic_unapproved,
@@ -1091,7 +1109,8 @@ if ($keywords || $author || $author_id || $search_id || $submit)
 
 				'U_VIEW_TOPIC'		=> $view_topic_url,
 				'U_VIEW_FORUM'		=> append_sid("{$phpbb_root_path}viewforum.$phpEx", 'f=' . $forum_id),
-				'U_VIEW_POST'		=> (!empty($row['post_id'])) ? append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=" . $row['topic_id'] . '&amp;p=' . $row['post_id'] . (($u_hilit) ? '&amp;hilit=' . $u_hilit : '')) . '#p' . $row['post_id'] : '')
+				'U_VIEW_POST'		=> (!empty($row['post_id'])) ? append_sid("{$phpbb_root_path}viewtopic.$phpEx", "f=$forum_id&amp;t=" . $row['topic_id'] . '&amp;p=' . $row['post_id'] . (($u_hilit) ? '&amp;hilit=' . $u_hilit : '')) . '#p' . $row['post_id'] : '',
+			)
 			));
 		}
 
