@@ -82,6 +82,10 @@ RewriteRule ^clan/izanaghis.html$ /jeuderole/clan.php?clan=17 [QSA,L,NC]
 RewriteRule ^clan/sans-clan.html$ /jeuderole/clan.php?clan=19 [QSA,L,NC]
 RewriteRule ^clan/vestales.html$ /jeuderole/clan.php?clan=18 [QSA,L,NC]
 RewriteRule ^clan/skjaldmeyjar.html$ /jeuderole/clan.php?clan=20 [QSA,L,NC]
+#AT Recherche des RPs 
+RewriteRule ^recherche/tous_les_rps.html$ /jeuderole/search.php?keywords=&terms=all&author=*&fid%5B%5D=16&fid%5B%5D=17&fid%5B%5D=18&fid%5B%5D=36&fid%5B%5D=19&fid%5B%5D=20&fid%5B%5D=21&fid%5B%5D=22&fid%5B%5D=23&fid%5B%5D=24&fid%5B%5D=26&fid%5B%5D=27&fid%5B%5D=28&fid%5B%5D=25&fid%5B%5D=35&fid%5B%5D=30&fid%5B%5D=31&fid%5B%5D=33&sc=0&sf=all&sr=topics&sk=t&sd=d&st=2&ch=300&t=0&submit=Rechercher [QSA,L,NC]
+RewriteRule ^recherche/tous_les_rps_clos.html$ /jeuderole/search.php?keywords=&terms=all&author=*&fid%5B%5D=16&fid%5B%5D=17&fid%5B%5D=18&fid%5B%5D=36&fid%5B%5D=19&fid%5B%5D=20&fid%5B%5D=21&fid%5B%5D=22&fid%5B%5D=23&fid%5B%5D=24&fid%5B%5D=26&fid%5B%5D=27&fid%5B%5D=28&fid%5B%5D=25&fid%5B%5D=35&fid%5B%5D=30&fid%5B%5D=31&fid%5B%5D=33&sc=0&sf=all&sr=topics&sk=t&sd=d&st=2&ch=300&t=0&submit=Rechercher&lock=1 [QSA,L,NC]
+RewriteRule ^recherche/tous_les_rps_en_cours.html$ /jeuderole/search.php?keywords=&terms=all&author=*&fid%5B%5D=16&fid%5B%5D=17&fid%5B%5D=18&fid%5B%5D=36&fid%5B%5D=19&fid%5B%5D=20&fid%5B%5D=21&fid%5B%5D=22&fid%5B%5D=23&fid%5B%5D=24&fid%5B%5D=26&fid%5B%5D=27&fid%5B%5D=28&fid%5B%5D=25&fid%5B%5D=35&fid%5B%5D=30&fid%5B%5D=31&fid%5B%5D=33&sc=0&sf=all&sr=topics&sk=t&sd=d&st=2&ch=300&t=0&submit=Rechercher&lock=0 [QSA,L,NC]
 
 
 # FORUM WITHOUT ID & DELIM ALL MODES
