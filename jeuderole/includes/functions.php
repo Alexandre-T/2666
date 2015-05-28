@@ -3452,7 +3452,7 @@ function parse_cfg_file($filename, $lines = false)
 
 		$parsed_items[$key] = $value;
 	}
-	
+
 	if (isset($parsed_items['inherit_from']) && isset($parsed_items['name']) && $parsed_items['inherit_from'] == $parsed_items['name'])
 	{
 		unset($parsed_items['inherit_from']);
@@ -4770,7 +4770,7 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'U_PRIVACY'				=> append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=privacy'),
 		'U_RESTORE_PERMISSIONS'	=> ($user->data['user_perm_from'] && $auth->acl_get('a_switchperm')) ? append_sid("{$phpbb_root_path}ucp.$phpEx", 'mode=restore_perm') : '',
 		'U_FEED'				=> generate_board_url() . "/feed.$phpEx",
-		
+
 		//AT BEGIN NEW LINK
 		'U_SEARCH_RP_EN_COURS'	=> ($auth->acl_get('u_search')) ? append_sid("{$phpbb_root_path}search.$phpEx", "author={$user->data['username']}&amp;fid%5B%5D=".FORUM_RP."&amp;sc=1&amp;sf=all&amp;sr=topics&amp;lock=2") : '',
 	    'U_MEMBERLIST_ACTIF'    => append_sid($phpbb_root_path.'groupe-actif-g'.GROUPE_ACTIF.'.html'),
@@ -4790,7 +4790,10 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 		'U_REGLEMENT'			=> append_sid("{$phpbb_root_path}accueil-du-jeu/reglement-t2.html"),
 		'U_REGLE_BIENSEANCE'	=> append_sid("{$phpbb_root_path}accueil-du-jeu/la-bienseance-t4.html"),
 		'U_RESUME'				=> append_sid("{$phpbb_root_path}personnages-resumes/"),
-		'U_SYNOPSIS'			=> append_sid("{$phpbb_root_path}description-du-jeu/synopsis-t9.html"),		
+		'U_SYNOPSIS'			=> append_sid("{$phpbb_root_path}description-du-jeu/synopsis-t9.html"),
+		'U_RP_EN_COURS'			=> append_sid("{$phpbb_root_path}../recherche/tous_les_rps_en_cours.html"),
+		'U_RP_CLOS'				=> append_sid("{$phpbb_root_path}../recherche/tous_les_rps_clos.html"),
+		'U_RPS_TOTAL'			=> append_sid("{$phpbb_root_path}../recherche/tous_les_rps.html"),
 		//AT END NEW LINK
 
 		'S_USER_LOGGED_IN'		=> ($user->data['user_id'] != ANONYMOUS) ? true : false,
@@ -4891,7 +4894,7 @@ function page_footer($run_cron = true)
 		$phpbb_seo->seo_end();
 	}
 	// www.phpBB-SEO.com SEO TOOLKIT END
-	
+
 	// AT MOD phpBB-SEO BEGIN
 	$board_url = generate_board_url() . '/';
 	$web_path = (defined('PHPBB_USE_BOARD_URL_PATH') && PHPBB_USE_BOARD_URL_PATH) ? $board_url : $phpbb_root_path;
@@ -4936,7 +4939,7 @@ function page_footer($run_cron = true)
 		//'U_ACP' => ($auth->acl_get('a_') && !empty($user->data['is_registered'])) ? append_sid("{$phpbb_root_path}adm/index.$phpEx", false, true, $user->session_id) : '')
 		'U_ACP' => ($auth->acl_get('a_') && !empty($user->data['is_registered'])) ? append_sid("{$web_path}adm/index.$phpEx", false, true, $user->session_id) : '')
 		// AT MOD phpBB-SEO BEGIN
-					
+
 	);
 
 	// Call cron-type script

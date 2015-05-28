@@ -56,28 +56,38 @@ var seo_hashfix = {SEO_HASHFIX};
 							<li><a href="{U_REGLE_BIENSEANCE}" title="Background complet"><i class="fa fa-fw fa-book"></i> Background</a></li>
 						</ul>
 					</li>
-					<!-- IF not S_IS_BOT -->
-						<!-- IF S_DISPLAY_MEMBERLIST -->
-							<li class="dropdown">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-group"></i> {L_MEMBERLIST}<span class="caret"></span></a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="{U_MEMBERLIST}" title="{L_MEMBERLIST_EXPLAIN}"><i class="fa fa-fw fa-group"></i>Tous les membres</a></li>
-									<li class="divider"></li>
-									<li><a href="{U_MEMBERLIST_ACTIF}"><i class="fa fa-fw fa-group"></i> Membres actifs</a></li>
-									<li><a href="{U_MEMBERLIST_ATTENTE}"><i class="fa fa-fw fa-group"></i> Membres en attente de validation</a></li>
-									<li class="divider"></li>
-									<li><a href="{U_MEMBERLIST_ASMODEENS}"><i class="fa fa-fw fa-group"></i> Asmodéens</a></li>
-									<li><a href="{U_MEMBERLIST_INFILTRES}"><i class="fa fa-fw fa-group"></i> Infiltrés</a></li>
-									<li><a href="{U_MEMBERLIST_INSOUMIS}"><i class="fa fa-fw fa-group"></i> Insoumis</a></li>
-									<li><a href="{U_MEMBERLIST_IZANAGHIS}"><i class="fa fa-fw fa-group"></i> Izanaghis</a></li>
-									<li><a href="{U_MEMBERLIST_SKJALDMEYJAR}"><i class="fa fa-fw fa-group"></i> Skjaldmeyjar</a></li>
-									<li><a href="{U_MEMBERLIST_VESTALES}"><i class="fa fa-fw fa-group"></i> Vestales</a></li>
-									<li><a href="{U_MEMBERLIST_SANS_CLAN}"><i class="fa fa-fw fa-group"></i> Sans clans</a></li>									
-									<li class="divider"></li>
-									<li><a href="{U_MEMBERLIST_INACTIF}"><i class="fa fa-fw fa-group"></i> Les disparus</a></li>
-								</ul>
-							</li>
-						<!-- ENDIF -->
+					<!-- IF not S_IS_BOT and S_DISPLAY_MEMBERLIST -->
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-group"></i> {L_MEMBERLIST}<span class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="{U_MEMBERLIST}" title="{L_MEMBERLIST_EXPLAIN}"><i class="fa fa-fw fa-group"></i>Tous les membres</a></li>
+								<li class="divider"></li>
+								<li><a href="{U_MEMBERLIST_ACTIF}"><i class="fa fa-fw fa-group"></i> Membres actifs</a></li>
+								<li><a href="{U_MEMBERLIST_ATTENTE}"><i class="fa fa-fw fa-group"></i> Membres en attente de validation</a></li>
+								<li class="divider"></li>
+								<li><a href="{U_MEMBERLIST_ASMODEENS}"><i class="fa fa-fw fa-group"></i> Asmodéens</a></li>
+								<li><a href="{U_MEMBERLIST_INFILTRES}"><i class="fa fa-fw fa-group"></i> Infiltrés</a></li>
+								<li><a href="{U_MEMBERLIST_INSOUMIS}"><i class="fa fa-fw fa-group"></i> Insoumis</a></li>
+								<li><a href="{U_MEMBERLIST_IZANAGHIS}"><i class="fa fa-fw fa-group"></i> Izanaghis</a></li>
+								<li><a href="{U_MEMBERLIST_SKJALDMEYJAR}"><i class="fa fa-fw fa-group"></i> Skjaldmeyjar</a></li>
+								<li><a href="{U_MEMBERLIST_VESTALES}"><i class="fa fa-fw fa-group"></i> Vestales</a></li>
+								<li><a href="{U_MEMBERLIST_SANS_CLAN}"><i class="fa fa-fw fa-group"></i> Sans clans</a></li>									
+								<li class="divider"></li>
+								<li><a href="{U_MEMBERLIST_INACTIF}"><i class="fa fa-fw fa-group"></i> Les disparus</a></li>
+							</ul>
+						</li>
+					<!-- ENDIF -->
+                    <li class="hidden-sm hidden-xs dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-book"></i> <abbr title="Sujets Role-Play">RPs</abbr><span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{U_RP_EN_COURS}" title="Listing des RPs en cours"><i class="fa fa-fw fa-file-text-o"></i> <abbr title="Sujets Role-Play">RPs</abbr> en cours&hellip;</a></li>
+                            <li><a href="{U_RP_CLOS}" title="Listing des RPs terminés"><i class="fa fa-fw fa-lock"></i> <abbr title="Sujets Role-Play">RPs</abbr> terminés&nbsp;</a></li>
+                            <li class="divider"></li>
+                            <li><a href="{U_RPS_TOTAL}" title="Listing complet des RPS"><i class="fa fa-fw fa-book"></i> Tous les <abbr title="Sujets Role-Play">RPs</abbr></a></li>
+                        </ul>
+                    </li>
+                    
+                    <!-- IF not S_IS_BOT -->                        
 						<!-- IF not S_USER_LOGGED_IN and S_REGISTER_ENABLED and not (S_SHOW_COPPA or S_REGISTRATION) --><li><a href="{U_REGISTER}"><i class="fa fa-sign-in fa-rotate-270"></i> {L_REGISTER}</a></li><!-- ENDIF -->
 						<li><a href="{U_LOGIN_LOGOUT}" title="{L_LOGIN_LOGOUT}" accesskey="x"><!-- IF S_USER_LOGGED_IN --><i class="fa fa-sign-out"></i> {L_LOGOUT} <!-- ELSE --><i class="fa fa-sign-in"></i> {L_LOGIN} <!-- ENDIF --></a></li>
 					<!-- ENDIF -->
