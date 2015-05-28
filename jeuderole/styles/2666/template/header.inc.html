@@ -1,9 +1,8 @@
 <meta charset="{S_CONTENT_ENCODING}" />
 <meta name="application-name" content="phpbb" />
-<meta name="author" content="" />
-<meta name="description" content="" />
-<meta name="generator" content="" />
-<meta name="keywords" content="" />
+<!-- IF S_META_AUTHOR --><meta name="author" content="{META_AUTHOR}" /><!-- ENDIF -->
+<!-- IF S_META_AUTHOR --><meta name="description" content="{META_DESCRIPTION}" /><!-- ENDIF -->
+<!-- IF S_META_KEYWORDS --><meta name="keywords" content="{META_KEYWORDS}" /><!-- ENDIF -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="shortcut icon" type="image/png" href="{T_IMAGESET_PATH}/favicon.png" />
 <link href="{T_STYLESHEET_LINK}" rel="stylesheet" type="text/css" media="screen, projection" />
@@ -12,7 +11,7 @@
       <script src="{T_THEME_PATH}/js/respond.min.js?v=1.4.2"></script>
     <![endif]-->
 {META}
-<title>{SITENAME} &bull; <!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF -->{PAGE_TITLE}</title>
+<title><!-- IF S_IN_MCP -->{L_MCP} &bull; <!-- ELSEIF S_IN_UCP -->{L_UCP} &bull; <!-- ENDIF -->{PAGE_TITLE} &bull; {SITENAME}</title>
 <!--
 	phpBB style name: Bootstrap
 	Based on style:   

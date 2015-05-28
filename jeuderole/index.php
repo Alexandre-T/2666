@@ -50,7 +50,7 @@ $result = $db->sql_query($sql);
 $total_actifs = (int) $db->sql_fetchfield('actif');
 $total_3j     = (int) $db->sql_fetchfield('cc');
 $total_4j     = (int) $db->sql_fetchfield('cd');
-$total_users  = $total_inactifs + $total_actifs + $total_3j + $total_4j + 4; //(Harahel est inactif mais à 4 contacts)  
+$total_users  = $total_inactifs + $total_actifs + $total_3j + $total_4j + 4; //(Harahel est inactif mais à 4 contacts)
 
 $l_total_user_s = 'TOTAL_PERSONNAGES_OTHER';
 
@@ -159,7 +159,13 @@ $template->assign_vars(array(
 );
 
 // Output page
-page_header($user->lang['INDEX']);
+//AT MOD META BEGIN
+//page_header($user->lang['INDEX']);
+$meta['author']= 'Harahel';
+$meta['keywords']='jeu de rôle par forum, jeu, 2666, exode, nephilim, science-fiction, odyssée';
+$meta['description']='2666 est jeu de rôles par forum. Il raconte l\'exode de Nephilim et d\'humains contraints de fuir précipitamment le système solaire.';
+page_header($user->lang['JDR'],true, 0, 'forum', $meta);
+//AT MOD META END
 
 $template->set_filenames(array(
 	'body' => 'index_body.html')

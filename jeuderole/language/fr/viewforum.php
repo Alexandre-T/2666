@@ -57,6 +57,7 @@ $lang = array_merge($lang, array(
     //AT MOD FORUM RP START
     'NO_RP'                 => 'Aucun RP en cours',
     'NO_RPA'                => 'Aucun RP archivé',
+    'JDR'					=> 'Le jeu de rôle',
     //AT MOD FORUM RP END
 	'NO_UNREAD_POSTS_HOT'		=> 'Pas de messages non lus [ Populaires ]',
 	'NO_UNREAD_POSTS_LOCKED'	=> 'Pas de messages non lus [ Verrouillés ]',

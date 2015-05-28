@@ -278,6 +278,8 @@ define('WORDS_TABLE',				$table_prefix . 'words');
 define('ZEBRA_TABLE',				$table_prefix . 'zebra');
 
 // Additional tables
+define('TOPSITES_TABLE',			$table_prefix . 'topsites');
+define('VOTES_TABLE',				$table_prefix . 'votes');
 
 
 ?>

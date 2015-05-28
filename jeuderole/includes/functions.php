@@ -4531,7 +4531,7 @@ function phpbb_http_login($param)
 /**
 * Generate page header
 */
-function page_header($page_title = '', $display_online_list = true, $item_id = 0, $item = 'forum')
+function page_header($page_title = '', $display_online_list = true, $item_id = 0, $item = 'forum', $meta = null)
 {
 	global $db, $config, $template, $SID, $_SID, $_EXTRA_URL, $user, $auth, $phpEx, $phpbb_root_path;
 
@@ -4539,6 +4539,29 @@ function page_header($page_title = '', $display_online_list = true, $item_id = 0
 	{
 		return;
 	}
+	// AT Module META BEGIN
+	if (empty($meta) or !is_array($meta)){
+		$meta = array();
+	};
+	if (!key_exists('description', $meta)){
+		$meta['description'] = (isset($config['meta_description']) && $config['meta_description'])?$config['meta_description']:'';
+	}
+	if (!key_exists('keywords', $meta)){
+		$meta['keywords'] = (isset($config['meta_keywords']) && $config['meta_keywords'])?$config['meta_keywords']:'';
+	}
+	if (!key_exists('author', $meta)){
+		$meta['author'] = (isset($config['meta_author']) && $config['meta_author'])?$config['meta_author']:'';
+	}
+	$template->assign_vars(array(
+		'S_META_DESCRIPTION'		=> !(empty($meta['description'])),
+		'S_META_KEYWORDS'			=> !(empty($meta['keywords'])),
+		'S_META_AUTHOR'				=> !(empty($meta['author'])),
+		'META_DESCRIPTION'			=> $meta['description'],
+		'META_KEYWORDS'				=> $meta['keywords'],
+		'META_AUTHOR'				=> $meta['author'],
+	));
+	// AT Module META END
+
 	// www.phpBB-SEO.com SEO TOOLKIT BEGIN
 	global $phpbb_seo;
 	if (!empty($phpbb_seo)) {
