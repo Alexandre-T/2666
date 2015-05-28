@@ -24,7 +24,14 @@ $auth->acl($user->data);
 $user->setup('accueil');
 
 // Output page
-page_header($user->lang['INDEX']);
+//AT MOD META BEGIN
+//page_header($user->lang['INDEX']);
+$meta['author']= 'Harahel';
+$meta['keywords']='jeu de rôle par forum, jeu, 2666, exode, nephilim, science-fiction, odyssée';
+$meta['description']='« 2666, à la recherche d\'une nouvelle Terre » est un jeu de rôle futuriste contant l\'exode de Nephilim et d\'humains contraints de fuir le système solaire.';
+page_header('2666. À la recherche d\'une nouvelle Terre...',true, 0, 'forum', $meta);
+//AT MOD META END
+
 
 $template->assign_var('S_ACCUEIL',true);
 
