@@ -284,8 +284,8 @@ body.body-f4{
 }
 
 /** Personnalisation de personnage **/
-body.body-f5{
-	background-position: center -100px;
+body.body-f5,body.body-f37{
+	background-position: center 0; 
 	background-image:url('{T_THEME_PATH}/images/background/personnages.jpg');
 }
 /** Personnalisation de personnage importants **/
