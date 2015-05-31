@@ -51,7 +51,7 @@ footer a{
 }
 
 /** Gestion des polices **/
-@font-face{font-family:'coalition';src:url('../fonts/coalition.ttf?v=2.0.0');}
+@font-face{font-family:'coalition';src:url('../../jeuderole/styles/2666/theme/fonts/coalition.ttf?v=2.0.0');}
 
 h1,h5,h6,
 section h2,
